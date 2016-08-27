@@ -1,0 +1,23 @@
+<!ENTITY sb.toolbar.edit "Rediģēšanas rīkjosla">
+<!ENTITY sb.toolbar.info "Informācijas rīkjosla">
+<!ENTITY sb.edit.eraser "DOM Eraser: Klikšķināmo elementu noņemšanas rīks">
+<!ENTITY sb.edit.undo "Atsaukt">
+<!ENTITY sb.edit.save "Saglabāt izmaiņas">
+<!ENTITY sb.edit.comment "Izvērst komentāru lauku">
+<!ENTITY sb.edit.sticky "Pielīmējamā piezīme">
+<!ENTITY sb.edit.sticky.create "Izveidot &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Pievienot inline anotāciju atlasītajam">
+<!ENTITY sb.edit.attach.file "Pievienot failu atlasītajam">
+<!ENTITY sb.edit.attach.link "Pievienot saiti atlasītajam">
+<!ENTITY sb.edit.cutter "Noņemt atlasīto">
+<!ENTITY sb.edit.remove.iframe "Noņemt visus IFRAME tagus">
+<!ENTITY sb.edit.remove.script "Noņemt visus SCRIPT tagus">
+<!ENTITY sb.highlighter "Marķieris">
+<!ENTITY sb.highlighter.remove "Notīrīt iezīmējumus atlasītajā">
+<!ENTITY sb.highlighter.remove.all "Notīrīt visus iezīmējumus">
+<!ENTITY sb.source "Atvērt avota URL">
+<!ENTITY sb.renew "Saglabāt atkārtoti">
+<!ENTITY sb.locate "Atrast sānjoslā">
+<!ENTITY sb.indicators "Rādīt saišu indikatorus">
+<!ENTITY sb.info.home "Sākumlapa">
+<!ENTITY sb.info.sitemap "Vietnes karte">

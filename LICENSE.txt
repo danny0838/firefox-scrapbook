@@ -14,7 +14,7 @@
  * The Original Code is ScrapBook.
  *
  * The Initial Developer of the Original Code is Gomita.
- * Portions created by the Initial Developer are Copyright (C) 2015
+ * Portions created by the Initial Developer are Copyright (C) 2016
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):

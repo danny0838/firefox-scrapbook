@@ -1,0 +1,33 @@
+<!ENTITY sb.open "Odpri">
+<!ENTITY sb.open.tab "Odpri v zavihku">
+<!ENTITY sb.open.newtab "Odpri v novem zavihku">
+<!ENTITY sb.open.source "Odpri izvorni URL">
+<!ENTITY sb.tools "Orodja">
+<!ENTITY sb.show.files "Prikaži datoteke">
+<!ENTITY sb.move "Premakni">
+<!ENTITY sb.move.into "Premakni v mapo">
+<!ENTITY sb.renew "Ponovno shrani">
+<!ENTITY sb.export "Izvozi">
+<!ENTITY sb.remove "Izbriši">
+<!ENTITY sb.property "Lastnosti">
+<!ENTITY sb.prop.title "Naziv">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Pripomba">
+<!ENTITY sb.prop.id.date "ID (čas)">
+<!ENTITY sb.folder.combine "Združen pogled">
+<!ENTITY sb.folder.openall "Odpri vse v zavihkih">
+<!ENTITY sb.folder.manage "Upravljaj z mapo">
+<!ENTITY sb.new.folder "Nova mapa">
+<!ENTITY sb.new.separator "Novo ločilo">
+<!ENTITY sb.new.note "Nova opomba">
+<!ENTITY sb.sort.folder "Razvrsti mapo">
+<!ENTITY sb.search "Poišči">
+<!ENTITY sb.search.fulltext "Iskanje polnega besedila">
+<!ENTITY sb.search.all "Vse">
+<!ENTITY sb.search.re "Uporabi RegExp">
+<!ENTITY sb.search.cs "Ujemaj velikost črk">
+<!ENTITY sb.search.cache "Posodobi predpomnilnik za polno iskanje besedila">
+<!ENTITY sb.search.clear "Počisti zgodovino obrazcev">
+<!ENTITY sb.search.days "Filtriranje po dnevih">
+<!ENTITY mb.manage "Upravljanje">
+<!ENTITY mb.profileFolder "Mapa profila">

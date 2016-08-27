@@ -1,0 +1,8 @@
+<!ENTITY sb.multiple.url "URL (Katrā rindā sava adrese)">
+<!ENTITY sb.multiple.detector "URL detektors">
+<!ENTITY sb.multiple.detector.plink "Visas saites lapā">
+<!ENTITY sb.multiple.detector.slink "Visas saites atlasītajā">
+<!ENTITY sb.multiple.detector.tabs "Visas atvērtās cilnes logā">
+<!ENTITY sb.multiple.detector.local "Visus HTML failus direktorijā">
+<!ENTITY sb.multiple.detector.bookmarks "Grāmatzīmes">
+<!ENTITY sb.multiple.detector.clear "Notīrīt">

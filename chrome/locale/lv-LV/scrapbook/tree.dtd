@@ -1,0 +1,33 @@
+<!ENTITY sb.open "Atvērt">
+<!ENTITY sb.open.tab "Atvērt cilnē">
+<!ENTITY sb.open.newtab "Atvērt jaunā cilnē">
+<!ENTITY sb.open.source "Atvērt avota URL">
+<!ENTITY sb.tools "Rīki">
+<!ENTITY sb.show.files "Rādīt failus">
+<!ENTITY sb.move "Pārvietot">
+<!ENTITY sb.move.into "Pārvietot uz mapi">
+<!ENTITY sb.renew "Saglabāt atkārtoti">
+<!ENTITY sb.export "Eksportēt">
+<!ENTITY sb.remove "Dzēst">
+<!ENTITY sb.property "Rekvizīti">
+<!ENTITY sb.prop.title "Nosaukums">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Komentārs">
+<!ENTITY sb.prop.id.date "ID (laiks)">
+<!ENTITY sb.folder.combine "Kombinēts skats">
+<!ENTITY sb.folder.openall "Atvērt visas cilnēs">
+<!ENTITY sb.folder.manage "Pārvaldīt mapi">
+<!ENTITY sb.new.folder "Jauna mape">
+<!ENTITY sb.new.separator "Jauns atdalītājs">
+<!ENTITY sb.new.note "Jauna piezīme">
+<!ENTITY sb.sort.folder "Kārtot mapes">
+<!ENTITY sb.search "Meklēt">
+<!ENTITY sb.search.fulltext "Pilnteksta meklēšana">
+<!ENTITY sb.search.all "Visi">
+<!ENTITY sb.search.re "Izmantot RegExp">
+<!ENTITY sb.search.cs "Saskaņot reģistru">
+<!ENTITY sb.search.cache "Atjaunināt kešatmiņu pilnteksta meklēšanai">
+<!ENTITY sb.search.clear "Notīrīt formu aizpildīšanas vēsturi">
+<!ENTITY sb.search.days "Filtrēt pēc vecuma">
+<!ENTITY mb.manage "Pārvaldīt">
+<!ENTITY mb.profileFolder "Profila mape">

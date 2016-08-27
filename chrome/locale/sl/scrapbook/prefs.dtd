@@ -1,0 +1,34 @@
+<!ENTITY sb.prefs.main "Glavno">
+<!ENTITY sb.prefs.keys "Tipke">
+<!ENTITY sb.prefs.tabs "Zavihki">
+<!ENTITY sb.prefs.save "Shrani">
+<!ENTITY sb.prefs.edit "Uredi">
+<!ENTITY sb.prefs.organize "Organiziraj">
+<!ENTITY sb.prefs.advanced "Napredno">
+<!ENTITY sb.prefs.ui.contextMenu "Prikaži v vsebinskem meniju brskalnika">
+<!ENTITY sb.prefs.ui.contextSubMenu "Podmeni">
+<!ENTITY sb.prefs.ui.bookmark "Prikaži meni 'Shrani kot zaznamek'">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Prikaži do">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "nedavno uporabljenih map">
+<!ENTITY sb.prefs.ui.menuBar "Prikaži v menijski vrstici">
+<!ENTITY sb.prefs.ui.toolsMenu "Prikaži v meniju 'Orodja'">
+<!ENTITY sb.prefs.ui.statusBar "Prikaži v vrstici stanja">
+<!ENTITY sb.prefs.restart "Sprememba zahteva ponovni zagon Firefoxa.">
+<!ENTITY sb.prefs.tabs.tips "Odpri v zavihku za naslednja opravila">
+<!ENTITY sb.prefs.tabs.note "Uredi zapisek">
+<!ENTITY sb.prefs.data "Mesto za shranjevanje podatkov">
+<!ENTITY sb.prefs.data.default "Privzeto (mapa profila)">
+<!ENTITY sb.prefs.data.custom "Shrani podatke v">
+<!ENTITY sb.prefs.data.tips "Izberite mapo za shranjevanje podatkov ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "Omogoči Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook omogoča nastavljanje več mest za shranjevanje podatkov in hitro preklapljanje med njimi z gumbom orodne vrstice.">
+<!ENTITY sb.prefs.confirmDelete "Opozori me med brisanjem predmetov drevesa">
+<!ENTITY sb.prefs.tree.autoCollapse "Ob odpiranju mape drevesa samodejno zapri druge mape">
+<!ENTITY sb.prefs.tree.unshift "Vstavi predmet na">
+<!ENTITY sb.prefs.tree.unshift.top "vrh mape">
+<!ENTITY sb.prefs.tree.unshift.bottom "dno mape">
+<!ENTITY sb.prefs.showDetailOnDrop "Ob vlečenju in spuščanju v stransko vrstico prikaži pog. okno 'Shrani podrobnosti'">
+<!ENTITY sb.prefs.notifyOnComplete "Prikaži obvestilo 'Shranjevanje končano'">
+<!ENTITY sb.button.customize "Prilagodi">
+<!ENTITY sb.button.browse "Brskaj">
+<!ENTITY sb.button.show "Prikaži datoteke">

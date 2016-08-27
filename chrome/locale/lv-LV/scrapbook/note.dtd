@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Saglabāt">
+<!ENTITY sb.note.close "Aizvērt">
+<!ENTITY sb.note.tools "Rīki">
+<!ENTITY sb.note.htmlview "HTML skats">
+<!ENTITY sb.note.normalview "Normālskats">
+<!ENTITY sb.note.template "Rediģēt HTML šablonu">
+<!ENTITY sb.note.autolinefeed "Automātiska rindpadeve">
+<!ENTITY sb.note.autolinefeed.t "Pievienot br tagu rindas beigās &sb.note.htmlview; skatā">
+<!ENTITY sb.note.fontsize "Šrifta izmērs">
+<!ENTITY sb.note.help "Palīdzība">
+<!ENTITY sb.note.print "Drukāt">
+<!ENTITY sb.note.exit "Iziet">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "R">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "D">
+<!ENTITY sb.note.exit.accesskey "I">

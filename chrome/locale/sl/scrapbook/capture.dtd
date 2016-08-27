@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Shrani">
+<!ENTITY sb.save.abort "Prekini">
+<!ENTITY sb.save.start "Začni">
+<!ENTITY sb.save.retry "Ponovno poskusi">
+<!ENTITY sb.save.skip "Preskoči">
+<!ENTITY sb.save.pause "Premor">
+<!ENTITY sb.save.filter "Filter">
+<!ENTITY sb.save.filter.domain "Omeji na domeno">
+<!ENTITY sb.save.filter.level "Omeji na mapo">
+<!ENTITY sb.save.filter.string "Filtriraj po nizih …">
+<!ENTITY sb.save.filter.checkon "Označi vse">
+<!ENTITY sb.save.filter.checkoff "Odznači vse">
+<!ENTITY sb.save.filter.invert "Obrni izbire">

@@ -1,0 +1,23 @@
+<!ENTITY sb.toolbar.edit "Uredi orodno vrstico">
+<!ENTITY sb.toolbar.info "Orodna vrstica podatkov">
+<!ENTITY sb.edit.eraser "DOM Eraser: orodje za brisanje predmetov na spletni strani, na katere ste kliknili">
+<!ENTITY sb.edit.undo "Razveljavi">
+<!ENTITY sb.edit.save "Shrani spremembe">
+<!ENTITY sb.edit.comment "Razširi območje za pripombe">
+<!ENTITY sb.edit.sticky "Lepljiva pripomba">
+<!ENTITY sb.edit.sticky.create "Ustvari &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Dodaj pripombo k izbiri v besedilu">
+<!ENTITY sb.edit.attach.file "Dodaj datoteko k izbiri">
+<!ENTITY sb.edit.attach.link "Dodaj povezavo k izbiri">
+<!ENTITY sb.edit.cutter "Odstrani izbiro">
+<!ENTITY sb.edit.remove.iframe "Odstrani vse oznake IFRAME">
+<!ENTITY sb.edit.remove.script "Odstrani vse oznake SCRIPT">
+<!ENTITY sb.highlighter "Poudarjevalnik">
+<!ENTITY sb.highlighter.remove "Počisti poudarke v izbiri">
+<!ENTITY sb.highlighter.remove.all "Počisti vse poudarke">
+<!ENTITY sb.source "Odpri izvorni URL">
+<!ENTITY sb.renew "Ponovno shrani">
+<!ENTITY sb.locate "Poišči v stranski vrstici">
+<!ENTITY sb.indicators "Prikaži kazalnike povezav">
+<!ENTITY sb.info.home "Domov">
+<!ENTITY sb.info.sitemap "Zemljevid strani">

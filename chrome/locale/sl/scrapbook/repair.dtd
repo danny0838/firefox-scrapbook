@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Obnovi scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Poskusite to, če ScrapBook nenadoma izgine.">
+<!ENTITY sb.repair.rdfFile.select "Izberite var. kopijo za obnovitev.">
+<!ENTITY sb.repair.rdfFile.file "Datoteka">
+<!ENTITY sb.repair.rdfFile.time "Čas">
+<!ENTITY sb.repair.rdfFile.size "Velikost">
+<!ENTITY sb.repair.favicons "Obnovi zaznamke v drevesu">
+<!ENTITY sb.repair.favicons.descript "Poskusite to, če v drevesu izgine veliko zaznamk.">
+<!ENTITY sb.repair.complete "Končano.">

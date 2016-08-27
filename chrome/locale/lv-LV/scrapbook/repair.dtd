@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Atjaunot scrapbook.rdf failu">
+<!ENTITY sb.repair.rdfFile.descript "Izmantojiet, ja pazudis ScrapBook mapju koks.">
+<!ENTITY sb.repair.rdfFile.select "Izvēlieties dublējuma failu atjaunošanai.">
+<!ENTITY sb.repair.rdfFile.file "Fails">
+<!ENTITY sb.repair.rdfFile.time "Laiks">
+<!ENTITY sb.repair.rdfFile.size "Lielums">
+<!ENTITY sb.repair.favicons "Atjaunot mapju koka ikonas">
+<!ENTITY sb.repair.favicons.descript "Izmantojiet, ja pazudušas ScrapBook mapju ikonas">
+<!ENTITY sb.repair.complete "Atjaunošana pabeigta">

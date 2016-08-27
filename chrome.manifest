@@ -15,11 +15,13 @@ locale	scrapbook	fr	chrome/locale/fr/scrapbook/
 locale	scrapbook	gl-ES	chrome/locale/gl-ES/scrapbook/
 locale	scrapbook	it	chrome/locale/it/scrapbook/
 locale	scrapbook	ko-KR	chrome/locale/ko-KR/scrapbook/
+locale	scrapbook	lv-LV	chrome/locale/lv-LV/scrapbook/
 locale	scrapbook	pl	chrome/locale/pl/scrapbook/
 locale	scrapbook	pt-BR	chrome/locale/pt-BR/scrapbook/
 locale	scrapbook	ro	chrome/locale/ro/scrapbook/
 locale	scrapbook	ru-RU	chrome/locale/ru-RU/scrapbook/
 locale	scrapbook	sk-SK	chrome/locale/sk-SK/scrapbook/
+locale	scrapbook	sl	chrome/locale/sl/scrapbook/
 locale	scrapbook	sv-SE	chrome/locale/sv-SE/scrapbook/
 locale	scrapbook	tr	chrome/locale/tr/scrapbook/
 locale	scrapbook	uk-UA	chrome/locale/uk-UA/scrapbook/

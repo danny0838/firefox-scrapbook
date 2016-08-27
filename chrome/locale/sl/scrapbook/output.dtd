@@ -1,0 +1,3 @@
+<!ENTITY sb.output.option.all "Izpiši celotno drevo">
+<!ENTITY sb.output.option.frame "Izpiši z okvirjem">
+<!ENTITY sb.output.option.open "Ko je opravilo končano, odpri datoteko HTML">

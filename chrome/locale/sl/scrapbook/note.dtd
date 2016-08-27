@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Shrani">
+<!ENTITY sb.note.close "Zapri">
+<!ENTITY sb.note.tools "Orodja">
+<!ENTITY sb.note.htmlview "Pogled HTML">
+<!ENTITY sb.note.normalview "Običajni pogled">
+<!ENTITY sb.note.template "Uredi predlogo HTML">
+<!ENTITY sb.note.autolinefeed "Samodejno podajanje vrtic">
+<!ENTITY sb.note.autolinefeed.t "Dodaj oznako br na konec vrstice ob &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Velikost pisave">
+<!ENTITY sb.note.help "Pomoč">
+<!ENTITY sb.note.print "Natisni">
+<!ENTITY sb.note.exit "Izhod">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "O">
+<!ENTITY sb.note.tools.accesskey "r">
+<!ENTITY sb.note.fontsize.accesskey "V">
+<!ENTITY sb.note.print.accesskey "N">
+<!ENTITY sb.note.exit.accesskey "z">

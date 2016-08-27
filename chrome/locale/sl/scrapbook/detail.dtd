@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "Shrani podrobnosti">
+<!ENTITY sb.detail.new.folder "Nova mapa">
+<!ENTITY sb.detail.select.folder "Izberite mapo">
+<!ENTITY sb.detail.option "Možnosti">
+<!ENTITY sb.detail.option.images "Slike">
+<!ENTITY sb.detail.option.styles "Slogi">
+<!ENTITY sb.detail.linked.file "Prenesi povezane datoteke">
+<!ENTITY sb.detail.linked.image "Slika">
+<!ENTITY sb.detail.linked.sound "Zvok">
+<!ENTITY sb.detail.linked.movie "Videoposnetek">
+<!ENTITY sb.detail.linked.archive "Arhiv">
+<!ENTITY sb.detail.linked.custom "Po meri">
+<!ENTITY sb.detail.linked.page2 "Globinsko shranjevanje">
+<!ENTITY sb.detail.linked.page.depth "Globina povezav">
+<!ENTITY sb.detail.linked.page.text "Po končanem shranjevanju bodo vse strani med seboj povezane.">
+<!ENTITY sb.detail.warnAboutRenew "OBVESTILO: &apos;Shrani ponovno&apos; prepiše prej shranjeno stran.">
+<!ENTITY sb.detail.warnAboutScript "OBVESTILO: JavaScript lahko povzroči nekaj težav.">

@@ -1,0 +1,18 @@
+<!ENTITY sb.new.folder "Nova mapa">
+<!ENTITY sb.new.separator "Novo ločilo">
+<!ENTITY sb.new.note "Nova opomba">
+<!ENTITY sb.toggle.all "Odpri/Zapri vse mape">
+<!ENTITY sb.tools "Orodja">
+<!ENTITY sb.tools.options "Možnosti">
+<!ENTITY sb.tools.manage "Upravljanje">
+<!ENTITY sb.tools.combine "Čarovnik za združevanje">
+<!ENTITY sb.tools.trade "Uvozi/Izvozi">
+<!ENTITY sb.tools.multiple "Shrani več URL-jev">
+<!ENTITY sb.tools.directory "Odpri mapo s podatki">
+<!ENTITY sb.tools.calculate "Izračun velikosti">
+<!ENTITY sb.tools.sorttree "Razvrsti celotno drevo">
+<!ENTITY sb.tools.output "Izpiši kot HTML">
+<!ENTITY sb.tools.repair "Zasilno popravljanje">
+<!ENTITY sb.tools.addons "Opravila dodatka">
+<!ENTITY sb.note.opentab "Odpri v zavihku">
+<!ENTITY sb.note.close "Zapri">

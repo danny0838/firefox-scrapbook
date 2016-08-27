@@ -1,0 +1,34 @@
+<!ENTITY sb.prefs.main "Galvenais">
+<!ENTITY sb.prefs.keys "Taustiņi">
+<!ENTITY sb.prefs.tabs "Cilnes">
+<!ENTITY sb.prefs.save "Saglabāt">
+<!ENTITY sb.prefs.edit "Rediģēt">
+<!ENTITY sb.prefs.organize "Organizēt">
+<!ENTITY sb.prefs.advanced "Papildu">
+<!ENTITY sb.prefs.ui.contextMenu "Rādīt pārlūka kontekstizvēlnē">
+<!ENTITY sb.prefs.ui.contextSubMenu "Apakšizvēlne">
+<!ENTITY sb.prefs.ui.bookmark "Rādīt izvēlni 'Saglabāt kā grāmatzīmi'">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Rādīt">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "nesen izmantotās mapes">
+<!ENTITY sb.prefs.ui.menuBar "Rādīt izvēlņu joslā">
+<!ENTITY sb.prefs.ui.toolsMenu "Rādīt izvēlnē 'Rīki'">
+<!ENTITY sb.prefs.ui.statusBar "Rādīt statusa joslā">
+<!ENTITY sb.prefs.restart "Izmaiņām nepieciešams restartēt Firefox">
+<!ENTITY sb.prefs.tabs.tips "Atvērt jaunu cilni šādām darbībām">
+<!ENTITY sb.prefs.tabs.note "Rediģēt piezīmi">
+<!ENTITY sb.prefs.data "Datu krātuves vieta">
+<!ENTITY sb.prefs.data.default "Pēc noklusējuma (profila mape)">
+<!ENTITY sb.prefs.data.custom "Datus saglabāt">
+<!ENTITY sb.prefs.data.tips "Izvēlieties mapi ScrapBook datu saglabāšanai">
+<!ENTITY sb.prefs.multibook.enabled "Iespējot Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook ļauj iestatīt vairākas vietas datu saglabāšanai un ātri pārslēgties starp tām izmantojot rīkjoslas pogu .">
+<!ENTITY sb.prefs.confirmDelete "Brīdināt par saglabāto vienumu dzēšanu">
+<!ENTITY sb.prefs.tree.autoCollapse "Atverot mapi automātiski aizvērt citas mapes">
+<!ENTITY sb.prefs.tree.unshift "Ievietot vienumu">
+<!ENTITY sb.prefs.tree.unshift.top "mapes sākumā">
+<!ENTITY sb.prefs.tree.unshift.bottom "mapes beigās">
+<!ENTITY sb.prefs.showDetailOnDrop "Rādīt saglabāšanas iestatījumus nometot vietni sānjoslā">
+<!ENTITY sb.prefs.notifyOnComplete "Rādīt paziņojumu 'Saglabāšana pabeigta'">
+<!ENTITY sb.button.customize "Pielāgot">
+<!ENTITY sb.button.browse "Pārlūkot">
+<!ENTITY sb.button.show "Rādīt failus">

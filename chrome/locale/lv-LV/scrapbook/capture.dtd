@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Saglabāt">
+<!ENTITY sb.save.abort "Pārtraukt">
+<!ENTITY sb.save.start "Sākt">
+<!ENTITY sb.save.retry "Atkārtot">
+<!ENTITY sb.save.skip "Izlaist">
+<!ENTITY sb.save.pause "Pauze">
+<!ENTITY sb.save.filter "Filtrēt">
+<!ENTITY sb.save.filter.domain "Ierobežot ar domēnu">
+<!ENTITY sb.save.filter.level "Ierobežot ar direktoriju">
+<!ENTITY sb.save.filter.string "Filtrēt pēs virknes...">
+<!ENTITY sb.save.filter.checkon "Atlasīt visas">
+<!ENTITY sb.save.filter.checkoff "Noņemt atlasi">
+<!ENTITY sb.save.filter.invert "Invertēt atlasi">

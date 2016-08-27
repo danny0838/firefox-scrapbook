@@ -1,0 +1,6 @@
+<!ENTITY mb.manager "Pārvaldnieks">
+<!ENTITY mb.prop.name "Nosaukums">
+<!ENTITY mb.prop.path "Ceļš">
+<!ENTITY mb.button.add "Pievienot">
+<!ENTITY mb.button.edit "Rediģēt">
+<!ENTITY mb.button.remove "Noņemt">

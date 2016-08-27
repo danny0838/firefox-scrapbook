@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "Saglabāšana">
+<!ENTITY sb.detail.new.folder "Jauna mape">
+<!ENTITY sb.detail.select.folder "Izvēlēties mapi">
+<!ENTITY sb.detail.option "Opcijas">
+<!ENTITY sb.detail.option.images "Attēli">
+<!ENTITY sb.detail.option.styles "Stili">
+<!ENTITY sb.detail.linked.file "Lejuplādēt saistītos failus">
+<!ENTITY sb.detail.linked.image "Attēli">
+<!ENTITY sb.detail.linked.sound "Audio">
+<!ENTITY sb.detail.linked.movie "Video">
+<!ENTITY sb.detail.linked.archive "Arhīvi">
+<!ENTITY sb.detail.linked.custom "Citi">
+<!ENTITY sb.detail.linked.page2 "Padziļināta saglabāšana">
+<!ENTITY sb.detail.linked.page.depth "Saglabāšanas dziļums">
+<!ENTITY sb.detail.linked.page.text "Pēc saglabāšanas visas lapas būs saistītas savā starpā.">
+<!ENTITY sb.detail.warnAboutRenew "BRĪDINĀJUMS: 'Saglabāt atkārtoti' pārrakstīs iepriekš saglabāto lapu.">
+<!ENTITY sb.detail.warnAboutScript "BRĪDINĀJUMS: JavaScript var izraisīt dažas problēmas.">

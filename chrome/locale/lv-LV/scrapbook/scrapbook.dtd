@@ -1,0 +1,18 @@
+<!ENTITY sb.new.folder "Jauna mape">
+<!ENTITY sb.new.separator "Jauns atdalītājs">
+<!ENTITY sb.new.note "Jauna piezīme">
+<!ENTITY sb.toggle.all "Atvērt/Aizvērt visas mapes">
+<!ENTITY sb.tools "Rīki">
+<!ENTITY sb.tools.options "Iestatījumi">
+<!ENTITY sb.tools.manage "Pārvaldīt">
+<!ENTITY sb.tools.combine "Apvienošanas vednis">
+<!ENTITY sb.tools.trade "Imports/Eksports">
+<!ENTITY sb.tools.multiple "Saglabāt vairākas URL">
+<!ENTITY sb.tools.directory "Atvērt ScrapBook datu mapi">
+<!ENTITY sb.tools.calculate "Lieluma aprēķināšana">
+<!ENTITY sb.tools.sorttree "Kārtot mapes">
+<!ENTITY sb.tools.output "Saglabāt kā HTML">
+<!ENTITY sb.tools.repair "Avārijas atjaunošana">
+<!ENTITY sb.tools.addons "Papildinājumu funkcijas">
+<!ENTITY sb.note.opentab "Atvērt cilnē">
+<!ENTITY sb.note.close "Aizvērt">

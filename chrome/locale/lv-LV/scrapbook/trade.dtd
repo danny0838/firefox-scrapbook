@@ -1,0 +1,5 @@
+<!ENTITY sb.trade.import "Imports">
+<!ENTITY sb.trade.export "Eksports">
+<!ENTITY sb.trade.time "Eksportēts">
+<!ENTITY sb.trade.restore "Importēt un atjaunot mapes struktūru">
+<!ENTITY sb.trade.remove "Noņemt failus pēc importēšanas">

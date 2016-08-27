@@ -1,0 +1,8 @@
+<!ENTITY sb.multiple.url "URL (vnesite URL-je po vrsticah)">
+<!ENTITY sb.multiple.detector "Zaznavanje URL-jev">
+<!ENTITY sb.multiple.detector.plink "Vse povezave na strani">
+<!ENTITY sb.multiple.detector.slink "Vse povezave v izbiri">
+<!ENTITY sb.multiple.detector.tabs "Vse odprti zavihki v oknu">
+<!ENTITY sb.multiple.detector.local "Vsi krajevni HTML-i v mapi">
+<!ENTITY sb.multiple.detector.bookmarks "Zaznamki">
+<!ENTITY sb.multiple.detector.clear "Počisti">

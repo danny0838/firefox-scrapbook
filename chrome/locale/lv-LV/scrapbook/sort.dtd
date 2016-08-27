@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Kārtot">
+<!ENTITY sb.sort.reverse "Pretējā secībā">
+<!ENTITY sb.sort.title.asc "Kārtot pēc nosaukuma (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Kārtot pēc nosaukuma (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Hronoloģiskā secībā">
+<!ENTITY sb.sort.date.desc "Apgriezti hronoloģiskā secībā">
+<!ENTITY sb.sort.recursive "Kārtot apakšmapes rekursīvi">
+<!ENTITY sb.sort.warning "UZMANĪBU: Šo darbību nevar atsaukt.">

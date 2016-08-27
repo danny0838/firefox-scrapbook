@@ -1,0 +1,5 @@
+<!ENTITY sb.trade.import "Uvozi">
+<!ENTITY sb.trade.export "Izvozi">
+<!ENTITY sb.trade.time "Izvoženo">
+<!ENTITY sb.trade.restore "Izvozi in obnovi zgradbo map">
+<!ENTITY sb.trade.remove "Odstrani datoteke po uvozu">

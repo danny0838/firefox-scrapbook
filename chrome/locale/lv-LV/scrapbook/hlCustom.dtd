@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Standarta stili">
+<!ENTITY sb.hlCustom.background "Fons">
+<!ENTITY sb.hlCustom.color "Krāsa">
+<!ENTITY sb.hlCustom.text "Teksts">
+<!ENTITY sb.hlCustom.bold "Treknraksts">
+<!ENTITY sb.hlCustom.italic "Slīpraksts">
+<!ENTITY sb.hlCustom.line "Pārsvītrots">
+<!ENTITY sb.hlCustom.border "Apmale">
+<!ENTITY sb.hlCustom.type "Tips">
+<!ENTITY sb.hlCustom.box "Rāmis">
+<!ENTITY sb.hlCustom.underline "Pasvītrots">
+<!ENTITY sb.hlCustom.style "Stils">
+<!ENTITY sb.hlCustom.solid "Nepārtraukta">
+<!ENTITY sb.hlCustom.dotted "Punktēta">
+<!ENTITY sb.hlCustom.dashed "Pārtraukta">
+<!ENTITY sb.hlCustom.double "Dubulta">
+<!ENTITY sb.hlCustom.width "Platums">
+<!ENTITY sb.hlCustom.thin "Šaurs">
+<!ENTITY sb.hlCustom.medium "Vidējs">
+<!ENTITY sb.hlCustom.thick "Plats">

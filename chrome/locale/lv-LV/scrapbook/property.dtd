@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "Vispārīga informācija">
+<!ENTITY sb.prop.type "Tips">
+<!ENTITY sb.prop.date "Datums">
+<!ENTITY sb.prop.encode "Kodējums">
+<!ENTITY sb.prop.size "Lielums">
+<!ENTITY sb.prop.content "Saturs">
+<!ENTITY sb.prop.folder "Mape">
+<!ENTITY sb.prop.icon "Ikona">
+<!ENTITY sb.prop.icon.change "Mainīt">
+<!ENTITY sb.prop.icon.default "Pēc noklusējuma">
+<!ENTITY sb.prop.icon.favicon "Izvēlieties izlases ikonu">
+<!ENTITY sb.prop.icon.custom "Izvēlieties lietotāja ikonu">
+<!ENTITY sb.prop.mark "Izcelt nosaukumu mapju kokā">

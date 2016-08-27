@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Prednastavljeni slogi">
+<!ENTITY sb.hlCustom.background "Ozadje">
+<!ENTITY sb.hlCustom.color "Barva">
+<!ENTITY sb.hlCustom.text "Besedilo">
+<!ENTITY sb.hlCustom.bold "Krepko">
+<!ENTITY sb.hlCustom.italic "Ležeče">
+<!ENTITY sb.hlCustom.line "Prečrtano">
+<!ENTITY sb.hlCustom.border "Obroba">
+<!ENTITY sb.hlCustom.type "Vrsta">
+<!ENTITY sb.hlCustom.box "Okvir">
+<!ENTITY sb.hlCustom.underline "Podčrtano">
+<!ENTITY sb.hlCustom.style "Slog">
+<!ENTITY sb.hlCustom.solid "Polno">
+<!ENTITY sb.hlCustom.dotted "Pikčasto">
+<!ENTITY sb.hlCustom.dashed "Črtkano">
+<!ENTITY sb.hlCustom.double "Dvojno">
+<!ENTITY sb.hlCustom.width "Širina">
+<!ENTITY sb.hlCustom.thin "Tanko">
+<!ENTITY sb.hlCustom.medium "Srednje">
+<!ENTITY sb.hlCustom.thick "Debelo">

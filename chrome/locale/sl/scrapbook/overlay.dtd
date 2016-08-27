@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Shrani izbiro">
+<!ENTITY sb.save.partial.as "Shrani izbiro kot">
+<!ENTITY sb.save.entire "Shrani stran">
+<!ENTITY sb.save.entire.as "Shrani stran kot">
+<!ENTITY sb.save.frame "Shrani okvir">
+<!ENTITY sb.save.frame.as "Shrani okvir kot">
+<!ENTITY sb.save.target "Shrani povezavo">
+<!ENTITY sb.save.target.as "Shrani povezavo kot">
+<!ENTITY sb.save.alltabs "Shrani vse zavihke">
+<!ENTITY sb.save.bookmark "Shrani kot zaznamek">
+<!ENTITY sb.sidebar "Prikaži v stranski vrstici">
+<!ENTITY sb.menubar "Menijska vrstica">
+<!ENTITY sb.editbefore "Uredi pred shranjevanjem">

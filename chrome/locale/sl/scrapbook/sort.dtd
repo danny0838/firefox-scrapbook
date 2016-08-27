@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Razvrsti">
+<!ENTITY sb.sort.reverse "Obratno">
+<!ENTITY sb.sort.title.asc "Razvrsti po nazivu (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Razvrsti po nazivu (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Po datumu nastanka">
+<!ENTITY sb.sort.date.desc "Obratno po po datumu nastanka">
+<!ENTITY sb.sort.recursive "Razvrsti podmape ponavljajoče">
+<!ENTITY sb.sort.warning "Obvestilo: tega opravila ni mogoče razveljaviti.">

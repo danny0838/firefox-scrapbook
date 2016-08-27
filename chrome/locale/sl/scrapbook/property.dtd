@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "Splošni podatki">
+<!ENTITY sb.prop.type "Vrsta">
+<!ENTITY sb.prop.date "Datum">
+<!ENTITY sb.prop.encode "Kodiranje">
+<!ENTITY sb.prop.size "Velikost">
+<!ENTITY sb.prop.content "Vsebina">
+<!ENTITY sb.prop.folder "Mapa">
+<!ENTITY sb.prop.icon "Ikona">
+<!ENTITY sb.prop.icon.change "Spremeni">
+<!ENTITY sb.prop.icon.default "Privzeto">
+<!ENTITY sb.prop.icon.favicon "Izberite zaznamko">
+<!ENTITY sb.prop.icon.custom "Izberite uporabniško ikono">
+<!ENTITY sb.prop.mark "Označi">

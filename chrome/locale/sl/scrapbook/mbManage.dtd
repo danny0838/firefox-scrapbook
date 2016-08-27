@@ -1,0 +1,6 @@
+<!ENTITY mb.manager "Upravitelj">
+<!ENTITY mb.prop.name "Ime">
+<!ENTITY mb.prop.path "Pot">
+<!ENTITY mb.button.add "Dodaj">
+<!ENTITY mb.button.edit "Uredi">
+<!ENTITY mb.button.remove "Odstrani">
