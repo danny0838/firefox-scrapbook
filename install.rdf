@@ -158,6 +158,17 @@
 
         <em:localized>
             <Description>
+                <em:locale>lv-LV</em:locale>
+                <em:name>ScrapBook X</em:name>
+                <em:description>Helps you save web pages and organize the collection.</em:description>
+                <em:creator>Danny Lin</em:creator>
+                <em:translator>Vards</em:translator>
+                <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+            </Description>
+        </em:localized>
+
+        <em:localized>
+            <Description>
                 <em:locale>pl</em:locale>
                 <em:name>ScrapBook X</em:name>
                 <em:description>Rozszerzenie to pomaga zapisać witryny internetowe na dysku i zarządzać nimi</em:description>
@@ -208,6 +219,17 @@
                 <em:description>Umožňuje ukladať webové stránky a spravovať ich kolekcie.</em:description>
                 <em:creator>Danny Lin</em:creator>
                 <em:translator>igor_r</em:translator>
+                <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+            </Description>
+        </em:localized>
+
+        <em:localized>
+            <Description>
+                <em:locale>sl</em:locale>
+                <em:name>ScrapBook X</em:name>
+                <em:description>Helps you save web pages and organize the collection.</em:description>
+                <em:creator>Danny Lin</em:creator>
+                <em:translator>Klofutar</em:translator>
                 <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
             </Description>
         </em:localized>
