@@ -1,0 +1,284 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Kopējais lielums">
+<!ENTITY sb.calc.diagnosis "Stāvoklis">
+
+<!-- capture.dtd -->
+<!ENTITY sb.save "Saglabāt">
+<!ENTITY sb.save.abort "Pārtraukt">
+<!ENTITY sb.save.start "Sākt">
+<!ENTITY sb.save.retry "Atkārtot">
+<!ENTITY sb.save.skip "Izlaist">
+<!ENTITY sb.save.pause "Pauze">
+<!ENTITY sb.save.filter "Filtrēt">
+<!ENTITY sb.save.filter.domain "Ierobežot ar domēnu">
+<!ENTITY sb.save.filter.level "Ierobežot ar direktoriju">
+<!ENTITY sb.save.filter.string "Filtrēt pēs virknes...">
+<!ENTITY sb.save.filter.checkon "Atlasīt visas">
+<!ENTITY sb.save.filter.checkoff "Noņemt atlasi">
+<!ENTITY sb.save.filter.invert "Invertēt atlasi">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Pievienojiet vienumus, pārvelkot no mapju koka tādā secībā, kādā vēlaties apvienot. Varat vilkt un nomest vairākus vienumus vienlaikus.">
+<!ENTITY sb.combine.preview "Priekšskatījums">
+<!ENTITY sb.combine.preview.d "Nospiediet 'Apvienot' pēc priekšskatījuma pārbaudes.">
+<!ENTITY sb.combine.option.remove "Pēc apvienošanas dzēst oriģinālās lapas">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.title "Saglabāšana">
+<!ENTITY sb.detail.new.folder "Jauna mape">
+<!ENTITY sb.detail.select.folder "Izvēlēties mapi">
+<!ENTITY sb.detail.option "Opcijas">
+<!ENTITY sb.detail.option.images "Attēli">
+<!ENTITY sb.detail.option.styles "Stili">
+<!ENTITY sb.detail.linked.file "Lejuplādēt saistītos failus">
+<!ENTITY sb.detail.linked.image "Attēli">
+<!ENTITY sb.detail.linked.sound "Audio">
+<!ENTITY sb.detail.linked.movie "Video">
+<!ENTITY sb.detail.linked.archive "Arhīvi">
+<!ENTITY sb.detail.linked.custom "Citi">
+<!ENTITY sb.detail.linked.page2 "Padziļināta saglabāšana">
+<!ENTITY sb.detail.linked.page.depth "Saglabāšanas dziļums">
+<!ENTITY sb.detail.linked.page.text "Pēc saglabāšanas visas lapas būs saistītas savā starpā.">
+<!ENTITY sb.detail.warnAboutRenew "BRĪDINĀJUMS: 'Saglabāt atkārtoti' pārrakstīs iepriekš saglabāto lapu.">
+<!ENTITY sb.detail.warnAboutScript "BRĪDINĀJUMS: JavaScript var izraisīt dažas problēmas.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Rediģēšanas rīkjosla">
+<!ENTITY sb.toolbar.info "Informācijas rīkjosla">
+<!ENTITY sb.edit.eraser "DOM Eraser: Klikšķināmo elementu noņemšanas rīks">
+<!ENTITY sb.edit.undo "Atsaukt">
+<!ENTITY sb.edit.save "Saglabāt izmaiņas">
+<!ENTITY sb.edit.comment "Izvērst komentāru lauku">
+<!ENTITY sb.edit.sticky "Pielīmējamā piezīme">
+<!ENTITY sb.edit.sticky.create "Izveidot &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Pievienot inline anotāciju atlasītajam">
+<!ENTITY sb.edit.attach.file "Pievienot failu atlasītajam">
+<!ENTITY sb.edit.attach.link "Pievienot saiti atlasītajam">
+<!ENTITY sb.edit.cutter "Noņemt atlasīto">
+<!ENTITY sb.edit.remove.iframe "Noņemt visus IFRAME tagus">
+<!ENTITY sb.edit.remove.script "Noņemt visus SCRIPT tagus">
+<!ENTITY sb.highlighter "Marķieris">
+<!ENTITY sb.highlighter.remove "Notīrīt iezīmējumus atlasītajā">
+<!ENTITY sb.highlighter.remove.all "Notīrīt visus iezīmējumus">
+<!ENTITY sb.source "Atvērt avota URL">
+<!ENTITY sb.renew "Saglabāt atkārtoti">
+<!ENTITY sb.locate "Atrast sānjoslā">
+<!ENTITY sb.indicators "Rādīt saišu indikatorus">
+<!ENTITY sb.info.home "Sākumlapa">
+<!ENTITY sb.info.sitemap "Vietnes karte">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Standarta stili">
+<!ENTITY sb.hlCustom.background "Fons">
+<!ENTITY sb.hlCustom.color "Krāsa">
+<!ENTITY sb.hlCustom.text "Teksts">
+<!ENTITY sb.hlCustom.bold "Treknraksts">
+<!ENTITY sb.hlCustom.italic "Slīpraksts">
+<!ENTITY sb.hlCustom.line "Pārsvītrots">
+<!ENTITY sb.hlCustom.border "Apmale">
+<!ENTITY sb.hlCustom.type "Tips">
+<!ENTITY sb.hlCustom.box "Rāmis">
+<!ENTITY sb.hlCustom.underline "Pasvītrots">
+<!ENTITY sb.hlCustom.style "Stils">
+<!ENTITY sb.hlCustom.solid "Nepārtraukta">
+<!ENTITY sb.hlCustom.dotted "Punktēta">
+<!ENTITY sb.hlCustom.dashed "Pārtraukta">
+<!ENTITY sb.hlCustom.double "Dubulta">
+<!ENTITY sb.hlCustom.width "Platums">
+<!ENTITY sb.hlCustom.thin "Šaurs">
+<!ENTITY sb.hlCustom.medium "Vidējs">
+<!ENTITY sb.hlCustom.thick "Plats">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Pārvaldnieks">
+<!ENTITY mb.prop.name "Nosaukums">
+<!ENTITY mb.prop.path "Ceļš">
+<!ENTITY mb.button.add "Pievienot">
+<!ENTITY mb.button.edit "Rediģēt">
+<!ENTITY mb.button.remove "Noņemt">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.url "URL (Katrā rindā sava adrese)">
+<!ENTITY sb.multiple.detector "URL detektors">
+<!ENTITY sb.multiple.detector.plink "Visas saites lapā">
+<!ENTITY sb.multiple.detector.slink "Visas saites atlasītajā">
+<!ENTITY sb.multiple.detector.tabs "Visas atvērtās cilnes logā">
+<!ENTITY sb.multiple.detector.local "Visus HTML failus direktorijā">
+<!ENTITY sb.multiple.detector.bookmarks "Grāmatzīmes">
+<!ENTITY sb.multiple.detector.clear "Notīrīt">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Saglabāt">
+<!ENTITY sb.note.close "Aizvērt">
+<!ENTITY sb.note.tools "Rīki">
+<!ENTITY sb.note.htmlview "HTML skats">
+<!ENTITY sb.note.normalview "Normālskats">
+<!ENTITY sb.note.template "Rediģēt HTML šablonu">
+<!ENTITY sb.note.autolinefeed "Automātiska rindpadeve">
+<!ENTITY sb.note.autolinefeed.t "Pievienot br tagu rindas beigās &sb.note.htmlview; skatā">
+<!ENTITY sb.note.fontsize "Šrifta izmērs">
+<!ENTITY sb.note.help "Palīdzība">
+<!ENTITY sb.note.print "Drukāt">
+<!ENTITY sb.note.exit "Iziet">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "R">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "D">
+<!ENTITY sb.note.exit.accesskey "I">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Visu mapju koku">
+<!ENTITY sb.output.option.frame "Ar rāmi">
+<!ENTITY sb.output.option.open "Kad process pabeigts, atvērt HTML failu">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.save.partial "Saglabāt atlasīto">
+<!ENTITY sb.save.partial.as "Saglabāt atlasīto kā">
+<!ENTITY sb.save.entire "Saglabāt lapu">
+<!ENTITY sb.save.entire.as "Saglabāt lapu kā">
+<!ENTITY sb.save.frame "Saglabāt rāmi">
+<!ENTITY sb.save.frame.as "Saglabāt rāmi kā">
+<!ENTITY sb.save.target "Saglabāt saiti">
+<!ENTITY sb.save.target.as "Saglabāt saiti kā">
+<!ENTITY sb.save.alltabs "Saglabāt visas cilnes">
+<!ENTITY sb.save.bookmark "Saglabāt kā grāmatzīmi">
+<!ENTITY sb.sidebar "Rādīt sānjoslā">
+<!ENTITY sb.menubar "Izvēlņu josla">
+<!ENTITY sb.editbefore "Rediģēt pirms saglabāšanas">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Galvenais">
+<!ENTITY sb.prefs.keys "Taustiņi">
+<!ENTITY sb.prefs.tabs "Cilnes">
+<!ENTITY sb.prefs.save "Saglabāt">
+<!ENTITY sb.prefs.edit "Rediģēt">
+<!ENTITY sb.prefs.organize "Organizēt">
+<!ENTITY sb.prefs.advanced "Papildu">
+<!ENTITY sb.prefs.ui.contextMenu "Rādīt pārlūka kontekstizvēlnē">
+<!ENTITY sb.prefs.ui.contextSubMenu "Apakšizvēlne">
+<!ENTITY sb.prefs.ui.bookmark "Rādīt izvēlni 'Saglabāt kā grāmatzīmi'">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Rādīt">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "nesen izmantotās mapes">
+<!ENTITY sb.prefs.ui.menuBar "Rādīt izvēlņu joslā">
+<!ENTITY sb.prefs.ui.toolsMenu "Rādīt izvēlnē 'Rīki'">
+<!ENTITY sb.prefs.ui.statusBar "Rādīt statusa joslā">
+<!ENTITY sb.prefs.restart "Izmaiņām nepieciešams restartēt Firefox">
+<!ENTITY sb.prefs.tabs.tips "Atvērt jaunu cilni šādām darbībām">
+<!ENTITY sb.prefs.tabs.note "Rediģēt piezīmi">
+<!ENTITY sb.prefs.data "Datu krātuves vieta">
+<!ENTITY sb.prefs.data.default "Pēc noklusējuma (profila mape)">
+<!ENTITY sb.prefs.data.custom "Datus saglabāt">
+<!ENTITY sb.prefs.data.tips "Izvēlieties mapi ScrapBook datu saglabāšanai">
+<!ENTITY sb.prefs.multibook.enabled "Iespējot Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook ļauj iestatīt vairākas vietas datu saglabāšanai un ātri pārslēgties starp tām izmantojot rīkjoslas pogu .">
+<!ENTITY sb.prefs.confirmDelete "Brīdināt par saglabāto vienumu dzēšanu">
+<!ENTITY sb.prefs.tree.autoCollapse "Atverot mapi automātiski aizvērt citas mapes">
+<!ENTITY sb.prefs.tree.unshift "Ievietot vienumu">
+<!ENTITY sb.prefs.tree.unshift.top "mapes sākumā">
+<!ENTITY sb.prefs.tree.unshift.bottom "mapes beigās">
+<!ENTITY sb.prefs.showDetailOnDrop "Rādīt saglabāšanas iestatījumus nometot vietni sānjoslā">
+<!ENTITY sb.prefs.notifyOnComplete "Rādīt paziņojumu 'Saglabāšana pabeigta'">
+<!ENTITY sb.button.customize "Pielāgot">
+<!ENTITY sb.button.browse "Pārlūkot">
+<!ENTITY sb.button.show "Rādīt failus">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Vispārīga informācija">
+<!ENTITY sb.prop.type "Tips">
+<!ENTITY sb.prop.date "Datums">
+<!ENTITY sb.prop.encode "Kodējums">
+<!ENTITY sb.prop.size "Lielums">
+<!ENTITY sb.prop.content "Saturs">
+<!ENTITY sb.prop.folder "Mape">
+<!ENTITY sb.prop.icon "Ikona">
+<!ENTITY sb.prop.icon.change "Mainīt">
+<!ENTITY sb.prop.icon.default "Pēc noklusējuma">
+<!ENTITY sb.prop.icon.favicon "Izvēlieties izlases ikonu">
+<!ENTITY sb.prop.icon.custom "Izvēlieties lietotāja ikonu">
+<!ENTITY sb.prop.mark "Izcelt nosaukumu mapju kokā">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Atjaunot scrapbook.rdf failu">
+<!ENTITY sb.repair.rdfFile.descript "Izmantojiet, ja pazudis ScrapBook mapju koks.">
+<!ENTITY sb.repair.rdfFile.select "Izvēlieties dublējuma failu atjaunošanai.">
+<!ENTITY sb.repair.rdfFile.file "Fails">
+<!ENTITY sb.repair.rdfFile.time "Laiks">
+<!ENTITY sb.repair.rdfFile.size "Lielums">
+<!ENTITY sb.repair.favicons "Atjaunot mapju koka ikonas">
+<!ENTITY sb.repair.favicons.descript "Izmantojiet, ja pazudušas ScrapBook mapju ikonas">
+<!ENTITY sb.repair.complete "Atjaunošana pabeigta">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.new.folder "Jauna mape">
+<!ENTITY sb.new.separator "Jauns atdalītājs">
+<!ENTITY sb.new.note "Jauna piezīme">
+<!ENTITY sb.toggle.all "Atvērt/Aizvērt visas mapes">
+<!ENTITY sb.tools "Rīki">
+<!ENTITY sb.tools.options "Iestatījumi">
+<!ENTITY sb.tools.manage "Pārvaldīt">
+<!ENTITY sb.tools.combine "Apvienošanas vednis">
+<!ENTITY sb.tools.trade "Imports/Eksports">
+<!ENTITY sb.tools.multiple "Saglabāt vairākas URL">
+<!ENTITY sb.tools.directory "Atvērt ScrapBook datu mapi">
+<!ENTITY sb.tools.calculate "Lieluma aprēķināšana">
+<!ENTITY sb.tools.sorttree "Kārtot mapes">
+<!ENTITY sb.tools.output "Saglabāt kā HTML">
+<!ENTITY sb.tools.repair "Avārijas atjaunošana">
+<!ENTITY sb.tools.addons "Papildinājumu funkcijas">
+<!ENTITY sb.note.opentab "Atvērt cilnē">
+<!ENTITY sb.note.close "Aizvērt">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Kārtot">
+<!ENTITY sb.sort.reverse "Pretējā secībā">
+<!ENTITY sb.sort.title.asc "Kārtot pēc nosaukuma (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Kārtot pēc nosaukuma (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Hronoloģiskā secībā">
+<!ENTITY sb.sort.date.desc "Apgriezti hronoloģiskā secībā">
+<!ENTITY sb.sort.recursive "Kārtot apakšmapes rekursīvi">
+<!ENTITY sb.sort.warning "UZMANĪBU: Šo darbību nevar atsaukt.">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Imports">
+<!ENTITY sb.trade.export "Eksports">
+<!ENTITY sb.trade.time "Eksportēts">
+<!ENTITY sb.trade.restore "Importēt un atjaunot mapes struktūru">
+<!ENTITY sb.trade.remove "Noņemt failus pēc importēšanas">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Atvērt">
+<!ENTITY sb.open.tab "Atvērt cilnē">
+<!ENTITY sb.open.newtab "Atvērt jaunā cilnē">
+<!ENTITY sb.open.source "Atvērt avota URL">
+<!ENTITY sb.tools "Rīki">
+<!ENTITY sb.show.files "Rādīt failus">
+<!ENTITY sb.move "Pārvietot">
+<!ENTITY sb.move.into "Pārvietot uz mapi">
+<!ENTITY sb.renew "Saglabāt atkārtoti">
+<!ENTITY sb.export "Eksportēt">
+<!ENTITY sb.remove "Dzēst">
+<!ENTITY sb.property "Rekvizīti">
+<!ENTITY sb.prop.title "Nosaukums">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Komentārs">
+<!ENTITY sb.prop.id.date "ID (laiks)">
+<!ENTITY sb.folder.combine "Kombinēts skats">
+<!ENTITY sb.folder.openall "Atvērt visas cilnēs">
+<!ENTITY sb.folder.manage "Pārvaldīt mapi">
+<!ENTITY sb.new.folder "Jauna mape">
+<!ENTITY sb.new.separator "Jauns atdalītājs">
+<!ENTITY sb.new.note "Jauna piezīme">
+<!ENTITY sb.sort.folder "Kārtot mapes">
+<!ENTITY sb.search "Meklēt">
+<!ENTITY sb.search.fulltext "Pilnteksta meklēšana">
+<!ENTITY sb.search.all "Visi">
+<!ENTITY sb.search.re "Izmantot RegExp">
+<!ENTITY sb.search.cs "Saskaņot reģistru">
+<!ENTITY sb.search.cache "Atjaunināt kešatmiņu pilnteksta meklēšanai">
+<!ENTITY sb.search.clear "Notīrīt formu aizpildīšanas vēsturi">
+<!ENTITY sb.search.days "Filtrēt pēc vecuma">
+<!ENTITY mb.manage "Pārvaldīt">
+<!ENTITY mb.profileFolder "Profila mape">
+
