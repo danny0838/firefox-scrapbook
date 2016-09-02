@@ -240,6 +240,14 @@
 <!ENTITY sb.sort.recursive "Kārtot apakšmapes rekursīvi">
 <!ENTITY sb.sort.warning "UZMANĪBU: Šo darbību nevar atsaukt.">
 
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook piezīmju HTML veidnes palīdzība">
+<!ENTITY sb.thelp.tags "Divas īpašās atzīmes">
+<!ENTITY sb.thelp.tag1 "Piezīmes virsraksts (pirmā rinda)">
+<!ENTITY sb.thelp.tag2 "Piezīmes saturs (otrā un nākamās rindas)">
+<!ENTITY sb.thelp.preset "Sākotnējā veidne">
+
 <!-- trade.dtd -->
 <!ENTITY sb.trade.import "Imports">
 <!ENTITY sb.trade.export "Eksports">

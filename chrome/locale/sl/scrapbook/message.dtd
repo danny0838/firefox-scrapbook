@@ -240,6 +240,14 @@
 <!ENTITY sb.sort.recursive "Razvrsti podmape ponavljajoče">
 <!ENTITY sb.sort.warning "Obvestilo: tega opravila ni mogoče razveljaviti.">
 
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "Pomoč za predloge HTML ScrapBook">
+<!ENTITY sb.thelp.tags "Two Special Tags">
+<!ENTITY sb.thelp.tag1 "Naziv (prva vrstica) opombe">
+<!ENTITY sb.thelp.tag2 "Vsebina (druga vrstica ali nadaljnje) opombe">
+<!ENTITY sb.thelp.preset "Prednastavljena predloga">
+
 <!-- trade.dtd -->
 <!ENTITY sb.trade.import "Uvozi">
 <!ENTITY sb.trade.export "Izvozi">
