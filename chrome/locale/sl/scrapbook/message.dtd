@@ -1,0 +1,411 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Skupna velikost">
+<!ENTITY sb.calc.diagnosis "Prepoznavanje težav">
+
+<!-- capture.dtd -->
+<!ENTITY sb.save "Shrani">
+<!ENTITY sb.save.abort "Prekini">
+<!ENTITY sb.save.start "Začni">
+<!ENTITY sb.save.retry "Ponovno poskusi">
+<!ENTITY sb.save.skip "Preskoči">
+<!ENTITY sb.save.pause "Premor">
+<!ENTITY sb.save.finish "Cancel">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Title">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filter">
+<!ENTITY sb.save.filter.column.rule "Show/Hide">
+<!ENTITY sb.save.filter.column.content "Filter (regular expression)">
+<!ENTITY sb.save.filter.accept "Accept">
+<!ENTITY sb.save.filter.accept.help "change or edit value">
+<!ENTITY sb.save.filter.cancel "Cancel">
+<!ENTITY sb.save.filter.cancel.help "abort editing">
+<!ENTITY sb.save.filter.delete "Delete">
+<!ENTITY sb.save.filter.delete.help "remove filter from the list">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Dodajte predmete z vlečenjem in spuščanjem z drevesa v vrstnem redu za združitev. Povlečete in spustite lahko več predmetov naenkrat.">
+<!ENTITY sb.combine.preview "Predogled">
+<!ENTITY sb.combine.preview.d "Pritisnite na gumb 'Združi' po pregledu predogleda.">
+<!ENTITY sb.combine.option.remove "Po končani združitvi odstrani izvirne strani">
+<!ENTITY sb.combine.up "move item upwards">
+<!ENTITY sb.combine.down "move item downwards">
+<!ENTITY sb.combine.remove "remove item">
+<!ENTITY sb.combine.newTitle "new title">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.title "Shrani podrobnosti">
+<!ENTITY sb.detail.new.folder "Nova mapa">
+<!ENTITY sb.detail.select.folder "Izberite mapo">
+<!ENTITY sb.detail.option "Možnosti">
+<!ENTITY sb.detail.option.save "Save">
+<!ENTITY sb.detail.option.images "Slike">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Slogi">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.tidyCss "Process CSS">
+<!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Charset">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
+<!ENTITY sb.detail.linked.file "Prenesi povezane datoteke">
+<!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
+<!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
+<!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
+<!ENTITY sb.detail.linked.file.reset "Reset to default">
+<!ENTITY sb.detail.linked.page "Globinsko shranjevanje">
+<!ENTITY sb.detail.linked.page.desc "Po končanem shranjevanju bodo vse strani med seboj povezane.">
+<!ENTITY sb.detail.linked.page.depth "Globina povezav">
+<!ENTITY sb.detail.warnAboutRenew "OBVESTILO: &apos;Shrani ponovno&apos; prepiše prej shranjeno stran.">
+<!ENTITY sb.detail.warnAboutScript "OBVESTILO: JavaScript lahko povzroči nekaj težav.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Uredi orodno vrstico">
+<!ENTITY sb.toolbar.info "Orodna vrstica podatkov">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser: orodje za brisanje predmetov na spletni strani, na katere ste kliknili">
+<!ENTITY sb.edit.undo "Razveljavi">
+<!ENTITY sb.edit.save "Shrani spremembe">
+<!ENTITY sb.edit.comment "Razširi območje za pripombe">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Dodaj pripombo k izbiri v besedilu">
+<!ENTITY sb.edit.attach.file "Dodaj datoteko k izbiri">
+<!ENTITY sb.edit.attach.link "Dodaj povezavo k izbiri">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Odstrani izbiro">
+<!ENTITY sb.edit.remove.iframe "Odstrani vse oznake IFRAME">
+<!ENTITY sb.edit.remove.script "Odstrani vse oznake SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Poudarjevalnik">
+<!ENTITY sb.highlighter.remove "Počisti poudarke v izbiri">
+<!ENTITY sb.highlighter.remove.all "Počisti vse poudarke">
+<!ENTITY sb.locate "Poišči v stranski vrstici">
+<!ENTITY sb.indicators "Prikaži kazalnike povezav">
+<!ENTITY sb.info.home "Domov">
+<!ENTITY sb.info.sitemap "Zemljevid strani">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Prednastavljeni slogi">
+<!ENTITY sb.hlCustom.background "Ozadje">
+<!ENTITY sb.hlCustom.color "Barva">
+<!ENTITY sb.hlCustom.text "Besedilo">
+<!ENTITY sb.hlCustom.bold "Krepko">
+<!ENTITY sb.hlCustom.italic "Ležeče">
+<!ENTITY sb.hlCustom.line "Prečrtano">
+<!ENTITY sb.hlCustom.border "Obroba">
+<!ENTITY sb.hlCustom.type "Vrsta">
+<!ENTITY sb.hlCustom.box "Okvir">
+<!ENTITY sb.hlCustom.underline "Podčrtano">
+<!ENTITY sb.hlCustom.style "Slog">
+<!ENTITY sb.hlCustom.solid "Polno">
+<!ENTITY sb.hlCustom.dotted "Pikčasto">
+<!ENTITY sb.hlCustom.dashed "Črtkano">
+<!ENTITY sb.hlCustom.double "Dvojno">
+<!ENTITY sb.hlCustom.width "Širina">
+<!ENTITY sb.hlCustom.thin "Tanko">
+<!ENTITY sb.hlCustom.medium "Srednje">
+<!ENTITY sb.hlCustom.thick "Debelo">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Upravitelj">
+<!ENTITY mb.prop.name "Ime">
+<!ENTITY mb.prop.path "Pot">
+<!ENTITY mb.button.add "Dodaj">
+<!ENTITY mb.button.edit "Uredi">
+<!ENTITY mb.button.remove "Odstrani">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Filter (regular expression)">
+<!ENTITY sb.multiple.titleofwebsite "Title of website">
+<!ENTITY sb.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.title "Title">
+<!ENTITY sb.multiple.url "URL (vnesite URL-je po vrsticah)">
+<!ENTITY sb.multiple.detector "Zaznavanje URL-jev">
+<!ENTITY sb.multiple.detector.plink "Vse povezave na strani">
+<!ENTITY sb.multiple.detector.slink "Vse povezave v izbiri">
+<!ENTITY sb.multiple.detector.tabs "Vse odprti zavihki v oknu">
+<!ENTITY sb.multiple.detector.local "Vsi krajevni HTML-i v mapi">
+<!ENTITY sb.multiple.detector.bookmarks "Zaznamki">
+<!ENTITY sb.multiple.detector.clear "Počisti">
+<!ENTITY sb.multiple.exclude "ignore already existing addresses in destination folder">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Shrani">
+<!ENTITY sb.note.close "Zapri">
+<!ENTITY sb.note.tools "Orodja">
+<!ENTITY sb.note.htmlview "Pogled HTML">
+<!ENTITY sb.note.normalview "Običajni pogled">
+<!ENTITY sb.note.template "Uredi predlogo HTML">
+<!ENTITY sb.note.autolinefeed "Samodejno podajanje vrtic">
+<!ENTITY sb.note.autolinefeed.t "Dodaj oznako br na konec vrstice ob &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Velikost pisave">
+<!ENTITY sb.note.help "Pomoč">
+<!ENTITY sb.note.print "Natisni">
+<!ENTITY sb.note.exit "Izhod">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "O">
+<!ENTITY sb.note.tools.accesskey "r">
+<!ENTITY sb.note.fontsize.accesskey "V">
+<!ENTITY sb.note.print.accesskey "N">
+<!ENTITY sb.note.exit.accesskey "z">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Izpiši celotno drevo">
+<!ENTITY sb.output.option.frame "Izpiši z okvirjem">
+<!ENTITY sb.output.option.open "Ko je opravilo končano, odpri datoteko HTML">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.save.partial "Shrani izbiro">
+<!ENTITY sb.save.partial.as "Shrani izbiro kot">
+<!ENTITY sb.save.entire "Shrani stran">
+<!ENTITY sb.save.entire.as "Shrani stran kot">
+<!ENTITY sb.save.frame "Shrani okvir">
+<!ENTITY sb.save.frame.as "Shrani okvir kot">
+<!ENTITY sb.save.target "Shrani povezavo">
+<!ENTITY sb.save.target.as "Shrani povezavo kot">
+<!ENTITY sb.save.alltabs "Shrani vse zavihke">
+<!ENTITY sb.save.bookmark "Shrani kot zaznamek">
+<!ENTITY sb.sidebar "Prikaži v stranski vrstici">
+<!ENTITY sb.menubar "Menijska vrstica">
+<!ENTITY sb.editbefore "Uredi pred shranjevanjem">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Glavno">
+<!ENTITY sb.prefs.keys "Tipke">
+<!ENTITY sb.prefs.tabs "Zavihki">
+<!ENTITY sb.prefs.save "Shrani">
+<!ENTITY sb.prefs.edit "Uredi">
+<!ENTITY sb.prefs.organize "Organiziraj">
+<!ENTITY sb.prefs.advanced "Napredno">
+<!ENTITY sb.prefs.ui.contextMenu "Prikaži v vsebinskem meniju brskalnika">
+<!ENTITY sb.prefs.ui.contextSubMenu "Podmeni">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Prikaži meni 'Shrani kot zaznamek'">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Prikaži do">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "nedavno uporabljenih map">
+<!ENTITY sb.prefs.ui.menuBar "Prikaži v menijski vrstici">
+<!ENTITY sb.prefs.ui.menuBar.icon "Icon">
+<!ENTITY sb.prefs.ui.toolsMenu "Prikaži v meniju 'Orodja'">
+<!ENTITY sb.prefs.ui.statusBar "Prikaži v vrstici stanja">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
+<!ENTITY sb.prefs.desc.restart "Sprememba zahteva ponovni zagon Firefoxa.">
+<!ENTITY sb.prefs.tabs.tips "Odpri v zavihku za naslednja opravila">
+<!ENTITY sb.prefs.tabs.note "Uredi zapisek">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data.tips "Izberite mapo za shranjevanje podatkov ScrapBook.">
+<!ENTITY sb.prefs.confirmDelete "Opozori me med brisanjem predmetov drevesa">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
+<!ENTITY sb.prefs.tree.autoCollapse "Ob odpiranju mape drevesa samodejno zapri druge mape">
+<!ENTITY sb.prefs.tree.unshift "Vstavi predmet na">
+<!ENTITY sb.prefs.tree.unshift.top "vrh mape">
+<!ENTITY sb.prefs.tree.unshift.bottom "dno mape">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Ob vlečenju in spuščanju v stransko vrstico prikaži pog. okno 'Shrani podrobnosti'">
+<!ENTITY sb.prefs.notifyOnComplete "Prikaži obvestilo 'Shranjevanje končano'">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Prilagodi">
+<!ENTITY sb.button.browse "Brskaj">
+<!ENTITY sb.button.show "Prikaži datoteke">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Splošni podatki">
+<!ENTITY sb.prop.type "Vrsta">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Kodiranje">
+<!ENTITY sb.prop.size "Velikost">
+<!ENTITY sb.prop.content "Vsebina">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Mapa">
+<!ENTITY sb.prop.icon "Ikona">
+<!ENTITY sb.prop.icon.change "Spremeni">
+<!ENTITY sb.prop.icon.default "Privzeto">
+<!ENTITY sb.prop.icon.favicon "Izberite zaznamko">
+<!ENTITY sb.prop.icon.custom "Izberite uporabniško ikono">
+<!ENTITY sb.prop.mark "Označi">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Obnovi scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Poskusite to, če ScrapBook nenadoma izgine.">
+<!ENTITY sb.repair.rdfFile.select "Izberite var. kopijo za obnovitev.">
+<!ENTITY sb.repair.rdfFile.file "Datoteka">
+<!ENTITY sb.repair.rdfFile.time "Čas">
+<!ENTITY sb.repair.rdfFile.size "Velikost">
+<!ENTITY sb.repair.favicons "Obnovi zaznamke v drevesu">
+<!ENTITY sb.repair.favicons.descript "Poskusite to, če v drevesu izgine veliko zaznamk.">
+<!ENTITY sb.repair.complete "Končano.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "Odpri/Zapri vse mape">
+<!ENTITY sb.tools "Orodja">
+<!ENTITY sb.tools.options "Možnosti">
+<!ENTITY sb.tools.manage "Upravljanje">
+<!ENTITY sb.tools.combine "Čarovnik za združevanje">
+<!ENTITY sb.tools.trade "Uvozi/Izvozi">
+<!ENTITY sb.tools.multiple "Shrani več URL-jev">
+<!ENTITY sb.tools.directory "Odpri mapo s podatki">
+<!ENTITY sb.tools.calculate "Izračun velikosti">
+<!ENTITY sb.tools.sorttree "Razvrsti celotno drevo">
+<!ENTITY sb.tools.output "Izpiši kot HTML">
+<!ENTITY sb.tools.repair "Zasilno popravljanje">
+<!ENTITY sb.tools.addons "Opravila dodatka">
+<!ENTITY sb.note.opentab "Odpri v zavihku">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Razvrsti">
+<!ENTITY sb.sort.reverse "Obratno">
+<!ENTITY sb.sort.title "Razvrsti po nazivu">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
+<!ENTITY sb.sort.recursive "Razvrsti podmape ponavljajoče">
+<!ENTITY sb.sort.warning "Obvestilo: tega opravila ni mogoče razveljaviti.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "Pomoč za predloge HTML ScrapBook">
+<!ENTITY sb.thelp.tags "Two Special Tags">
+<!ENTITY sb.thelp.tag1 "Naziv (prva vrstica) opombe">
+<!ENTITY sb.thelp.tag2 "Vsebina (druga vrstica ali nadaljnje) opombe">
+<!ENTITY sb.thelp.preset "Prednastavljena predloga">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Uvozi">
+<!ENTITY sb.trade.export "Izvozi">
+<!ENTITY sb.trade.time "Izvoženo">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Izvozi in obnovi zgradbo map">
+<!ENTITY sb.trade.remove "Odstrani datoteke po uvozu">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Odpri">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Odpri v zavihku">
+<!ENTITY sb.open.newtab "Odpri v novem zavihku">
+<!ENTITY sb.open.source "Odpri izvorni URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "Prikaži datoteke">
+<!ENTITY sb.move "Premakni">
+<!ENTITY sb.move.into "Premakni v mapo">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Ponovno shrani">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
+<!ENTITY sb.export "Izvozi">
+<!ENTITY sb.remove "Izbriši">
+<!ENTITY sb.property "Lastnosti">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Naziv">
+<!ENTITY sb.prop.comment "Pripomba">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "Convert to Folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
+<!ENTITY sb.folder.combine "Združen pogled">
+<!ENTITY sb.folder.openall "Odpri vse v zavihkih">
+<!ENTITY sb.folder.manage "Upravljaj z mapo">
+<!ENTITY sb.new.folder "Nova mapa">
+<!ENTITY sb.new.separator "Novo ločilo">
+<!ENTITY sb.new.note "Nova opomba">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Razvrsti mapo">
+<!ENTITY sb.search "Poišči">
+<!ENTITY sb.search.fulltext "Iskanje polnega besedila">
+<!ENTITY sb.search.all "Vse">
+<!ENTITY sb.search.re "Uporabi RegExp">
+<!ENTITY sb.search.cs "Ujemaj velikost črk">
+<!ENTITY sb.search.cache "Posodobi predpomnilnik za polno iskanje besedila">
+<!ENTITY sb.search.clear "Počisti zgodovino obrazcev">
+<!ENTITY mb.manage "Upravljanje">
+<!ENTITY mb.profileFolder "Mapa profila">
+
