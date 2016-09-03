@@ -161,10 +161,6 @@ var sbSearchResult = {
         return aString;
     },
 
-    localizedQuotation: function(aString) {
-        return sbCommonUtils.lang("QUOTATION", aString);
-    },
-
     forward: function(key) {
         if ( !this.CURRENT_TREEITEM ) return;
         var id = this.CURRENT_TREEITEM[5];
