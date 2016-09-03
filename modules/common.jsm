@@ -557,6 +557,21 @@ var sbCommonUtils = {
         }
     },
 
+    execProgram: function(aExecFilePath, args) {
+        try {
+            var execFile = this.convertPathToFile(aExecFilePath);
+            if ( !execFile.exists() ) {
+                this.alert(lang("ERR_FILE_NOT_EXIST", [aExecFilePath]));
+                return;
+            }
+            var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
+            process.init(execFile);
+            process.run(false, args, args.length);
+        } catch (ex) {
+            this.alert(lang("ERR_FAIL_EXEC_FILE", [aExecFilePath]));
+        }
+    },
+
     convertToUnicode: function(aString, aCharset) {
         if ( !aString ) return "";
         try {
@@ -632,7 +647,7 @@ var sbCommonUtils = {
         }
     },
 
-    // This ensures normalizeURI("http://abc/?ä¸­æ–‡#!def%") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87#%21def%")
+    // This ensures normalizeURI("http://abc/?¤¤¤å#!def%") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87#%21def%")
     // Mainly to recover an overencode issue that !'()~ be saved encoded for xhtml files.
     normalizeURI: function(aURI) {
         try {

@@ -1,0 +1,12 @@
+Scrapbook X 1.13.1
+==================
+
+Changes since v1.13.0
+---------------------
+
+ * Added Latvian (lv) and Slovenian (sl) localization.
+
+ * Recovered an internal API sbCommonUtils.execProgram() for addon
+   compatibility.
+
+Also includes some localization improvements.
