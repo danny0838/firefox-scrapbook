@@ -40,3 +40,13 @@ It is used to open a specific directory in the native file explorer so
 that the user can easily view or edit their source files of the selected
 ScrapBook item. It is also used to open the pointed file of the selected
 ScrapBook "file" typed item and is under the user's full consent.
+
+
+# Use of nsIProcess
+
+This is used by the execProgram method in the modules/common.jsm.
+The execProgram is inherited from ScrapBook by Gomita and its function is
+to run an external process of an external program. It is currently not
+used in the main program of ScrapBook X and is left for downward
+compatibility since it's essential for some ScrapBook related addons to
+work, such as BackupHelper.
