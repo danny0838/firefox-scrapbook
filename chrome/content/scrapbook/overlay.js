@@ -49,6 +49,7 @@ var sbBrowserOverlay = {
             var elem = document.getElementById(id);
             var keyStr = sbCommonUtils.getPref(pref, "");
             var shortcut = sbShortcut.fromString(keyStr);
+console.log("setting:", id, shortcut.toString());
             if (!shortcut.isComplete) {
                 elem.parentNode.removeChild(elem);
             } else if (shortcut.isPrintable) {
@@ -60,6 +61,13 @@ var sbBrowserOverlay = {
                 elem.setAttribute("modifiers", shortcut.getModifiers());
                 elem.removeAttribute("key");
             }
+if (elem.parentNode) {
+    console.log("key", elem.hasAttribute("key") ? elem.getAttribute("key") : "(none)");
+    console.log("keycode", elem.hasAttribute("keycode") ? elem.getAttribute("keycode") : "(none)");
+    console.log("modifiers", elem.hasAttribute("modifiers") ? elem.getAttribute("modifiers") : "(none)");
+} else {
+    console.log("(none)");
+}
         }
     },
 
