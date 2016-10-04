@@ -51,7 +51,7 @@ var sbBrowserOverlay = {
             var shortcut = sbShortcut.fromString(keyStr);
 console.log("setting:", id, shortcut.toString());
             if (!shortcut.isComplete) {
-                elem.parentNode.removeChild(elem);
+                elem.setAttribute("disabled", "true");
             } else if (shortcut.isPrintable) {
                 elem.setAttribute("key", shortcut.keyName);
                 elem.setAttribute("modifiers", shortcut.getModifiers());
@@ -61,7 +61,7 @@ console.log("setting:", id, shortcut.toString());
                 elem.setAttribute("modifiers", shortcut.getModifiers());
                 elem.removeAttribute("key");
             }
-if (elem.parentNode) {
+if (!elem.hasAttribute("disabled")) {
     console.log("key", elem.hasAttribute("key") ? elem.getAttribute("key") : "(none)");
     console.log("keycode", elem.hasAttribute("keycode") ? elem.getAttribute("keycode") : "(none)");
     console.log("modifiers", elem.hasAttribute("modifiers") ? elem.getAttribute("modifiers") : "(none)");
