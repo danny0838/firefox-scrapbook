@@ -50,7 +50,7 @@ var sbBrowserOverlay = {
             var keyStr = sbCommonUtils.getPref(pref, "");
             var shortcut = sbShortcut.fromString(keyStr);
             if (!shortcut.isComplete) {
-                elem.parentNode.removeChild(elem);
+                elem.setAttribute("disabled", "true");
             } else if (shortcut.isPrintable) {
                 elem.setAttribute("key", shortcut.keyName);
                 elem.setAttribute("modifiers", shortcut.getModifiers());
