@@ -1079,9 +1079,19 @@ sbContentSaverClass.prototype = {
     // 2. Unicode BOM in the CSS file
     // 3. @charset rule in the CSS file
     // 4. assume it's UTF-8
-    // We follow 1-3 but not 4: if no charset found, manipulate it as byte string.
+    // We follow 1-3 but not 4: if no supported charset found, manipulate it as byte string.
     processCSSFile: function(aCSSFile, aRefURL, aCharset) {
-        var charset = aCharset;
+        var getSupportedCharset = function (charset) {
+            try {
+                sbCommonUtils.UNICODE.charset = charset;
+            } catch (ex) {
+                // charset is not supported by Firefox
+                return null;
+            }
+            return charset;
+        };
+
+        var charset = getSupportedCharset(aCharset);
         var cssText = sbCommonUtils.readFile(aCSSFile, charset);
         var hasAtRule = false;
 
@@ -1100,6 +1110,7 @@ sbContentSaverClass.prototype = {
                 charset = RegExp.$2;
                 hasAtRule = true;
             }
+            charset = getSupportedCharset(charset);
             if (charset) cssText = sbCommonUtils.convertToUnicode(cssText, charset);
         } else {
             if (/^@charset (["'])(\w+)\1;/.test(cssText)) {
