@@ -1079,7 +1079,7 @@ sbContentSaverClass.prototype = {
     // 2. Unicode BOM in the CSS file
     // 3. @charset rule in the CSS file
     // 4. assume it's UTF-8
-    // We follow 1-3 but not 4: if no supported charset found, manipulate it as byte string.
+    // We follow 1-3 but not 4: if no supported charset found, handle it as a byte string.
     processCSSFile: function(aCSSFile, aRefURL, aCharset) {
         var getSupportedCharset = function (charset) {
             try {

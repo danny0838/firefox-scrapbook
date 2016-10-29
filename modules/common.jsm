@@ -452,7 +452,7 @@ var sbCommonUtils = {
             var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
             ostream.init(aFile, -1, 0666, 0);
             if (aChars == "UTF-8" || !aChars) {
-                // quick way to preocess UTF-8 conversion
+                // quick way to process UTF-8 conversion
                 // UTF-16 => UTF-8 should be no unsupported chars
                 var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].createInstance(Components.interfaces.nsIConverterOutputStream);
                 converter.init(ostream, "UTF-8", 4096, 0x0000);
