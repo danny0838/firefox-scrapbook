@@ -253,7 +253,7 @@ var sbCaptureTask = {
             var url = gURLs[this.index];
             this.redirectHash = {};
         } else {
-            if (!this.redirectHash[aRedirectURL]) {
+            if (!this.redirectHash[sbCommonUtils.normalizeURI(aRedirectURL)]) {
                 var url = aRedirectURL;
             } else {
                 var errMsg = "Circular redirect";
@@ -262,7 +262,7 @@ var sbCaptureTask = {
                 return;
             }
         }
-        this.redirectHash[url] = true;
+        this.redirectHash[sbCommonUtils.normalizeURI(url)] = true;
 
         // if active, start connection and capture
         SB_trace(sbCommonUtils.lang("CONNECT", url));
