@@ -253,6 +253,12 @@ var sbCaptureTask = {
             var url = gURLs[this.index];
             this.redirectHash = {};
         } else {
+            if (gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)]) {
+                // the redirected URL is already captured, add to list and skip it
+                gURL2Name[sbCommonUtils.normalizeURI(this.URL)] = gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)];
+                this.next(true);
+                return;
+            }
             if (!this.redirectHash[sbCommonUtils.normalizeURI(aRedirectURL)]) {
                 var url = aRedirectURL;
             } else {
