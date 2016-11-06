@@ -1,0 +1,19 @@
+Scrapbook X 1.13.3
+==================
+
+Changes since v1.13.2
+---------------------
+
+ * Fixed a saving error for a CSS file using a charset not supported
+   by Firefox.
+
+ * Fixed an issue that links to index.html are not correctly rewritten
+   if the source URL contains a hash.
+
+ * Fixed an issue for a duplicated save if there is a redirect to a
+   page that has already been saved.
+
+ * Added a status message for evary URL that is automatically skipped
+   due to some reason.
+
+Also includes some documentation improvements.
