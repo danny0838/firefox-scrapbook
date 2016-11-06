@@ -253,16 +253,23 @@ var sbCaptureTask = {
             var url = gURLs[this.index];
             this.redirectHash = {};
         } else {
-            if (!this.redirectHash[aRedirectURL]) {
+            if (gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)]) {
+                // the redirected URL is already captured, add to list and skip it
+                gURL2Name[sbCommonUtils.normalizeURI(this.URL)] = gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)];
+                this.updateStatus("duplicated");
+                this.next(true);
+                return;
+            }
+            if (!this.redirectHash[sbCommonUtils.normalizeURI(aRedirectURL)]) {
                 var url = aRedirectURL;
             } else {
-                var errMsg = "Circular redirect";
+                var errMsg = "circular redirect";
                 this.updateStatus(errMsg);
                 this.fail(errMsg);
                 return;
             }
         }
-        this.redirectHash[url] = true;
+        this.redirectHash[sbCommonUtils.normalizeURI(url)] = true;
 
         // if active, start connection and capture
         SB_trace(sbCommonUtils.lang("CONNECT", url));
@@ -1067,6 +1074,7 @@ sbHeaderSniffer.prototype = {
         } else if (gContext == "indepth") {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
             // those who go here are undefined files, and should be skipped
+            sbCaptureTask.updateStatus("non-HTML");
             sbCaptureTask.next(true);
         } else {
             // sbCommonUtils.error("Non-HTML under undefined context: " + gContext);

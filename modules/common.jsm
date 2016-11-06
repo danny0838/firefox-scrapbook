@@ -452,7 +452,7 @@ var sbCommonUtils = {
             var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
             ostream.init(aFile, -1, 0666, 0);
             if (aChars == "UTF-8" || !aChars) {
-                // quick way to preocess UTF-8 conversion
+                // quick way to process UTF-8 conversion
                 // UTF-16 => UTF-8 should be no unsupported chars
                 var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].createInstance(Components.interfaces.nsIConverterOutputStream);
                 converter.init(ostream, "UTF-8", 4096, 0x0000);
@@ -647,11 +647,12 @@ var sbCommonUtils = {
         }
     },
 
-    // This ensures normalizeURI("http://abc/?中文#!def%") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87#%21def%")
+    // This ensures normalizeURI("http://abc/?中文!def%#1234") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87%21def%")
     // Mainly to recover an overencode issue that !'()~ be saved encoded for xhtml files.
     normalizeURI: function(aURI) {
+        var [URI] = this.splitURLByAnchor(aURI);
         try {
-            return aURI.replace(/((?!%[0-9A-F]{2}).)+|(%[0-9A-F]{2})+/gi, function (m, u, e) {
+            return URI.replace(/((?!%[0-9A-F]{2}).)+|(%[0-9A-F]{2})+/gi, function (m, u, e) {
                 // unencoded part => encode as it's safe
                 if (u) return encodeURI(m);
                 // encoded part => decode-encode so that overencoded chars are recovered
@@ -660,7 +661,7 @@ var sbCommonUtils = {
         } catch(ex) {}
         // This URI is not encoded as UTF-8.
         // Keep it unchanged since we cannot confidently decode it without breaking functional URI chars
-        return aURI;
+        return URI;
     },
 
     splitFileName: function(aFileName) {
