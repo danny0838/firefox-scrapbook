@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "將檔案儲存為 ASCII 檔名">
 <!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式儲存資料時，顯示「詳細資訊」對話方塊">
 <!ENTITY sb.prefs.notifyOnComplete "顯示「儲存完畢」提醒視窗">
-<!ENTITY sb.prefs.notifyPageSaved "瀏覽儲存過的頁面時，顯示提醒視窗">
+<!ENTITY sb.prefs.notifyPageSaved "瀏覽儲存過的頁面時，顯示提醒">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動輸出 HTML 資料列表">
 <!ENTITY sb.prefs.io "偏好設定">
 <!ENTITY sb.prefs.io.export "匯出偏好設定">
