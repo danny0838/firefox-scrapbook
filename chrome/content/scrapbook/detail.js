@@ -51,7 +51,6 @@ var sbCaptureOptions = {
         } else {
             document.getElementById("sbDetailTabs").selectedIndex = 1;
             document.getElementById("sbDetailTabGeneral").collapsed = true;
-            document.getElementById("sbDetailInDepthBox").collapsed = true;
             document.getElementById("sbDetailRememberAsDefault").hidden = true;
         }
     },
