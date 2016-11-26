@@ -688,8 +688,8 @@ var sbInvisibleBrowser = {
                 if (aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec) {
                     if (sbInvisibleBrowser.reload) {
                         // dummy URL loaded, now load the real URL
-                        sbInvisibleBrowser.load(sbInvisibleBrowser.reload);
-                        sbInvisibleBrowser.reload = null;
+                        sbInvisibleBrowser.load(sbInvisibleBrowser.loadingURL);
+                        sbInvisibleBrowser.reload = false;
                     } else {
                         sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
                     }
@@ -708,8 +708,9 @@ var sbInvisibleBrowser = {
         onSecurityChange: function() {},
     },
 
+    loadingURL: null,
     fileCount: 0,
-    reload: null,
+    reload: false,
 
     init: function(aLoadMedia) {
         try {
@@ -748,8 +749,9 @@ var sbInvisibleBrowser = {
         }
         // if aURL is different from the current URL only in hash, a loading is not performed
         // load a dummy blank URL first to bypass this issue
+        this.loadingURL = aURL;
         if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) {
-            this.reload = aURL;
+            this.reload = true;
             this.ELEMENT.loadURI("about:blank?" + Math.random().toString(), null, null);
         } else {
             this.ELEMENT.loadURI(aURL, null, null);
@@ -761,7 +763,7 @@ var sbInvisibleBrowser = {
     },
 
     onLoadStart: function() {
-        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, this.ELEMENT.currentURI.spec));
+        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, this.loadingURL));
     },
     
     onLoadFinish: function() {
