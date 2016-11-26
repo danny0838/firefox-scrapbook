@@ -182,8 +182,7 @@ var sbBrowserOverlay = {
                         sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data);
                 }
             };
-            var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-            alertsSvc.showAlertNotification(icon, title, text, true, id, listener);
+            sbCommonUtils.ALERT.showAlertNotification(icon, title, text, true, id, listener);
         }
     },
 

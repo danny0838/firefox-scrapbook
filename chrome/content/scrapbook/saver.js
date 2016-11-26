@@ -26,14 +26,12 @@ var sbContentSaver = {
                             sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
                     }
                 };
-                var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-                alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
+                sbCommonUtils.ALERT.showAlertNotification(icon, title, text, true, aItem.id, listener);
             }
         } else {
             var icon = sbCommonUtils.getDefaultIcon();
             var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
-            var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-            alertsSvc.showAlertNotification(icon, title, null);
+            sbCommonUtils.ALERT.showAlertNotification(icon, title, null);
         }
     },
 };
