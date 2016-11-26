@@ -6,7 +6,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>scrapbookx@addons.mozilla.org</em:id>
         <em:type>2</em:type>
-        <em:version>1.13.0</em:version>
+        <em:version>1.13.4</em:version>
         <em:unpack>false</em:unpack>
         <em:bootstrap>false</em:bootstrap>
         <em:multiprocessCompatible>false</em:multiprocessCompatible>
@@ -19,7 +19,7 @@
                 <!-- Firefox -->
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>4.0</em:minVersion>
-                <em:maxVersion>50.*</em:maxVersion>
+                <em:maxVersion>52.*</em:maxVersion>
             </Description>
         </em:targetApplication>
 
@@ -158,6 +158,17 @@
 
         <em:localized>
             <Description>
+                <em:locale>lv-LV</em:locale>
+                <em:name>ScrapBook X</em:name>
+                <em:description>Helps you save web pages and organize the collection.</em:description>
+                <em:creator>Danny Lin</em:creator>
+                <em:translator>Vards</em:translator>
+                <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+            </Description>
+        </em:localized>
+
+        <em:localized>
+            <Description>
                 <em:locale>pl</em:locale>
                 <em:name>ScrapBook X</em:name>
                 <em:description>Rozszerzenie to pomaga zapisać witryny internetowe na dysku i zarządzać nimi</em:description>
@@ -208,6 +219,17 @@
                 <em:description>Umožňuje ukladať webové stránky a spravovať ich kolekcie.</em:description>
                 <em:creator>Danny Lin</em:creator>
                 <em:translator>igor_r</em:translator>
+                <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+            </Description>
+        </em:localized>
+
+        <em:localized>
+            <Description>
+                <em:locale>sl</em:locale>
+                <em:name>ScrapBook X</em:name>
+                <em:description>Helps you save web pages and organize the collection.</em:description>
+                <em:creator>Danny Lin</em:creator>
+                <em:translator>Klofutar</em:translator>
                 <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
             </Description>
         </em:localized>

@@ -238,13 +238,12 @@ var sbCaptureTask = {
         this.seconds = -1;
 
         // mark the item we are currently on
-        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "selected");
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "working");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
         var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
         if ( checkstate.match("false") ) {
             document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
-            this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
-            this.next(true);
+            this.skip();
             return;
         }
 
@@ -253,16 +252,23 @@ var sbCaptureTask = {
             var url = gURLs[this.index];
             this.redirectHash = {};
         } else {
-            if (!this.redirectHash[aRedirectURL]) {
+            if (gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)]) {
+                // the redirected URL is already captured, add to list and skip it
+                gURL2Name[sbCommonUtils.normalizeURI(this.URL)] = gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)];
+                this.updateStatus("duplicated");
+                this.succeed();
+                return;
+            }
+            if (!this.redirectHash[sbCommonUtils.normalizeURI(aRedirectURL)]) {
                 var url = aRedirectURL;
             } else {
-                var errMsg = "Circular redirect";
+                var errMsg = "circular redirect";
                 this.updateStatus(errMsg);
                 this.fail(errMsg);
                 return;
             }
         }
-        this.redirectHash[url] = true;
+        this.redirectHash[sbCommonUtils.normalizeURI(url)] = true;
 
         // if active, start connection and capture
         SB_trace(sbCommonUtils.lang("CONNECT", url));
@@ -301,7 +307,6 @@ var sbCaptureTask = {
         this.next(true);
     },
 
-    // press "skip" button
     // shift to next item
     next: function(quickly) {
         // Resume "skip" button, which is temporarily diasbled
@@ -372,6 +377,7 @@ var sbCaptureTask = {
         }
     },
 
+    // press "finish" button
     closeWindow: function() {
         window.setTimeout(function(){ window.close(); }, 1000);
     },
@@ -392,6 +398,12 @@ var sbCaptureTask = {
             this.seconds++;
             window.clearTimeout(this.timerID);
         }
+    },
+
+    // press "skip" button
+    skip: function() {
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "skipped");
+        this.next(true);
     },
 
     // press "cancel" button
@@ -673,11 +685,19 @@ var sbInvisibleBrowser = {
 
         onStateChange: function(aWebProgress, aRequest, aStateFlags, aStatus) {
             if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
-                sbInvisibleBrowser.fileCount++;
-                sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
+                if (aRequest.name != "about:document-onload-blocker") {
+                    sbInvisibleBrowser.fileCount++;
+                    sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
+                }
             } else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 ) {
                 if (aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec) {
-                    sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
+                    if (sbInvisibleBrowser.reload) {
+                        // dummy URL loaded, now load the real URL
+                        sbInvisibleBrowser.load(sbInvisibleBrowser.loadingURL);
+                        sbInvisibleBrowser.reload = false;
+                    } else {
+                        sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
+                    }
                 }
             }
         },
@@ -693,7 +713,9 @@ var sbInvisibleBrowser = {
         onSecurityChange: function() {},
     },
 
+    loadingURL: null,
     fileCount: 0,
+    reload: false,
 
     init: function(aLoadMedia) {
         try {
@@ -730,10 +752,15 @@ var sbInvisibleBrowser = {
                 this.ELEMENT.docShell.charset = aCharset;
             }
         }
-        this.ELEMENT.loadURI(aURL, null, null);
-        // if aURL is different from the current URL only in hash,
-        // a loading is not performed unless forced to reload
-        if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) this.ELEMENT.reload();
+        // if aURL is different from the current URL only in hash, a loading is not performed
+        // load a dummy blank URL first to bypass this issue
+        this.loadingURL = aURL;
+        if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) {
+            this.reload = true;
+            this.ELEMENT.loadURI("about:blank?" + Math.random().toString(), null, null);
+        } else {
+            this.ELEMENT.loadURI(aURL, null, null);
+        }
     },
 
     cancel: function() {
@@ -741,7 +768,7 @@ var sbInvisibleBrowser = {
     },
 
     onLoadStart: function() {
-        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (this.ELEMENT.currentURI.spec || this.ELEMENT.contentDocument.title)));
+        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, this.loadingURL));
     },
     
     onLoadFinish: function() {
@@ -1067,7 +1094,8 @@ sbHeaderSniffer.prototype = {
         } else if (gContext == "indepth") {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
             // those who go here are undefined files, and should be skipped
-            sbCaptureTask.next(true);
+            sbCaptureTask.updateStatus("non-HTML");
+            sbCaptureTask.skip();
         } else {
             // sbCommonUtils.error("Non-HTML under undefined context: " + gContext);
         }

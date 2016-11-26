@@ -1,0 +1,12 @@
+Scrapbook X 1.13.2
+==================
+
+Changes since v1.13.1
+---------------------
+
+ * Fixed an issue that any key combination could potentially work as
+   switching the sidebar.
+
+ * Removed an obsolete debug message when opening the sidebar.
+
+Also includes some documentation improvements.
