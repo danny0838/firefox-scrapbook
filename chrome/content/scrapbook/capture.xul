@@ -112,7 +112,7 @@
     </vbox>
 
     <hbox>
-        <button id="sbCaptureSkipButton" label="&sb.save.skip;" oncommand="sbCaptureTask.next(true);" disabled="true" />
+        <button id="sbCaptureSkipButton" label="&sb.save.skip;" oncommand="sbCaptureTask.skip();" disabled="true" />
         <spacer flex="1" />
         <button id="sbCapturePauseButton" label="&sb.save.pause;" oncommand="sbCaptureTask.pause();" />
         <button id="sbCaptureStartButton" label="&sb.save.start;" oncommand="sbCaptureTask.activate();" hidden="true" />

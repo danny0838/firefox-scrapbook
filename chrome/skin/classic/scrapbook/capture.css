@@ -88,12 +88,12 @@ treechildren::-moz-tree-checkbox(disabled) {
   list-style-image: none;
 }
 
-treechildren::-moz-tree-row(selected) {
-    background-color: #33CC33;
+treechildren::-moz-tree-row(working) {
+    background-image: url(capture_working.png);
 }
 
-treechildren::-moz-tree-row(finished) {
-    background-color: #FFFFFF;
+treechildren::-moz-tree-row(skipped) {
+    background-image: url(capture_skipped.png);
 }
 
 treechildren::-moz-tree-cell-text(success) {

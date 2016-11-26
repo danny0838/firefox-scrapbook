@@ -238,13 +238,12 @@ var sbCaptureTask = {
         this.seconds = -1;
 
         // mark the item we are currently on
-        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "selected");
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "working");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
         var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
         if ( checkstate.match("false") ) {
             document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
-            this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
-            this.next(true);
+            this.skip();
             return;
         }
 
@@ -257,7 +256,7 @@ var sbCaptureTask = {
                 // the redirected URL is already captured, add to list and skip it
                 gURL2Name[sbCommonUtils.normalizeURI(this.URL)] = gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)];
                 this.updateStatus("duplicated");
-                this.next(true);
+                this.skip();
                 return;
             }
             if (!this.redirectHash[sbCommonUtils.normalizeURI(aRedirectURL)]) {
@@ -308,7 +307,6 @@ var sbCaptureTask = {
         this.next(true);
     },
 
-    // press "skip" button
     // shift to next item
     next: function(quickly) {
         // Resume "skip" button, which is temporarily diasbled
@@ -379,6 +377,7 @@ var sbCaptureTask = {
         }
     },
 
+    // press "finish" button
     closeWindow: function() {
         window.setTimeout(function(){ window.close(); }, 1000);
     },
@@ -399,6 +398,12 @@ var sbCaptureTask = {
             this.seconds++;
             window.clearTimeout(this.timerID);
         }
+    },
+
+    // press "skip" button
+    skip: function() {
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "skipped");
+        this.next(true);
     },
 
     // press "cancel" button
@@ -1090,7 +1095,7 @@ sbHeaderSniffer.prototype = {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
             // those who go here are undefined files, and should be skipped
             sbCaptureTask.updateStatus("non-HTML");
-            sbCaptureTask.next(true);
+            sbCaptureTask.skip();
         } else {
             // sbCommonUtils.error("Non-HTML under undefined context: " + gContext);
         }
