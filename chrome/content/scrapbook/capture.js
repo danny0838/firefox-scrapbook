@@ -256,7 +256,7 @@ var sbCaptureTask = {
                 // the redirected URL is already captured, add to list and skip it
                 gURL2Name[sbCommonUtils.normalizeURI(this.URL)] = gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)];
                 this.updateStatus("duplicated");
-                this.skip();
+                this.succeed();
                 return;
             }
             if (!this.redirectHash[sbCommonUtils.normalizeURI(aRedirectURL)]) {
