@@ -53,7 +53,7 @@ Core changes:
    For instance, they generate problematic CSS, they don't support
    querySelector and cannot tidy captured CSS or resolve internal hash
    links, they cannot modify getters for prototypes and cannot work
-   with our cross platform keyboard shortcut framework, they support
+   with our cross-platform keyboard shortcut framework, they support
    HTML5 poorly and must use the ancient nsDragAndDrop API to support
    drag and drop, which is buggy in many cases.
 
