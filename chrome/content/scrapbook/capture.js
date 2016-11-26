@@ -680,8 +680,10 @@ var sbInvisibleBrowser = {
 
         onStateChange: function(aWebProgress, aRequest, aStateFlags, aStatus) {
             if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
-                sbInvisibleBrowser.fileCount++;
-                sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
+                if (aRequest.name != "about:document-onload-blocker") {
+                    sbInvisibleBrowser.fileCount++;
+                    sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
+                }
             } else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 ) {
                 if (aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec) {
                     if (sbInvisibleBrowser.reload) {
