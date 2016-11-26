@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "إلتقاط في العمق">
 <!ENTITY sb.detail.linked.page.desc "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "لاحظ: 'الالتقاط مجدداً' يكتب فوق الصفحات المحفوظة.">
 <!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص-الجافا  قد تؤدي الى بعض المشاكل.">
 

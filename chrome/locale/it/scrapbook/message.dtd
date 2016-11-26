@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Cattura in profondità">
 <!ENTITY sb.detail.linked.page.desc "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l'opzione 'Cattura ancora' sovrascrive le pagine precedentemente salvate">
 <!ENTITY sb.detail.warnAboutScript "AVVISO: gli JavaScript potrebbero causare problemi">
 

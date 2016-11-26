@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Derinlemesine Kaydet">
 <!ENTITY sb.detail.linked.page.desc "Kayıt etme işlemi tamamlandıktan sonra, tüm sayfalar birbirine bağlanacak ve site haritası oluşturulacak.">
 <!ENTITY sb.detail.linked.page.depth "Linkleri izleme derinliği">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "DİKKAT: 'Yeniden Kaydet' önceden kaydedilmiş sayfanın üzerine yazar.">
 <!ENTITY sb.detail.warnAboutScript "DİKKAT: JavaScript bazı problemlere yol açabilir.">
 

@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Globinsko shranjevanje">
 <!ENTITY sb.detail.linked.page.desc "Po končanem shranjevanju bodo vse strani med seboj povezane.">
 <!ENTITY sb.detail.linked.page.depth "Globina povezav">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "OBVESTILO: &apos;Shrani ponovno&apos; prepiše prej shranjeno stran.">
 <!ENTITY sb.detail.warnAboutScript "OBVESTILO: JavaScript lahko povzroči nekaj težav.">
 

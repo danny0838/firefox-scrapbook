@@ -52,6 +52,7 @@ var sbCaptureOptions = {
             document.getElementById("sbDetailTabs").selectedIndex = 1;
             document.getElementById("sbDetailTabGeneral").collapsed = true;
             document.getElementById("sbDetailInDepthBox").collapsed = true;
+            document.getElementById("sbDetailRememberAsDefault").hidden = true;
         }
     },
 
@@ -77,19 +78,21 @@ var sbCaptureOptions = {
         }
 
         // save to preference
-        sbCommonUtils.setPref("save.default.images", this.param.option["images"]);
-        sbCommonUtils.setPref("save.default.media", this.param.option["media"]);
-        sbCommonUtils.setPref("save.default.fonts", this.param.option["fonts"]);
-        sbCommonUtils.setPref("save.default.frames", this.param.option["frames"]);
-        sbCommonUtils.setPref("save.default.styles", this.param.option["styles"]);
-        sbCommonUtils.setPref("save.default.script", this.param.option["script"]);
-        sbCommonUtils.setPref("save.default.fileAsHtml", this.param.option["fileAsHtml"]);
-        sbCommonUtils.setPref("save.default.saveDataUri", this.param.option["saveDataUri"]);
-        sbCommonUtils.setPref("save.default.tidyCss", this.param.option["tidyCss"]);
-        sbCommonUtils.setPref("save.default.downLinkMethod", this.param.option["downLinkMethod"]);
-        sbCommonUtils.setPref("save.default.downLinkFilter", this.param.option["downLinkFilter"]);
-        if ( this.param.context !== "capture-again-deep" ) {
-            sbCommonUtils.setPref("save.default.inDepthLevels", this.param.option["inDepth"]);
+        if (!this.param.item || document.getElementById("sbDetailRememberAsDefault").checked) {
+            sbCommonUtils.setPref("save.default.images", this.param.option["images"]);
+            sbCommonUtils.setPref("save.default.media", this.param.option["media"]);
+            sbCommonUtils.setPref("save.default.fonts", this.param.option["fonts"]);
+            sbCommonUtils.setPref("save.default.frames", this.param.option["frames"]);
+            sbCommonUtils.setPref("save.default.styles", this.param.option["styles"]);
+            sbCommonUtils.setPref("save.default.script", this.param.option["script"]);
+            sbCommonUtils.setPref("save.default.fileAsHtml", this.param.option["fileAsHtml"]);
+            sbCommonUtils.setPref("save.default.saveDataUri", this.param.option["saveDataUri"]);
+            sbCommonUtils.setPref("save.default.tidyCss", this.param.option["tidyCss"]);
+            sbCommonUtils.setPref("save.default.downLinkMethod", this.param.option["downLinkMethod"]);
+            sbCommonUtils.setPref("save.default.downLinkFilter", this.param.option["downLinkFilter"]);
+            if ( this.param.context !== "capture-again-deep" ) {
+                sbCommonUtils.setPref("save.default.inDepthLevels", this.param.option["inDepth"]);
+            }
         }
 
         // check for regex error

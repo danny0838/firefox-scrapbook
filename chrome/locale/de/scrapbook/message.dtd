@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Ausführliche Archivierung">
 <!ENTITY sb.detail.linked.page.desc "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt.">
 <!ENTITY sb.detail.linked.page.depth "Links folgen bis zu einer Tiefe von">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "HINWEIS: &quot;Erneut archivieren&quot; überschreibt zuvor gespeicherte Seiten.">
 <!ENTITY sb.detail.warnAboutScript "HINWEIS: JavaScript kann eine Reihe von Problemen verursachen.">
 

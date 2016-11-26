@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Captura em Nível">
 <!ENTITY sb.detail.linked.page.desc "Após completar as capturas, todas as páginas serão linkadas umas às outras.">
 <!ENTITY sb.detail.linked.page.depth "Profundidade para seguir os links">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar Novamente' substitui a página salva anteriormente.">
 <!ENTITY sb.detail.warnAboutScript "AVISO: O JavaScript pode causar alguns problemas.">
 
