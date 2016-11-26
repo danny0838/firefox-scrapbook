@@ -1,0 +1,20 @@
+Scrapbook X 1.13.4
+==================
+
+Changes since v1.13.3
+---------------------
+
+ * Fixed an issue that subsequent URLs different only in hash in the
+   list of "Save Multiple URLs" causes the save process to freeze up.
+
+ * Fixed an issue that the file counter and the URL in the loading
+   message of the Save dialog is sometimes wrong.
+
+ * URLs redirected to an already saved page are now marked as
+   successfully saved rather than skipped.
+
+ * Adjusted the highlight of the URLs being selected, being saved,
+   and been skipped to make them more significant and to avoid a
+   displaying issue on several platforms.
+
+Also includes some documentation and localization improvements.
