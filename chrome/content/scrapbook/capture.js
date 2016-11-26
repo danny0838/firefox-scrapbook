@@ -684,7 +684,13 @@ var sbInvisibleBrowser = {
                 sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
             } else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 ) {
                 if (aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec) {
-                    sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
+                    if (sbInvisibleBrowser.reload) {
+                        // dummy URL loaded, now load the real URL
+                        sbInvisibleBrowser.load(sbInvisibleBrowser.reload);
+                        sbInvisibleBrowser.reload = null;
+                    } else {
+                        sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
+                    }
                 }
             }
         },
@@ -701,6 +707,7 @@ var sbInvisibleBrowser = {
     },
 
     fileCount: 0,
+    reload: null,
 
     init: function(aLoadMedia) {
         try {
@@ -737,10 +744,14 @@ var sbInvisibleBrowser = {
                 this.ELEMENT.docShell.charset = aCharset;
             }
         }
-        this.ELEMENT.loadURI(aURL, null, null);
-        // if aURL is different from the current URL only in hash,
-        // a loading is not performed unless forced to reload
-        if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) this.ELEMENT.reload();
+        // if aURL is different from the current URL only in hash, a loading is not performed
+        // load a dummy blank URL first to bypass this issue
+        if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) {
+            this.reload = aURL;
+            this.ELEMENT.loadURI("about:blank?" + Math.random().toString(), null, null);
+        } else {
+            this.ELEMENT.loadURI(aURL, null, null);
+        }
     },
 
     cancel: function() {
