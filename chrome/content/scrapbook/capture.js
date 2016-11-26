@@ -761,7 +761,7 @@ var sbInvisibleBrowser = {
     },
 
     onLoadStart: function() {
-        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (this.ELEMENT.currentURI.spec || this.ELEMENT.contentDocument.title)));
+        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, this.ELEMENT.currentURI.spec));
     },
     
     onLoadFinish: function() {
