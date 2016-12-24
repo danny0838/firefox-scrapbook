@@ -4,10 +4,11 @@ Scrapbook X 1.14.0rc1
 Changes since v1.13.4
 ---------------------
 
- * Detail save options now only be remembered when "Remember current options" is checked.
+ * Detail save options now only be remembered when "Remember current
+   options" is checked.
 
- * Notification for a web page that is already saved now shows on
-   the top of a tab.
+ * Notification for a web page that is already saved now shows on the
+   top of a tab.
 
  * Adjusted the export functionality:
 
@@ -17,4 +18,4 @@ Changes since v1.13.4
 
    * The user interface now display the exported time in ISO format.
 
-Also includes some code clearnup and localization improvements.
+Also includes some code clean-up and localization improvements.
