@@ -52,7 +52,7 @@
         <treecols>
             <treecol id="sbTradeTreeColTitle" label="&sb.prop.title;" sortIndex="0" flex="2" primary="true" />
             <splitter class="tree-splitter" />
-            <treecol id="sbTradeTreeColDate" label="&sb.trade.time;" sortIndex="5" flex="1" sortDirection="ascending" />
+            <treecol id="sbTradeTreeColDate" label="&sb.trade.time;" sortIndex="1" flex="1" sortDirection="ascending" />
             <splitter class="tree-splitter" />
             <treecol id="sbTradeTreeColFolder" label="&sb.prop.folder;" sortIndex="2" flex="1" />
         </treecols>

@@ -100,19 +100,17 @@ var sbTradeService = {
             } else {
                 item.icon = sbCommonUtils.getDefaultIcon(item.type);
             }
-            var lastModifiedTime = item.exported || (new Date(file.lastModifiedTime)).toISOString();
             this.treeItems.push([
                 item.title,
-                lastModifiedTime,
+                item.exported || (new Date(file.lastModifiedTime)).toISOString(),
                 item.folder ? item.folder.replace(/\t/g, "\x1B") : "",
                 item.id,
                 item.icon,
-                lastModifiedTime,
                 dirName,
                 item.type
             ]);
         }
-        sbCustomTreeUtil.sortArrayByIndex(this.treeItems, 5);
+        sbCustomTreeUtil.sortArrayByIndex(this.treeItems, 1);
         this.initTree();
         this.log(sbCommonUtils.lang("DETECT", this.treeItems.length, this.rightDir.path), "G");
     },
@@ -202,12 +200,12 @@ var sbTradeService = {
 
     getCurrentDirName: function() {
         var curIdx = sbCustomTreeUtil.getSelection(this.TREE)[0];
-        return this.treeItems[curIdx][6];
+        return this.treeItems[curIdx][5];
     },
 
     open: function(aTabbed) {
         var idx = sbCustomTreeUtil.getSelection(this.TREE)[0];
-        var type = this.treeItems[idx][7];
+        var type = this.treeItems[idx][6];
         if (type == "bookmark" || type == "separator")
             return;
         sbCommonUtils.loadURL(
@@ -227,7 +225,7 @@ var sbTradeService = {
         if ( idxList.length < 1 ) return;
         if ( !this.confirmRemovingPrompt() ) return;
         for ( var i = 0; i < idxList.length; i++ ) {
-            var dirName = this.treeItems[idxList[i]][6];
+            var dirName = this.treeItems[idxList[i]][5];
             if ( !dirName ) return;
             var dir = this.rightDir.clone();
             dir.append(dirName);
@@ -278,7 +276,7 @@ var sbTradeService = {
         event.dataTransfer.setData("sb/tradeitem", idxList.join("\n"));
         event.dataTransfer.setData("text/plain", idxList.map(function(idx){
             var srcDir = sbTradeService.rightDir.clone();
-            srcDir.append(sbTradeService.treeItems[idx][6]);
+            srcDir.append(sbTradeService.treeItems[idx][5]);
             return sbCommonUtils.convertFileToURL(srcDir);
         }).join("\n"));
         event.dataTransfer.dropEffect = "move";
@@ -489,7 +487,7 @@ var sbImportService = {
 
     copyRightToLeft: function() {
         if ( sbDataSource.data.URI != this._dataURI ) throw "Datasource changed.";
-        var dirName = sbTradeService.treeItems[this.idxList[this.count]][6];
+        var dirName = sbTradeService.treeItems[this.idxList[this.count]][5];
         var srcDir = sbTradeService.rightDir.clone();
         srcDir.append(dirName);
         if ( !srcDir.exists() ) throw "Directory not found.";
