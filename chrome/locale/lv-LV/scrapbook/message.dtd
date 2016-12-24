@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Padziļināta saglabāšana">
 <!ENTITY sb.detail.linked.page.desc "Pēc saglabāšanas visas lapas būs saistītas savā starpā.">
 <!ENTITY sb.detail.linked.page.depth "Saglabāšanas dziļums">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "BRĪDINĀJUMS: 'Saglabāt atkārtoti' pārrakstīs iepriekš saglabāto lapu.">
 <!ENTITY sb.detail.warnAboutScript "BRĪDINĀJUMS: JavaScript var izraisīt dažas problēmas.">
 

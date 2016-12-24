@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Многоуровневый захват">
 <!ENTITY sb.detail.linked.page.desc "После завершения сохранения веб-страниц они будут связаны между собой.">
 <!ENTITY sb.detail.linked.page.depth "Уровень глубины захвата ссылок">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "Примечание: При использовании функции «Захватить снова» сохранённая страница будет перезаписана.">
 <!ENTITY sb.detail.warnAboutScript "Внимание: Могут возникнуть проблемы с JavaScript.">
 
