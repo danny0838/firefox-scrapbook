@@ -380,9 +380,14 @@ var sbExportService = {
     copyLeftToRight: function(aRes) {
         if ( !sbDataSource.exists(aRes) ) throw "Datasource changed.";
         var item = sbDataSource.getItem(aRes);
+        item.icon = item.icon.replace(new RegExp("^resource://scrapbook/data/" + item.id + "/"), "");
+
+        // special handled properties
+        delete(item.folder);
+        delete(item.container);
         item.folder = sbDataSource.getFolderPath(aRes).join("\t");
         item.container = sbDataSource.isContainer(aRes) ? "true" : "";
-        item.icon = item.icon.replace(new RegExp("^resource://scrapbook/data/" + item.id + "/"), "");
+
         var num = 0, destDir, dirName;
         do {
             dirName = sbCommonUtils.validateFileName(item.title).substring(0,60) || "untitled";
