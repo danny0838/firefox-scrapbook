@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "In-depth Save">
 <!ENTITY sb.detail.linked.page.desc "After all pages are saved, they will be linked with each other and a sitemap will be created.">
 <!ENTITY sb.detail.linked.page.depth "Depth to follow links">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Save Again' will overwrite the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">
 

@@ -152,21 +152,32 @@ var sbBrowserOverlay = {
             if (this.infoMode)
                 window.setTimeout(function() { sbInfoViewer.init(id); }, 50);
         } else {
-            window.setTimeout(function() { sbPageEditor.uninit(); }, 0);
-            if ( sbCommonUtils.getPref("notifyPageCaptured", true) ) this.notifyPageCaptured(aURL);
+            window.setTimeout(function() { 
+              sbPageEditor.uninit();
+              if ( sbCommonUtils.getPref("notifyPageCaptured", true) ) sbBrowserOverlay.notifyPageCaptured(aURL);
+            }, 0);
         }
         this.locateMe = null;
         this.lastLocation = aURL;
     },
 
     notifyPageCaptured: function(aURL) {
-        aURL = sbCommonUtils.splitURLByAnchor(aURL)[0];
+        // remove old notification
+        var name = "ScrapBook:notifyPageCaptured";
+        var box = gBrowser.getNotificationBox();
+        var notification = box.getNotificationWithValue(name);
+        if (notification) notification.close();
+
+        // count saved page entries
+        URL = sbCommonUtils.splitURLByAnchor(aURL)[0];
         var result = [];
         var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 2, true);
         resList.forEach(function(res) {
             if (["bookmark", "note", "notex"].indexOf(sbDataSource.getProperty(res, "type")) != -1) return;
-            if (sbCommonUtils.splitURLByAnchor(sbDataSource.getProperty(res, "source"))[0] == aURL) result.push(res);
+            if (sbCommonUtils.splitURLByAnchor(sbDataSource.getProperty(res, "source"))[0] == URL) result.push(res);
         }, this);
+
+        // show notification if there is at least one result
         if (result.length) {
             res = result[0];
             var id = sbDataSource.getProperty(res, "id");
@@ -174,16 +185,15 @@ var sbBrowserOverlay = {
             var type = sbDataSource.getProperty(res, "type");
             var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
 
-            var text = title;
-            var title = sbCommonUtils.lang("PAGE_SAVED", result.length);
-            var listener = {
-                observe: function(subject, topic, data) {
-                    if (topic == "alertclickcallback")
-                        sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data);
+            var text = sbCommonUtils.lang("PAGE_SAVED", result.length);
+            var priority = box.PRIORITY_WARNING_MEDIUM;
+            var buttons = [{
+                label: sbCommonUtils.lang("PAGE_SAVED_VIEW"),
+                callback: function () {
+                    sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + id, true);
                 }
-            };
-            var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-            alertsSvc.showAlertNotification(icon, title, text, true, id, listener);
+            }];
+            box.appendNotification(text, name, icon, priority, buttons);
         }
     },
 

@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "掘り下げ保存">
 <!ENTITY sb.detail.linked.page.desc "保存完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
+<!ENTITY sb.detail.rememberAsDefault "上のオプションを憶える">
 <!ENTITY sb.detail.warnAboutRenew "注意：再保存を行うと元のページに上書きされます。">
 <!ENTITY sb.detail.warnAboutScript "注意：JavaScriptは何らかの問題を引き起こす可能性があります。">
 

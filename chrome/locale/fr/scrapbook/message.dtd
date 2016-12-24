@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Enregistrement en profondeur">
 <!ENTITY sb.detail.linked.page.desc "Une fois les enregistrements terminés, toutes les pages seront liées entre elles et un plan du site sera créé.">
 <!ENTITY sb.detail.linked.page.depth "Profondeur d'enregistrement des liens">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "IMPORTANT : 'Capturer à nouveau' remplace la page sauvegardée précédemment.">
 <!ENTITY sb.detail.warnAboutScript "IMPORTANT : JavaScript peut causer des problèmes.">
 

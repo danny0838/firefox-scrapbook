@@ -26,9 +26,9 @@ Bug fixes:
 
  * A page linked from an XHTML page and has a path containing certain
    special characters (such as "!", "'", or "~") causes some interlinks be
-   not builded.
+   not built.
 
- * Certain styles and scripts become broken when a XHTML page is captured
+ * Certain styles and scripts become broken when an XHTML page is captured
    as HTML via "Capture presenting HTML for non-HTML files".
 
  * Some editor functions, such as DOM Erasor and Freenote, does not work

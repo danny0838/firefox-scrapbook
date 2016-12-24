@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Syvätallennus">
 <!ENTITY sb.detail.linked.page.desc "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">
 <!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "HUOM.: &quot;Tallenna uudestaan&quot; korvaa aiemmin tallennetun sivun.">
 <!ENTITY sb.detail.warnAboutScript "HUOM.: JavaScript voi aiheuttaa ongelmia.">
 

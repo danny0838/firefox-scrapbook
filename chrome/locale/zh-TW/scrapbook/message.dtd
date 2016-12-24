@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "深入儲存">
 <!ENTITY sb.detail.linked.page.desc "全部儲存完成後，會將所有頁面互相連結，並產生站台地圖。">
 <!ENTITY sb.detail.linked.page.depth "深入連結層數">
+<!ENTITY sb.detail.rememberAsDefault "記住目前選項">
 <!ENTITY sb.detail.warnAboutRenew "請注意：「重新儲存」將覆蓋之前儲存的頁面。">
 <!ENTITY sb.detail.warnAboutScript "請注意：儲存 JavaScript 可能會引發許多問題。">
 
@@ -282,7 +283,7 @@
 <!ENTITY sb.prefs.asciiFilename "將檔案儲存為 ASCII 檔名">
 <!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式儲存資料時，顯示「詳細資訊」對話方塊">
 <!ENTITY sb.prefs.notifyOnComplete "顯示「儲存完畢」提醒視窗">
-<!ENTITY sb.prefs.notifyPageSaved "瀏覽儲存過的頁面時，顯示提醒視窗">
+<!ENTITY sb.prefs.notifyPageSaved "瀏覽儲存過的頁面時，顯示提醒">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動輸出 HTML 資料列表">
 <!ENTITY sb.prefs.io "偏好設定">
 <!ENTITY sb.prefs.io.export "匯出偏好設定">

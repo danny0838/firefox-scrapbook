@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Hloubkové uložení">
 <!ENTITY sb.detail.linked.page.desc "Po dokončení zachycení budou všechny stránky vzájemně propojeny a bude vytvořena mapa stránek.">
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "UPOZORNĚNÍ: 'Zachytit znovu' přepíše předchozí uloženou stránku.">
 <!ENTITY sb.detail.warnAboutScript "POZNÁMKA: JavaScript může způsobit některé problémy.">
 

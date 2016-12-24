@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Przechwytywanie szczegółowe">
 <!ENTITY sb.detail.linked.page.desc "Po zakończeniu przechwytywania wszystkie strony będą powiązane ze sobą i zostanie utworzona mapa stron.">
 <!ENTITY sb.detail.linked.page.depth "Głębokość podążania za odnośnikami">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "Uwaga: Opcja &quot;Przechwyć ponownie&quot; nadpisze poprzednio zapisaną stronę">
 <!ENTITY sb.detail.warnAboutScript "Uwaga: JavaScript może powodować problemy.">
 

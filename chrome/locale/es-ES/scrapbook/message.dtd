@@ -73,6 +73,7 @@
 <!ENTITY sb.detail.linked.page "Guardado multi-nivel">
 <!ENTITY sb.detail.linked.page.desc "Después de completar las capturas, todas las páginas estarán enlazadas entre ellas, y será creado un mapa del sitio.">
 <!ENTITY sb.detail.linked.page.depth "Profundidad en la captura enlaces">
+<!ENTITY sb.detail.rememberAsDefault "Remember current options">
 <!ENTITY sb.detail.warnAboutRenew "NOTA: 'Capturar Otra vez' sobre-escribe la página guardada previamente.">
 <!ENTITY sb.detail.warnAboutScript "NOTA: JavaScript puede causar algunos problemas.">
 
