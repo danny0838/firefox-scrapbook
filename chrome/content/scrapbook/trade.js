@@ -100,13 +100,14 @@ var sbTradeService = {
             } else {
                 item.icon = sbCommonUtils.getDefaultIcon(item.type);
             }
+            var lastModifiedTime = item.exported || (new Date(file.lastModifiedTime)).toISOString();
             this.treeItems.push([
                 item.title,
-                (new Date(file.lastModifiedTime)).toLocaleString(),
+                lastModifiedTime,
                 item.folder ? item.folder.replace(/\t/g, "\x1B") : "",
                 item.id,
                 item.icon,
-                file.lastModifiedTime,
+                lastModifiedTime,
                 dirName,
                 item.type
             ]);
@@ -385,8 +386,10 @@ var sbExportService = {
         // special handled properties
         delete(item.folder);
         delete(item.container);
+        delete(item.exported);
         item.folder = sbDataSource.getFolderPath(aRes).join("\t");
         item.container = sbDataSource.isContainer(aRes) ? "true" : "";
+        item.exported = (new Date()).toISOString();
 
         var num = 0, destDir, dirName;
         do {

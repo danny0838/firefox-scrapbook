@@ -149,8 +149,8 @@ var sbDataSource = {
             sbCommonUtils.extendObject(newItem, aSBitem);
             var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
             for (prop in newItem) {
-                // "folder" and "container" props are specially handled and do not need to store
-                if (prop == "folder" || prop == "container" ) continue;
+                // these props are specially handled and do not need to be stored
+                if (["folder", "container", "exported"].indexOf(prop) != -1) continue;
                 var arc = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + prop);
                 var val = sbCommonUtils.RDF.GetLiteral(aSBitem[prop]);
                 this._dataObj.Assert(newRes, arc, val, true);
