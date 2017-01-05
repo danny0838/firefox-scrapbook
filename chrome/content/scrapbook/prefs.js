@@ -36,10 +36,6 @@ var sbPrefWindow = {
             elem.appendChild(imgDelete);
             elem.addEventListener("keydown", sbPrefWindow.setShortcut, true);
         });
-
-        // output tree requires correct pref and datasource,
-        // we have to exec it before changing them
-        sbDataSource.outputTreeAuto();
     },
 
     done: function() {
