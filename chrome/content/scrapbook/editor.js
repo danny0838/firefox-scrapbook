@@ -2653,17 +2653,17 @@ var sbInfoViewer = {
             document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
             document.getElementById("ScrapBookStatusPopupI").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
             document.getElementById("ScrapBookStatusPopupE").setAttribute("disabled", false);
-            document.getElementById("ScrapBookStatusPopup").lastChild.previousSibling.setAttribute("hidden", true);
-            document.getElementById("ScrapBookStatusPopup").lastChild.setAttribute("hidden", true);
+            document.getElementById("ScrapBookEditBefore").previousSibling.setAttribute("hidden", true);
+            document.getElementById("ScrapBookEditBefore").setAttribute("hidden", true);
         } else {
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", true);
             document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupI").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupE").setAttribute("disabled", true);
-            document.getElementById("ScrapBookStatusPopup").lastChild.previousSibling.setAttribute("hidden", false);
-            document.getElementById("ScrapBookStatusPopup").lastChild.setAttribute("hidden", false);
-            document.getElementById("ScrapBookStatusPopup").lastChild.setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || document.getElementById("ScrapBookToolbox").hidden));
+            document.getElementById("ScrapBookEditBefore").previousSibling.setAttribute("hidden", false);
+            document.getElementById("ScrapBookEditBefore").setAttribute("hidden", false);
+            document.getElementById("ScrapBookEditBefore").setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || document.getElementById("ScrapBookToolbox").hidden));
         }
     },
 
