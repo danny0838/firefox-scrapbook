@@ -383,17 +383,17 @@ var sbCommonUtils = {
      * RDF utilities
      ***************************************************************/
 
-     // get the datasource from an .rdf file
-     // if the .rdf file does not exist, create one using the default root name
-     getRDFDataSource: function(aDataFile, aDefaultRootName) {
-         var fileURL = this.convertFileToURL(aDataFile);
-         if (!aDataFile.exists()) {
+    // get the datasource from an .rdf file
+    // if the .rdf file does not exist, create one using the default root name
+    getRDFDataSource: function(aDataFile, aDefaultRootName) {
+        var fileURL = this.convertFileToURL(aDataFile);
+        if (!aDataFile.exists()) {
             var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
             this.RDFCU.MakeSeq(iDS, this.RDF.GetResource(aDefaultRootName));
             iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(fileURL);
-         }
-         return this.RDF.GetDataSourceBlocking(fileURL);
-     },
+        }
+        return this.RDF.GetDataSourceBlocking(fileURL);
+    },
 
 
     /****************************************************************
