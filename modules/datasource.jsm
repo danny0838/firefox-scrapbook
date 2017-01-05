@@ -112,7 +112,8 @@ var sbDataSource = {
                 this._uninit();
                 break;
             case "nsPref:changed": 
-                if (aData == "data.path") {
+                if (aData == "data.path") { 
+                    this.outputTreeAuto();
                     this.checkRefresh();
                 }
                 break;
