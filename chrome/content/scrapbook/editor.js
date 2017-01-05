@@ -2648,6 +2648,7 @@ var sbInfoViewer = {
         document.getElementById("ScrapBookStatusPopupE").setAttribute("checked", sbBrowserOverlay.editMode);
         document.getElementById("ScrapBookStatusPopupI").setAttribute("checked", sbBrowserOverlay.infoMode);
         if ( id && sbDataSource.exists(sbBrowserOverlay.resource) ) {
+            document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", false);
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "notex");
             document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
@@ -2656,6 +2657,7 @@ var sbInfoViewer = {
             document.getElementById("ScrapBookEditBefore").previousSibling.setAttribute("hidden", true);
             document.getElementById("ScrapBookEditBefore").setAttribute("hidden", true);
         } else {
+            document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", true);
             document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", true);
@@ -2771,8 +2773,25 @@ var sbInfoViewer = {
     },
 
     openSourceURL: function(tabbed) {
-        if ( !sbBrowserOverlay.getID() ) return;
-        sbCommonUtils.loadURL(sbDataSource.getProperty(sbBrowserOverlay.resource, "source"), tabbed);
+        var id = sbBrowserOverlay.getID();
+        if ( !id ) return;
+        var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
+        var source = (fileName == "index") ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
+        if (!source) {
+            // read sb-url2name.txt and search for source URL of the current page
+            var file = sbCommonUtils.getContentDir(id).clone(); file.append("sb-url2name.txt");
+            if (file.exists() && file.isFile()) {
+                sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
+                    var [url, docName] = line.split("\t", 2);
+                    if (docName == fileName) source = url;
+                });
+            }
+        }
+        if (!source) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", fileName + ".html."));
+            return;
+        }
+        sbCommonUtils.loadURL(source, tabbed);
     },
 
     loadFile: function(aFileName) {
