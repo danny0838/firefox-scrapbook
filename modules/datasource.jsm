@@ -30,6 +30,7 @@ var sbDataSource = {
             this._firstInit = false;
             var obs = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
             obs.addObserver(this, "quit-application-requested", false);
+            sbCommonUtils.prefBranch.addObserver("", this, false);
         }
         try {
             this._dataFile = sbCommonUtils.getScrapBookDir(true);
@@ -109,6 +110,11 @@ var sbDataSource = {
             case "quit-application-requested": 
                 this.outputTreeAuto();
                 this._uninit();
+                break;
+            case "nsPref:changed": 
+                if (aData == "data.path") {
+                    this.checkRefresh();
+                }
                 break;
             default: 
         }
