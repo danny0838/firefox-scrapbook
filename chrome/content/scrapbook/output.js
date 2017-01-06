@@ -834,6 +834,7 @@ var sbOutputService = {
             + '    }\n'
             + '};\n'
             + '</script>\n'
+            + '<script src="tree/custom.js"></script>\n'
             + '</head>\n'
             + '<body onload="searchEngine.init();">\n'
             + '<form action="javascript:searchEngine.search();">\n'
