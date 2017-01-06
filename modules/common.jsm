@@ -230,27 +230,47 @@ var sbCommonUtils = {
         return { id: aID, create: aID, modify: aID, type: "", title: "", chars: "", icon: "", source: "", comment: "", lock: "" };
     },
 
-    getScrapBookDir: function() {
-        var dataPath = this.getPref("data.path", ""), dir;
-        if (dataPath) {
-            try {
-                // if dataPath is absolute
-                dir = this.convertPathToFile(dataPath);
-            } catch(ex) {
-                try {
-                    // if data.path is relative (to Firefox profile directory)
-                    dir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
-                    dir = this.convertFileToURL(dir) + dataPath.split(/[\/\\]/).map(function(part){return encodeURIComponent(part);}).join("/");
-                    dir = this.convertURLToFile(dir);
-                } catch(ex) {}
-            }
+    getScrapBookDir: function(aRenew) {
+        if (!arguments.callee.newScrapBookDir) {
+            var that = this;
+            arguments.callee.newScrapBookDir = function() {
+                var dataPath = that.getPref("data.path", ""), dir;
+                if (dataPath) {
+                    try {
+                        // if dataPath is absolute
+                        dir = that.convertPathToFile(dataPath);
+                    } catch(ex) {
+                        try {
+                            // if data.path is relative (to Firefox profile directory)
+                            var profileDir = that.DIR.get("ProfD", Components.interfaces.nsIFile);
+                            var path = that.convertFileToURL(profileDir) + dataPath.split(/[\/\\]/).map(function(part){return encodeURIComponent(part);}).join("/");
+                            dir = that.convertURLToFile(path);
+                        } catch(ex) {}
+                    }
+                }
+                if ( !dir ) {
+                    dir = that.DIR.get("ProfD", Components.interfaces.nsIFile);
+                    dir.append("ScrapBook");
+                }
+                return dir;
+            };
         }
-        if ( !dir ) {
-            dir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
-            dir.append("ScrapBook");
+        if (!arguments.callee.currentDir || aRenew) {
+            arguments.callee.currentDir = arguments.callee.newScrapBookDir();
         }
+        var dir = arguments.callee.currentDir.clone();
         if ( !dir.exists() ) {
-            dir.create(dir.DIRECTORY_TYPE, 0700);
+            try {
+                dir.create(dir.DIRECTORY_TYPE, 0700);
+            } catch (ex) {
+                this.alert(lang("ERR_FAIL_INIT_SCRAPBOOKDIR", dir.path));
+                this.resetPref("data.path");
+                arguments.callee.currentDir = arguments.callee.newScrapBookDir();
+                dir = arguments.callee.currentDir.clone();
+                if ( !dir.exists() ) {
+                    dir.create(dir.DIRECTORY_TYPE, 0700);
+                }
+            }
         }
         return dir;
     },
@@ -383,17 +403,17 @@ var sbCommonUtils = {
      * RDF utilities
      ***************************************************************/
 
-     // get the datasource from an .rdf file
-     // if the .rdf file does not exist, create one using the default root name
-     getRDFDataSource: function(aDataFile, aDefaultRootName) {
-         var fileURL = this.convertFileToURL(aDataFile);
-         if (!aDataFile.exists()) {
+    // get the datasource from an .rdf file
+    // if the .rdf file does not exist, create one using the default root name
+    getRDFDataSource: function(aDataFile, aDefaultRootName) {
+        var fileURL = this.convertFileToURL(aDataFile);
+        if (!aDataFile.exists()) {
             var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
             this.RDFCU.MakeSeq(iDS, this.RDF.GetResource(aDefaultRootName));
             iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(fileURL);
-         }
-         return this.RDF.GetDataSourceBlocking(fileURL);
-     },
+        }
+        return this.RDF.GetDataSourceBlocking(fileURL);
+    },
 
 
     /****************************************************************

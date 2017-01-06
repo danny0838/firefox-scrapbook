@@ -30,9 +30,10 @@ var sbDataSource = {
             this._firstInit = false;
             var obs = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
             obs.addObserver(this, "quit-application-requested", false);
+            sbCommonUtils.prefBranch.addObserver("", this, false);
         }
         try {
-            this._dataFile = sbCommonUtils.getScrapBookDir();
+            this._dataFile = sbCommonUtils.getScrapBookDir(true);
             this._dataFile.append("scrapbook.rdf");
             this._dataObj = sbCommonUtils.getRDFDataSource(this._dataFile, "urn:scrapbook:root");
             this._needReOutputTree = false;
@@ -109,6 +110,12 @@ var sbDataSource = {
             case "quit-application-requested": 
                 this.outputTreeAuto();
                 this._uninit();
+                break;
+            case "nsPref:changed": 
+                if (aData == "data.path") { 
+                    this.outputTreeAuto();
+                    this.checkRefresh();
+                }
                 break;
             default: 
         }
