@@ -32,7 +32,7 @@ var sbDataSource = {
             obs.addObserver(this, "quit-application-requested", false);
         }
         try {
-            this._dataFile = sbCommonUtils.getScrapBookDir();
+            this._dataFile = sbCommonUtils.getScrapBookDir(true);
             this._dataFile.append("scrapbook.rdf");
             this._dataObj = sbCommonUtils.getRDFDataSource(this._dataFile, "urn:scrapbook:root");
             this._needReOutputTree = false;
