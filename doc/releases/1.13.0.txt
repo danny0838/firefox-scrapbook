@@ -51,7 +51,8 @@ Compatibility notes (with 1.12.*)
  * Language packs are largely modified.
 
    One thing has to be explicitly noted is that "capture" has been renamed
-   to "save", as legacy ScrapBook by Gomita has done.  Additionally, previous "Localize Embedded External Media" has been simplified to 
+   to "save", as legacy ScrapBook by Gomita has done.  Additionally,
+   previous "Localize Embedded External Media" has been simplified to
    "Internalize".  Some documentation may need to be updated accordingly.
 
 
@@ -104,9 +105,9 @@ Bug fixes:
 
  * A page linked from an XHTML page and has a path containing certain
    special characters (such as "!", "'", or "~") causes some interlinks be
-   not builded.
+   not built.
 
- * Certain styles and scripts become broken when a XHTML page is saved
+ * Certain styles and scripts become broken when an XHTML page is saved
    as HTML via "Save presenting HTML for non-HTML files".
 
  * Some editor functions, such as DOM Erasor and Freenote, do not work for
@@ -231,7 +232,7 @@ Save functionality:
 
    * Added a context menu with "check/uncheck selected items" directives.
 
-   * An invalid RegExp is now forbidden in to prevent an error on
+   * An invalid RegExp is now forbidden from input to prevent an error on
      filtering URLs.
 
  * Added save option "Save data URI as file".
@@ -291,7 +292,7 @@ Save functionality:
    If the provided string is invalid, it will be ignored and the error
    will be output to the browser console for trouble shooting.
 
- * New user preferences to determine certain details to record.
+ * New user preferences to determine certain details to be recorded.
 
    "save.default.recordSkippedUrl", "save.default.recordRemovedAttr", and
    "save.default.recordInDepthLink" user preferences are now available to
@@ -412,7 +413,7 @@ Data tree, sidebar, and manager:
 
 Hotkey:
 
- * Improved cross platform hotkey support.
+ * Improved cross-platform hotkey support.
 
    Now supports the command key and the hotkey presentation style for
    Macs.  Also added the support for customized accel key via the user
