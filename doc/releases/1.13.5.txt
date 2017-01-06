@@ -1,0 +1,12 @@
+Scrapbook X 1.13.5
+==================
+
+Changes since v1.13.4
+---------------------
+
+ * Fixed a regression that the search page of "Output HTML tree" does
+   not load "custom.js" in the "tree" folder.
+
+ * Improved the output code of the index page of "Output HTML tree".
+
+Also includes some documentation improvements.

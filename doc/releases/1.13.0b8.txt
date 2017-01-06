@@ -25,7 +25,7 @@ Bug fixes:
 
 Functionality changes:
 
- * Improved cross platform hotkey support, especially the support for
+ * Improved cross-platform hotkey support, especially the support for
    the command key and the hotkey presentation style for Macs.
 
  * Allows customized hotkey combination in the user options.
