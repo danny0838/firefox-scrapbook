@@ -29,9 +29,8 @@ var sbContentSaver = {
                 sbCommonUtils.ALERT.showAlertNotification(icon, title, text, true, aItem.id, listener);
             }
         } else {
-            var icon = sbCommonUtils.getDefaultIcon();
             var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
-            sbCommonUtils.ALERT.showAlertNotification(icon, title, null);
+            sbCommonUtils.ALERT.showAlertNotification(null, title, null);
         }
     },
 };
