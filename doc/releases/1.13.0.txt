@@ -51,7 +51,8 @@ Compatibility notes (with 1.12.*)
  * Language packs are largely modified.
 
    One thing has to be explicitly noted is that "capture" has been renamed
-   to "save", as legacy ScrapBook by Gomita has done.  Additionally, previous "Localize Embedded External Media" has been simplified to 
+   to "save", as legacy ScrapBook by Gomita has done.  Additionally,
+   previous "Localize Embedded External Media" has been simplified to
    "Internalize".  Some documentation may need to be updated accordingly.
 
 
