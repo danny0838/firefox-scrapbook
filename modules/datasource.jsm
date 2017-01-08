@@ -30,7 +30,6 @@ var sbDataSource = {
             this._firstInit = false;
             var obs = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
             obs.addObserver(this, "quit-application-requested", false);
-            sbCommonUtils.prefBranch.addObserver("", this, false);
         }
         try {
             this._dataFile = sbCommonUtils.getScrapBookDir(true);
@@ -66,17 +65,19 @@ var sbDataSource = {
     },
 
     cleanUpBackups: function(bDir) {
-        var max = 5;
-        var today = (new Date()).getTime();
+        var backupRemoveLimit = sbCommonUtils.getPref("data.rdfBackupRemoveLimit", 0);
+        var backupRemoveAvail = backupRemoveLimit >= 0 ? backupRemoveLimit : Infinity;
+        var backupKeepDays = sbCommonUtils.getPref("data.rdfBackupKeepDays", 0);
+        var backupKeepTime = backupKeepDays >= 0 ? 1000 * 60 * 60 * 24 * backupKeepDays : Infinity;
+        var now = Date.now();
         var dirEnum = bDir.directoryEntries;
-        while ( dirEnum.hasMoreElements() ) {
+        while ( dirEnum.hasMoreElements() && backupRemoveAvail > 0 ) {
             var entry = dirEnum.getNext().QueryInterface(Components.interfaces.nsILocalFile);
             if ( !entry.leafName.match(/^scrapbook_(\d{4})(\d{2})(\d{2})\.rdf$/) ) continue;
-            var lifeTime = (new Date(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10))).getTime();
-            lifeTime = Math.round((today - lifeTime) / (1000 * 60 * 60 * 24));
-            if ( lifeTime > 30 ) {
-                if (--max < 0) break;
+            var lifeTime = now - (new Date(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10))).getTime();
+            if ( lifeTime > backupKeepTime ) {
                 entry.remove(false);
+                backupRemoveAvail--;
             }
         }
     },
@@ -110,12 +111,6 @@ var sbDataSource = {
             case "quit-application-requested": 
                 this.outputTreeAuto();
                 this._uninit();
-                break;
-            case "nsPref:changed": 
-                if (aData == "data.path") { 
-                    this.outputTreeAuto();
-                    this.checkRefresh();
-                }
                 break;
             default: 
         }

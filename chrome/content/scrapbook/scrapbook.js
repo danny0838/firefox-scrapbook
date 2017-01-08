@@ -615,14 +615,18 @@ var sbSearchService = {
         var cache = sbCommonUtils.getScrapBookDir().clone();
         cache.append("cache.rdf");
         var shouldBuild = false;
-        if (!cache.exists() || cache.fileSize < 1024 * 32) {
+        var sizeThresholdBytes = sbCommonUtils.getPref("fulltext.updateSizeThreshold", 0);
+        var sizeThreshold = sizeThresholdBytes >= 0 ? 1024 * sizeThresholdBytes : Infinity;
+        if (!cache.exists() || cache.fileSize < sizeThreshold) {
             shouldBuild = true;
         } else {
             var data = sbCommonUtils.getScrapBookDir().clone();
             data.append("scrapbook.rdf");
             var dataModTime = data.lastModifiedTime;
             var cacheModTime = cache.lastModifiedTime;
-            if (dataModTime > cacheModTime && ((new Date()).getTime() - cacheModTime) > 1000 * 60 * 60 * 24 * 5)
+            var timeThresholdMinutes = sbCommonUtils.getPref("fulltext.updateTimeThreshold", 0);
+            var timeThreshold = timeThresholdMinutes >= 0 ? 1000 * 60 * timeThresholdMinutes : Infinity;
+            if (dataModTime > cacheModTime && (Date.now() - cacheModTime) >= timeThreshold)
                 shouldBuild = true;
         }
         var uri = "chrome://scrapbook/content/result.xul";
