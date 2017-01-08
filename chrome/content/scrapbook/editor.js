@@ -2781,10 +2781,14 @@ var sbInfoViewer = {
             // read sb-url2name.txt and search for source URL of the current page
             var file = sbCommonUtils.getContentDir(id).clone(); file.append("sb-url2name.txt");
             if (file.exists() && file.isFile()) {
-                sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
-                    var [url, docName] = line.split("\t", 2);
-                    if (docName == fileName) source = url;
-                });
+                var lines = sbCommonUtils.readFile(file, "UTF-8").split("\n");
+                for (var i = 0, I = lines.length; i < I; i++) {
+                    var [url, docName] = lines[i].split("\t", 2);
+                    if (docName == fileName) {
+                        source = url;
+                        break;
+                    }
+                }
             }
         }
         if (!source) {
