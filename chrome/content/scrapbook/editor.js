@@ -2824,7 +2824,7 @@ var sbInfoViewer = {
     },
 
     loadFile: function(aFileName) {
-        var file = sbCommonUtils.getContentDir(sbPageEditor.item.id); file.append(aFileName);
+        var file = sbCommonUtils.getContentDir(sbBrowserOverlay.getID()); file.append(aFileName);
         var url = sbCommonUtils.convertFileToURL(file);
         var dataXml = sbCommonUtils.convertURLToFile(url);
         // later Firefox version doesn't allow loading .xsl in the upper directory
