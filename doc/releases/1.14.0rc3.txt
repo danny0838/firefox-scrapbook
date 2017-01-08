@@ -1,0 +1,49 @@
+Scrapbook X 1.14.0rc3
+=====================
+
+Changes since v1.14.0rc2
+------------------------
+
+ * User interface improvements:
+
+   * "Open Source URL" commands are now disabled if the current item has
+      no source URL recorded.
+
+   * Fixed an issue that "Open Source URL" in the toolbar dropdown menu
+     doesn't work for non-HTMl files.
+
+   * "Open Source URL" in the toolbar dropdown menu now loads the page
+     with the current hash.
+
+   * Recovered the "Site Map" command in the toolbar dropdown menu.
+
+   * Recovered the old-style status bar button in Firefox < 4.0.
+     (Available via Status-4-Evar or another similar add-on.)
+
+ * Added and changed several user preferences:
+
+   * Changed "fulltext.sitePagesLimit": now 0 means 0 ("index no deep
+     page") and a negative means infinity ("index unlimited deep pages").
+
+   * Added "fulltext.updateSizeThreshold": if the cache size is smaller
+     than this set size (KiB), it is updated whenever a fulltext search
+     is performed. (A negative means infinity, i.e. always update cache.)
+
+   * Added "fulltext.updateTimeThreshold": if the cache file is older
+     than this set time (minutes), it will be updated when a fulltext
+     search is performed. (A negative means infinity, i.e. never update
+     an old cache.)
+
+   * Added "data.rdfBackupKeepDays": backup RDFs that are older than this
+     set time (days) will be removed during a check. (A negative means
+     infinity, i.e. never remove backup RDFs.)
+
+   * Added "data.rdfBackupRemoveLimit": the maximal number of expired backup
+     RDFs that will be removed during a check. (A negative means infinity,
+     i.e. remove all expired backup RDFs during a check.)
+
+ * When the "data.path" preference is manually modified, ScrapBook X
+   now will keep using the old value, and no more automatically
+   refreshes the UI and outputs HTML tree.
+
+Also includes some code clean-up and documentation improvements.
