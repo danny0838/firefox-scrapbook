@@ -89,7 +89,7 @@
     <popupset id="mainPopupSet">
         <!-- toolbar dropdown and/or status popup -->
         <menupopup id="ScrapBookStatusPopup">
-            <menuitem id="ScrapBookStatusPopupS" label="&sb.open.source;" oncommand="sbInfoViewer.openSourceURL(false);" onclick="if (event.button == 1) sbInfoViewer.openSourceURL(true); document.getElementById('ScrapBookStatusPopup').hidePopup();" />
+            <menuitem id="ScrapBookStatusPopupS" label="&sb.open.source;" oncommand="sbInfoViewer.openSourceURL(false);" onclick="if (event.button != 1) return; sbInfoViewer.openSourceURL(true); event.originalTarget.parentNode.hidePopup(); event.preventDefault();" />
             <menuitem id="ScrapBookStatusPopupM" label="&sb.info.sitemap;" oncommand="sbInfoViewer.loadFile('sitemap.xml');" />
             <menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..." oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
             <menuitem id="ScrapBookStatusPopupT" label="&sb.internalize;..." tooltiptext="&sb.internalize.help;" oncommand="sbInfoViewer.internalize();" class="menuitem-iconic sb-capture-target" />
