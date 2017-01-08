@@ -402,15 +402,14 @@ var sbBrowserOverlay = {
         }
     },
 
-    onStatusPanelPopupShowing: function(event) {
+    onStatusPopupShowing: function(event) {
         var popup = event.originalTarget;
         var popupSource = document.getElementById("ScrapBookStatusPopup");
-        popupSource.showPopup();
+        sbInfoViewer.onPopupShowing();
         while (popupSource.firstChild) popup.appendChild(popupSource.firstChild);
-        popupSource.hidePopup();
     },
 
-    onStatusPanelPopupHiding: function(event) {
+    onStatusPopupHiding: function(event) {
         var popup = event.originalTarget;
         var popupSource = document.getElementById("ScrapBookStatusPopup");
         while (popup.firstChild) popupSource.appendChild(popup.firstChild);
