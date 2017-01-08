@@ -2819,7 +2819,8 @@ var sbInfoViewer = {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", subPath));
             return;
         }
-        sbCommonUtils.loadURL(source, tabbed);
+        var [, hash] = sbCommonUtils.splitURLByAnchor(window.content.location.href);
+        sbCommonUtils.loadURL(source + hash, tabbed);
     },
 
     loadFile: function(aFileName) {
