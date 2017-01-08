@@ -6,6 +6,7 @@
 
 #ScrapBookStatusPanel {
     list-style-image: url("main_24.png");
+    padding: 0px 2px;
 }
 
 #scrapbook-button {

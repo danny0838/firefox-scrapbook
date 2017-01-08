@@ -350,7 +350,7 @@ var sbCacheService = {
                     url2name = sbCommonUtils.readFile(url2name, "UTF-8").split("\n");
                     var limit = sbCommonUtils.getPref("fulltext.sitePagesLimit", 0);
                     for (var i = 0; i < url2name.length; i++) {
-                        if (limit && i > limit) break; // prevent too large cache
+                        if (limit >= 0 && i > limit) break; // prevent too large cache
                         var line = url2name[i].split("\t");
                         if (!line[1] || line[1] == "index") continue;
                         var subpath = line[1] + ".html";

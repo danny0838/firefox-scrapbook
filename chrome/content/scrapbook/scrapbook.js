@@ -248,6 +248,7 @@ var sbController = {
         var isFolder = false;
         var isBookmark = false;
         var isSeparator = false;
+        var hasSource = false;
         var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
             isContainer = sbDataSource.isContainer(res);
@@ -259,6 +260,7 @@ var sbController = {
                 case "bookmark": isBookmark = true; break;
                 case "separator": isSeparator = true; break;
             }
+            hasSource = !!sbDataSource.getProperty(res, "source");
         }
         var getElement = function(aID) {
             return document.getElementById(aID);
@@ -267,6 +269,7 @@ var sbController = {
         getElement("sbPopupOpen").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenNewTab").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenSource").hidden = isMultiple || isFolder || isSeparator || isNote;
+        getElement("sbPopupOpenSource").disabled = !hasSource;
         getElement("sbPopupCombinedView").hidden = isMultiple || !isContainer;
         getElement("sbPopupOpenAllItems").hidden = isMultiple || !isContainer;
         getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isContainer;
@@ -615,14 +618,18 @@ var sbSearchService = {
         var cache = sbCommonUtils.getScrapBookDir().clone();
         cache.append("cache.rdf");
         var shouldBuild = false;
-        if (!cache.exists() || cache.fileSize < 1024 * 32) {
+        var sizeThresholdBytes = sbCommonUtils.getPref("fulltext.updateSizeThreshold", 0);
+        var sizeThreshold = sizeThresholdBytes >= 0 ? 1024 * sizeThresholdBytes : Infinity;
+        if (!cache.exists() || cache.fileSize < sizeThreshold) {
             shouldBuild = true;
         } else {
             var data = sbCommonUtils.getScrapBookDir().clone();
             data.append("scrapbook.rdf");
             var dataModTime = data.lastModifiedTime;
             var cacheModTime = cache.lastModifiedTime;
-            if (dataModTime > cacheModTime && ((new Date()).getTime() - cacheModTime) > 1000 * 60 * 60 * 24 * 5)
+            var timeThresholdMinutes = sbCommonUtils.getPref("fulltext.updateTimeThreshold", 0);
+            var timeThreshold = timeThresholdMinutes >= 0 ? 1000 * 60 * timeThresholdMinutes : Infinity;
+            if (dataModTime > cacheModTime && (Date.now() - cacheModTime) >= timeThreshold)
                 shouldBuild = true;
         }
         var uri = "chrome://scrapbook/content/result.xul";

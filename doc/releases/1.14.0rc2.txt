@@ -21,4 +21,7 @@ Changes since v1.14.0rc1
  * Now fallbacks to use the profile folder if the selected ScrapBook
    directory cannot be used.
 
+ * Now automatically refreshes the UI and outputs HTML tree when the
+   "data.path" preference is manually modified.
+
 Also includes some code clean-up and documentation improvements.
