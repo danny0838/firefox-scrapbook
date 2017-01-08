@@ -2649,7 +2649,7 @@ var sbInfoViewer = {
         document.getElementById("ScrapBookStatusPopupI").setAttribute("checked", sbBrowserOverlay.infoMode);
         if ( id && sbDataSource.exists(sbBrowserOverlay.resource) ) {
             document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
-            document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", !sbDataSource.getProperty(sbBrowserOverlay.resource, "source"));
+            document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", !sbDataSource.getProperty(sbBrowserOverlay.resource, "source") && sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "notex");
             document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
