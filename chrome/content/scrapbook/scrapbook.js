@@ -248,6 +248,7 @@ var sbController = {
         var isFolder = false;
         var isBookmark = false;
         var isSeparator = false;
+        var hasSource = false;
         var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
             isContainer = sbDataSource.isContainer(res);
@@ -259,6 +260,7 @@ var sbController = {
                 case "bookmark": isBookmark = true; break;
                 case "separator": isSeparator = true; break;
             }
+            hasSource = !!sbDataSource.getProperty(res, "source");
         }
         var getElement = function(aID) {
             return document.getElementById(aID);
@@ -267,6 +269,7 @@ var sbController = {
         getElement("sbPopupOpen").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenNewTab").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenSource").hidden = isMultiple || isFolder || isSeparator || isNote;
+        getElement("sbPopupOpenSource").disabled = !hasSource;
         getElement("sbPopupCombinedView").hidden = isMultiple || !isContainer;
         getElement("sbPopupOpenAllItems").hidden = isMultiple || !isContainer;
         getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isContainer;
