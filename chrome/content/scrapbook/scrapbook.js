@@ -615,7 +615,9 @@ var sbSearchService = {
         var cache = sbCommonUtils.getScrapBookDir().clone();
         cache.append("cache.rdf");
         var shouldBuild = false;
-        if (!cache.exists() || cache.fileSize < 1024 * 32) {
+        var sizeThresholdBytes = sbCommonUtils.getPref("fulltext.updateSizeThreshold", 0);
+        var sizeThreshold = sizeThresholdBytes >= 0 ? 1024 * sizeThresholdBytes : Infinity;
+        if (!cache.exists() || cache.fileSize < sizeThreshold) {
             shouldBuild = true;
         } else {
             var data = sbCommonUtils.getScrapBookDir().clone();

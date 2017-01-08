@@ -120,5 +120,6 @@ pref("extensions.scrapbook.save.default.inDepthLevels", 0);
 pref("extensions.scrapbook.save.default.recordSkippedUrl", false);
 pref("extensions.scrapbook.save.default.recordRemovedAttr", false);
 pref("extensions.scrapbook.save.default.recordInDepthLink", false);
+pref("extensions.scrapbook.fulltext.updateSizeThreshold", 32);
 pref("extensions.scrapbook.fulltext.updateTimeThreshold", 7200);
 pref("extensions.scrapbook.fulltext.sitePagesLimit", 256);
