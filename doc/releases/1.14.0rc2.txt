@@ -1,0 +1,24 @@
+Scrapbook X 1.14.0rc2
+=====================
+
+Changes since v1.14.0rc1
+------------------------
+
+ * Fixed a regression that the search page of "Output HTML tree" does
+   not load "custom.js" in the "tree" folder.
+
+ * Improved the output code of the index page of "Output HTML tree".
+
+ * Added the "Open Source URL" command back to the dropdown menu of
+   the ScrapBook toolbar, and it now opens the corresponding source
+   URL for a deep-saved page as well.
+
+ * Notification box of "Save multiple URLs" no more shows an empty icon.
+
+ * No more output the HTML tree automatically before entering Option
+   dialog.
+
+ * Now fallbacks to use the profile folder if the selected ScrapBook
+   directory cannot be used.
+
+Also includes some code clean-up and documentation improvements.
