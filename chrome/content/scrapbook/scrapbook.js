@@ -622,7 +622,9 @@ var sbSearchService = {
             data.append("scrapbook.rdf");
             var dataModTime = data.lastModifiedTime;
             var cacheModTime = cache.lastModifiedTime;
-            if (dataModTime > cacheModTime && ((new Date()).getTime() - cacheModTime) > 1000 * 60 * 60 * 24 * 5)
+            var timeThresholdMinutes = sbCommonUtils.getPref("fulltext.updateTimeThreshold", 0);
+            var timeThreshold = timeThresholdMinutes >= 0 ? 1000 * 60 * timeThresholdMinutes : Infinity;
+            if (dataModTime > cacheModTime && (Date.now() - cacheModTime) >= timeThreshold)
                 shouldBuild = true;
         }
         var uri = "chrome://scrapbook/content/result.xul";
