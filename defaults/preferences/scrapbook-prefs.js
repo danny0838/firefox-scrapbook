@@ -14,6 +14,8 @@ pref("extensions.scrapbook.tabs.combinedView", true);
 pref("extensions.scrapbook.tabs.searchResult", true);
 pref("extensions.scrapbook.tabs.note", false);
 pref("extensions.scrapbook.data.path", "");
+pref("extensions.scrapbook.data.rdfBackupKeepDays", 30);
+pref("extensions.scrapbook.data.rdfBackupRemoveLimit", 5);
 pref("extensions.scrapbook.edit.autoEditNoteX", true);
 pref("extensions.scrapbook.edit.autoEditNoteX.active", true);
 pref("extensions.scrapbook.edit.insertDateFormat", "%Y-%m-%d %H:%M:%S");
