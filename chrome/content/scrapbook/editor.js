@@ -2648,6 +2648,7 @@ var sbInfoViewer = {
         document.getElementById("ScrapBookStatusPopupE").setAttribute("checked", sbBrowserOverlay.editMode);
         document.getElementById("ScrapBookStatusPopupI").setAttribute("checked", sbBrowserOverlay.infoMode);
         if ( id && sbDataSource.exists(sbBrowserOverlay.resource) ) {
+            document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
             document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", false);
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "notex");
@@ -2657,6 +2658,7 @@ var sbInfoViewer = {
             document.getElementById("ScrapBookEditBefore").previousSibling.setAttribute("hidden", true);
             document.getElementById("ScrapBookEditBefore").setAttribute("hidden", true);
         } else {
+            document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", true);
