@@ -10,7 +10,7 @@ Changes since v1.14.0rc2
       no source URL recorded.
 
    * Fixed an issue that "Open Source URL" in the toolbar dropdown menu
-     doesn't work for non-HTMl files.
+     doesn't work for non-HTML files.
 
    * "Open Source URL" in the toolbar dropdown menu now loads the page
      with the current hash.
