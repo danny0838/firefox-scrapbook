@@ -402,6 +402,19 @@ var sbBrowserOverlay = {
         }
     },
 
+    onStatusPanelPopupShowing: function(event) {
+        var popup = event.originalTarget;
+        var popupSource = document.getElementById("ScrapBookStatusPopup");
+        popupSource.showPopup();
+        while (popupSource.firstChild) popup.appendChild(popupSource.firstChild);
+        popupSource.hidePopup();
+    },
+
+    onStatusPanelPopupHiding: function(event) {
+        var popup = event.originalTarget;
+        var popupSource = document.getElementById("ScrapBookStatusPopup");
+        while (popup.firstChild) popupSource.appendChild(popup.firstChild);
+    },
 };
 
 

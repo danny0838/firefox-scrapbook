@@ -2648,7 +2648,8 @@ var sbInfoViewer = {
         document.getElementById("ScrapBookStatusPopupE").setAttribute("checked", sbBrowserOverlay.editMode);
         document.getElementById("ScrapBookStatusPopupI").setAttribute("checked", sbBrowserOverlay.infoMode);
         if ( id && sbDataSource.exists(sbBrowserOverlay.resource) ) {
-            document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", false);
+            document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
+            document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", !sbDataSource.getProperty(sbBrowserOverlay.resource, "source") && sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "notex");
             document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
@@ -2657,6 +2658,7 @@ var sbInfoViewer = {
             document.getElementById("ScrapBookEditBefore").previousSibling.setAttribute("hidden", true);
             document.getElementById("ScrapBookEditBefore").setAttribute("hidden", true);
         } else {
+            document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupS").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", true);
             document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", true);
@@ -2773,25 +2775,52 @@ var sbInfoViewer = {
     },
 
     openSourceURL: function(tabbed) {
+        var self = arguments.callee;
+        if (!self.getSourceURL) {
+            self.getSourceURL = function(id, res, subPath){
+                if (subPath == "index.html") {
+                    return sbDataSource.getProperty(res, "source") || self.getSourceURLFromUrl2Name(id, subPath);
+                }
+                return self.getSourceURLFromFile2Url(id, subPath) || self.getSourceURLFromUrl2Name(id, subPath);
+            };
+            self.getSourceURLFromFile2Url = function(id, subPath){
+                // seek sb-file2url.txt for source URL of the current file
+                var listfile = sbCommonUtils.getContentDir(id).clone(); listfile.append("sb-file2url.txt");
+                if (listfile.exists() && listfile.isFile()) {
+                    var lines = sbCommonUtils.readFile(listfile, "UTF-8").split("\n");
+                    for (var i = 0, I = lines.length; i < I; i++) {
+                        var [file, url] = lines[i].split("\t", 2);
+                        if (file == subPath && url.indexOf(":") != -1) return url;
+                    }
+                }
+                return null;
+            };
+            self.getSourceURLFromUrl2Name = function(id, subPath){
+                // seek sb-url2name.txt for source URL of the current doc
+                var [subPathBase] = sbCommonUtils.splitFileName(subPath);
+                var listfile = sbCommonUtils.getContentDir(id).clone(); listfile.append("sb-url2name.txt");
+                if (listfile.exists() && listfile.isFile()) {
+                    var lines = sbCommonUtils.readFile(listfile, "UTF-8").split("\n");
+                    for (var i = 0, I = lines.length; i < I; i++) {
+                        var [url, name] = lines[i].split("\t", 2);
+                        if (name == subPathBase) return url;
+                    }
+                }
+                return null;
+            };
+        }
+      
         var id = sbBrowserOverlay.getID();
         if ( !id ) return;
-        var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
-        var source = (fileName == "index") ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
+        var basePathCut = sbCommonUtils.getContentDir(id, true).path.length + 1;
+        var subPath = sbCommonUtils.convertURLToFile(window.content.location.href).path.substring(basePathCut).replace(/\\/g, "/");
+        var source = self.getSourceURL(id, sbBrowserOverlay.resource, subPath);
         if (!source) {
-            // read sb-url2name.txt and search for source URL of the current page
-            var file = sbCommonUtils.getContentDir(id).clone(); file.append("sb-url2name.txt");
-            if (file.exists() && file.isFile()) {
-                sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
-                    var [url, docName] = line.split("\t", 2);
-                    if (docName == fileName) source = url;
-                });
-            }
-        }
-        if (!source) {
-            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", fileName + ".html."));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", subPath));
             return;
         }
-        sbCommonUtils.loadURL(source, tabbed);
+        var [, hash] = sbCommonUtils.splitURLByAnchor(window.content.location.href);
+        sbCommonUtils.loadURL(source + hash, tabbed);
     },
 
     loadFile: function(aFileName) {

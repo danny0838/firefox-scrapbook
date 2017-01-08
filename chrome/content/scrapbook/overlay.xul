@@ -98,6 +98,7 @@
                        ondragover="toggleSidebar('viewScrapBookSidebar',true);">
             <menupopup id="ScrapBookStatusPopup" onpopupshowing="sbInfoViewer.onPopupShowing(event);">
                 <menuitem id="ScrapBookStatusPopupS" label="&sb.open.source;" oncommand="sbInfoViewer.openSourceURL(false);" onclick="if (event.button == 1) sbInfoViewer.openSourceURL(true); document.getElementById('ScrapBookStatusPopup').hidePopup();" />
+                <menuitem id="ScrapBookStatusPopupM" label="&sb.info.sitemap;" oncommand="sbInfoViewer.loadFile('sitemap.xml');" />
                 <menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..." oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
                 <menuitem id="ScrapBookStatusPopupT" label="&sb.internalize;..." tooltiptext="&sb.internalize.help;" oncommand="sbInfoViewer.internalize();" class="menuitem-iconic sb-capture-target" />
                 <menuseparator />
@@ -268,4 +269,12 @@
         </toolbox>
     </vbox>
 
+    <!-- status bar -->
+    <statusbar id="status-bar">
+        <statusbarpanel id="ScrapBookStatusPanel"
+                        class="statusbarpanel-menu-iconic"
+                        onclick="if (event.originalTarget.localName == 'statusbarpanel') if (event.button == 1) { toggleSidebar('viewScrapBookSidebar'); event.stopPropagation(); }">
+            <menupopup id="ScrapBookStatusPanelPopup" onpopupshowing="sbBrowserOverlay.onStatusPanelPopupShowing(event);" onpopuphiding="sbBrowserOverlay.onStatusPanelPopupHiding(event);" />
+        </statusbarpanel>
+    </statusbar>
 </overlay>
