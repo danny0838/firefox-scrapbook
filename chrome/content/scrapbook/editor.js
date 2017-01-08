@@ -2776,8 +2776,10 @@ var sbInfoViewer = {
         var id = sbBrowserOverlay.getID();
         if ( !id ) return;
         var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
-        var source = (fileName == "index") ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
-        if (!source) {
+        var source;
+        if (fileName == "index") {
+            source = sbDataSource.getProperty(sbBrowserOverlay.resource, "source");
+        } else {
             // read sb-url2name.txt and search for source URL of the current page
             var file = sbCommonUtils.getContentDir(id).clone(); file.append("sb-url2name.txt");
             if (file.exists() && file.isFile()) {
@@ -2790,10 +2792,10 @@ var sbInfoViewer = {
                     }
                 }
             }
-        }
-        if (!source) {
-            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", fileName + ".html."));
-            return;
+            if (!source) {
+                sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", fileName + ".html."));
+                return;
+            }
         }
         sbCommonUtils.loadURL(source, tabbed);
     },
