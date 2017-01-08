@@ -268,4 +268,12 @@
         </toolbox>
     </vbox>
 
+    <!-- status bar -->
+    <statusbar id="status-bar">
+        <statusbarpanel id="ScrapBookStatusPanel"
+                        class="statusbarpanel-menu-iconic"
+                        onclick="if (event.originalTarget.localName == 'statusbarpanel') if (event.button == 1) { toggleSidebar('viewScrapBookSidebar'); event.stopPropagation(); }">
+            <menupopup id="ScrapBookStatusPanelPopup" onpopupshowing="sbBrowserOverlay.onStatusPanelPopupShowing(event);" onpopuphiding="sbBrowserOverlay.onStatusPanelPopupHiding(event);" />
+        </statusbarpanel>
+    </statusbar>
 </overlay>
