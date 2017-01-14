@@ -72,13 +72,16 @@ var sbSortService = {
         var rdfCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
         rdfCont.Init(sbDataSource.data, aContRes);
         var resEnum = rdfCont.GetElements();
-        var resListF = [], resListI = [], resListN = [], resListX = [];
+        var resListF = [], resListI = [], resListB = [], resListN = [], resListX = [];
         if (this.grouping) {
             while ( resEnum.hasMoreElements() ) {
                 var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 switch(sbDataSource.getProperty(res, "type")) {
                     case "folder":
                         resListF.push(res);
+                        break;
+                    case "bookmark":
+                        resListB.push(res);
                         break;
                     case "note":
                         resListN.push(res);
@@ -94,15 +97,17 @@ var sbSortService = {
             if ( !this.key ){
                 resListF.reverse();
                 resListI.reverse();
+                resListB.reverse();
                 resListN.reverse();
                 resListX.reverse();
-                resListF = resListF.concat(resListI).concat(resListX).concat(resListN);
+                resListF = resListF.concat(resListI).concat(resListB).concat(resListX).concat(resListN);
             } else {
                 resListF.sort(this.compare);
                 resListI.sort(this.compare);
+                resListB.sort(this.compare);
                 resListN.sort(this.compare);
                 resListX.sort(this.compare);
-                resListF = resListF.concat(resListI).concat(resListX).concat(resListN);
+                resListF = resListF.concat(resListI).concat(resListB).concat(resListX).concat(resListN);
             }
         } else {
             while ( resEnum.hasMoreElements() ) {
