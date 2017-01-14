@@ -1001,6 +1001,7 @@ sbContentSaverClass.prototype = {
             switch (cssRule.type) {
                 case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
                     var importedCSS = cssRule.styleSheet;
+                    if (!importedCSS) break;
                     var importedCSSText = "/* Code tidied up by ScrapBook */\n"
                         + this.processCSSRules(importedCSS, importedCSS.href, aDocument, "");
                     var fileName = this.download(importedCSS.href, "quote", "cssText", { cssText: importedCSSText });
