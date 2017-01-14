@@ -1,0 +1,11 @@
+Scrapbook X 1.13.6
+==================
+
+Changes since v1.13.5
+---------------------
+
+ * Fixed an issue that a self-importing CSS causes the save process
+   to error out unexpectedly.
+
+ * Fixed an issue that the "Index" and "Site Map" commands in the info
+   toolbar doesn't work if the editor toolbar is not toggled shown.
