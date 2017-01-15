@@ -1,0 +1,15 @@
+Scrapbook X 1.14.0rc5
+=====================
+
+Changes since v1.14.0rc4
+------------------------
+
+ * Fixed an issue that a self-importing CSS causes the save process
+   to error out unexpectedly.
+
+ * Sort wizard now consider a bookmark item as an individual group
+   when "Group by Type" is checked.
+
+ * Added "Sort by URL" option to Sort wizard.
+
+Also includes some documentation improvements.
