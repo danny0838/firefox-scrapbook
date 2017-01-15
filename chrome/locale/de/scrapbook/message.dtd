@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "Ordnerliste sortieren">
 <!ENTITY sb.sort.reverse "Reihenfolge umkehren">
 <!ENTITY sb.sort.title "Alphabetisch nach Namen sortieren">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">
