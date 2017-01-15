@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "정렬">
 <!ENTITY sb.sort.reverse "역순으로 정렬">
 <!ENTITY sb.sort.title "제목으로 정렬">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">

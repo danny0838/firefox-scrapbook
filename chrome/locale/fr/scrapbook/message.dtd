@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "Classement">
 <!ENTITY sb.sort.reverse "Inverser">
 <!ENTITY sb.sort.title "Classer par titre">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">

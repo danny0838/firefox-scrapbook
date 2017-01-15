@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "Razvrsti">
 <!ENTITY sb.sort.reverse "Obratno">
 <!ENTITY sb.sort.title "Razvrsti po nazivu">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">

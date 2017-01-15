@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "Järjestä">
 <!ENTITY sb.sort.reverse "Käänteinen">
 <!ENTITY sb.sort.title "Järjestä otsikon mukaan">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">
