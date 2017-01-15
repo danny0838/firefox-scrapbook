@@ -18,6 +18,7 @@
         <radiogroup id="sbSortRadioGroup" persist="sortIndex">
             <radio label="&sb.sort.reverse;" />
             <radio label="&sb.sort.title;" />
+            <radio label="&sb.sort.url;" />
             <radio label="&sb.sort.id;" />
             <radio label="&sb.sort.create;" />
             <radio label="&sb.sort.modify;" />

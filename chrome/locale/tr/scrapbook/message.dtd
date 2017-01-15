@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "Sırala">
 <!ENTITY sb.sort.reverse "Ters Çevir">
 <!ENTITY sb.sort.title "Başlığa Göre Sırala">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">

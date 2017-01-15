@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "排列项目列表">
 <!ENTITY sb.sort.reverse "反序">
 <!ENTITY sb.sort.title "标题">
+<!ENTITY sb.sort.url "URL">
 <!ENTITY sb.sort.id "ID">
 <!ENTITY sb.sort.create "建立时间">
 <!ENTITY sb.sort.modify "修改时间">

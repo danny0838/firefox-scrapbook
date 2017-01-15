@@ -7,8 +7,8 @@ Changes since v1.14.0rc3
  * Fixed the abnormal behavior of the "Open Source URL" in the toolbar
    dropdown menu when clicked.
 
- * Fixed an issue that the "Index" and "Site Map" commands doesn't work
-   if the editor toolbar is not switched shown.
+ * Fixed an issue that the "Index" and "Site Map" commands in the info
+   toolbar doesn't work if the editor toolbar is not toggled shown.
 
  * Fixed an issue that status popup never shown if the toolbar button is
    not placed.

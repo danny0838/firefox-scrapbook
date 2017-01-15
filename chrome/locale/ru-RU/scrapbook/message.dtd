@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "Сортировка каталогов">
 <!ENTITY sb.sort.reverse "В обратном порядке">
 <!ENTITY sb.sort.title "По заголовкам">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">

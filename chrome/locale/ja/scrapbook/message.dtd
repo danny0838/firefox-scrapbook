@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "ソート">
 <!ENTITY sb.sort.reverse "逆順にソート">
 <!ENTITY sb.sort.title "タイトルでソート">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "IDでソート">
 <!ENTITY sb.sort.create "作成時間でソート">
 <!ENTITY sb.sort.modify "変更時間でソート">

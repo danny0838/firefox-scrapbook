@@ -342,6 +342,7 @@
 <!ENTITY sb.sort "Сортування">
 <!ENTITY sb.sort.reverse "У зворотньому напрямку">
 <!ENTITY sb.sort.title "Сортувати за назвою">
+<!ENTITY sb.sort.url "Sort by URL">
 <!ENTITY sb.sort.id "Sort by ID">
 <!ENTITY sb.sort.create "Sort by Create Time">
 <!ENTITY sb.sort.modify "Sort by Modify Time">
