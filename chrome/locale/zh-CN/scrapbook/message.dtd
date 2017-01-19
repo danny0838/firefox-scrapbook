@@ -243,7 +243,7 @@
 <!ENTITY sb.save.target "保存链接">
 <!ENTITY sb.save.target.as "保存链接为">
 <!ENTITY sb.save.alltabs "保存所有标签页">
-<!ENTITY sb.save.bookmark "保存為 ScrapBook 书签">
+<!ENTITY sb.save.bookmark "保存为 ScrapBook 书签">
 <!ENTITY sb.sidebar "在侧栏显示">
 <!ENTITY sb.menubar "菜单栏存取键">
 <!ENTITY sb.editbefore "保存前进行编辑">
@@ -258,7 +258,7 @@
 <!ENTITY sb.prefs.advanced "高级">
 <!ENTITY sb.prefs.ui.contextMenu "在浏览器中显示上下文菜单">
 <!ENTITY sb.prefs.ui.contextSubMenu "子菜单">
-<!ENTITY sb.prefs.ui.bookmarkMenu "显示“保存為 ScrapBook 书签”菜单">
+<!ENTITY sb.prefs.ui.bookmarkMenu "显示“保存为 ScrapBook 书签”菜单">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "显示">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "个最近使用的文件夹">
 <!ENTITY sb.prefs.ui.menuBar "在菜单栏中显示">
