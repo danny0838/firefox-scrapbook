@@ -191,7 +191,7 @@ sbContentSaverClass.prototype = {
         }
         this.item.title = titles[1] || titles[0];
         // If the edit toolbar is showing, also modify its title
-        if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden ) {
+        if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden && document.getElementById("ScrapBookEditor") && !document.getElementById("ScrapBookEditor").hidden ) {
             var modTitle = document.getElementById("ScrapBookEditTitle").value;
             if ( titles.indexOf(modTitle) < 0 ) {
                 titles.splice(1, 0, modTitle);
