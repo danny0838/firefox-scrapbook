@@ -912,7 +912,7 @@ sbContentSaverClass.prototype = {
                     var tmpRefURL = this.refURLObj;
                     // retrieve contentDocument from the corresponding real frame
                     var idx = aNode.getAttribute(this.elemMapKey);
-                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (parseInt(++this.frameCount)));
+                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (++this.frameCount));
                     aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
                 } else {
