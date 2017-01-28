@@ -83,6 +83,7 @@ function sbContentSaverClass() {
     this.elemMapKey = "data-sb-id-" + Date.now();
     this.elemMapOrig = [];
     this.elemMapClone = [];
+    this.frameCount = 0;
 }
 
 sbContentSaverClass.prototype = {
@@ -156,6 +157,7 @@ sbContentSaverClass.prototype = {
         this.linkURLs = [];
         this.elemMapOrig = [];
         this.elemMapClone = [];
+        this.frameCount = 0;
     },
 
     // aRootWindow: window to be captured
@@ -913,7 +915,7 @@ sbContentSaverClass.prototype = {
                     var tmpRefURL = this.refURLObj;
                     // retrieve contentDocument from the corresponding real frame
                     var idx = aNode.getAttribute(this.elemMapKey);
-                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
+                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (parseInt(++this.frameCount)));
                     aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
                 } else {
