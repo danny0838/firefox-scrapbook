@@ -80,6 +80,7 @@ function sbContentSaverClass() {
     this.elemMapKey = "data-sb-id-" + Date.now();
     this.elemMapOrig = [];
     this.elemMapClone = [];
+    this.frameCount = 0;
 }
 
 sbContentSaverClass.prototype = {
@@ -153,6 +154,7 @@ sbContentSaverClass.prototype = {
         this.linkURLs = [];
         this.elemMapOrig = [];
         this.elemMapClone = [];
+        this.frameCount = 0;
     },
 
     // aRootWindow: window to be captured
@@ -191,7 +193,7 @@ sbContentSaverClass.prototype = {
         }
         this.item.title = titles[1] || titles[0];
         // If the edit toolbar is showing, also modify its title
-        if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden ) {
+        if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden && document.getElementById("ScrapBookEditor") && !document.getElementById("ScrapBookEditor").hidden ) {
             var modTitle = document.getElementById("ScrapBookEditTitle").value;
             if ( titles.indexOf(modTitle) < 0 ) {
                 titles.splice(1, 0, modTitle);
@@ -910,7 +912,7 @@ sbContentSaverClass.prototype = {
                     var tmpRefURL = this.refURLObj;
                     // retrieve contentDocument from the corresponding real frame
                     var idx = aNode.getAttribute(this.elemMapKey);
-                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
+                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (parseInt(++this.frameCount)));
                     aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
                 } else {

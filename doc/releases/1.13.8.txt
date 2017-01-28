@@ -1,0 +1,12 @@
+Scrapbook X 1.13.8
+==================
+
+Skipped version 1.13.7 due to a minor error.
+
+Changes since v1.13.6
+---------------------
+
+ * Fixed an issue of having an empty title when saving a ScrapBook page
+   when the editor toolbar is hidden.
+
+Also includes some localization improvements.
