@@ -1,0 +1,13 @@
+Scrapbook X 1.14.0rc6
+=====================
+
+Changes since v1.14.0rc5
+------------------------
+
+ * Fixed an issue that the number of saved frame pages does not start
+   from 1.
+
+ * Fixed an issue of having an empty title when saving a ScrapBook page
+   when the editor toolbar is hidden.
+
+Also includes some localization improvements.
