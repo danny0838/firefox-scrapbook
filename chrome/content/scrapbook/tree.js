@@ -154,6 +154,7 @@ var sbTreeHandler = {
                 dataTransfer.dropEffect = "none";
             }
         } else if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab") || 
+                   dataTransfer.types.contains("text/x-moz-text-internal") || 
                    dataTransfer.types.contains("text/x-moz-url") || 
                    dataTransfer.types.contains("text/_moz_htmlcontext")) {
             event.preventDefault();
@@ -182,7 +183,8 @@ var sbTreeHandler = {
         var showDetail = dataTransfer.dropEffect == "copy";
         // drags a tab from Firefox
         // => if it's the current tab, capture/bookmark it
-        if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab")) {
+        // since Firefox >= 52, dragging a tab gets only "text/x-moz-text-internal" (originally plus "application/x-moz-tabbrowser-tab")
+        if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab") || dataTransfer.types.contains("text/x-moz-text-internal")) {
             var tab = dataTransfer.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
             if (tab instanceof XULElement && tab.localName == "tab" && 
                 tab.ownerDocument.defaultView instanceof ChromeWindow && 
