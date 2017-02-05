@@ -1,0 +1,13 @@
+Scrapbook X 1.13.9
+==================
+
+Changes since v1.13.8
+---------------------
+
+ * Fixed an issue that the number of saved frame pages does not start
+   from 1.
+
+ * Fixed an issue that dragging tabs to the Scrapbook sidebar does not
+   work in Firefox >= 51.
+
+Also includes some localization improvements.

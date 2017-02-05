@@ -1,0 +1,10 @@
+Scrapbook X 1.14.0rc7
+=====================
+
+Changes since v1.14.0rc6
+------------------------
+
+ * Fixed an issue that dragging tabs to the Scrapbook sidebar does not
+   work in Firefox >= 51.
+
+Also includes some code clean-up and localization improvements.

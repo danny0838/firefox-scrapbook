@@ -40,36 +40,36 @@
 <!ENTITY sb.detail.new.folder "Neuer Ordner">
 <!ENTITY sb.detail.select.folder "Ordner auswählen">
 <!ENTITY sb.detail.option "Einschließen">
-<!ENTITY sb.detail.option.save "Archivieren">
+<!ENTITY sb.detail.option.save "Archiviere">
 <!ENTITY sb.detail.option.images "Grafiken">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Webseiten-Stile">
-<!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.tidyCss "Process CSS">
-<!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
-<!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
-<!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
-<!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
-<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
-<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
-<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.option.scripts "Skripten">
+<!ENTITY sb.detail.option.tidyCss "Verarbeite CSS">
+<!ENTITY sb.detail.option.tidyCss.0 "Keine Anpassung">
+<!ENTITY sb.detail.option.tidyCss.0.help "Speichern im Original. Links könnten nicht mehr funktionieren.">
+<!ENTITY sb.detail.option.tidyCss.1 "Links anpassen">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS mit sehr komplizierter Syntax könnten nicht richtig angepasst werden.">
+<!ENTITY sb.detail.option.tidyCss.2 "Links anpassen; Unbekanntes entfernen">
+<!ENTITY sb.detail.option.tidyCss.2.help "Kommentare und vom Browser nicht untersützte CSS-Code wird entfernt.">
+<!ENTITY sb.detail.option.tidyCss.3 "Links anpassen; Unbekanntes und Ungenutztes entfernen">
+<!ENTITY sb.detail.option.tidyCss.3.help "Kommentare und vom Browser nicht untersützte CSS-Code wird entfernt. CSS-Code der für kein Element verwendet wird gelöscht, wenn nicht auch Skripte gespeichert werden.">
+<!ENTITY sb.detail.option.saveDataUri "Speichere URI als Datei">
+<!ENTITY sb.detail.option.saveDataUri.help "Die gespeicherte Datei wird nach ihrer SHA1 Checksume benannt.">
+<!ENTITY sb.detail.option.fileAsHtml "Speichere eine nicht-HTML-Datei als HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "Wenn eine nicht-HTML-Datei im Browser betrachtet wird, speichere den gerenderten HTML-Inhalt. (Inklusive XHTML-Dateien.)">
 <!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.timeout.help "Wartezeit, bevor die nächste URL gesichert wird.">
 <!ENTITY sb.detail.linked.charset "Zeichensatz">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
+<!ENTITY sb.detail.linked.charset.help "Zwinge das Laden der Seite mit dem ausgewählten Zeichensatz. Für automatische Erkennung leer lassen.">
 <!ENTITY sb.detail.linked.file "Verlinkte Dateien herunterladen">
-<!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
-<!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
-<!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
-<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.">
-<!ENTITY sb.detail.linked.file.reset "Reset to default">
+<!ENTITY sb.detail.linked.file.method0 "Herunterladen von verknüpften Dateien deaktivieren">
+<!ENTITY sb.detail.linked.file.method1 "Gleiche URL-Dateiendung ab">
+<!ENTITY sb.detail.linked.file.method2 "Gleiche HTTP-Header und URL-Dateiendung ab">
+<!ENTITY sb.detail.linked.file.desc "Dateien, mit einer Endung passend zu einer RegExp in den nachfolgenden Zeilen werden heruntergeladen. Zeilen die mit # starten werden übersprungen.">
+<!ENTITY sb.detail.linked.file.reset "Standard">
 <!ENTITY sb.detail.linked.page "Ausführliche Archivierung">
 <!ENTITY sb.detail.linked.page.desc "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt.">
 <!ENTITY sb.detail.linked.page.depth "Links folgen bis zu einer Tiefe von">
@@ -80,84 +80,84 @@
 <!-- editor.dtd -->
 <!ENTITY sb.toolbar.edit "Werkzeugleiste anzeigen">
 <!ENTITY sb.toolbar.info "Informationsleiste anzeigen">
-<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
-<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.folderView "Hier klicken um das Datenverzeichnis zu öffnen. Mittlere Maustaste öffnet in einem neuen Tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Lösche unerwünschte Elemente oder ScrapBook Notizen.">
 <!ENTITY sb.edit.undo "Rückgängig">
 <!ENTITY sb.edit.save "Änderungen speichern">
 <!ENTITY sb.edit.comment "Beschreibungsfeld vergrößern">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Klicken um ein Notiz zu erstellen, welche bei einem markierten Bereich erscheint oder frei schwebt, wenn kein Bereich markiert wurde.">
+<!ENTITY sb.edit.freenote.create "Notiz erstellen">
 <!ENTITY sb.edit.inline.add "Zeilenkommentar für Auswahl anlegen">
 <!ENTITY sb.edit.attach.file "Auswahl mit Datei verknüpfen">
 <!ENTITY sb.edit.attach.link "Auswahl mit Link verknüpfen">
-<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
-<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
-<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.attach.innerlink "Inneren-Link an Auswahl anhängen">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Hier klicken um markierten Bereich zu löschen. Mittlere Maustaste leert Scrapbook-Notizen im markierten Bereich.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Zum aktivieren und deaktivieren hier klicken. Nach Aktivierung sind Seiten editierbar und Bearbeitungs-Kommandos sind mittels Hotkeys oder dem Kontext-Menü verfügbar.">
 <!ENTITY sb.edit.html "HTML Editor">
-<!ENTITY sb.edit.html.color "Edit Color">
-<!ENTITY sb.edit.html.color.forText "Set text color:">
-<!ENTITY sb.edit.html.color.forBg "Set background color:">
-<!ENTITY sb.edit.html.source "Edit HTML Source">
-<!ENTITY sb.edit.html.link "Insert Link">
-<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.color "Bearbeite Farbe">
+<!ENTITY sb.edit.html.color.forText "Setze Textfarbe:">
+<!ENTITY sb.edit.html.color.forBg "Setze Hintergrundfarbe:">
+<!ENTITY sb.edit.html.source "Editiere HTML-Quelle">
+<!ENTITY sb.edit.html.link "Füge Link hinzu">
+<!ENTITY sb.edit.html.link.url "Ziel URL:">
 <!ENTITY sb.edit.html.link.id "Item ID:">
-<!ENTITY sb.edit.html.link.format "Select insert format:">
-<!ENTITY sb.edit.html.file "Insert File">
-<!ENTITY sb.edit.html.file.pick "Insert file:">
-<!ENTITY sb.edit.html.file.html "Insert sub-page:">
-<!ENTITY sb.edit.html.file.format "Select insert format:">
-<!ENTITY sb.edit.html.backup "Backup the Current Page">
-<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.link.format "Setze Formatierung:">
+<!ENTITY sb.edit.html.file "Datei einfügen">
+<!ENTITY sb.edit.html.file.pick "Datei einfügen:">
+<!ENTITY sb.edit.html.file.html "Unterseite einfügen:">
+<!ENTITY sb.edit.html.file.format "Setze Formatierung:">
+<!ENTITY sb.edit.html.backup "Sicherung der aktuellen Seite">
+<!ENTITY sb.edit.html.backup.desc "Beschreibung:">
 <!ENTITY sb.edit.html.menu.basic "Text">
 <!ENTITY sb.edit.html.menu.block "Block">
-<!ENTITY sb.edit.html.menu.insert "Insert">
-<!ENTITY sb.edit.html.menu.wrapper "Advanced">
-<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
-<!ENTITY sb.edit.html.menuitem.save "Save the Page">
-<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
-<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
-<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
-<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
-<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
-<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
-<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
-<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
-<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
-<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
-<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
-<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
-<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
-<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
-<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
-<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
-<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
-<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
-<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
-<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
-<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menu.insert "Einfügen">
+<!ENTITY sb.edit.html.menu.wrapper "Erweitert">
+<!ENTITY sb.edit.html.menuitem.insertSource "Quelle einfügen oder editieren">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Formate löschen">
+<!ENTITY sb.edit.html.menuitem.unlink "Links löschen">
+<!ENTITY sb.edit.html.menuitem.save "Seite speichern">
+<!ENTITY sb.edit.html.menuitem.quit "Modus des HTMLEditor wechseln">
+<!ENTITY sb.edit.html.menuitem.bold "Fett">
+<!ENTITY sb.edit.html.menuitem.italic "Kursiv">
+<!ENTITY sb.edit.html.menuitem.underline "Unterstrichen">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Durchgestrichen">
+<!ENTITY sb.edit.html.menuitem.setColor "Setze Text- und Hintergrundfarbe">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Text vergrößern">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Text verkleinern">
+<!ENTITY sb.edit.html.menuitem.superscript "Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Normal">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Überschrift 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Überschrift Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Überschrift Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Überschrift Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Überschrift Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Überschrift Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "DIV-Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "PRE-Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Ungeordnete Liste">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Geordnete Liste">
 <!ENTITY sb.edit.html.menuitem.outdent "Outdent">
 <!ENTITY sb.edit.html.menuitem.indent "Indent">
-<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
-<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
-<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
-<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
-<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
-<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
-<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
-<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
-<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
-<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
-<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
-<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Linksbündig ausrichten">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Rechtsbündig ausrichten">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Zentriert ausrichten">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Blocksatz">
+<!ENTITY sb.edit.html.menuitem.attachLink "Link oder inneren Link hinzufügen">
+<!ENTITY sb.edit.html.menuitem.attachFile "Datei oder Unterseite hinzufügen">
+<!ENTITY sb.edit.html.menuitem.backupFile "Sicherung dieser Seite erstellen">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Horizontale Linie einfügen">
+<!ENTITY sb.edit.html.menuitem.insertDate "Datum und Uhrzeit (date) einfügen">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Todo-Checkbox einfügen">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Todo-Checkbox (ausgewählt) einfügen">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Formatieren mit Template">
 <!ENTITY sb.edit.cutter "Ausgewählten Bereich entfernen">
 <!ENTITY sb.edit.remove.iframe "Alle IFRAME-Tags entfernen">
 <!ENTITY sb.edit.remove.script "Alle SCRIPT-Tags entfernen">
-<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Klicken um den markierten Bereich hervorzuheben.">
 <!ENTITY sb.highlighter "Hervorhebung">
-<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
-<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.highlighter.remove "ausgewählte ScrapBook-Notizen löschen">
+<!ENTITY sb.highlighter.remove.all "Lösche alle ScrapBook-Notizen">
 <!ENTITY sb.locate "Innerhalb der Ordnerliste lokalisieren">
 <!ENTITY sb.indicators "Link-Kennzeichnung aktivieren">
 <!ENTITY sb.info.home "Startseite">
@@ -246,7 +246,7 @@
 <!ENTITY sb.save.alltabs "Alle Tabs archivieren">
 <!ENTITY sb.save.bookmark "Als Lesezeichen archivieren">
 <!ENTITY sb.sidebar "ScrapBook-Sidebar öffnen">
-<!ENTITY sb.menubar "Menubar accesskey">
+<!ENTITY sb.menubar "Eintrag in Menüleiste">
 <!ENTITY sb.editbefore "Vor dem Archivieren bearbeiten">
 
 <!-- prefs.dtd -->
@@ -266,29 +266,29 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Symbol">
 <!ENTITY sb.prefs.ui.toolsMenu "ScrapBook-Eintrag im Menü &quot;Extras&quot; anzeigen">
 <!ENTITY sb.prefs.ui.statusBar "Symbol in der Statusleiste anzeigen">
-<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
+<!ENTITY sb.prefs.ui.sidebarManage "Nutze Verwaltungsmodus in der Sidebar">
 <!ENTITY sb.prefs.desc.restart "Änderung erfordert einen Firefox-Neustart.">
 <!ENTITY sb.prefs.tabs.tips "Folgende Aktionen öffnen neue Tabs">
 <!ENTITY sb.prefs.tabs.note "Notiz bearbeiten">
-<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Automatisch Notiz-Seite bearbeiten">
+<!ENTITY sb.prefs.edit.insertDateFormat "Date-Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML Formatierungs-Template">
 <!ENTITY sb.prefs.data.tips "ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">
 <!ENTITY sb.prefs.confirmDelete "Vor dem Löschen von Listeneinträgen bestätigen">
-<!ENTITY sb.prefs.saveDefault "Default save settings">
+<!ENTITY sb.prefs.saveDefault "Standard Archivierungsdetails">
 <!ENTITY sb.prefs.tree.autoCollapse "Beim Ausklappen eines Listenordners alle anderen Ordner einklappen">
 <!ENTITY sb.prefs.tree.unshift "Einen Eintrag am">
 <!ENTITY sb.prefs.tree.unshift.top "Anfang eines Ordners erstellen">
 <!ENTITY sb.prefs.tree.unshift.bottom "Ende eines Ordners erstellen">
-<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.asciiFilename "Speichere Dateien mit ASCII Dateinamen">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
-<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.io "Preferences">
-<!ENTITY sb.prefs.io.export "Export Preferences">
-<!ENTITY sb.prefs.io.import "Import Preferences">
-<!ENTITY sb.prefs.io.reset "Reset Preferences">
+<!ENTITY sb.prefs.notifyPageSaved "Zeige einen Hinweis, wenn man eine bereits gespeicherte Seite aufruft">
+<!ENTITY sb.prefs.autoOutput "Automatisch einen HTML-Baum erstellen, wenn Daten geändert wurden">
+<!ENTITY sb.prefs.io "Einstellungen">
+<!ENTITY sb.prefs.io.export "Exportiere Einstellungen">
+<!ENTITY sb.prefs.io.import "Importiere Einstellungen">
+<!ENTITY sb.prefs.io.reset "Einstellungen zurücksetzen">
 <!ENTITY sb.button.customize "Anpassen">
 <!ENTITY sb.button.browse "Durchsuchen">
 <!ENTITY sb.button.show "Dateien anzeigen">
@@ -296,12 +296,12 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Allgemeine Informationen">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.create "Create">
-<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.create "Erstellt am">
+<!ENTITY sb.prop.modify "Geändert am">
 <!ENTITY sb.prop.encode "Kodierung">
 <!ENTITY sb.prop.size "Größe">
 <!ENTITY sb.prop.content "Inhalt">
-<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.file "Datei">
 <!ENTITY sb.prop.folder "Ordner">
 <!ENTITY sb.prop.icon "Favicon">
 <!ENTITY sb.prop.icon.change "Ändern">
@@ -309,7 +309,7 @@
 <!ENTITY sb.prop.icon.favicon "Favicon auswählen">
 <!ENTITY sb.prop.icon.custom "Eigenes Favicon auswählen">
 <!ENTITY sb.prop.mark "Eintrag markieren (fett)">
-<!ENTITY sb.prop.lock "Lock">
+<!ENTITY sb.prop.lock "Sperren">
 
 <!-- repair.dtd -->
 <!ENTITY sb.repair.rdfFile "Datei scrapbook.rdf wiederherstellen">
@@ -343,12 +343,12 @@
 <!ENTITY sb.sort.reverse "Reihenfolge umkehren">
 <!ENTITY sb.sort.title "Alphabetisch nach Namen sortieren">
 <!ENTITY sb.sort.url "Sort by URL">
-<!ENTITY sb.sort.id "Sort by ID">
-<!ENTITY sb.sort.create "Sort by Create Time">
-<!ENTITY sb.sort.modify "Sort by Modify Time">
-<!ENTITY sb.sort.descending "In descending order">
-<!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
+<!ENTITY sb.sort.id "Sortieren nach ID">
+<!ENTITY sb.sort.create "Sortieren nach Erstellzeit">
+<!ENTITY sb.sort.modify "Sortieren nach Änderungszeit">
+<!ENTITY sb.sort.descending "In absteigender Reihenfolge">
+<!ENTITY sb.sort.grouping "Nach Typ gruppieren">
+<!ENTITY sb.sort.grouping.help "Sortierung mit Einträgen gruppiert nach Odern, Seite, Notiz-Seite und Notizen.">
 <!ENTITY sb.sort.recursive "Unterordner ebenfalls sortieren">
 <!ENTITY sb.sort.warning "HINWEIS: Dieser Vorgang kann nicht rückgängig gemacht werden.">
 
@@ -364,14 +364,14 @@
 <!ENTITY sb.trade.import "Importieren">
 <!ENTITY sb.trade.export "Exportieren">
 <!ENTITY sb.trade.time "Datum des Exports">
-<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.update "Importieren mit dem aktuellsten Scrapbook X Format">
 <!ENTITY sb.trade.restore "Importieren unter Beibehaltung der Ordnerstruktur">
 <!ENTITY sb.trade.remove "Dateien nach erfolgtem Import entfernen">
-<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+<!ENTITY sb.trade.exportFolder "Exportiere der Ordner-Items (Vorsicht beim Re-Import)">
 
 <!-- tree.dtd -->
 <!ENTITY sb.open "Öffnen">
-<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.native "Im Standardprogramm öffnen">
 <!ENTITY sb.open.tab "In Tab öffnen">
 <!ENTITY sb.open.newtab "In neuem Tab öffnen">
 <!ENTITY sb.open.source "Ursprungs-URL öffnen">
@@ -381,8 +381,8 @@
 <!ENTITY sb.move.into "In Ordner verschieben">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Erneut archivieren">
-<!ENTITY sb.internalize "Internalize">
-<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
+<!ENTITY sb.internalize "Internalisieren">
+<!ENTITY sb.internalize.help "Durch die Seite eingebettete externe Mediendateien im lokalen Verzeichnis speichern.">
 <!ENTITY sb.export "Exportieren">
 <!ENTITY sb.remove "Löschen">
 <!ENTITY sb.property "Eigenschaften">
@@ -391,15 +391,15 @@
 <!ENTITY sb.prop.comment "Beschreibung">
 <!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
-<!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.unmake.container "Convert to Non-folder">
+<!ENTITY sb.make.container "Zu Ordner konvertieren">
+<!ENTITY sb.unmake.container "Zu nicht-Ordner konvertieren">
 <!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
 <!ENTITY sb.folder.openall "Alles in Tabs öffnen">
 <!ENTITY sb.folder.manage "Ordner verwalten">
 <!ENTITY sb.new.folder "Neuer Ordner">
 <!ENTITY sb.new.separator "Neue Trennlinie">
 <!ENTITY sb.new.note "Neue Notiz">
-<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.new.notex "Neue Notzi-Seite">
 <!ENTITY sb.sort.folder "Ordner sortieren">
 <!ENTITY sb.search "Suchen">
 <!ENTITY sb.search.fulltext "Volltextsuche">
