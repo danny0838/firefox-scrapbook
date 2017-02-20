@@ -1307,6 +1307,7 @@ sbContentSaverClass.prototype = {
                         _skipped: false,
                         onStartRequest: function (aRequest, aContext) {
                             try {
+                                aRequest = aRequest.QueryInterface(Components.interfaces.nsIChannel);
                                 // get header info
                                 try { this._content.filename = aRequest.contentDispositionFilename; } catch (ex) {}
                                 try { this._content.isAttachment = aRequest.contentDisposition; } catch (ex) {}
