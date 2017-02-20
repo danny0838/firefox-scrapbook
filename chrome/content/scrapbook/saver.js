@@ -1328,7 +1328,7 @@ sbContentSaverClass.prototype = {
                                 }
                                 // special: apply the filter
                                 if (aSpecialMode == "linkFilter") {
-                                    var toDownload = that.downLinkFilter(ext);
+                                    var toDownload = ["text/html", "application/xhtml+xml"].indexOf(this._content.contentType) < 0 && that.downLinkFilter(ext);
                                     if (!toDownload) {
                                         if ( that.option["inDepth"] > that.depth ) {
                                             // do not copy, but add to the link list if it's a work of deep capture
