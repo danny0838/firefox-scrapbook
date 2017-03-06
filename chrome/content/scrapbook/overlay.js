@@ -153,17 +153,36 @@ var sbBrowserOverlay = {
                 window.setTimeout(function() { sbInfoViewer.init(id); }, 50);
         } else {
             window.setTimeout(function() { sbPageEditor.uninit(); }, 0);
-            if ( sbCommonUtils.getPref("notifyPageCaptured", true) ) this.notifyPageCaptured(aURL);
+            if ( sbCommonUtils.getPref("notifyPageCaptured", true) ) this.async_notifyPageCaptured(aURL);
         }
         this.locateMe = null;
         this.lastLocation = aURL;
+    },
+
+    // async may missed notifications if uri quickly changed, but will not stuck browseing.
+    async_notifyPageCaptured: function(aURL) {
+        Components.utils.import("resource://gre/modules/Services.jsm");
+        var fxVersion = parseFloat(Services.appinfo.version);
+        
+        // Note: if use `var promise = new Promise`, Fx29~Fx30 says: TypeError: Promise is not a constructor.
+        if (fxVersion < 29.0) {
+            sbBrowserOverlay.notifyPageCaptured(aURL);
+            return;
+        }
+        new Promise(function(resolve, reject) {
+            sbBrowserOverlay.notifyPageCaptured(aURL);
+            //setTimeout(function() {
+            //    alert('async');
+                resolve();
+            //}, 3000); // for testing
+        });
     },
 
     notifyPageCaptured: function(aURL) {
         aURL = sbCommonUtils.splitURLByAnchor(aURL)[0];
         var result = [];
         var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 2, true);
-        resList.forEach(function(res) {
+        resList.forEach(function(res) { // may faster with hashmap or cache
             if (["bookmark", "note", "notex"].indexOf(sbDataSource.getProperty(res, "type")) != -1) return;
             if (sbCommonUtils.splitURLByAnchor(sbDataSource.getProperty(res, "source"))[0] == aURL) result.push(res);
         }, this);
@@ -183,6 +202,7 @@ var sbBrowserOverlay = {
                 }
             };
             var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+            if (aURL && aURL != (gBrowser.currentURI ? gBrowser.currentURI.spec : "")) return; // the active tab's uri changed.
             alertsSvc.showAlertNotification(icon, title, text, true, id, listener);
         }
     },
