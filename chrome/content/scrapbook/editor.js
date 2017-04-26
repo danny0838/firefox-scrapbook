@@ -1874,7 +1874,7 @@ var sbDOMEraser = {
             + '</div>';
 
         helpElem.innerHTML = sbCommonUtils.stringTemplate(content, /__([\w_]+)__/g, {
-            "id": id
+            "id": sbCommonUtils.escapeHTML(id)
         });
         doc.body.appendChild(helpElem);
 
@@ -1901,13 +1901,14 @@ var sbDOMEraser = {
         this._clearKeybox();
 
         // set content
-        var content = command;
+        var content = sbCommonUtils.escapeHTML(command);
         if (key) {
             var index = command.toLowerCase().indexOf(key.toLowerCase());
             if (index >= 0) {
                 var s1 = command.substring(0, index);
-                var s2 = command.substring(index + 1);
-                var content = s1 + "<b style='font-size:2em;'>" + command.charAt(index) + "</b>" + s2;
+                var s2 = command.charAt(index);
+                var s3 = command.substring(index + 1);
+                content = sbCommonUtils.escapeHTML(s1) + "<b style='font-size:2em;'>" + sbCommonUtils.escapeHTML(s2) + "</b>" + sbCommonUtils.escapeHTML(s3);
             }
         }
 
@@ -2063,7 +2064,9 @@ var sbDOMEraser = {
             var labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("EDIT_REMOVE_HIGHLIGHT"));
         } else {
             var outlineStyle = "2px solid #FF0000";
-            var labelText = makeElementLabelString(aNode);
+            var labelText = "<b style='color:#000'>" + sbCommonUtils.escapeHTMLWithSpace(aNode.tagName.toLowerCase()) + "</b>" +
+            (aNode.id ? ", id: " + sbCommonUtils.escapeHTMLWithSpace(aNode.id) : "") +
+            (aNode.className ? ", class: " + sbCommonUtils.escapeHTMLWithSpace(aNode.className) : "");
         }
         createLabel(this.lastWindow, aNode, labelText);
         setOutline(aNode, outlineStyle);
@@ -2099,13 +2102,6 @@ var sbDOMEraser = {
 
             // expose this variable
             this.labelElem = labelElem;
-        }
-
-        function makeElementLabelString(elem) {
-            var s = "<b style='color:#000'>" + sbCommonUtils.escapeHTMLWithSpace(elem.tagName.toLowerCase()) + "</b>";
-            if (elem.id != '') s += ", id: " + sbCommonUtils.escapeHTMLWithSpace(elem.id);
-            if (elem.className != '') s += ", class: " + sbCommonUtils.escapeHTMLWithSpace(elem.className);
-            return s;
         }
 
         function setOutline(aElement, outline) {
