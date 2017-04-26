@@ -1,0 +1,17 @@
+Scrapbook X 1.14.0rc8
+=====================
+
+Changes since v1.14.0rc7
+------------------------
+
+ * Fixed an issue that, when using "Match HTTP header and URL file
+   extension", a redirected link is treated as if it had no HTTP
+   header.
+
+ * Fixed an issue that, when using "Match HTTP header and URL file
+   extension", an HTML page that happens to have an extension that
+   matches the download rules is treated as a file instead of a web
+   page.
+
+ * Fixed an issue that an item with a title having leading or trailing
+   dots or slashes could be exported with a bad folder name.
