@@ -553,8 +553,16 @@ var sbSearchService = {
 
     get ELEMENT() { return document.getElementById("sbSearchImage"); },
     get FORM_HISTORY() {
-        return Components.classes["@mozilla.org/satchel/form-history;1"]
-               .getService(Components.interfaces.nsIFormHistory2 || Components.interfaces.nsIFormHistory);
+        try {
+            // Firefox >= ?
+            Components.utils.import("resource://gre/modules/FormHistory.jsm");
+            var result = FormHistory;
+        } catch (ex) {
+            // not available in Firefox >= 54
+            var result = Components.classes["@mozilla.org/satchel/form-history;1"]
+                    .getService(Components.interfaces.nsIFormHistory2 || Components.interfaces.nsIFormHistory);
+        }
+        return this.FORM_HISTORY = result;
     },
 
     type: "",
@@ -601,7 +609,7 @@ var sbSearchService = {
             var query = aInput;
             var re = document.getElementById("sbSearchPopupOptionRE").getAttribute("checked");
             var mc = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
-            this.FORM_HISTORY.addEntry("sbSearchHistory", query);
+            this.addFormHistory(query);
             if (this.type == "fulltext") {
                 this.doFullTextSearch(query, re, mc);
             } else {
@@ -722,8 +730,32 @@ var sbSearchService = {
         sbDataSource.clearContainer("urn:scrapbook:search");
     },
 
+    addFormHistory: function(query) {
+        if (this.FORM_HISTORY.update) {
+            this.FORM_HISTORY.update({
+                op: "remove",
+                fieldname: "sbSearchHistory",
+                value: query
+            });
+            this.FORM_HISTORY.update({
+                op: "add",
+                fieldname: "sbSearchHistory",
+                value: query
+            });
+        } else {
+            this.FORM_HISTORY.addEntry("sbSearchHistory", query);
+        }
+    },
+
     clearFormHistory: function() {
-        this.FORM_HISTORY.removeEntriesForName("sbSearchHistory");
+        if (this.FORM_HISTORY.update) {
+            this.FORM_HISTORY.update({
+                op: "remove",
+                fieldname: "sbSearchHistory"
+            });
+        } else {
+            this.FORM_HISTORY.removeEntriesForName("sbSearchHistory");
+        }
     },
 };
 
@@ -1058,5 +1090,6 @@ var sbSearchQueryHandler = {
 window.addEventListener("SidebarFocused", function () {
     return document.getElementById("sbTree").focus();
 }, false);
+
 
 
