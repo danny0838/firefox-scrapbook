@@ -551,8 +551,10 @@ var sbImportService = {
             if ( this.tarResArray[0] != window.top.sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";
         }
         var curRes = sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
-        if (item.container || item.type == "folder") sbDataSource.createEmptySeq(curRes.Value);
-        this.folderTable[item.title] = curRes.Value;
+        if (item.container || item.type == "folder") {
+            sbDataSource.createEmptySeq(curRes.Value);
+            this.folderTable[item.title] = curRes.Value;
+        }
         window.top.sbTreeHandler.TREE.builder.rebuild();
     },
 

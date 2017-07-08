@@ -904,14 +904,14 @@ var sbCommonUtils = {
     escapeFileName: function(aString) {
         // " ": breaks srcset
         // "#": as the demarcation of main location and hash
-        return aString.replace(/(?:[ #]|%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
+        return aString.replace(/[ %#]+/g, function(m){return encodeURIComponent(m);});
     },
 
     // Tidy chars that may not be valid in a filename on a platform.
     // see also: escapeFileName
     validateFileName: function(aFileName) {
         aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
-        aFileName = aFileName.replace(/^[. ]+/, "").replace(/[. ]+$/, ""); // leading/trailing spaces and dots are not allowed in Windows
+        aFileName = aFileName.replace(/^\./, "_.").replace(/^ +/, "").replace(/[. ]+$/, ""); // leading/trailing spaces and dots are not allowed in Windows
         aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
         aFileName = aFileName.replace(/[\<]/g, "(");
         aFileName = aFileName.replace(/[\>]/g, ")");
