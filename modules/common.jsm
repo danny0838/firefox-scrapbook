@@ -880,7 +880,7 @@ var sbCommonUtils = {
     escapeFileName: function(aString) {
         // " ": breaks srcset
         // "#": as the demarcation of main location and hash
-        return aString.replace(/(?:[ #]|%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
+        return aString.replace(/[ %#]+/g, function(m){return encodeURIComponent(m);});
     },
 
     // Tidy chars that may not be valid in a filename on a platform.
