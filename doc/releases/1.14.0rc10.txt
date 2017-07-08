@@ -1,0 +1,14 @@
+Scrapbook X 1.14.0rc10
+======================
+
+Changes since v1.14.0rc9
+------------------------
+
+ * Fixed an issue that a file named ".foo" be fixed to "foo" and
+   loses its extension.
+
+ * Persent chars ("%") in a filename are now always encoded in URL.
+
+ * Fixed an issue that a non-folder item with a same name with a
+   folder before it causes the import wizard to generated a duplicated
+   folder.
