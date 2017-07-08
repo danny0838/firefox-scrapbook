@@ -1,0 +1,7 @@
+Scrapbook X 1.13.11
+===================
+
+Changes since v1.13.10
+----------------------
+
+ * Fixed an issue that fulltext search does not work in Firefox >= 54.
