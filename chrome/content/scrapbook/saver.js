@@ -409,11 +409,15 @@ sbContentSaverClass.prototype = {
 
         // process internal (style) and external (link) CSS
         Array.prototype.forEach.call(aDocument.styleSheets, function(css){
-            var nodeOrig = css.ownerNode;
-            var node = this.elemMapClone[nodeOrig.getAttribute(this.elemMapKey)];
-
-            // this css node is out of the capture range
-            if (!node) return;
+            try {
+                // Firefox Bug 1385552: document.styleSheets may contain a bad object
+                var nodeOrig = css.ownerNode;
+                var node = this.elemMapClone[nodeOrig.getAttribute(this.elemMapKey)];
+                if (!node) throw "not in capture range";
+            } catch (ex) {
+                // this css node does not exist or is out of the capture range
+                return;
+            }
 
             // do not rewrite CSS during an internalize
             if (this.option["internalize"]) return;
@@ -1297,6 +1301,8 @@ sbContentSaverClass.prototype = {
                 that.httpTask[that.item.id]++;
                 try {
                     var channel = sbCommonUtils.newChannel(sourceURL);
+                    channel = channel.QueryInterface(Components.interfaces.nsIHttpChannel);
+                    channel.setRequestHeader("referer", that.refURLObj.spec, false);
                     channel.asyncOpen({
                         _content: {},
                         _stream: null,
