@@ -1301,6 +1301,8 @@ sbContentSaverClass.prototype = {
                 that.httpTask[that.item.id]++;
                 try {
                     var channel = sbCommonUtils.newChannel(sourceURL);
+                    channel = channel.QueryInterface(Components.interfaces.nsIHttpChannel);
+                    channel.setRequestHeader("referer", that.refURLObj.spec, false);
                     channel.asyncOpen({
                         _content: {},
                         _stream: null,
