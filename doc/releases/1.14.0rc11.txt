@@ -1,0 +1,11 @@
+Scrapbook X 1.14.0rc11
+======================
+
+Changes since v1.14.0rc10
+-------------------------
+
+ * Provides the referer header when saving a page to avoid access
+   restriction of some web sites.
+
+ * Fixed an issue that some web pages cannot be saved due to a
+   malformatted CSSStyleSheet object.
