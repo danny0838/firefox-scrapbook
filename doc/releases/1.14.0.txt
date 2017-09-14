@@ -1,0 +1,99 @@
+Scrapbook X 1.14.0
+==================
+
+This is the first release of 1.14 series and is identical to
+v1.14.0rc11 except for version number and documentation.
+
+
+Compatibility notes (with 1.13.*)
+---------------------------------
+
+ * User preference schema was slightly changed.
+
+   The behavior of value 0 of "fulltext.sitePagesLimit" user preference
+   is different between 1.13 and 1.14 series.
+
+ * Added support for export time recording.
+
+   The export time of an exported item recorded in index.dat is only
+   supported in 1.14 series and will be ignored in older versions.
+
+
+Changes since v1.13.12
+----------------------
+
+General user interface:
+
+ * Detail save options now only be remembered when "Remember current
+   options" is checked.
+
+ * Added the "Open Source URL" command back to the dropdown menu of
+   the ScrapBook toolbar, and it now opens the corresponding source
+   URL for a deep-saved page as well.
+
+ * Recovered the "Site Map" command in the toolbar dropdown menu.
+
+ * Recovered the old-style status bar button in Firefox < 4.0.
+   (Available via Status-4-Evar or similar addons.)
+
+ * Notification for a web page that is already saved now shows on the
+   top of a tab.
+
+ * No more output the HTML tree automatically before entering Option
+   dialog.
+
+ * Now fallbacks to use the profile folder if the selected ScrapBook
+   directory cannot be used.
+
+ * Sort wizard now consider a bookmark item as an individual group
+   when "Group by Type" is checked.
+
+ * Added "Sort by URL" option to Sort wizard.
+
+User preference:
+
+ * Changed "fulltext.sitePagesLimit": now 0 means 0 ("index no deep
+   page") and a negative means infinity ("index unlimited deep pages").
+
+ * Added "fulltext.updateSizeThreshold": if the cache size is smaller
+   than this set size (KiB), it is updated whenever a fulltext search
+   is performed. (A negative means infinity, i.e. always update cache.)
+
+ * Added "fulltext.updateTimeThreshold": if the cache file is older
+   than this set time (minutes), it will be updated when a fulltext
+   search is performed. (A negative means infinity, i.e. never update
+   an old cache.)
+
+ * Added "data.rdfBackupKeepDays": backup RDFs that are older than this
+   set time (days) will be removed during a check. (A negative means
+   infinity, i.e. never remove backup RDFs.)
+
+ * Added "data.rdfBackupRemoveLimit": the maximal number of expired backup
+   RDFs that will be removed during a check. (A negative means infinity,
+   i.e. remove all expired backup RDFs during a check.)
+
+ * When the "data.path" preference is manually modified, ScrapBook X
+   now keeps using the old value, and no more automatically refreshes
+   the UI and outputs HTML tree.
+
+Save functionality:
+
+ * Provides the referer header when saving a page to avoid access
+   restriction of some web sites.
+
+ * Fixed an issue that some web pages cannot be saved due to a
+   malformatted CSSStyleSheet object.
+
+Export functionality:
+
+ * The exported time of an item is now recorded as a property in the
+   index.dat.  If it's not available, the last modified time of the
+   item folder is used as a fallback.
+
+   This solved an issue that the order of exported items are messed up
+   after re-imported on Linux or when the user has modified them.
+
+ * The Manage dialog now displays the exported time in ISO format.
+
+Also includes many code clean-up, documentation revises, and localization 
+and tooltip improvements.
