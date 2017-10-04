@@ -943,11 +943,12 @@ sbContentSaverClass.prototype = {
             // other specific
             this.removeAttr(aNode, "contextmenu");
         }
-        // handle integrity
+        // handle integrity and crossorigin
         // We have to remove integrity check because we could modify the content
         // and they might not work correctly in the offline environment.
         if ( this.option["removeIntegrity"] ) {
             this.removeAttr(aNode, "integrity");
+            this.removeAttr(aNode, "crossorigin");
         }
     },
 
