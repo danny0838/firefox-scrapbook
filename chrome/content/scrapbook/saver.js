@@ -640,6 +640,16 @@ sbContentSaverClass.prototype = {
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
+                if ( aNode.hasAttribute("poster") ) {
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("poster")) ) break;
+                    var url = aNode.poster;
+                    if ( this.option["media"] ) {
+                        var fileName = this.download(url);
+                        if (fileName) aNode.setAttribute("poster", fileName);
+                    } else {
+                        aNode.setAttribute("poster", this.getSkippedURL(url));
+                    }
+                }
                 break;
             case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
