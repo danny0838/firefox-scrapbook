@@ -789,7 +789,6 @@ sbContentSaverClass.prototype = {
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                     if (aNode.textContent) aNode.textContent = "/* Code removed by ScrapBook */";
-                    return;
                 }
                 break;
             case "a": 
