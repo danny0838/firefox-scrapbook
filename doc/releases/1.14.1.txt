@@ -4,10 +4,10 @@ Scrapbook X 1.14.1
 Changes since v1.14.0
 ---------------------
 
-* Added support to "poster" attribute of <video> elements.
+ * Added support to "poster" attribute of <video> elements.
 
-* Remove "crossorigin" attribute to avoid loading failure of
-  the downloaded resource on some browsers (e.g. Chrome).
+ * Remove "crossorigin" attribute to avoid loading failure of
+   the downloaded resource on some browsers (e.g. Chrome).
 
-* Fixed an issue that <script> elements are escaped from some
-  processes.
+ * Fixed an issue that <script> elements are escaped from some
+   processes.
