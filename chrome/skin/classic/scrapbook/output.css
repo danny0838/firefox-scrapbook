@@ -75,6 +75,9 @@ fieldset.separator legend {
     width: 16px;
     height: 16px;
     vertical-align: middle;
+    display: inline-block;
+    *display: inline; /* hack for display: inline-block; for IE < 8 */
+    *zoom: 1; /* hack for display: inline-block; for IE < 8 */
 }
 
 #search img {
