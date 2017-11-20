@@ -405,11 +405,7 @@ var sbExportService = {
         try {
             srcDir.copyTo(sbTradeService.rightDir, destDir.leafName);
         } catch(ex) {
-            try {
-                srcDir.copyTo(sbTradeService.rightDir, item.id);
-            } catch(ex) {
-                throw "Failed to copy files.";
-            }
+            throw "Failed to copy files.";
         }
         if (item.type == "folder" || item.type == "bookmark" || item.type == "separator")
             sbCommonUtils.removeDirSafety(srcDir);
