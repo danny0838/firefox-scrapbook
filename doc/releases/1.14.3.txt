@@ -1,0 +1,7 @@
+Scrapbook X 1.14.3
+==================
+
+Changes since v1.14.2
+---------------------
+
+ * Fixed an issue of bad indent for items with missing favicon.
