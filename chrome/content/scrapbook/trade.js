@@ -390,8 +390,10 @@ var sbExportService = {
         item.exported = (new Date()).toISOString();
 
         var num = 0, destDir, dirName;
+        var dirNameBase = sbCommonUtils.crop(sbCommonUtils.validateFileName(item.title), 60, 0, '') || "untitled";
+        dirNameBase = sbCommonUtils.validateFileName(dirNameBase); // avoid potential bad filename such as trailing space
         do {
-            dirName = sbCommonUtils.validateFileName(item.title).substring(0,60) || "untitled";
+            dirName = dirNameBase;
             if ( num > 0 ) dirName += "-" + num;
             dirName = dirName.replace(/\./g, "");
             destDir = sbTradeService.rightDir.clone();
@@ -403,11 +405,7 @@ var sbExportService = {
         try {
             srcDir.copyTo(sbTradeService.rightDir, destDir.leafName);
         } catch(ex) {
-            try {
-                srcDir.copyTo(sbTradeService.rightDir, item.id);
-            } catch(ex) {
-                throw "Failed to copy files.";
-            }
+            throw "Failed to copy files.";
         }
         if (item.type == "folder" || item.type == "bookmark" || item.type == "separator")
             sbCommonUtils.removeDirSafety(srcDir);

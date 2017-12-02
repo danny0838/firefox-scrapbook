@@ -1,0 +1,8 @@
+Scrapbook X 1.14.4
+==================
+
+Changes since v1.14.3
+---------------------
+
+ * Fixed an issue that the exported item folder be named after its ID
+   instead of its title.
