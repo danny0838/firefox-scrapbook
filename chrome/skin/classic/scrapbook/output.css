@@ -18,6 +18,12 @@ div#header a {
     color: #666666;
 }
 
+/* ::::: root ::::: */
+
+ul#container-root {
+    margin-left: 10px;
+}
+
 /* ::::: list ::::: */
 ul {
     margin-left: 0px;
@@ -27,7 +33,7 @@ ul {
 /* ::::: list items ::::: */
 li {
     list-style-type: none;
-    margin: 2px 20px;
+    margin: 2px 10px;
     white-space: nowrap;
 }
 
