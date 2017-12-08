@@ -524,7 +524,7 @@ var sbOutputService = {
             + '            "re": false,\n'
             + '            "default": this.config["default_field"]\n'
             + '        };\n'
-            + '        keyStr.replace(/(\\-?[A-Za-z]+:|\\-)(?:"((?:\\\\"|[^"])*)"|([^ "\\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){\n'
+            + '        keyStr.replace(/(\\-?[A-Za-z]+:|\\-)(?:"((?:""|[^"])*)"|([^ "\\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){\n'
             + '            if (cmd) {\n'
             + '                var term = qterm ? qterm.replace(/""/g, \'"\') : term;\n'
             + '            }\n'
