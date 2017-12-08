@@ -17,7 +17,7 @@
 <!ENTITY sb.save.uncheckSelection "取消勾選選取項目">
 <!ENTITY sb.save.filter "過濾">
 <!ENTITY sb.save.filter.column.rule "顯示/隱藏">
-<!ENTITY sb.save.filter.column.content "篩選條件（規則運算式）">
+<!ENTITY sb.save.filter.column.content "篩選條件（正規表述式）">
 <!ENTITY sb.save.filter.accept "確認">
 <!ENTITY sb.save.filter.accept.help "修改選取項目或編輯新項目">
 <!ENTITY sb.save.filter.cancel "取消">
@@ -68,7 +68,7 @@
 <!ENTITY sb.detail.linked.file.method0 "停用下載連結檔案">
 <!ENTITY sb.detail.linked.file.method1 "比對網址副檔名">
 <!ENTITY sb.detail.linked.file.method2 "比對 HTTP 標頭及網址副檔名">
-<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行規則運算式的檔案。略過 &quot;#&quot; 開頭的行。">
+<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行正規表述式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
 <!ENTITY sb.detail.linked.page "深入儲存">
 <!ENTITY sb.detail.linked.page.desc "全部儲存完成後，會將所有頁面互相連結，並產生站台地圖。">
@@ -194,7 +194,7 @@
 <!ENTITY mb.button.remove "刪除">
 
 <!-- multiple.dtd -->
-<!ENTITY sb.multiple.filter "篩選條件（使用規則運算式）">
+<!ENTITY sb.multiple.filter "篩選條件（使用正規表述式）">
 <!ENTITY sb.multiple.titleofwebsite "網站標題">
 <!ENTITY sb.multiple.titleoflink "連結標題">
 <!ENTITY sb.multiple.title "標題">
@@ -404,7 +404,7 @@
 <!ENTITY sb.search "搜尋">
 <!ENTITY sb.search.fulltext "全文搜尋">
 <!ENTITY sb.search.all "所有欄位">
-<!ENTITY sb.search.re "使用規則運算式">
+<!ENTITY sb.search.re "使用正規表述式">
 <!ENTITY sb.search.cs "大小寫需相符">
 <!ENTITY sb.search.cache "更新全文搜尋快取">
 <!ENTITY sb.search.clear "清除搜尋歷史記錄">
