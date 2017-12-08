@@ -785,7 +785,7 @@ var sbSearchQueryHandler = {
             're': !!aPreset['re'],
             'default': aPreset['default'] || 'title',
         };
-        aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
+        aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:""|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
             if (cmd) {
                 var term = qterm ? qterm.replace(/""/g, '"') : term;
             } else {
