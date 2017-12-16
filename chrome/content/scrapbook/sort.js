@@ -1,5 +1,5 @@
 
-var sbSortService = {
+let sbSortService = {
 
     get WIZARD()      { return document.getElementById("sbSortWizard"); },
     get RADIO_GROUP() { return document.getElementById("sbSortRadioGroup"); },
@@ -70,13 +70,13 @@ var sbSortService = {
     },
 
     process: function(aContRes) {
-        var rdfCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
+        let rdfCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
         rdfCont.Init(sbDataSource.data, aContRes);
-        var resEnum = rdfCont.GetElements();
-        var resListF = [], resListI = [], resListB = [], resListN = [], resListX = [];
+        let resEnum = rdfCont.GetElements();
+        let resListF = [], resListI = [], resListB = [], resListN = [], resListX = [];
         if (this.grouping) {
             while ( resEnum.hasMoreElements() ) {
-                var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+                let res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 switch(sbDataSource.getProperty(res, "type")) {
                     case "folder":
                         resListF.push(res);
@@ -112,7 +112,7 @@ var sbSortService = {
             }
         } else {
             while ( resEnum.hasMoreElements() ) {
-                var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+                let res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 resListF.push(res);
             }
             if ( !this.key ){
@@ -121,7 +121,7 @@ var sbSortService = {
                 resListF.sort(this.compare);
             }
         }
-        for ( var i = 0; i < resListF.length; i++ ) {
+        for ( let i = 0; i < resListF.length; i++ ) {
             rdfCont.RemoveElement(resListF[i], true);
             rdfCont.AppendElement(resListF[i]);
         }
@@ -134,8 +134,8 @@ var sbSortService = {
     },
 
     compare: function(resA, resB) {
-        var a = sbDataSource.getProperty(resA, sbSortService.key).toUpperCase();
-        var b = sbDataSource.getProperty(resB, sbSortService.key).toUpperCase();
+        let a = sbDataSource.getProperty(resA, sbSortService.key).toUpperCase();
+        let b = sbDataSource.getProperty(resB, sbSortService.key).toUpperCase();
         if ( a > b ) return sbSortService.order;
         if ( a < b ) return -sbSortService.order;
         return 0;

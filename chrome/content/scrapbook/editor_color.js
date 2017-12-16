@@ -1,11 +1,11 @@
-var gData;
-var gColorType;
-var gColorTextChecker;
-var gColorTextPicker;
-var gColorTextHidden;
-var gColorBgChecker;
-var gColorBgPicker;
-var gColorBgHidden;
+let gData;
+let gColorType;
+let gColorTextChecker;
+let gColorTextPicker;
+let gColorTextHidden;
+let gColorBgChecker;
+let gColorBgPicker;
+let gColorBgHidden;
 
 function init() {
     if ( !window.arguments) window.close();

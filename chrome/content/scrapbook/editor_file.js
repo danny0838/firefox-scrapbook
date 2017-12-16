@@ -1,4 +1,4 @@
-var gData;
+let gData;
 
 function init() {
     if ( !window.arguments) window.close();
@@ -24,7 +24,7 @@ function accept() {
 }
 
 function pickFile() {
-    var pickedFile = sbCommonUtils.showFilePicker({
+    let pickedFile = sbCommonUtils.showFilePicker({
         window: window,
         title: sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"),
         mode: 0, // modeOpen
@@ -36,6 +36,6 @@ function pickFile() {
 }
 
 function pick(aIDToCheck) {
-    var el = document.getElementById(aIDToCheck);
+    let el = document.getElementById(aIDToCheck);
     if (!el.disabled) document.getElementById("sbFileSelector").selectedItem = el;
 }

@@ -1,5 +1,5 @@
 
-var sbMultipleService = {
+let sbMultipleService = {
 
     get FILTER()  { return document.getElementById("sbFilter"); },
     get STATUS()  { return document.getElementById("sbStatus"); },
@@ -23,18 +23,18 @@ var sbMultipleService = {
     },
 
     done: function() {
-        var allURLs = [];
-        var urlList = [];
-        var namList = [];
-        var urlHash = {};
-        var lines = this.TEXTBOX.value.split("\n");
-        for ( var i = 0; i < lines.length; i++ ) {
+        let allURLs = [];
+        let urlList = [];
+        let namList = [];
+        let urlHash = {};
+        let lines = this.TEXTBOX.value.split("\n");
+        for ( let i = 0; i < lines.length; i++ ) {
             if ( lines[i].length > 5 ) urlHash[lines[i]] = true;
         }
-        for ( var url in urlHash ) { allURLs.push(url); }
+        for ( let url in urlHash ) { allURLs.push(url); }
         if ( allURLs.length < 1 ) return;
         //Verbliebene Links trennen
-        for ( var i = 0; i < allURLs.length; i++ ) {
+        for ( let i = 0; i < allURLs.length; i++ ) {
             lines = allURLs[i].split("  ");
             urlList[i] = lines.shift();
             if ( lines.length ) {
@@ -43,7 +43,7 @@ var sbMultipleService = {
                 namList[i] = "";
             }
         }
-        var data = {
+        let data = {
             urls: urlList,
             showDetail: false,
             resName: sbFolderSelector2.resURI,
@@ -54,14 +54,14 @@ var sbMultipleService = {
     },
 
     addURL: function(auAllHash, auExclude) {
-        var auAll = "";
-        var auSelected = 0;
-        var auCount = 0;
-        var auFilter = this.FILTER.value;
+        let auAll = "";
+        let auSelected = 0;
+        let auCount = 0;
+        let auFilter = this.FILTER.value;
         if ( auExclude == null ) {
             auExclude = document.getElementById("sbExcludeExistingAddresses").checked;
         }
-        for ( var auURL in auAllHash ) {
+        for ( let auURL in auAllHash ) {
             auCount++;
             this.allURLs.push(auURL);
             this.allTitles.push(auAllHash[auURL]);
@@ -70,12 +70,12 @@ var sbMultipleService = {
             //Vergleichen mit Ausschlußliste und Co
             this.currentID = sbFolderSelector2.resURI;
             if ( this.currentID != this.lastID ) this.detectExistingLinks();
-            for ( var auI=0; auI<this.allURLs.length; auI++ ) {
+            for ( let auI=0; auI<this.allURLs.length; auI++ ) {
                 if ( this.allURLs[auI].match(auFilter) ) {
                     //Abgleich mit Ausschlussliste
-                    var auDoppelt = 0;
+                    let auDoppelt = 0;
                     if ( auExclude ) {
-                        for ( var auJ = 0; auJ < this.vorhLinks.length; auJ++) {
+                        for ( let auJ = 0; auJ < this.vorhLinks.length; auJ++) {
                             if ( this.vorhLinks[auJ] == this.allURLs[auI] ) {
                                 auDoppelt = 1;
                                 auJ = this.vorhLinks.length;
@@ -102,30 +102,30 @@ var sbMultipleService = {
     },
 
     pasteClipboardURL: function() {
-        var pcuAllHash = {};
-        var pcuLines = [];
+        let pcuAllHash = {};
+        let pcuLines = [];
         this.allURLs = [];
         this.allTitles = [];
         try {
-            var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+            let clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
             if ( !clip ) return false;
-            var trans = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
+            let trans = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
             if ( !trans ) return false;
             if ( 'init' in trans ) {
-                var loadContext = document.defaultView.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
+                let loadContext = document.defaultView.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
                 trans.init(loadContext);
             }
             trans.addDataFlavor("text/unicode");
             clip.getData(trans, clip.kGlobalClipboard);
-            var str = new Object();
-            var len = new Object();
+            let str = new Object();
+            let len = new Object();
             trans.getTransferData("text/unicode", str, len);
             if ( str ) {
                 str = str.value.QueryInterface(Components.interfaces.nsISupportsString);
                 pcuLines = str.toString().split("\n");
-                for ( var i = 0; i < pcuLines.length; i++ ) {
+                for ( let i = 0; i < pcuLines.length; i++ ) {
                     if ( pcuLines[i].match(/^(http|https|ftp|file):\/\//) ) {
-                        var pcuGetrennt = pcuLines[i].split("\;");
+                        let pcuGetrennt = pcuLines[i].split("\;");
                         if ( pcuGetrennt.length > 1 ) {
                             pcuAllHash[pcuGetrennt[0]] = pcuGetrennt[1];
                         } else {
@@ -141,12 +141,12 @@ var sbMultipleService = {
 
     detectURLsOfTabs: function() {
         this.clear();
-        var duotURL = "";
-        var duotAllHash = {};
-        var nodes = window.opener.gBrowser.mTabContainer.childNodes;
+        let duotURL = "";
+        let duotAllHash = {};
+        let nodes = window.opener.gBrowser.mTabContainer.childNodes;
         this.allURLs = [];
         this.allTitles = [];
-        for ( var i = 0; i < nodes.length; i++ ) {
+        for ( let i = 0; i < nodes.length; i++ ) {
             duotURL = window.opener.gBrowser.getBrowserForTab(nodes[i]).contentDocument.location.href;
             if ( duotURL.match(/^(http|https|ftp|file):\/\//) ) {
                 duotAllHash[duotURL] = "";
@@ -157,9 +157,9 @@ var sbMultipleService = {
 
     detectURLsInPage: function() {
         this.clear();
-        var duipURL = "";
-        var duipAllHash = {};
-        var node = window.opener.top.content.document.body;
+        let duipURL = "";
+        let duipAllHash = {};
+        let node = window.opener.top.content.document.body;
         this.allURLs = [];
         this.allTitles = [];
         traceTree: while ( true ) {
@@ -181,19 +181,19 @@ var sbMultipleService = {
 
     detectURLsInSelection: function() {
         this.clear();
-        var duisURL = "";
-        var duisAllHash = {};
-        var sel = window.opener.top.sbPageEditor.getSelection(sbCommonUtils.getFocusedWindow());
+        let duisURL = "";
+        let duisAllHash = {};
+        let sel = window.opener.top.sbPageEditor.getSelection(sbCommonUtils.getFocusedWindow());
         if ( !sel ) {
             document.getElementById("sbCounter").setAttribute("value", "");
             return;
         }
         this.allURLs = [];
         for (var i=0, I=sel.rangeCount; i<I; i++) {
-            var selRange = sel.getRangeAt(i);
-            var node = selRange.startContainer;
+            let selRange = sel.getRangeAt(i);
+            let node = selRange.startContainer;
             if ( node.nodeName == "#text" ) node = node.parentNode;
-            var nodeRange = window.opener.top.content.document.createRange();
+            let nodeRange = window.opener.top.content.document.createRange();
             traceTree: while ( true ) {
                 nodeRange.selectNode(node);
                 if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 ) {
@@ -219,9 +219,9 @@ var sbMultipleService = {
 
     detectExistingLinks: function() {
         //Funktion ermittelt die Links der vorhandenen Einträge im aktuell gewählten Zielverzeichnis
-        var delResource = null;
-        var delRDFCont = null;
-        var delResEnum = [];
+        let delResource = null;
+        let delRDFCont = null;
+        let delResEnum = [];
         this.vorhLinks = [];
         this.lastID = this.currentID;
         delResource = sbCommonUtils.RDF.GetResource(this.currentID);
@@ -229,7 +229,7 @@ var sbMultipleService = {
         delRDFCont.Init(sbDataSource.data, delResource);
         delResEnum = delRDFCont.GetElements();
         while ( delResEnum.hasMoreElements() ) {
-            var delRes = delResEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+            let delRes = delResEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
             if ( !sbDataSource.isContainer(delRes) ) {
                 this.vorhLinks.push(sbDataSource.getProperty(delRes, "source"));
             }
@@ -238,9 +238,9 @@ var sbMultipleService = {
 
     updateSelection: function(usEvent) {
         //Funktion aktualisiert den Inhalt der aktuellen Auswahl
-        var usCount = this.allURLs.length;
-        var usAllHash = {};
-        var usExclude = true;
+        let usCount = this.allURLs.length;
+        let usAllHash = {};
+        let usExclude = true;
         usExclude = document.getElementById("sbExcludeExistingAddresses").checked;
         if ( usEvent ) {
             if ( usEvent.button == 0 ) {
@@ -251,7 +251,7 @@ var sbMultipleService = {
                 }
             }
         }
-        for ( var i=0; i<usCount; i++ ) {
+        for ( let i=0; i<usCount; i++ ) {
             usAllHash[this.allURLs[i]] = this.allTitles[i];
         }
         this.allURLs = [];
@@ -261,7 +261,7 @@ var sbMultipleService = {
 
     toggleMethod: function() {
         //Funktion aktiviert bzw. deaktiviert die Zeichensatzauswahl
-        var tmMethod = document.getElementById("sbMethod").value;
+        let tmMethod = document.getElementById("sbMethod").value;
         if ( tmMethod == "SB" ) {
             document.getElementById("sbCharset").disabled = false;
         } else {
@@ -274,13 +274,13 @@ var sbMultipleService = {
 
 
 
-var sbURLDetector1 = {
+let sbURLDetector1 = {
 
     index: 0,
 
     run: function() {
         this.index = 0;
-        var pickedDir = sbCommonUtils.showFilePicker({
+        let pickedDir = sbCommonUtils.showFilePicker({
             window: window,
             title: "",
             mode: 2, // modeGetFolder
@@ -293,14 +293,14 @@ var sbURLDetector1 = {
 
     inspectDirectory: function(aDir, curIdx) {
         sbMultipleService.STATUS.value = sbCommonUtils.lang("SCANNING_DIR", curIdx, this.index, aDir.path);
-        var entries = aDir.directoryEntries;
+        let entries = aDir.directoryEntries;
         while ( entries.hasMoreElements() ) {
-            var entry = entries.getNext().QueryInterface(Components.interfaces.nsILocalFile);
+            let entry = entries.getNext().QueryInterface(Components.interfaces.nsILocalFile);
             if ( entry.isDirectory() ) {
                 this.inspectDirectoryWithDelay(entry, ++this.index);
             } else {
                 if ( entry.leafName.match(/\.(html|htm)$/i) ) {
-                    var hash = {};
+                    let hash = {};
                     hash[sbCommonUtils.convertFileToURL(entry)] = "";
                     sbMultipleService.addURL(hash);
                 }
@@ -316,7 +316,7 @@ var sbURLDetector1 = {
 };
 
 
-var sbURLDetector2 = {
+let sbURLDetector2 = {
 
     type: "",
     index: 0,
@@ -330,9 +330,9 @@ var sbURLDetector2 = {
         this.lines = [];
         this.result = "";
         this.weboxBaseURL = "";
-        var theFile ;
+        let theFile ;
         if ( this.type == "W" ) {
-            var pickedFile = sbCommonUtils.showFilePicker({
+            let pickedFile = sbCommonUtils.showFilePicker({
                 window: window,
                 title: "Select default.html of WeBoX.",
                 mode: 0, // modeOpen

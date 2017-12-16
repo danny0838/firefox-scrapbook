@@ -1,12 +1,12 @@
 
-var sbContentSaver = {
+let sbContentSaver = {
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
-        var saver = new sbContentSaverClass();
+        let saver = new sbContentSaverClass();
         return saver.captureWindow(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle);
     },
 
     captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
-        var saver = new sbContentSaverClass();
+        let saver = new sbContentSaverClass();
         return saver.captureFile(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext);
     },
 
@@ -14,13 +14,13 @@ var sbContentSaver = {
         // aItem is the last item that is captured
         // in a multiple capture it could be null 
         if (aItem) {
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
+            let res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
             if ( sbDataSource.getProperty(res, "type") == "marked" ) return;
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
-                var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(aItem.type);
-                var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
-                var text = sbCommonUtils.crop(aItem.title, null, 100);
-                var listener = {
+                let icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(aItem.type);
+                let title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
+                let text = sbCommonUtils.crop(aItem.title, null, 100);
+                let listener = {
                     observe: function(subject, topic, data) {
                         if (topic == "alertclickcallback")
                             sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
@@ -29,7 +29,7 @@ var sbContentSaver = {
                 sbCommonUtils.ALERT.showAlertNotification(icon, title, text, true, aItem.id, listener);
             }
         } else {
-            var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
+            let title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
             sbCommonUtils.ALERT.showAlertNotification(null, title, null);
         }
     },
@@ -173,18 +173,18 @@ sbContentSaverClass.prototype = {
 
         // if there is no selection, process as non-partial
         if ( aIsPartial ) {
-            var sel = aRootWindow.getSelection();
+            let sel = aRootWindow.getSelection();
             if (!sel.isCollapsed) this.selection = sel;
         }
 
         // Build the title list.
         // First is default title (document title or URL), others are candidate.
-        var titles = [aRootWindow.document.title || decodeURI(this.item.source)];
+        let titles = [aRootWindow.document.title || decodeURI(this.item.source)];
         if (aTitle) titles.push(aTitle);
         if ( this.selection ) {
-            var lines = this.selection.toString().split("\n");
-            for ( var i = 0, I = lines.length; i < I; i++ ) {
-                var line = lines[i].replace(/[\r\n\t]+/g, "");
+            let lines = this.selection.toString().split("\n");
+            for ( let i = 0, I = lines.length; i < I; i++ ) {
+                let line = lines[i].replace(/[\r\n\t]+/g, "");
                 if ( line.length > 0 ) {
                     titles.push(sbCommonUtils.crop(line, 150, 180));
                     if ( titles.length > 4 ) break;
@@ -194,7 +194,7 @@ sbContentSaverClass.prototype = {
         this.item.title = titles[1] || titles[0];
         // If the edit toolbar is showing, also modify its title
         if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden && document.getElementById("ScrapBookEditor") && !document.getElementById("ScrapBookEditor").hidden ) {
-            var modTitle = document.getElementById("ScrapBookEditTitle").value;
+            let modTitle = document.getElementById("ScrapBookEditTitle").value;
             if ( titles.indexOf(modTitle) < 0 ) {
                 titles.splice(1, 0, modTitle);
                 this.item.title = modTitle;
@@ -205,21 +205,21 @@ sbContentSaverClass.prototype = {
         // Show detail dialog
         // if the user closes it, skip the capture process
         if ( aShowDetail ) {
-            var ret = this.showDetailDialog(titles, aResName, aContext);
+            let ret = this.showDetailDialog(titles, aResName, aContext);
             if ( ret.result == 0 ) { return null; }
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
 
         // save the document content to ScrapBook
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
-        var newName = this.saveDocumentInternal(aRootWindow.document, this.documentName);
+        let newName = this.saveDocumentInternal(aRootWindow.document, this.documentName);
 
         // Use the tab icon as the item icon if it's available
         // For a file or image, use default (file extension related icon)
         if ( ["file", "image"].indexOf(this.item.type) == -1 ) {
             if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
-                var iconURL = gBrowser.mCurrentBrowser.mIconURL;
-                var iconFileName = this.download(iconURL);
+                let iconURL = gBrowser.mCurrentBrowser.mIconURL;
+                let iconFileName = this.download(iconURL);
                 if (iconFileName) this.item.icon = iconFileName;
             }
         }
@@ -229,7 +229,7 @@ sbContentSaverClass.prototype = {
 
         // if there is no further download task, complete the download
         if ( this.httpTask[this.item.id] == 0 ) {
-            var that = this;
+            let that = this;
             setTimeout(function(){ that.onAllDownloadsComplete(that.item); }, 100);
         }
 
@@ -244,19 +244,19 @@ sbContentSaverClass.prototype = {
         this.item.source = aSourceURL;
         this.item.type = aType;
         if ( aShowDetail ) {
-            var ret = this.showDetailDialog(null, aResName, aContext);
+            let ret = this.showDetailDialog(null, aResName, aContext);
             if ( ret.result == 0 ) { return null; }
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
         this.refURLObj = sbCommonUtils.convertURLToObject(aReferURL);
-        var newName = this.saveFileInternal(aSourceURL, this.documentName, aType);
+        let newName = this.saveFileInternal(aSourceURL, this.documentName, aType);
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
 
     showDetailDialog: function(aTitles, aResURI, aContext) {
-        var ret = {
+        let ret = {
             item: this.item,
             option: this.option,
             titles: aTitles || [this.item.title],
@@ -269,16 +269,16 @@ sbContentSaverClass.prototype = {
     },
 
     saveDocumentInternal: function(aDocument, aFileKey) {
-        var captureType = "";
-        var charset = this.option["forceUtf8"] ? "UTF-8" : aDocument.characterSet;
-        var contentType = aDocument.contentType;
+        let captureType = "";
+        let charset = this.option["forceUtf8"] ? "UTF-8" : aDocument.characterSet;
+        let contentType = aDocument.contentType;
         if ( ["text/html", "application/xhtml+xml"].indexOf(contentType) < 0 ) {
             if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["fileAsHtml"]) ) {
                 captureType = "file";
             }
         }
         if ( captureType ) {
-            var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, charset);
+            let newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, charset);
             return newLeafName;
         }
 
@@ -289,46 +289,46 @@ sbContentSaverClass.prototype = {
         // The document might have a ridiculous location.href, such as "about:blank",
         // if there is no refURLObj yet, use the "index.html" in the target item dir as ref.
         try {
-            var elem = aDocument.createElement("a");
+            let elem = aDocument.createElement("a");
             elem.href = "";
             this.refURLObj = sbCommonUtils.convertURLToObject(elem.href);
         } catch(ex) {
             if (!this.refURLObj) {
-                var refFile = this.contentDir.clone(); refFile.append("index.html");
+                let refFile = this.contentDir.clone(); refFile.append("index.html");
                 this.refURLObj = sbCommonUtils.convertURLToObject(sbCommonUtils.convertFileToURL(refFile));
             }
         }
 
         if ( !this.option["internalize"] ) {
-            var useXHTML = (contentType == "application/xhtml+xml") && (!this.option["fileAsHtml"]);
-            var [myHTMLFileName, myHTMLFileDone] = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
+            let useXHTML = (contentType == "application/xhtml+xml") && (!this.option["fileAsHtml"]);
+            let [myHTMLFileName, myHTMLFileDone] = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
             if (myHTMLFileDone) return myHTMLFileName;
             // create a meta refresh for each *.xhtml
             if (useXHTML) {
-                var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + myHTMLFileName + '"></head><body></body></html>';
-                var myHTMLFile = this.contentDir.clone();
+                let myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + myHTMLFileName + '"></head><body></body></html>';
+                let myHTMLFile = this.contentDir.clone();
                 myHTMLFile.append(aFileKey + ".html");
                 sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
             }
         }
 
-        var htmlNode = aDocument.documentElement;
+        let htmlNode = aDocument.documentElement;
         // cloned frames has contentDocument = null
         // cloned canvas has no image data
         // give them an unique id for later retrieving
         Array.prototype.forEach.call(htmlNode.querySelectorAll("frame, iframe, canvas, link, style"), function (elem) {
-            var idx = this.elemMapOrig.length;
+            let idx = this.elemMapOrig.length;
             this.elemMapOrig[idx] = elem;
             elem.setAttribute(this.elemMapKey, idx);
         }, this);
         // construct the node list
-        var rootNode;
-        var headNode;
+        let rootNode;
+        let headNode;
         if ( this.selection ) {
-            var selNodeTree = []; // Is not enough to preserve order of sparsely selected table cells
-            for ( var iRange = 0; iRange < this.selection.rangeCount; ++iRange ) {
-                var myRange = this.selection.getRangeAt(iRange);
-                var curNode = myRange.commonAncestorContainer;
+            let selNodeTree = []; // Is not enough to preserve order of sparsely selected table cells
+            for ( let iRange = 0; iRange < this.selection.rangeCount; ++iRange ) {
+                let myRange = this.selection.getRangeAt(iRange);
+                let curNode = myRange.commonAncestorContainer;
                 if ( curNode.nodeName.toUpperCase() == "HTML" ) {
                     // in some case (e.g. view image) the selection is the html node
                     // and will cause subsequent errors.
@@ -347,17 +347,17 @@ sbContentSaverClass.prototype = {
 
                 if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
 
-                var tmpNodeList = [];
+                let tmpNodeList = [];
                 do {
                     tmpNodeList.unshift(curNode);
                     curNode = curNode.parentNode;
                 } while ( curNode.nodeName.toUpperCase() != "HTML" );
 
-                var parentNode = rootNode;
-                var branchList = selNodeTree;
-                var matchedDepth = -2;
-                for( var iDepth = 0; iDepth < tmpNodeList.length; ++iDepth ) {
-                    for ( var iBranch = 0; iBranch < branchList.length; ++iBranch ) {
+                let parentNode = rootNode;
+                let branchList = selNodeTree;
+                let matchedDepth = -2;
+                for( let iDepth = 0; iDepth < tmpNodeList.length; ++iDepth ) {
+                    for ( let iBranch = 0; iBranch < branchList.length; ++iBranch ) {
                         if (tmpNodeList[iDepth] === branchList[iBranch].origNode ) {
                             matchedDepth = iDepth;
                             break;
@@ -365,7 +365,7 @@ sbContentSaverClass.prototype = {
                     }
 
                     if (iBranch === branchList.length) {
-                        var clonedNode = tmpNodeList[iDepth].cloneNode(false);
+                        let clonedNode = tmpNodeList[iDepth].cloneNode(false);
                         parentNode.appendChild(clonedNode);
                         branchList.push({
                             origNode: tmpNodeList[iDepth],
@@ -402,7 +402,7 @@ sbContentSaverClass.prototype = {
 
         // build the map of cloned style elements
         Array.prototype.forEach.call(rootNode.querySelectorAll("link, style"), function (elem) {
-            var idx = elem.getAttribute(this.elemMapKey);
+            let idx = elem.getAttribute(this.elemMapKey);
             this.elemMapClone[idx] = elem;
             elem.removeAttribute(this.elemMapKey);
         }, this);
@@ -411,8 +411,8 @@ sbContentSaverClass.prototype = {
         Array.prototype.forEach.call(aDocument.styleSheets, function(css){
             try {
                 // Firefox Bug 1385552: document.styleSheets may contain a bad object
-                var nodeOrig = css.ownerNode;
-                var node = this.elemMapClone[nodeOrig.getAttribute(this.elemMapKey)];
+                let nodeOrig = css.ownerNode;
+                let node = this.elemMapClone[nodeOrig.getAttribute(this.elemMapKey)];
                 if (!node) throw "not in capture range";
             } catch (ex) {
                 // this css node does not exist or is out of the capture range
@@ -429,11 +429,11 @@ sbContentSaverClass.prototype = {
                         return;
                     } else if ( this.option["styles"] ) {
                         if ( this.option["tidyCss"] >= 2 ) {
-                            var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
+                            let cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
                             cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
                             node.textContent = cssText;
                         } else if ( this.option["tidyCss"] == 1 ) {
-                            var cssText = this.inspectCSSFileText(node.textContent, this.refURLObj.spec);
+                            let cssText = this.inspectCSSFileText(node.textContent, this.refURLObj.spec);
                             node.textContent = cssText;
                         } else {
                             // keep the styles as-is
@@ -445,7 +445,7 @@ sbContentSaverClass.prototype = {
                     }
                     break;
                 case "link":
-                    var url = css.href;
+                    let url = css.href;
                     if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
                         // a special stylesheet used by scrapbook, keep it intact
                         // (it should use an absolute link or a chrome link, which don't break after capture)
@@ -455,16 +455,16 @@ sbContentSaverClass.prototype = {
                         return;
                     } else if ( this.option["styles"] ) {
                         if ( this.option["tidyCss"] >= 2 ) {
-                            var cssText = this.processCSSRules(css, url, aDocument, "");
+                            let cssText = this.processCSSRules(css, url, aDocument, "");
                             cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
-                            var fileName = this.download(url, "quote", "cssText", { cssText: cssText });
+                            let fileName = this.download(url, "quote", "cssText", { cssText: cssText });
                             if (fileName) node.setAttribute("href", fileName);
                         } else if ( this.option["tidyCss"] == 1 ) {
-                            var url = css.href;
-                            var fileName = this.download(url, "quote", "cssFile");
+                            let url = css.href;
+                            let fileName = this.download(url, "quote", "cssFile");
                             if (fileName) node.setAttribute("href", fileName);
                         } else {
-                            var fileName = this.download(url, null);
+                            let fileName = this.download(url, null);
                             if (fileName) node.setAttribute("href", fileName);
                         }
                     } else {
@@ -490,7 +490,7 @@ sbContentSaverClass.prototype = {
         // change the charset to UTF-8
         // also change the meta tag; generate one if none found
         if ( this.option["forceUtf8"] ) {
-            var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
+            let metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
             for (var i=0, len=metas.length; i<len; ++i) {
                 meta = metas[i];
                 if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
@@ -504,7 +504,7 @@ sbContentSaverClass.prototype = {
                 }
             }
             if (!hasmeta) {
-                var metaNode = aDocument.createElement("meta");
+                let metaNode = aDocument.createElement("meta");
                 metaNode.setAttribute("charset", "UTF-8");
                 headNode.insertBefore(aDocument.createTextNode("\n"), headNode.firstChild);
                 headNode.insertBefore(metaNode, headNode.firstChild);
@@ -513,13 +513,13 @@ sbContentSaverClass.prototype = {
         }
 
         // generate the HTML and CSS file and save
-        var myHTML = sbCommonUtils.doctypeToString(aDocument.doctype);
+        let myHTML = sbCommonUtils.doctypeToString(aDocument.doctype);
         if (contentType == "application/xhtml+xml" && this.option["fileAsHtml"]) {
             // convert xhtml into html
-            var iframe = aDocument.createElement("iframe");
+            let iframe = aDocument.createElement("iframe");
             iframe.style.display = "hidden";
             htmlNode.appendChild(iframe);
-            var doc = iframe.contentDocument.documentElement;
+            let doc = iframe.contentDocument.documentElement;
             htmlNode.removeChild(iframe);
             while (doc.firstChild) doc.removeChild(doc.firstChild);
             this.cloneNodeData(rootNode, doc);
@@ -529,9 +529,9 @@ sbContentSaverClass.prototype = {
         }
 
         if ( this.option["internalize"] ) {
-            var myHTMLFile = this.option["internalize"];
+            let myHTMLFile = this.option["internalize"];
         } else {
-            var myHTMLFile = this.contentDir.clone();
+            let myHTMLFile = this.contentDir.clone();
             myHTMLFile.append(myHTMLFileName);
         }
 
@@ -542,16 +542,16 @@ sbContentSaverClass.prototype = {
 
     saveFileInternal: function(aFileURL, aFileKey, aCaptureType, aCharset) {
         if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
-        var urlObj = sbCommonUtils.convertURLToObject(aFileURL);
+        let urlObj = sbCommonUtils.convertURLToObject(aFileURL);
         if ( !this.refURLObj ) {
             this.refURLObj = urlObj;
         }
-        var newFileName = this.download(aFileURL, "HTML");
+        let newFileName = this.download(aFileURL, "HTML");
         if (newFileName) {
             if ( aCaptureType == "image" ) {
-                var myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + newFileName + '"></body></html>';
+                let myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + newFileName + '"></body></html>';
             } else {
-                var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=' + newFileName + '"></head><body></body></html>';
+                let myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=' + newFileName + '"></head><body></body></html>';
             }
             if ( this.isMainFrame ) {
                 this.item.icon = "moz-icon://" + this.download(aFileURL) + "?size=16";
@@ -559,9 +559,9 @@ sbContentSaverClass.prototype = {
                 this.item.chars = aCharset || "";
             }
         } else {
-            var myHTML = "";
+            let myHTML = "";
         }
-        var myHTMLFile = this.contentDir.clone();
+        let myHTMLFile = this.contentDir.clone();
         myHTMLFile.append(aFileKey + ".html");
         sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
         this.downloadRewriteFiles[this.item.id].push([myHTMLFile, "UTF-8"]);
@@ -573,7 +573,7 @@ sbContentSaverClass.prototype = {
     addResource: function(aResName, aResIndex) {
         if ( !aResName ) return;
         // We are during a capture process, temporarily set marked and no icon
-        var [_type, _icon] = [this.item.type, this.item.icon];
+        let [_type, _icon] = [this.item.type, this.item.icon];
         [this.item.type, this.item.icon] = ["marked", ""];
         this.treeRes = sbDataSource.addItem(this.item, aResName, aResIndex);
         [this.item.type, this.item.icon] = [_type, _icon];
@@ -583,9 +583,9 @@ sbContentSaverClass.prototype = {
 
 
     getHeadNode: function(aNode) {
-        var headNode = aNode.getElementsByTagName("head")[0];
+        let headNode = aNode.getElementsByTagName("head")[0];
         if (!headNode) {
-            var elems = aNode.childNodes;
+            let elems = aNode.childNodes;
             for (var i=0, I=elems.length; i<I; i++) {
                 if (elems[i].nodeType == 1) {
                     if (elems[i].nodeName.toUpperCase() == "HEAD") {
@@ -604,21 +604,21 @@ sbContentSaverClass.prototype = {
             case "img": 
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
-                    var url = aNode.src;
+                    let url = aNode.src;
                     if ( this.option["images"] ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else {
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 if ( aNode.hasAttribute("srcset") ) {
-                    var that = this;
-                    var newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                    let that = this;
+                    let newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
                         if ( that.option["internalize"] && that.isInternalized(url) ) return url;
-                        var url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
+                        let url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
                         if ( that.option["images"] ) {
-                            var fileName = that.download(url);
+                            let fileName = that.download(url);
                             if (fileName) return fileName;
                         } else {
                             return that.getSkippedURL(url);
@@ -632,9 +632,9 @@ sbContentSaverClass.prototype = {
             case "video":
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
-                    var url = aNode.src;
+                    let url = aNode.src;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else {
                         aNode.setAttribute("src", this.getSkippedURL(url));
@@ -642,9 +642,9 @@ sbContentSaverClass.prototype = {
                 }
                 if ( aNode.hasAttribute("poster") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("poster")) ) break;
-                    var url = aNode.poster;
+                    let url = aNode.poster;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) aNode.setAttribute("poster", fileName);
                     } else {
                         aNode.setAttribute("poster", this.getSkippedURL(url));
@@ -654,23 +654,23 @@ sbContentSaverClass.prototype = {
             case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
-                    var url = aNode.src;
-                    var type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
+                    let url = aNode.src;
+                    let type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
                     if ( this.option[type] ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else {
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 if ( aNode.hasAttribute("srcset") ) {
-                    var that = this;
-                    var type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
-                    var newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                    let that = this;
+                    let type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
+                    let newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
                         if ( that.option["internalize"] && that.isInternalized(url) ) return url;
                         url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
                         if ( that.option[type] ) {
-                            var fileName = that.download(url);
+                            let fileName = that.download(url);
                             if (fileName) return fileName;
                         } else {
                             return that.getSkippedURL(url);
@@ -682,9 +682,9 @@ sbContentSaverClass.prototype = {
             case "object": 
                 if ( aNode.hasAttribute("data") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
-                    var url = aNode.data;
+                    let url = aNode.data;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) aNode.setAttribute("data", fileName);
                     } else {
                         aNode.setAttribute("data", this.getSkippedURL(url));
@@ -694,9 +694,9 @@ sbContentSaverClass.prototype = {
             case "applet": 
                 if ( aNode.hasAttribute("archive") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("archive")) ) break;
-                    var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
+                    let url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
                     if ( this.option["media"] ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) aNode.setAttribute("archive", fileName);
                     } else {
                         aNode.setAttribute("archive", this.getSkippedURL(url));
@@ -705,8 +705,8 @@ sbContentSaverClass.prototype = {
                 break;
             case "canvas":
                 if ( this.option["media"] && !this.option["script"] ) {
-                    var canvasOrig = this.elemMapOrig[aNode.getAttribute(this.elemMapKey)];
-                    var canvasScript = aNode.ownerDocument.createElement("script");
+                    let canvasOrig = this.elemMapOrig[aNode.getAttribute(this.elemMapKey)];
+                    let canvasScript = aNode.ownerDocument.createElement("script");
                     canvasScript.textContent = '(' + this.setCanvasData.toString().replace(/\s+/g, ' ') + ')("' + canvasOrig.toDataURL() + '")';
                     aNode.parentNode.insertBefore(canvasScript, aNode.nextSibling);
                 }
@@ -726,9 +726,9 @@ sbContentSaverClass.prototype = {
                 // handle "background" attribute (HTML5 deprecated)
                 if ( aNode.hasAttribute("background") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("background")) ) break;
-                    var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
+                    let url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
                     if ( this.option["images"] ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) aNode.setAttribute("background", fileName);
                     } else {
                         aNode.setAttribute("background", this.getSkippedURL(url));
@@ -740,9 +740,9 @@ sbContentSaverClass.prototype = {
                     case "image": 
                         if ( aNode.hasAttribute("src") ) {
                             if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
-                            var url = aNode.src;
+                            let url = aNode.src;
                             if ( this.option["images"] ) {
-                                var fileName = this.download(url);
+                                let fileName = this.download(url);
                                 if (fileName) aNode.setAttribute("src", fileName);
                             } else {
                                 aNode.setAttribute("src", this.getSkippedURL(url));
@@ -756,11 +756,11 @@ sbContentSaverClass.prototype = {
                 if ( aNode.hasAttribute("href") ) {
                     if ( this.option["internalize"] ) break;
                     // gets "" if rel attribute not defined
-                    var rels = aNode.rel.toLowerCase().split(/[ \t\r\n\v\f]+/);
+                    let rels = aNode.rel.toLowerCase().split(/[ \t\r\n\v\f]+/);
                     if (rels.indexOf("stylesheet") >= 0) {
                         // stylesheets should already been processed now
                     } else if (rels.indexOf("icon") >= 0) {
-                        var fileName = this.download(aNode.href);
+                        let fileName = this.download(aNode.href);
                         if (fileName) {
                             aNode.setAttribute("href", fileName);
                             if ( this.isMainFrame ) this.item.icon = fileName;
@@ -780,12 +780,12 @@ sbContentSaverClass.prototype = {
                 if ( this.option["script"] ) {
                     if ( aNode.hasAttribute("src") ) {
                         if ( this.option["internalize"] ) break;
-                        var fileName = this.download(aNode.src);
+                        let fileName = this.download(aNode.src);
                         if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
                     if ( aNode.hasAttribute("src") ) {
-                        var url = aNode.src;
+                        let url = aNode.src;
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                     if (aNode.textContent) aNode.textContent = "/* Code removed by ScrapBook */";
@@ -794,7 +794,7 @@ sbContentSaverClass.prototype = {
             case "a": 
             case "area": 
                 if ( this.option["internalize"] ) break;
-                var url = aNode.href;
+                let url = aNode.href;
                 if ( !url ) {
                     break;
                 } else if ( url.match(/^javascript:/i) && !this.option["script"] ) {
@@ -802,7 +802,7 @@ sbContentSaverClass.prototype = {
                     break;
                 }
                 // adjustment for hash links targeting the current page
-                var [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(url);
+                let [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(url);
                 if ( urlMain === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
                     // This link targets the current page.
                     if ( urlHash === '' || urlHash === '#' ) {
@@ -813,9 +813,9 @@ sbContentSaverClass.prototype = {
                     // For full capture (no selection), relink to the captured page.
                     // For partial capture, the captured page could be incomplete,
                     // relink to the captured page only when the target node is included in the selected fragment.
-                    var hasLocalTarget = !this.selection;
+                    let hasLocalTarget = !this.selection;
                     if ( !hasLocalTarget ) {
-                        var targetId = decodeURIComponent(urlHash.substr(1)).replace(/\W/g, '\\$&');
+                        let targetId = decodeURIComponent(urlHash.substr(1)).replace(/\W/g, '\\$&');
                         if ( aRootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
                             hasLocalTarget = true;
                         }
@@ -838,16 +838,16 @@ sbContentSaverClass.prototype = {
                     }
                     if (this.option["downLinkMethod"] == 2) {
                         // check header and url extension
-                        var fileName = this.download(url, null, "linkFilter");
+                        let fileName = this.download(url, null, "linkFilter");
                         if (fileName) {
                             aNode.setAttribute("href", fileName);
                             break;
                         }
                     } else if (this.option["downLinkMethod"] == 1) {
                         // check url extension
-                        var [, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(url));
+                        let [, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(url));
                         if (this.downLinkFilter(ext)) {
-                            var fileName = this.download(url);
+                            let fileName = this.download(url);
                             if (fileName) {
                                 aNode.setAttribute("href", fileName);
                                 break;
@@ -857,9 +857,9 @@ sbContentSaverClass.prototype = {
                 } else if ( url.indexOf("file:") === 0 ) {
                     // Download all non-HTML local files.
                     // This is primarily for the combine wizard to capture all "file:" data.
-                    var mime = sbCommonUtils.getFileMime(sbCommonUtils.convertURLToFile(url));
+                    let mime = sbCommonUtils.getFileMime(sbCommonUtils.convertURLToFile(url));
                     if ( ["text/html", "application/xhtml+xml"].indexOf(mime) < 0 ) {
-                        var fileName = this.download(url);
+                        let fileName = this.download(url);
                         if (fileName) {
                             aNode.setAttribute("href", fileName);
                             break;
@@ -898,7 +898,7 @@ sbContentSaverClass.prototype = {
                         case "og:video:url":
                         case "og:video:secure_url":
                         case "og:url":
-                            var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+                            let url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
                             aNode.setAttribute("content", url);
                             break;
                     }
@@ -907,7 +907,7 @@ sbContentSaverClass.prototype = {
                     switch ( aNode.getAttribute("http-equiv").toLowerCase() ) {
                         case "refresh":
                             if ( aNode.getAttribute("content").match(/^(\d+;\s*url=)(.*)$/i) ) {
-                                var url = sbCommonUtils.resolveURL(this.refURLObj.spec, RegExp.$2);
+                                let url = sbCommonUtils.resolveURL(this.refURLObj.spec, RegExp.$2);
                                 aNode.setAttribute("content", RegExp.$1 + url);
                                 // add to the link list if it's a work of deep capture
                                 if ( this.option["inDepth"] > this.depth ) this.linkURLs.push(url);
@@ -922,10 +922,10 @@ sbContentSaverClass.prototype = {
                 if ( this.option["frames"] ) {
                     this.isMainFrame = false;
                     if ( this.selection ) this.selection = null;
-                    var tmpRefURL = this.refURLObj;
+                    let tmpRefURL = this.refURLObj;
                     // retrieve contentDocument from the corresponding real frame
-                    var idx = aNode.getAttribute(this.elemMapKey);
-                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (++this.frameCount));
+                    let idx = aNode.getAttribute(this.elemMapKey);
+                    let newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (++this.frameCount));
                     aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
                 } else {
@@ -936,13 +936,13 @@ sbContentSaverClass.prototype = {
         }
         // handle style attr
         if ( aNode.style && aNode.style.cssText ) {
-            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image");
+            let newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image");
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
         // handle script related attrs
         if ( !this.option["script"] ) {
             // general: remove on* attributes
-            var attrs = aNode.attributes;
+            let attrs = aNode.attributes;
             for (var i = 0; i < attrs.length; i++) {
                 if (attrs[i].name.toLowerCase().startsWith("on")) {
                     this.removeAttr(aNode, attrs[i].name);
@@ -970,12 +970,12 @@ sbContentSaverClass.prototype = {
         if (!sourceNode.hasChildNodes()) return;
         Array.prototype.forEach.call(sourceNode.childNodes, function(elem){
             if (elem.nodeType === 1) {
-                var newElem = targetNode.ownerDocument.createElement(elem.nodeName);
+                let newElem = targetNode.ownerDocument.createElement(elem.nodeName);
                 targetNode.appendChild(newElem);
                 this.cloneNodeData(elem, newElem);
             }
             else {
-                var newElem = elem.cloneNode(true);
+                let newElem = elem.cloneNode(true);
                 targetNode.appendChild(newElem);
             }
         }, this);
@@ -989,9 +989,9 @@ sbContentSaverClass.prototype = {
     },
 
     getSourceParentType: function (aSourceNode) {
-        var node = aSourceNode.parentNode;
+        let node = aSourceNode.parentNode;
         while (node) {
-            var nn = node.nodeName.toLowerCase();
+            let nn = node.nodeName.toLowerCase();
             if (nn == "picture" || nn == "audio" || nn == "video") {
                 return nn;
             }
@@ -1001,31 +1001,31 @@ sbContentSaverClass.prototype = {
     },
 
     setCanvasData: function (data) {
-      var scripts = document.getElementsByTagName("script");
-      var script = scripts[scripts.length-1], canvas = script.previousSibling;
-      var img = new Image();
+      let scripts = document.getElementsByTagName("script");
+      let script = scripts[scripts.length-1], canvas = script.previousSibling;
+      let img = new Image();
       img.onload = function(){ canvas.getContext("2d").drawImage(img, 0, 0); };
       img.src = data;
       script.parentNode.removeChild(script);
     },
 
     processCSSRules: function(aCSS, aRefURL, aDocument, aIndent) {
-        var content = "";
+        let content = "";
         // if aCSS is a rule set of an external CSS file, use its URL as reference
-        var refURL = aCSS.href || aRefURL;
+        let refURL = aCSS.href || aRefURL;
         Array.forEach(aCSS.cssRules, function(cssRule) {
             switch (cssRule.type) {
                 case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
-                    var importedCSS = cssRule.styleSheet;
+                    let importedCSS = cssRule.styleSheet;
                     if (!importedCSS) break;
-                    var importedCSSText = "/* Code tidied up by ScrapBook */\n"
+                    let importedCSSText = "/* Code tidied up by ScrapBook */\n"
                         + this.processCSSRules(importedCSS, importedCSS.href, aDocument, "");
-                    var fileName = this.download(importedCSS.href, "quote", "cssText", { cssText: importedCSSText });
-                    var cssText = aIndent + '@import url("' + fileName + '");';
+                    let fileName = this.download(importedCSS.href, "quote", "cssText", { cssText: importedCSSText });
+                    let cssText = aIndent + '@import url("' + fileName + '");';
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "font");
+                    let cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "font");
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
@@ -1037,12 +1037,12 @@ sbContentSaverClass.prototype = {
                 case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
                     // if script is used, preserve all css in case it's used by a dynamic generated DOM
                     if (this.option["script"] || (this.option["tidyCss"] < 3) || verifySelector(aDocument, cssRule.selectorText)) {
-                        var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "image");
+                        let cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "image");
                         if (cssText) content += cssText + "\n";
                     }
                     break;
                 default: 
-                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "image");
+                    let cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "image");
                     if (cssText) content += cssText + "\n";
                     break;
             }
@@ -1054,9 +1054,9 @@ sbContentSaverClass.prototype = {
                 if (doc.querySelector(selectorText)) return true;
                 // querySelector of selectors like a:hover or so always return null
                 // preserve pseudo-class and pseudo-elements if their non-pseudo versions exist
-                var hasPseudo = false;
-                var startPseudo = false;
-                var depseudoSelectors = [""];
+                let hasPseudo = false;
+                let startPseudo = false;
+                let depseudoSelectors = [""];
                 selectorText.replace(
                     /(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
                     function(){
@@ -1095,7 +1095,7 @@ sbContentSaverClass.prototype = {
     // 4. assume it's UTF-8
     // We follow 1-3 but not 4: if no supported charset found, handle it as a byte string.
     processCSSFile: function(aCSSFile, aRefURL, aCharset) {
-        var getSupportedCharset = function (charset) {
+        let getSupportedCharset = function (charset) {
             try {
                 sbCommonUtils.UNICODE.charset = charset;
             } catch (ex) {
@@ -1105,9 +1105,9 @@ sbContentSaverClass.prototype = {
             return charset;
         };
 
-        var charset = getSupportedCharset(aCharset);
-        var cssText = sbCommonUtils.readFile(aCSSFile, charset);
-        var hasAtRule = false;
+        let charset = getSupportedCharset(aCharset);
+        let cssText = sbCommonUtils.readFile(aCSSFile, charset);
+        let hasAtRule = false;
 
         if (!charset) {
             if (cssText.startsWith("\xEF\xBB\xBF")) {
@@ -1150,61 +1150,61 @@ sbContentSaverClass.prototype = {
     //        consider implementing a real CSS parser to prevent potential error
     //        for certain complicated CSS
     inspectCSSFileText: function(aCSSText, aRefURL) {
-        var that = this;
-        var pCm = "(?:/\\*[\\s\\S]*?\\*/)"; // comment
-        var pSp = "(?:[ \\t\\r\\n\\v\\f]*)"; // space equivalents
-        var pCmSp = "(?:" + "(?:" + pCm + "|" + pSp + ")" + "*" + ")"; // comment or space
-        var pChar = "(?:\\\\.|[^\\\\])"; // a char, or escaped
-        var pStr = "(?:" + pChar + "*?" + ")"; // string
-        var pSStr = "(?:" + pCmSp + pStr + pCmSp + ")"; // spaced string
-        var pDQStr = "(?:" + '"' + pStr + '"' + ")"; // single quoted string
-        var pSQStr = "(?:" + "'" + pStr + "'" + ")"; // double quoted string
-        var pES = "(?:" + "(?:" + [pCm, pDQStr, pSQStr, pChar].join("|") + ")*?" + ")"; // embeded string
-        var pUrl = "(?:" + "url\\(" + pSp + "(?:" + [pDQStr, pSQStr, pSStr].join("|") + ")" + pSp + "\\)" + ")";
-        var pUrl2 = "(" + "url\\(" + pSp + ")(" + [pDQStr, pSQStr, pSStr].join("|") + ")(" + pSp + "\\)" + ")"; // catch 3
-        var pRImport = "(" + "@import" + pCmSp + ")(" + [pUrl, pDQStr, pSQStr].join("|") + ")(" + pCmSp + ";" + ")"; // catch 3
-        var pRFontFace = "(" + "@font-face" + pCmSp + "{" + pES + "}" + ")"; // catch 1
+        let that = this;
+        let pCm = "(?:/\\*[\\s\\S]*?\\*/)"; // comment
+        let pSp = "(?:[ \\t\\r\\n\\v\\f]*)"; // space equivalents
+        let pCmSp = "(?:" + "(?:" + pCm + "|" + pSp + ")" + "*" + ")"; // comment or space
+        let pChar = "(?:\\\\.|[^\\\\])"; // a char, or escaped
+        let pStr = "(?:" + pChar + "*?" + ")"; // string
+        let pSStr = "(?:" + pCmSp + pStr + pCmSp + ")"; // spaced string
+        let pDQStr = "(?:" + '"' + pStr + '"' + ")"; // single quoted string
+        let pSQStr = "(?:" + "'" + pStr + "'" + ")"; // double quoted string
+        let pES = "(?:" + "(?:" + [pCm, pDQStr, pSQStr, pChar].join("|") + ")*?" + ")"; // embeded string
+        let pUrl = "(?:" + "url\\(" + pSp + "(?:" + [pDQStr, pSQStr, pSStr].join("|") + ")" + pSp + "\\)" + ")";
+        let pUrl2 = "(" + "url\\(" + pSp + ")(" + [pDQStr, pSQStr, pSStr].join("|") + ")(" + pSp + "\\)" + ")"; // catch 3
+        let pRImport = "(" + "@import" + pCmSp + ")(" + [pUrl, pDQStr, pSQStr].join("|") + ")(" + pCmSp + ";" + ")"; // catch 3
+        let pRFontFace = "(" + "@font-face" + pCmSp + "{" + pES + "}" + ")"; // catch 1
 
-        var parseUrlFunc = function (text, callback) {
+        let parseUrlFunc = function (text, callback) {
             return text.replace(new RegExp(pUrl2, "gi"), function (m, u1, u2, u3) {
                 if (u2.startsWith('"') && u2.endsWith('"')) {
-                    var ret = callback(u2.slice(1, -1));
+                    let ret = callback(u2.slice(1, -1));
                 } else if (u2.startsWith("'") && u2.endsWith("'")) {
-                    var ret = callback(u2.slice(1, -1));
+                    let ret = callback(u2.slice(1, -1));
                 } else {
-                    var ret = callback(u2.trim());
+                    let ret = callback(u2.trim());
                 }
                 return u1 + '"' + ret + '"' + u3;
             });
         };
-        var importParseUrlFunc = function (url) {
-            var dataURL = sbCommonUtils.unescapeCss(url);
+        let importParseUrlFunc = function (url) {
+            let dataURL = sbCommonUtils.unescapeCss(url);
             if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return dataURL;
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
-            var dataFile = that.download(dataURL, "quote", "cssFile");
+            let dataFile = that.download(dataURL, "quote", "cssFile");
             if (dataFile) dataURL = dataFile;
             return dataURL;
         };
 
-        var cssText = aCSSText.replace(
+        let cssText = aCSSText.replace(
             new RegExp([pCm, pRImport, pRFontFace, "("+pUrl+")"].join("|"), "gi"),
             function (m, im1, im2, im3, ff, u) {
                 if (im2) {
                     if (im2.startsWith('"') && im2.endsWith('"')) {
-                        var ret = 'url("' + importParseUrlFunc(im2.slice(1, -1)) + '")';
+                        let ret = 'url("' + importParseUrlFunc(im2.slice(1, -1)) + '")';
                     } else if (im2.startsWith("'") && im2.endsWith("'")) {
-                        var ret = 'url("' + importParseUrlFunc(im2.slice(1, -1)) + '")';
+                        let ret = 'url("' + importParseUrlFunc(im2.slice(1, -1)) + '")';
                     } else {
-                        var ret = parseUrlFunc(im2, importParseUrlFunc);
+                        let ret = parseUrlFunc(im2, importParseUrlFunc);
                     }
                     return im1 + ret + im3;
                 } else if (ff) {
                     return parseUrlFunc(m, function (url) {
-                        var dataURL = sbCommonUtils.unescapeCss(url);
+                        let dataURL = sbCommonUtils.unescapeCss(url);
                         if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return dataURL;
                         dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
                         if (that.option["fonts"]) {
-                            var dataFile = that.download(dataURL, "quote");
+                            let dataFile = that.download(dataURL, "quote");
                             if (dataFile) dataURL = dataFile;
                         } else {
                             dataURL = that.getSkippedURL(dataURL);
@@ -1213,11 +1213,11 @@ sbContentSaverClass.prototype = {
                     });
                 } else if (u) {
                     return parseUrlFunc(m, function (url) {
-                        var dataURL = sbCommonUtils.unescapeCss(url);
+                        let dataURL = sbCommonUtils.unescapeCss(url);
                         if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return dataURL;
                         dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
                         if (that.option["images"]) {
-                            var dataFile = that.download(dataURL, "quote");
+                            let dataFile = that.download(dataURL, "quote");
                             if (dataFile) dataURL = dataFile;
                         } else {
                             dataURL = that.getSkippedURL(dataURL);
@@ -1231,19 +1231,19 @@ sbContentSaverClass.prototype = {
     },
 
     inspectCSSText: function(aCSSText, aRefURL, aType) {
-        var that = this;
+        let that = this;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // and no CSS comment is in, so we can parse it safely with this RegExp.
-        var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
+        let regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = sbCommonUtils.unescapeCss(arguments[1]);
+            let dataURL = sbCommonUtils.unescapeCss(arguments[1]);
             if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return ' url("' + dataURL + '")';
             if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             switch (aType) {
                 case "image":
                     if (that.option["images"]) {
-                        var dataFile = that.download(dataURL, "quote");
+                        let dataFile = that.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else {
                         dataURL = that.getSkippedURL(dataURL);
@@ -1251,7 +1251,7 @@ sbContentSaverClass.prototype = {
                     break;
                 case "font":
                     if (that.option["fonts"]) {
-                        var dataFile = that.download(dataURL, "quote");
+                        let dataFile = that.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else {
                         dataURL = that.getSkippedURL(dataURL);
@@ -1284,20 +1284,20 @@ sbContentSaverClass.prototype = {
     // return <fileName>: a download happen, or used an already downloaded file
     download: function(aURLSpec, aEscapeType, aSpecialMode, aSpecialModeParams) {
         if ( !aURLSpec ) return "";
-        var sourceURL = aURLSpec;
-        var that = this;
+        let sourceURL = aURLSpec;
+        let that = this;
 
-        var errorHandler = function(ex) {
+        let errorHandler = function(ex) {
             // crop to prevent large dataURI masking the exception info, especially dataURIs
             sourceURL = sbCommonUtils.crop(sourceURL, 1024);
             if (sourceURL.startsWith("file:")) {
-                var msgType = "ERR_FAIL_COPY_FILE";
+                let msgType = "ERR_FAIL_COPY_FILE";
             } else if (sourceURL.startsWith("data:")) {
-                var msgType = "ERR_FAIL_WRITE_FILE";
+                let msgType = "ERR_FAIL_WRITE_FILE";
             } else {
-                var msgType = "ERR_FAIL_DOWNLOAD_FILE";
+                let msgType = "ERR_FAIL_DOWNLOAD_FILE";
             }
-            var errURL = "urn:scrapbook-download-error:" + sourceURL;
+            let errURL = "urn:scrapbook-download-error:" + sourceURL;
             sbCommonUtils.error(sbCommonUtils.lang(msgType, sourceURL, ex));
             if (hashKey) that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(errURL, aEscapeType);
             return errURL;
@@ -1305,12 +1305,12 @@ sbContentSaverClass.prototype = {
 
         try {
             if ( sourceURL.startsWith("http:") || sourceURL.startsWith("https:") || sourceURL.startsWith("ftp:") ) {
-                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
-                var hashKey = sbCommonUtils.getUUID();
-                var fileName, isDuplicate;
+                let targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
+                let hashKey = sbCommonUtils.getUUID();
+                let fileName, isDuplicate;
                 that.httpTask[that.item.id]++;
                 try {
-                    var channel = sbCommonUtils.newChannel(sourceURL);
+                    let channel = sbCommonUtils.newChannel(sourceURL);
                     channel = channel.QueryInterface(Components.interfaces.nsIHttpChannel);
                     channel.setRequestHeader("referer", that.refURLObj.spec, false);
                     channel.asyncOpen({
@@ -1330,11 +1330,11 @@ sbContentSaverClass.prototype = {
                                 // if header Content-Disposition is defined, use it
                                 if (this._content.filename) {
                                     fileName = this._content.filename;
-                                    var [, ext] = sbCommonUtils.splitFileName(fileName);
+                                    let [, ext] = sbCommonUtils.splitFileName(fileName);
                                 }
                                 // if no ext defined, try header Content-Type
                                 if (!fileName) {
-                                    var [base, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aRequest.name));
+                                    let [base, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aRequest.name));
                                     if (!ext && this._content.contentType) {
                                         ext = sbCommonUtils.getMimePrimaryExtension(this._content.contentType, ext);
                                     }
@@ -1342,7 +1342,7 @@ sbContentSaverClass.prototype = {
                                 }
                                 // special: apply the filter
                                 if (aSpecialMode == "linkFilter") {
-                                    var toDownload = ["text/html", "application/xhtml+xml"].indexOf(this._content.contentType) < 0 && that.downLinkFilter(ext);
+                                    let toDownload = ["text/html", "application/xhtml+xml"].indexOf(this._content.contentType) < 0 && that.downLinkFilter(ext);
                                     if (!toDownload) {
                                         if ( that.option["inDepth"] > that.depth ) {
                                             // do not copy, but add to the link list if it's a work of deep capture
@@ -1360,7 +1360,7 @@ sbContentSaverClass.prototype = {
                                     [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL, "cssText");
                                     that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(fileName, aEscapeType, true);
                                     if (!isDuplicate) {
-                                        var targetFile = targetDir.clone(); targetFile.append(fileName);
+                                        let targetFile = targetDir.clone(); targetFile.append(fileName);
                                         sbCommonUtils.writeFile(targetFile, aSpecialModeParams.cssText, "UTF-8");
                                         that.downloadRewriteFiles[that.item.id].push([targetFile, "UTF-8"]);
                                     }
@@ -1408,10 +1408,10 @@ sbContentSaverClass.prototype = {
                             try {
                                 if (!this._stream) {
                                     this._file = targetDir.clone(); this._file.append(fileName);
-                                    var ostream = Components.classes['@mozilla.org/network/file-output-stream;1']
+                                    let ostream = Components.classes['@mozilla.org/network/file-output-stream;1']
                                             .createInstance(Components.interfaces.nsIFileOutputStream);
                                     ostream.init(this._file, -1, 0666, 0);
-                                    var bostream = Components.classes['@mozilla.org/network/buffered-output-stream;1']
+                                    let bostream = Components.classes['@mozilla.org/network/buffered-output-stream;1']
                                             .createInstance(Components.interfaces.nsIBufferedOutputStream);
                                     bostream.init(ostream, 1024 * 1024);
                                     this._stream = bostream;
@@ -1432,18 +1432,18 @@ sbContentSaverClass.prototype = {
                 return "urn:scrapbook-download:" + hashKey;
             } else if ( sourceURL.startsWith("file:") ) {
                 // if sourceURL is not targeting a file, fail out
-                var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
+                let sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
                 if (!sourceFile.exists()) throw sourceURL + " does not exist";
                 if (!sourceFile.isFile()) throw sourceURL + " is not a file";
                 // determine the filename
-                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
-                var fileName, isDuplicate;
+                let targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
+                let fileName, isDuplicate;
                 fileName = sbCommonUtils.getFileName(sourceURL);
                 // if the target file exists and has same content as the source file, skip copy
                 // This kind of duplicate is probably a result of Firefox making a relative link absolute
                 // during a copy/cut.
                 fileName = sbCommonUtils.validateFileName(fileName);
-                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                let targetFile = targetDir.clone(); targetFile.append(fileName);
                 if (sbCommonUtils.compareFiles(sourceFile, targetFile)) {
                     return that.escapeURL(fileName, aEscapeType, true);
                 }
@@ -1461,7 +1461,7 @@ sbContentSaverClass.prototype = {
                 if (isDuplicate) return that.escapeURL(fileName, aEscapeType, true);
                 // set task
                 that.httpTask[that.item.id]++;
-                var item = that.item;
+                let item = that.item;
                 setTimeout(function(){ that.onDownloadComplete(item); }, 0);
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
@@ -1473,7 +1473,7 @@ sbContentSaverClass.prototype = {
             } else if ( sourceURL.startsWith("data:") ) {
                 // special: use cssText
                 if (aSpecialMode == "cssText") {
-                    var dataURI = "data:text/css;base64," + btoa(sbCommonUtils.unicodeToUtf8(aSpecialModeParams.cssText));
+                    let dataURI = "data:text/css;base64," + btoa(sbCommonUtils.unicodeToUtf8(aSpecialModeParams.cssText));
                     if (!that.option["saveDataUri"]) {
                         return that.escapeURL(dataURI, aEscapeType, true);
                     } else {
@@ -1485,15 +1485,15 @@ sbContentSaverClass.prototype = {
                 if (!that.option["saveDataUri"]) {
                     return "";
                 }
-                var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
-                var dataURIBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
+                let { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
+                let dataURIBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
                 // use sha1sum as the filename
-                var dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
-                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
-                var fileName, isDuplicate;
+                let dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
+                let targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
+                let fileName, isDuplicate;
                 // if the target file exists and has same content as the dataURI, skip copy
                 fileName = dataURIFileName;
-                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                let targetFile = targetDir.clone(); targetFile.append(fileName);
                 if (targetFile.exists() && targetFile.isFile()) {
                     if (sbCommonUtils.readFile(targetFile) === dataURIBytes) {
                         return that.escapeURL(fileName, aEscapeType, true);
@@ -1504,10 +1504,10 @@ sbContentSaverClass.prototype = {
                 if (isDuplicate) return that.escapeURL(fileName, aEscapeType, true);
                 // set task
                 that.httpTask[that.item.id]++;
-                var item = that.item;
+                let item = that.item;
                 setTimeout(function(){ that.onDownloadComplete(item); }, 0);
                 // do the save
-                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                let targetFile = targetDir.clone(); targetFile.append(fileName);
                 sbCommonUtils.writeFileBytes(targetFile, dataURIBytes);
                 return that.escapeURL(fileName, aEscapeType, true);
             }
@@ -1518,40 +1518,40 @@ sbContentSaverClass.prototype = {
     },
 
     downLinkFilter: function(aFileExt) {
-        var that = this;
+        let that = this;
         // use cache if the filter is not changed
         if (arguments.callee._filter !== that.option["downLinkFilter"]) {
             arguments.callee._filter = that.option["downLinkFilter"];
             arguments.callee.filters = (function () {
-                var ret = [];
+                let ret = [];
                 that.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
                     if (line.charAt(0) === "#") return;
                     line = line.trim();
                     if (line === "") return;
                     try {
-                        var regex = new RegExp("^(?:" + line + ")$", "i");
+                        let regex = new RegExp("^(?:" + line + ")$", "i");
                         ret.push(regex);
                     } catch (ex) {}
                 });
                 return ret;
             })();
         }
-        var toDownload = arguments.callee.filters.some(function (filter) {
+        let toDownload = arguments.callee.filters.some(function (filter) {
             return filter.test(aFileExt);
         });
         return toDownload;
     },
 
     globalURLFilter: function (aURL) {
-        var that = this;
+        let that = this;
         // use the cache if the filter is not changed
         if (arguments.callee._filter !== that.option["linkUrlFilters"]) {
             arguments.callee._filter = that.option["linkUrlFilters"];
             arguments.callee.filters = (function () {
                 try {
-                    var filters = [];
-                    var dataStr = that.option["linkUrlFilters"];
-                    var data = JSON.parse(dataStr);
+                    let filters = [];
+                    let dataStr = that.option["linkUrlFilters"];
+                    let data = JSON.parse(dataStr);
                     ((data instanceof Array) ? data : [data]).forEach(function (item) {
                         // make sure each item is a valid RegExp
                         try {
@@ -1575,7 +1575,7 @@ sbContentSaverClass.prototype = {
             })();
         }
         // apply the filters
-        var toForbid = arguments.callee.filters.some(function (filter) {
+        let toForbid = arguments.callee.filters.some(function (filter) {
             return filter.test(aURL);
         });
         return !toForbid;
@@ -1588,17 +1588,17 @@ sbContentSaverClass.prototype = {
         if (this.option["serializeFilename"]) {
             return this.getUniqueFileNameSerialize(aSuggestFileName, aSourceURL, aSourceDoc);
         }
-        var newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
-        var [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
+        let newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
+        let [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
         newFileBase = sbCommonUtils.crop(newFileBase, 128, 240);
         newFileExt = newFileExt || "dat";
-        var sourceURL = sbCommonUtils.splitURLByAnchor(aSourceURL)[0];
-        var sourceDoc = aSourceDoc;
+        let sourceURL = sbCommonUtils.splitURLByAnchor(aSourceURL)[0];
+        let sourceDoc = aSourceDoc;
 
         // CI means case insensitive
-        var seq = 0;
+        let seq = 0;
         newFileName = newFileBase + "." + newFileExt;
-        var newFileNameCI = newFileName.toLowerCase();
+        let newFileNameCI = newFileName.toLowerCase();
         while (this.file2URL[newFileNameCI] !== undefined) {
             if (this.file2URL[newFileNameCI] === sourceURL) {
                 if (this.file2Doc[newFileNameCI] === sourceDoc || !sourceDoc) {
@@ -1647,19 +1647,19 @@ sbContentSaverClass.prototype = {
             arguments.callee._file2URL = this.file2URL;
             arguments.callee.fileBase2URL = {};
             for (var keyFileName in this.file2URL) {
-                var keyFileBase = sbCommonUtils.splitFileName(keyFileName)[0];
+                let keyFileBase = sbCommonUtils.splitFileName(keyFileName)[0];
                 arguments.callee.fileBase2URL[keyFileBase] = this.file2URL[keyFileName];
             }
         }
-        var newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
-        var [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
+        let newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
+        let [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
         newFileBase = "index";
         newFileExt = (newFileExt || "dat").toLowerCase();
-        var sourceURL = sbCommonUtils.splitURLByAnchor(aSourceURL)[0];
-        var sourceDoc = aSourceDoc;
+        let sourceURL = sbCommonUtils.splitURLByAnchor(aSourceURL)[0];
+        let sourceDoc = aSourceDoc;
 
         // CI means case insensitive
-        var seq = 0;
+        let seq = 0;
         newFileName = newFileBase + "." + newFileExt;
         while (arguments.callee.fileBase2URL[newFileBase] !== undefined) {
             // special handle index.html
@@ -1707,9 +1707,9 @@ sbContentSaverClass.prototype = {
     },
 
     restoreFileNameFromHash: function (content) {
-        var that = this;
+        let that = this;
         return content.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
-            var url = that.downloadRewriteMap[that.item.id][key];
+            let url = that.downloadRewriteMap[that.item.id][key];
             // This could happen when a web page really contains a content text in our format.
             // We return the original text for keys not defineded in the map to prevent a bad replace
             // since it's nearly impossible for them to hit on the hash keys we are using.
@@ -1755,8 +1755,8 @@ sbContentSaverClass.prototype = {
     onAllDownloadsComplete: function(aItem) {
         // restore downloaded file names
         this.downloadRewriteFiles[aItem.id].forEach(function (data) {
-            var [file, charset] = data;
-            var content = sbCommonUtils.readFile(file, charset);
+            let [file, charset] = data;
+            let content = sbCommonUtils.readFile(file, charset);
             content = this.restoreFileNameFromHash(content);
             if (charset) {
                 sbCommonUtils.writeFile(file, content, charset);
@@ -1774,7 +1774,7 @@ sbContentSaverClass.prototype = {
         if ( this.option["inDepth"] > this.depth && this.linkURLs.length > 0 ) {
             if ( this.depth == 0 ) {
                 this.item.type = "marked";
-                var data = {
+                let data = {
                     urls: this.linkURLs,
                     refUrl: this.refURLObj.spec,
                     showDetail: false,
@@ -1785,7 +1785,7 @@ sbContentSaverClass.prototype = {
                 };
                 window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
             } else {
-                for ( var i = 0; i < this.linkURLs.length; i++ ) {
+                for ( let i = 0; i < this.linkURLs.length; i++ ) {
                     sbCaptureTask.add(this.linkURLs[i], this.depth + 1);
                 }
             }
@@ -1793,15 +1793,15 @@ sbContentSaverClass.prototype = {
 
         // fix resource settings after capture complete
         // This is only run if we have addResource'd for this document.
-        var res = this.treeRes;
+        let res = this.treeRes;
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
             // Don't add "resource://" for URLs like "moz-icon://"
             if (aItem.icon) {
                 if (aItem.icon.indexOf(":") >= 0) {
-                    var iconURL = aItem.icon;
+                    let iconURL = aItem.icon;
                 } else {
-                    var iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
+                    let iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
                 }
                 sbDataSource.setProperty(res, "icon", iconURL);
             }

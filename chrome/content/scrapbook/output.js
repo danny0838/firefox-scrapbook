@@ -1,5 +1,5 @@
 
-var sbOutputService = {
+let sbOutputService = {
 
     depth: 0,
     content: "",
@@ -51,9 +51,9 @@ var sbOutputService = {
 
     exec: function() {
         this.content = this.getHTMLHead();
-        var selResList = sbTreeHandler.getSelection(true, 1);
+        let selResList = sbTreeHandler.getSelection(true, 1);
         this.content += '<ul id="container-root">\n';
-        for ( var i = 0; i < selResList.length; i++ ) {
+        for ( let i = 0; i < selResList.length; i++ ) {
             this.content += '<li class="depth' + String(this.depth) + '">';
             this.content += this.getHTMLBody(selResList[i]);
             this.processRescursively(selResList[i]);
@@ -64,10 +64,10 @@ var sbOutputService = {
     },
 
     finalize: function() {
-        var dir = sbCommonUtils.getScrapBookDir().clone();
+        let dir = sbCommonUtils.getScrapBookDir().clone();
         dir.append("tree");
         if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
-        var urlHash = {
+        let urlHash = {
             "chrome://scrapbook/skin/treeitem.png": "treeitem.png",
             "chrome://scrapbook/skin/treenote.png": "treenote.png",
             "chrome://scrapbook/skin/treenotex.png": "treenotex.png",
@@ -75,36 +75,36 @@ var sbOutputService = {
             "chrome://scrapbook/skin/toolbar_toggle.png": "toggle.png",
             "chrome://scrapbook/skin/search_all.png": "search.png",
         };
-        for ( var url in urlHash ) {
-            var destFile = dir.clone();
+        for ( let url in urlHash ) {
+            let destFile = dir.clone();
             destFile.append(urlHash[url]);
             sbCommonUtils.saveTemplateFile(url, destFile);
         }
-        var frameFile = dir.clone();
+        let frameFile = dir.clone();
         frameFile.append("frame.html");
         sbCommonUtils.writeFile(frameFile, this.getHTMLFrame(), "UTF-8");
-        var indexFile = dir.clone();
+        let indexFile = dir.clone();
         indexFile.append("index.html");
         this.content += this.getHTMLFoot();
         sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
-        var searchFile = dir.parent;
+        let searchFile = dir.parent;
         searchFile.append("search.html");
         sbCommonUtils.writeFile(searchFile, this.getHTMLSearch(), "UTF-8");
-        var indexCSS = dir.clone();
+        let indexCSS = dir.clone();
         indexCSS.append('index.css');
         sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/output.css", indexCSS, true);
         sbDataSource.outputTreeAutoDone();
         if ( this.optionOpen ) {
-            var fileName = this.optionFrame ? "frame.html" : "index.html";
+            let fileName = this.optionFrame ? "frame.html" : "index.html";
             sbCommonUtils.loadURL(sbCommonUtils.convertFileToURL(dir) + fileName, true);
         }
     },
 
     processRescursively: function(aContRes) {
         this.depth++;
-        var id = sbDataSource.getProperty(aContRes, "id") || "root";
+        let id = sbDataSource.getProperty(aContRes, "id") || "root";
         this.content += '<ul id="container-' + id + '">\n';
-        var resList = sbDataSource.flattenResources(aContRes, 0, false);
+        let resList = sbDataSource.flattenResources(aContRes, 0, false);
         for (var i = 1; i < resList.length; i++) {
             this.content += '<li class="depth' + String(this.depth) + '">';
             this.content += this.getHTMLBody(resList[i]);
@@ -117,14 +117,14 @@ var sbOutputService = {
     },
 
     getHTMLTitle: function() {
-        var dataPath = sbCommonUtils.getPref("data.path", "");
-        var dataTitle = sbCommonUtils.getPref("data.title", "");
-        var title = ((dataPath && dataTitle) ? dataTitle + " - " : "") + "ScrapBook";
+        let dataPath = sbCommonUtils.getPref("data.path", "");
+        let dataTitle = sbCommonUtils.getPref("data.title", "");
+        let title = ((dataPath && dataTitle) ? dataTitle + " - " : "") + "ScrapBook";
         return sbCommonUtils.escapeHTMLWithSpace(title, true);
     },
 
     getHTMLHead: function() {
-        var HTML = '<!DOCTYPE html>\n'
+        let HTML = '<!DOCTYPE html>\n'
             + '<html id="scrapbook-index">\n\n'
             + '<head>\n'
             + '<meta charset="UTF-8">\n'
@@ -143,12 +143,12 @@ var sbOutputService = {
             + '    initEvents();\n'
             + '}\n'
             + 'function initLoadHash() {\n'
-            + '    var hash = top.location.hash, hashTargetUrl, hashTargetItem;\n'
+            + '    let hash = top.location.hash, hashTargetUrl, hashTargetItem;\n'
             + '    if (hash) {\n'
             + '        hashTargetUrl = hash.substring(1);\n'
-            + '        var mainPage = hashTargetUrl.replace(/^(\\.\\.\\/data\\/\\d{14})\\/.*/, "$1/index.html");\n'
-            + '        var elems = document.getElementById("container-root").getElementsByTagName("A");\n'
-            + '        for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
+            + '        let mainPage = hashTargetUrl.replace(/^(\\.\\.\\/data\\/\\d{14})\\/.*/, "$1/index.html");\n'
+            + '        let elems = document.getElementById("container-root").getElementsByTagName("A");\n'
+            + '        for ( let i = 0, I = elems.length; i < I; i++ ) {\n'
             + '            if (elems[i].getAttribute("href") == mainPage) {\n'
             + '                hashTargetItem = elems[i];\n'
             + '                break;\n'
@@ -160,7 +160,7 @@ var sbOutputService = {
             + '    }\n'
             + '    if (hashTargetItem) {\n'
             + '        if (self != top && hashTargetItem.title) top.document.title = hashTargetItem.title;\n'
-            + '        var ancs = hashTargetItem;\n'
+            + '        let ancs = hashTargetItem;\n'
             + '        while (ancs) { \n'
             + '            if (ancs.nodeName == "UL") toggleElem(ancs, true);\n' 
             + '            ancs = ancs.parentNode;\n'
@@ -173,8 +173,8 @@ var sbOutputService = {
             + '        toggleAll();\n'
             + '        return false;\n'
             + '    }\n'
-            + '    var elems = document.getElementById("container-root").getElementsByTagName("A");\n'
-            + '    for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
+            + '    let elems = document.getElementById("container-root").getElementsByTagName("A");\n'
+            + '    for ( let i = 0, I = elems.length; i < I; i++ ) {\n'
             + '        if (elems[i].className == "container") {\n'
             + '            elems[i].onclick = onClickContainer;\n'
             + '        } else if (elems[i].className == "folder") {\n'
@@ -185,20 +185,20 @@ var sbOutputService = {
             + '    }\n'
             + '}\n'
             + 'function onClickContainer() {\n'
-            + '    var ulElem = document.getElementById(this.id.replace(/^item-/, "container-"));\n'
+            + '    let ulElem = document.getElementById(this.id.replace(/^item-/, "container-"));\n'
             + '    if (ulElem) toggleElem(ulElem);\n'
             + '    return false;\n'
             + '}\n'
             + 'function onClickFolder() {\n'
-            + '    var cElem = this.previousSibling;\n'
+            + '    let cElem = this.previousSibling;\n'
             + '    cElem.focus();\n'
             + '    cElem.click();\n'
             + '    return false;\n'
             + '}\n'
             + 'function onClickItem() {\n'
             + '    if (self == top) return;\n'
-            + '    var hash = "#" + this.getAttribute("href");\n'
-            + '    var title = this.childNodes[1].nodeValue;\n'
+            + '    let hash = "#" + this.getAttribute("href");\n'
+            + '    let title = this.childNodes[1].nodeValue;\n'
             + '    try {\n'
             + '        if (history && history.pushState) top.history.pushState("", title, hash);\n'
             + '        else top.location.hash = hash;\n'
@@ -208,7 +208,7 @@ var sbOutputService = {
             + '    }\n'
             + '}\n'
             + 'function toggleElem(elem, willOpen) {\n'
-            + '    var iElem = document.getElementById(elem.id.replace(/^container-/, "item-"));\n'
+            + '    let iElem = document.getElementById(elem.id.replace(/^container-/, "item-"));\n'
             + '    if (!iElem) return;\n'
             + '    if (typeof willOpen === "undefined") willOpen = (elem.style.display == "none");\n'
             + '    if (willOpen) {\n'
@@ -221,14 +221,14 @@ var sbOutputService = {
             + '    }\n'
             + '}\n'
             + 'function toggleAll(willOpen) {\n'
-            + '    var ulElems = document.getElementsByTagName("UL");\n'
+            + '    let ulElems = document.getElementsByTagName("UL");\n'
             + '    if (typeof willOpen === "undefined") {\n'
             + '        willOpen = false;\n'
-            + '        for ( var i = 1; i < ulElems.length; i++ ) {\n'
+            + '        for ( let i = 1; i < ulElems.length; i++ ) {\n'
             + '            if (ulElems[i].style.display == "none") { willOpen = true; break; }\n'
             + '        }\n'
             + '    }\n'
-            + '    for ( var i = 1; i < ulElems.length; i++ ) {\n'
+            + '    for ( let i = 1; i < ulElems.length; i++ ) {\n'
             + '        toggleElem(ulElems[i], willOpen);\n'
             + '    }\n'
             + '}\n'
@@ -241,11 +241,11 @@ var sbOutputService = {
     },
 
     getHTMLBody: function(aRes) {
-        var id = sbDataSource.getProperty(aRes, "id");
-        var type = sbDataSource.getProperty(aRes, "type");
-        var icon = sbDataSource.getProperty(aRes, "icon");
-        var title = sbDataSource.getProperty(aRes, "title");
-        var source = sbDataSource.getProperty(aRes, "source");
+        let id = sbDataSource.getProperty(aRes, "id");
+        let type = sbDataSource.getProperty(aRes, "type");
+        let icon = sbDataSource.getProperty(aRes, "icon");
+        let title = sbDataSource.getProperty(aRes, "title");
+        let source = sbDataSource.getProperty(aRes, "source");
         // fix icon path to fit tree output
         if (icon) {
             icon = icon.replace(/^resource:\/\/scrapbook\//, "../");
@@ -257,7 +257,7 @@ var sbOutputService = {
         title = sbCommonUtils.escapeHTMLWithSpace(title);
         source = sbCommonUtils.escapeHTML(source);
         // generate HTML output
-        var ret = "";
+        let ret = "";
         if (sbDataSource.isContainer(aRes)) {
             ret += '<a id="item-' + id + '" class="container" title="Toggle" href="#">▷</a>';
         }
@@ -271,11 +271,11 @@ var sbOutputService = {
                 break;
             default: 
                 if (type != "folder") {
-                    var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
-                    var target = this.optionFrame ? ' target="main"' : "";
-                    var hrefTarget = ' href="' + href + '"' + target;
+                    let href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
+                    let target = this.optionFrame ? ' target="main"' : "";
+                    let hrefTarget = ' href="' + href + '"' + target;
                 } else {
-                    var hrefTarget = '';
+                    let hrefTarget = '';
                 }
                 ret += '<a class="' + type + '" title="' + title + '"' + hrefTarget + '>'
                     + '<img src="' + icon + '" alt="">' + title + '</a>';
@@ -287,7 +287,7 @@ var sbOutputService = {
     },
 
     getHTMLFoot: function() {
-        var HTML = ''
+        let HTML = ''
                 + '<script>init();</script>\n'
                 + '</body>\n'
                 + '\n'
@@ -296,7 +296,7 @@ var sbOutputService = {
     },
 
     getHTMLFrame: function() {
-        var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">\n'
+        let HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">\n'
             + '<html id="scrapbook-frame">\n'
             + '<head>\n'
             + '<meta charset="UTF-8">\n'
@@ -312,7 +312,7 @@ var sbOutputService = {
     },
 
     getHTMLSearch: function() {
-        var HTML = '<!DOCTYPE html>\n'
+        let HTML = '<!DOCTYPE html>\n'
             + '<html id="scrapbook-search">\n'
             + '<head>\n'
             + '<meta charset="UTF-8">\n'
@@ -335,22 +335,22 @@ var sbOutputService = {
             + '    },\n'
             + '\n'
             + '    init: function () {\n'
-            + '        var that = this;\n'
+            + '        let that = this;\n'
             + '\n'
             + '        // load rdf files\n'
-            + '        var loading_done = 0, loading_errors = 0;\n'
+            + '        let loading_done = 0, loading_errors = 0;\n'
             + '        for (var scrapbooks_index = 0, scrapbooks_len = scrapbooks.length; scrapbooks_index < scrapbooks_len; scrapbooks_index++) {\n'
             + '            (function(){\n'
-            + '                var scrapbook = scrapbooks[scrapbooks_index];\n'
-            + '                var type = "cache.rdf";\n'
-            + '                var path = scrapbook.path + "/" + type;\n'
+            + '                let scrapbook = scrapbooks[scrapbooks_index];\n'
+            + '                let type = "cache.rdf";\n'
+            + '                let path = scrapbook.path + "/" + type;\n'
             + '                that.loadXMLDoc(path, function(xml){\n'
             + '                    // some mobile browsers (e.g. Dolphin) do not support xmlDoc.getElementsByTagName\n'
-            + '                    var items = xml.documentElement.childNodes, data = [];\n'
+            + '                    let items = xml.documentElement.childNodes, data = [];\n'
             + '                    for (var i = 0, len = items.length; i < len; i++) {\n'
-            + '                        var item = items[i];\n'
+            + '                        let item = items[i];\n'
             + '                        if (item.nodeName != "RDF:Description") continue;\n'
-            + '                        var id_path = item.getAttribute("RDF:about").match(/^urn:scrapbook:item(\\d{14})#(.*?)$/);\n'
+            + '                        let id_path = item.getAttribute("RDF:about").match(/^urn:scrapbook:item(\\d{14})#(.*?)$/);\n'
             + '                        data.push({\n'
             + '                            "id": id_path[1],\n'
             + '                            "path": id_path[2],\n'
@@ -368,16 +368,16 @@ var sbOutputService = {
             + '                });\n'
             + '            })();\n'
             + '            (function(){\n'
-            + '                var scrapbook = scrapbooks[scrapbooks_index];\n'
-            + '                var type = "scrapbook.rdf";\n'
-            + '                var path = scrapbook.path + "/" + type;\n'
+            + '                let scrapbook = scrapbooks[scrapbooks_index];\n'
+            + '                let type = "scrapbook.rdf";\n'
+            + '                let path = scrapbook.path + "/" + type;\n'
             + '                that.loadXMLDoc(path, function(xml){\n'
             + '                    // some mobile browsers (e.g. Dolphin) do not support xmlDoc.getElementsByTagName\n'
-            + '                    var items = xml.documentElement.childNodes, data = [];\n'
+            + '                    let items = xml.documentElement.childNodes, data = [];\n'
             + '                    for (var i = 0, len = items.length; i < len; i++) {\n'
-            + '                        var item = items[i];\n'
+            + '                        let item = items[i];\n'
             + '                        if (item.nodeName != "RDF:Description") continue;\n'
-            + '                        var id = item.getAttribute("NS1:id");\n'
+            + '                        let id = item.getAttribute("NS1:id");\n'
             + '                        data[id] = {\n'
             + '                            "id": id,\n'
             + '                            "type": item.getAttribute("NS1:type"),\n'
@@ -408,7 +408,7 @@ var sbOutputService = {
             + '            }\n'
             + '            // if all success?\n'
             + '            for (var i = 0, I = scrapbooks.length; i < I; i++) {\n'
-            + '                var scrapbook = scrapbooks[i];\n'
+            + '                let scrapbook = scrapbooks[i];\n'
             + '                if (!(scrapbook.data && scrapbook.cache)) return;\n'
             + '            }\n'
             + '            // enable the search button\n'
@@ -418,9 +418,9 @@ var sbOutputService = {
             + '\n'
             + '    loadXMLDoc: function(url, callback, error_handler) {\n'
             + '        try {\n'
-            + '            var that = this;\n'
+            + '            let that = this;\n'
             + '            checkHttp(url);\n'
-            + '            var xmlhttp;\n'
+            + '            let xmlhttp;\n'
             + '            if (window.XMLHttpRequest) {  // code for IE7+, Firefox, Chrome, Opera, Safari\n'
             + '                xmlhttp = new XMLHttpRequest();\n'
             + '            }\n'
@@ -466,9 +466,9 @@ var sbOutputService = {
             + '        this.clearResult();\n'
             + '        try {\n'
             + '            // parse key\n'
-            + '            var keyStr = document.getElementById("keyword").value;\n'
+            + '            let keyStr = document.getElementById("keyword").value;\n'
             + '            if (this.config["default_search"]) keyStr = this.config["default_search"] + " " + keyStr;\n'
-            + '            var key = this.parseQuery(keyStr);\n'
+            + '            let key = this.parseQuery(keyStr);\n'
             + '            if (key.error.length) {\n'
             + '                for (var i = 0, len = key.error.length; i < len; i++) {\n'
             + '                    this.addMsg(key.error[i]);\n'
@@ -477,11 +477,11 @@ var sbOutputService = {
             + '            }\n'
             + '            // get result\n'
             + '            for (var scrapbooks_index = 0, scrapbooks_len = scrapbooks.length; scrapbooks_index < scrapbooks_len; scrapbooks_index++) {\n'
-            + '                var scrapbook = scrapbooks[scrapbooks_index];\n'
-            + '                var result = [];\n'
+            + '                let scrapbook = scrapbooks[scrapbooks_index];\n'
+            + '                let result = [];\n'
             + '                for (var i = 0, len = scrapbook.cache.length; i < len; i++) {\n'
-            + '                    var item = scrapbook.cache[i];\n'
-            + '                    var data = {\n'
+            + '                    let item = scrapbook.cache[i];\n'
+            + '                    let data = {\n'
             + '                        "cache": item,\n'
             + '                        "item": scrapbook.data[item.id]\n'
             + '                    };\n'
@@ -491,7 +491,7 @@ var sbOutputService = {
             + '                }\n'
             + '                // sort result\n'
             + '                for (var i = 0, len = key.sort.length; i < len; i++) {\n'
-            + '                    var sortKey = key.sort[i];\n'
+            + '                    let sortKey = key.sort[i];\n'
             + '                    result.sort(function(a, b){\n'
             + '                        a = a[sortKey[0]][sortKey[1]];\n'
             + '                        b = b[sortKey[0]][sortKey[1]];\n'
@@ -501,7 +501,7 @@ var sbOutputService = {
             + '                    });\n'
             + '                }\n'
             + '                // display result\n'
-            + '                var scrapbook_name = scrapbook.name ? "(" + scrapbook.name + ") " : "";\n'
+            + '                let scrapbook_name = scrapbook.name ? "(" + scrapbook.name + ") " : "";\n'
             + '                this.addMsg(scrapbook_name + "Found " + result.length + " results:");\n'
             + '                for (var i = 0, len = result.length; i < len; i++) {\n'
             + '                    this.addResult(result[i], scrapbook);\n'
@@ -515,8 +515,8 @@ var sbOutputService = {
             + '    },\n'
             + '\n'
             + '    parseQuery: function(keyStr) {\n'
-            + '        var that = this;\n'
-            + '        var key = {\n'
+            + '        let that = this;\n'
+            + '        let key = {\n'
             + '            "error": [],\n'
             + '            "rule": [],\n'
             + '            "sort": [],\n'
@@ -526,10 +526,10 @@ var sbOutputService = {
             + '        };\n'
             + '        keyStr.replace(/(-?[A-Za-z]+:|-)(?:"((?:""|[^"])*)"|([^"\\s]*))|(?:"((?:""|[^"])*)"|([^"\\s]+))/g, function(match, cmd, qterm, term, qterm2, term2){\n'
             + '            if (cmd) {\n'
-            + '                var term = (qterm !== undefined) ? qterm.replace(/""/g, \'"\') : term;\n'
+            + '                let term = (qterm !== undefined) ? qterm.replace(/""/g, \'"\') : term;\n'
             + '            }\n'
             + '            else {\n'
-            + '                var term = (qterm2 !== undefined) ? qterm2.replace(/""/g, \'"\') : term2;\n'
+            + '                let term = (qterm2 !== undefined) ? qterm2.replace(/""/g, \'"\') : term2;\n'
             + '            }\n'
             + '            switch (cmd) {\n'
             + '                case "mc:":\n'
@@ -637,31 +637,31 @@ var sbOutputService = {
             + '            }\n'
             + '\n'
             + '            function parseStr(term, exactMatch) {\n'
-            + '                var options = key.mc ? "m" : "im";\n'
+            + '                let options = key.mc ? "m" : "im";\n'
             + '                if (key.re) {\n'
             + '                    try {\n'
-            + '                        var regex = new RegExp(term, options);\n'
+            + '                        let regex = new RegExp(term, options);\n'
             + '                    } catch(ex) {\n'
             + '                        addError("Invalid RegExp: " + term);\n'
             + '                        return null;\n'
             + '                    }\n'
             + '                }\n'
             + '                else {\n'
-            + '                    var q = that.escapeRegExp(term);\n'
+            + '                    let q = that.escapeRegExp(term);\n'
             + '                    if (exactMatch) q = "^" + q + "$";\n'
-            + '                    var regex = new RegExp(q, options);\n'
+            + '                    let regex = new RegExp(q, options);\n'
             + '                }\n'
             + '                return regex;\n'
             + '            }\n'
             + '\n'
             + '            function parseDate(term) {\n'
-            + '                var match = term.match(/^(\\d{0,14})-?(\\d{0,14})$/);\n'
+            + '                let match = term.match(/^(\\d{0,14})-?(\\d{0,14})$/);\n'
             + '                if (!match) {\n'
             + '                    addError("Invalid date format: " + term);\n'
             + '                    return null;\n'
             + '                }\n'
-            + '                var since = match[1] ? pad(match[1], 14) : pad(match[1], 14);\n'
-            + '                var until = match[2] ? pad(match[2], 14) : pad(match[2], 14, "9");\n'
+            + '                let since = match[1] ? pad(match[1], 14) : pad(match[1], 14);\n'
+            + '                let until = match[2] ? pad(match[2], 14) : pad(match[2], 14, "9");\n'
             + '                return [parseInt(since, 10), parseInt(until, 10)];\n'
             + '            }\n'
             + '\n'
@@ -713,7 +713,7 @@ var sbOutputService = {
             + '    },\n'
             + '\n'
             + '    _match_type: function(keyitem, data) {\n'
-            + '        var text = data.item.type;\n'
+            + '        let text = data.item.type;\n'
             + '        for (var i=0, len=keyitem.exclude.length; i<len; i++) {\n'
             + '            if (keyitem.exclude[i].test(text)) {\n'
             + '                return false;\n'
@@ -753,7 +753,7 @@ var sbOutputService = {
             + '\n'
             + '    matchDate: function(keyitem, date) {\n'
             + '        if (!date) return false;\n'
-            + '        var date = parseInt(date, 10);\n'
+            + '        let date = parseInt(date, 10);\n'
             + '        for (var i=0, len=keyitem.exclude.length; i<len; i++) {\n'
             + '            if (keyitem.exclude[i][0] <= date && date <= keyitem.exclude[i][1]) {\n'
             + '                return false;\n'
@@ -768,18 +768,18 @@ var sbOutputService = {
             + '    },\n'
             + '\n'
             + '    addResult: function(data, scrapbook) {\n'
-            + '        var cache = data.cache;\n'
-            + '        var item = data.item;\n'
-            + '        var wrapper = document.getElementById("result");\n'
-            + '        var result = document.createElement("li");\n'
-            + '        var subpath = "data/" + item.id + "/" + cache.path.replace(/[^\\/]+/g, function(m){return encodeURIComponent(m);});\n'
-            + '        var bullet = this.config["list_bullet"] + " ";\n'
-            + '        var text = item.type == "bookmark" ?\n'
+            + '        let cache = data.cache;\n'
+            + '        let item = data.item;\n'
+            + '        let wrapper = document.getElementById("result");\n'
+            + '        let result = document.createElement("li");\n'
+            + '        let subpath = "data/" + item.id + "/" + cache.path.replace(/[^\\/]+/g, function(m){return encodeURIComponent(m);});\n'
+            + '        let bullet = this.config["list_bullet"] + " ";\n'
+            + '        let text = item.type == "bookmark" ?\n'
             + '            bullet + item.title:\n'
             + '            item.title + ((cache.path != "index.html") ? (" (" + cache.path + ")") : "");\n'
             + '        if (item.type != "bookmark") {\n'
-            + '            var href = scrapbook.path + "/" + "tree/frame.html#../" + subpath;\n'
-            + '            var link = document.createElement("a");\n'
+            + '            let href = scrapbook.path + "/" + "tree/frame.html#../" + subpath;\n'
+            + '            let link = document.createElement("a");\n'
             + '            link.setAttribute("href", href);\n'
             + '            link.setAttribute("target", "_blank");\n'
             + '            link.setAttribute("class", "bookmark");\n'
@@ -787,9 +787,9 @@ var sbOutputService = {
             + '            link.appendChild(document.createTextNode(bullet));\n'
             + '            result.appendChild(link);\n'
             + '        }\n'
-            + '        var href = (item.type == "bookmark") ? item.source : scrapbook.path + "/" + subpath;\n'
-            + '        var target = (item.type == "bookmark") ? "_blank" : "main";\n'
-            + '        var link = document.createElement("a");\n'
+            + '        let href = (item.type == "bookmark") ? item.source : scrapbook.path + "/" + subpath;\n'
+            + '        let target = (item.type == "bookmark") ? "_blank" : "main";\n'
+            + '        let link = document.createElement("a");\n'
             + '        link.setAttribute("href", href);\n'
             + '        link.setAttribute("target", target);\n'
             + '        link.setAttribute("class", item.type);\n'
@@ -800,13 +800,13 @@ var sbOutputService = {
             + '    },\n'
             + '\n'
             + '    clearResult: function() {\n'
-            + '        var result = document.getElementById("result"), child;\n'
+            + '        let result = document.getElementById("result"), child;\n'
             + '        while ((child = result.firstChild)) result.removeChild(child);\n'
             + '    },\n'
             + '\n'
             + '    addMsg: function(msg) {\n'
-            + '        var wrapper = document.getElementById("result");\n'
-            + '        var result = document.createElement("li");\n'
+            + '        let wrapper = document.getElementById("result");\n'
+            + '        let result = document.createElement("li");\n'
             + '        result.appendChild(document.createTextNode(msg));\n'
             + '        wrapper.appendChild(result);\n'
             + '    },\n'
@@ -816,8 +816,8 @@ var sbOutputService = {
             + '    },\n'
             + '\n'
             + '    helperFill: function() {\n'
-            + '        var helper = document.getElementById("helper");\n'
-            + '        var keyword = document.getElementById("keyword");\n'
+            + '        let helper = document.getElementById("helper");\n'
+            + '        let keyword = document.getElementById("keyword");\n'
             + '        keyword.value = keyword.value + (keyword.value == "" ? "" : " ") + helper.value;\n'
             + '        helper.selectedIndex = 0;\n'
             + '        keyword.focus();\n'

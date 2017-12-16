@@ -1,5 +1,5 @@
 
-var sbManageService = {
+let sbManageService = {
 
     moduleID: "",
 
@@ -24,15 +24,15 @@ var sbManageService = {
     toggleRightPane: function(aModuleElt) {
         if ( typeof(aModuleElt) == "string" ) aModuleElt = document.getElementById(aModuleElt);
         this.moduleID = this.moduleID == aModuleElt.id ? "" : aModuleElt.id;
-        var willEnable = this.moduleID == "" ? false : true;
-        var elts = document.getElementsByAttribute("group", "module");
-        for ( var i = 0; i < elts.length; i++ ) {
+        let willEnable = this.moduleID == "" ? false : true;
+        let elts = document.getElementsByAttribute("group", "module");
+        for ( let i = 0; i < elts.length; i++ ) {
             elts[i].checked = elts[i].id == this.moduleID;
         }
         document.getElementById("sbPaneSplitter").hidden = !willEnable;
         document.getElementById("sbRightPaneBrowser").hidden = !willEnable;
-        var colElts = document.getElementById("sbTreeCols").childNodes;
-        for ( var i = 1; i < colElts.length; i++ ) {
+        let colElts = document.getElementById("sbTreeCols").childNodes;
+        for ( let i = 1; i < colElts.length; i++ ) {
             if (colElts[i].nodeName != "treecol") continue;
             if ( willEnable ) {
                 this.treeColumnState.persist[i] = colElts[i].getAttribute("persist");
@@ -48,8 +48,8 @@ var sbManageService = {
     },
 
     getTreeSelection: function() {
-        var arg1 = [], arg2 = [];
-        var idxList = sbTreeHandler.getSelection(false, 2);
+        let arg1 = [], arg2 = [];
+        let idxList = sbTreeHandler.getSelection(false, 2);
         idxList.forEach(function(aIdx) {
             arg1.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx));
             arg2.push(sbTreeHandler.getParentResource(aIdx));

@@ -1,5 +1,5 @@
 
-var sbPropService = {
+let sbPropService = {
 
     get ICON()   { return document.getElementById("sbPropIcon"); },
 
@@ -31,19 +31,19 @@ var sbPropService = {
             return;
         }
         // parse dateTime
-        var date1 = this.item.create || this.id;
-        var dateTime = "";
+        let date1 = this.item.create || this.id;
+        let dateTime = "";
         if (date1.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/)) {
-            var dd = new Date(
+            let dd = new Date(
                 parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10),
                 parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10)
             );
             dateTime = dd.toLocaleString();
         }
-        var date2 = this.item.modify;
-        var dateTime2 = "";
+        let date2 = this.item.modify;
+        let dateTime2 = "";
         if (date2.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/)) {
-            var dd = new Date(
+            let dd = new Date(
                 parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10),
                 parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10)
             );
@@ -62,7 +62,7 @@ var sbPropService = {
         document.getElementById("sbPropLock").setAttribute("checked", this.item.lock == "true");
         this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
         document.title = this.item.title;
-        var bundleName = "TYPE_PAGE";
+        let bundleName = "TYPE_PAGE";
         switch (this.item.type) {
             case "separator": this.isTypeSeparator = true; bundleName = "TYPE_SEPARATOR"; break;
             case "bookmark": this.isTypeBookmark = true; bundleName = "TYPE_BOOKMARK";  break;
@@ -91,12 +91,12 @@ var sbPropService = {
     },
 
     delayedInit: function() {
-        var sizeCount = this.getTotalFileSize(this.id);
+        let sizeCount = this.getTotalFileSize(this.id);
         document.getElementById("sbPropSize").value = sbCommonUtils.lang("FILES_COUNT", sbCommonUtils.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]);
     },
 
     accept: function() {
-        var newVals = {
+        let newVals = {
             title: document.getElementById("sbPropTitle").value,
             source: document.getElementById("sbPropSource").value,
             comment: sbCommonUtils.escapeComment(document.getElementById("sbPropComment").value),
@@ -108,8 +108,8 @@ var sbPropService = {
             newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
         if (!this.isTypeSeparator && !document.getElementById("sbPropLock").hidden)
             newVals.lock = document.getElementById("sbPropLock").checked ? "true" : "";
-        var changed = false;
-        var props = ["title", "source", "comment", "type", "icon", "chars", "lock"];
+        let changed = false;
+        let props = ["title", "source", "comment", "type", "icon", "chars", "lock"];
         for (var i = 0; i < props.length; i++) {
             if (this.item[props[i]] != newVals[props[i]]) {
                 this.item[props[i]] = newVals[props[i]];
@@ -148,12 +148,12 @@ var sbPropService = {
     },
 
     getIconURL: function() {
-        var iconURL = this.ICON.src;
+        let iconURL = this.ICON.src;
         return ( iconURL.indexOf("chrome://scrapbook/skin/") == 0 ) ? "" : iconURL;
     },
 
     pickupIcon: function(aCommand, aPickerLabel) {
-        var dir;
+        let dir;
         if ( aCommand == "F" ) {
             dir = sbCommonUtils.getContentDir(this.item.id, true);
             if ( !dir ) return;
@@ -162,7 +162,7 @@ var sbPropService = {
             dir.append("icon");
             if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
         }
-        var pickedFile = sbCommonUtils.showFilePicker({
+        let pickedFile = sbCommonUtils.showFilePicker({
             window: window,
             title: aPickerLabel,
             mode: 0, // modeOpen
@@ -172,7 +172,7 @@ var sbPropService = {
             ]
         });
         if (pickedFile) {
-            var iconURL;
+            let iconURL;
             if ( aCommand == "F" && dir.contains(pickedFile, false) ) {
                 iconURL = sbCommonUtils.convertFileToResURL(pickedFile);
             } else if ( aCommand == "U" && dir.contains(pickedFile, false) ) {
@@ -185,13 +185,13 @@ var sbPropService = {
     },
 
     setIconURL: function() {
-        var ret = { value: this.getIconURL() };
+        let ret = { value: this.getIconURL() };
         if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, sbCommonUtils.lang("ADDRESS"), ret, null, {}) ) return;
         if ( ret.value ) this.ICON.src = ret.value;
     },
 
     updateCommentTab: function(aComment) {
-        var elem = document.getElementById("sbPropCommentTab");
+        let elem = document.getElementById("sbPropCommentTab");
         if ( aComment ) {
             elem.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
         } else {
@@ -200,18 +200,18 @@ var sbPropService = {
     },
 
     getHTMLTitle: function(aID, aChars) {
-        var file = sbCommonUtils.getContentDir(aID, true);
+        let file = sbCommonUtils.getContentDir(aID, true);
         if ( !file ) return "";
         file.append("index.html");
-        var content = sbCommonUtils.readFile(file, aChars);
+        let content = sbCommonUtils.readFile(file, aChars);
         return content.match(/<title>([^<]+?)<\/title>/im) ? RegExp.$1 : "";
     },
 
     getTotalFileSize: function(aID) {
-        var totalSize = 0;
-        var totalFile = 0;
-        var totalDir = 0;
-        var dir = sbCommonUtils.getContentDir(aID, true, true);
+        let totalSize = 0;
+        let totalFile = 0;
+        let totalDir = 0;
+        let dir = sbCommonUtils.getContentDir(aID, true, true);
         if (!dir) return [totalSize, totalFile, totalDir];
         sbCommonUtils.forEachFile(dir, function(file){
             if (file.isDirectory()) {

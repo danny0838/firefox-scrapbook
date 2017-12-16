@@ -1,5 +1,5 @@
 
-var sbTreeHandler = {
+let sbTreeHandler = {
 
     get TREE() { return document.getElementById("sbTree"); },
 
@@ -20,7 +20,7 @@ var sbTreeHandler = {
             document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
         }
         if (this.TREE.getAttribute("data-seltype") == "single") {
-            var selType = sbCommonUtils.getPref("ui.sidebarManage", false) ? "multiple" : "single";
+            let selType = sbCommonUtils.getPref("ui.sidebarManage", false) ? "multiple" : "single";
             this.TREE.setAttribute("seltype", selType);
         }
         this.TREE.builder.rebuild();
@@ -31,9 +31,9 @@ var sbTreeHandler = {
 
     uninit: function() {
         this.enableDragDrop(false);
-        var dsEnum = this.TREE.database.GetDataSources();
+        let dsEnum = this.TREE.database.GetDataSources();
         while ( dsEnum.hasMoreElements() ) {
-            var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
+            let ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
             this.TREE.database.RemoveDataSource(ds);
         }
     },
@@ -53,12 +53,12 @@ var sbTreeHandler = {
         if ( aEvent.button != 0 && aEvent.button != 1 ) return;
         // "twisty" is the small arrow at the side of a container item
         // click on it toggles the container natively
-        var obj = {};
+        let obj = {};
         this.TREE.treeBoxObject.getCellAt(aEvent.clientX, aEvent.clientY, {}, {}, obj);
         if ( !obj.value || obj.value == "twisty" ) return;
 
-        var curIdx = this.TREE.currentIndex;
-        var shortcut = sbShortcut.fromEvent(aEvent);
+        let curIdx = this.TREE.currentIndex;
+        let shortcut = sbShortcut.fromEvent(aEvent);
         if (aType == 2 && !sbCommonUtils.getPref("ui.sidebarManage", false)) {
             // non-manage window:
             // simple click to open item; mid-, ctrl-, and shift-click to open in new tab
@@ -78,7 +78,7 @@ var sbTreeHandler = {
 
     // simple Enter on container: toggle container (natively)
     onKeyDown: function(aEvent, aType) {
-        var shortcut = sbShortcut.fromEvent(aEvent);
+        let shortcut = sbShortcut.fromEvent(aEvent);
         switch (shortcut.keyName) {
             case "Return":
                 // Enter to open item; Ctrl/Shift+Enter to open in new tab
@@ -117,7 +117,7 @@ var sbTreeHandler = {
             // (preventDefault doesn't work here)
             this.toggleFolder(this.TREE.currentIndex);
         }
-        var shortcut = sbShortcut.fromEvent(aEvent);
+        let shortcut = sbShortcut.fromEvent(aEvent);
         sbController.open(this.resource, shortcut.accelKey || shortcut.shiftKey);
     },
 
@@ -125,11 +125,11 @@ var sbTreeHandler = {
         if (event.originalTarget.localName != "treechildren") {
             return;
         }
-        var resList = this.getSelection(true, 0);
+        let resList = this.getSelection(true, 0);
         if (!resList.length) {
             return;
         }
-        var dataTransfer = event.dataTransfer;
+        let dataTransfer = event.dataTransfer;
         dataTransfer.setData("moz/rdfitem", resList.map(function(res){
             return res.Value;
         }).join("\n"));
@@ -143,7 +143,7 @@ var sbTreeHandler = {
     },
 
     onDragOver: function(event) {
-        var dataTransfer = event.dataTransfer;
+        let dataTransfer = event.dataTransfer;
         // drags items from tree
         if (dataTransfer.types.contains("moz/rdfitem")) {
             event.preventDefault();
@@ -158,7 +158,7 @@ var sbTreeHandler = {
                    dataTransfer.types.contains("text/x-moz-url") || 
                    dataTransfer.types.contains("text/_moz_htmlcontext")) {
             event.preventDefault();
-            var shortcut = sbShortcut.fromEvent(event);
+            let shortcut = sbShortcut.fromEvent(event);
             if (shortcut.altKey) {
                 dataTransfer.dropEffect = "link";
             } else if (sbCommonUtils.getPref("showDetailOnDrop", false) || shortcut.accelKey || shortcut.shiftKey) {
@@ -179,13 +179,13 @@ var sbTreeHandler = {
             this._importDataInternal(row, orient, dataTransfer.getData("sb/tradeitem").split("\n"));
             return;
         }
-        var ip = this._getInsertionPoint(row, orient);
-        var showDetail = dataTransfer.dropEffect == "copy";
+        let ip = this._getInsertionPoint(row, orient);
+        let showDetail = dataTransfer.dropEffect == "copy";
         // drags a tab from Firefox
         // => if it's the current tab, capture/bookmark it
         // since Firefox >= 52, dragging a tab gets only "text/x-moz-text-internal" (originally plus "application/x-moz-tabbrowser-tab")
         if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab") || dataTransfer.types.contains("text/x-moz-text-internal")) {
-            var tab = dataTransfer.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
+            let tab = dataTransfer.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
             if (tab instanceof XULElement && tab.localName == "tab" && 
                 tab.ownerDocument.defaultView instanceof ChromeWindow && 
                 tab == window.top.gBrowser.mCurrentTab) {
@@ -197,12 +197,12 @@ var sbTreeHandler = {
             }
         // drags something containing url
         } else if (dataTransfer.types.contains("text/x-moz-url")) {
-            var url = dataTransfer.getData("URL");
+            let url = dataTransfer.getData("URL");
             // drags a link from the web page content
             // => capture/bookmark it, using the link text as title
             if (dataTransfer.types.contains("text/x-moz-url-desc")) {
-                var url = dataTransfer.getData("text/x-moz-url-data");
-                var title = dataTransfer.getData("text/x-moz-url-desc");
+                let url = dataTransfer.getData("text/x-moz-url-data");
+                let title = dataTransfer.getData("text/x-moz-url-desc");
                 if (dataTransfer.dropEffect == "link") {
                     this._bookmarkInternal(ip, { title: title, source: url });
                 } else {
@@ -219,7 +219,7 @@ var sbTreeHandler = {
             // drags files
             // => capture/bookmark the first file
             } else if (dataTransfer.types.contains("Files")) {
-                var url = dataTransfer.getData("text/x-moz-url");
+                let url = dataTransfer.getData("text/x-moz-url");
                 if (dataTransfer.dropEffect == "link") {
                     this._bookmarkInternal(ip, { title: sbCommonUtils.getFileName(url), source: url });
                 } else {
@@ -246,10 +246,10 @@ var sbTreeHandler = {
 
     send: function() {
         if ( this.TREE.view.selection.count == 0 ) return;
-        var idxList = this.getSelection(false, 0), resList = [], parList = [];
-        for ( var i = 0, I = idxList.length; i < I; i++ ) {
-            var curRes = this.TREE.builderView.getResourceAtIndex(idxList[i]);
-            var parRes = this.getParentResource(idxList[i]);
+        let idxList = this.getSelection(false, 0), resList = [], parList = [];
+        for ( let i = 0, I = idxList.length; i < I; i++ ) {
+            let curRes = this.TREE.builderView.getResourceAtIndex(idxList[i]);
+            let parRes = this.getParentResource(idxList[i]);
             if ( parRes.Value == "urn:scrapbook:search" ) {
                 parRes = sbDataSource.findParentResource(curRes);
                 if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_SEND")); return; }
@@ -263,10 +263,10 @@ var sbTreeHandler = {
 
     copy: function() {
         if ( this.TREE.view.selection.count == 0 ) return;
-        var idxList = this.getSelection(false, 0), resList = [], parList = [];
-        for ( var i = 0, I = idxList.length; i < I; i++ ) {
-            var curRes = this.TREE.builderView.getResourceAtIndex(idxList[i]);
-            var parRes = this.getParentResource(idxList[i]);
+        let idxList = this.getSelection(false, 0), resList = [], parList = [];
+        for ( let i = 0, I = idxList.length; i < I; i++ ) {
+            let curRes = this.TREE.builderView.getResourceAtIndex(idxList[i]);
+            let parRes = this.getParentResource(idxList[i]);
             if ( parRes.Value == "urn:scrapbook:search" ) {
                 parRes = sbDataSource.findParentResource(curRes);
                 if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_SEND")); return; }
@@ -280,13 +280,13 @@ var sbTreeHandler = {
 
     remove: function() {
         if ( this.TREE.view.selection.count == 0 ) return;
-        var idxList = this.getSelection(false, 0), resList = [], parList = [];
-        for ( var i = 0, I = idxList.length; i < I; i++ ) {
+        let idxList = this.getSelection(false, 0), resList = [], parList = [];
+        for ( let i = 0, I = idxList.length; i < I; i++ ) {
             resList.push( this.TREE.builderView.getResourceAtIndex(idxList[i]) );
             parList.push( this.getParentResource(idxList[i]) );
         }
         if ( !sbController.confirmRemovingFor(resList) ) return;
-        var rmIDs = sbController.removeInternal(resList, parList, false);
+        let rmIDs = sbController.removeInternal(resList, parList, false);
         if ( rmIDs ) {
             sbMainService.trace(sbCommonUtils.lang("ITEMS_REMOVED", rmIDs.length));
             if ( "sbNoteService" in window && sbNoteService.resource && sbNoteService.resource.Value.substring(18,32) == rmIDs[0] ) sbNoteService.exit(false);
@@ -294,14 +294,14 @@ var sbTreeHandler = {
     },
 
     locateInternal: function(aRes) {
-        var i = 0;
-        var resList = [];
+        let i = 0;
+        let resList = [];
         while ( aRes && aRes.Value != this.TREE.ref && ++i < 32 ) {
             resList.unshift(aRes);
             aRes = sbDataSource.findParentResource(aRes);
         }
         for ( i = 0; i < resList.length; i++ ) {
-            var idx = this.TREE.builderView.getIndexOfResource(resList[i]);
+            let idx = this.TREE.builderView.getIndexOfResource(resList[i]);
             if ( idx != -1 && !this.TREE.view.isContainerOpen(idx) ) this.TREE.view.toggleOpenState(idx);
         }
         this.TREE.treeBoxObject.ensureRowIsVisible(idx);
@@ -311,7 +311,7 @@ var sbTreeHandler = {
 
 
     getParentResource: function(aIdx) {
-        var parIdx = this.TREE.builderView.getParentIndex(aIdx);
+        let parIdx = this.TREE.builderView.getParentIndex(aIdx);
         if ( parIdx == -1 ) {
             return this.TREE.resource;
         } else {
@@ -320,11 +320,11 @@ var sbTreeHandler = {
     },
 
     getSelection: function(idx2res, rule) {
-        var ret = [];
-        for ( var rc = 0; rc < this.TREE.view.selection.getRangeCount(); rc++ ) {
-            var start = {}, end = {};
+        let ret = [];
+        for ( let rc = 0; rc < this.TREE.view.selection.getRangeCount(); rc++ ) {
+            let start = {}, end = {};
             this.TREE.view.selection.getRangeAt(rc, start, end);
-            for ( var i = start.value; i <= end.value; i++ ) {
+            for ( let i = start.value; i <= end.value; i++ ) {
                 if ( rule == 1 && !this.TREE.view.isContainer(i) ) continue;
                 if ( rule == 2 && this.TREE.view.isContainer(i) ) continue;
                 ret.push( idx2res ? this.TREE.builderView.getResourceAtIndex(i) : i );
@@ -335,8 +335,8 @@ var sbTreeHandler = {
 
     // modify current list so that items in a selected container are all considered selected
     getComplexSelection: function(resList, rule) {
-        var ret = [];
-        var uriHash = {};
+        let ret = [];
+        let uriHash = {};
         resList.forEach(function(res){
             if ( sbDataSource.isContainer(res) ) {
                 sbDataSource.flattenResources(res, rule, true).forEach(function(childRes){
@@ -363,31 +363,31 @@ var sbTreeHandler = {
     },
 
     toggleAllFolders: function(forceClose) {
-        var willOpen = true;
-        for ( var i = 0; i < this.TREE.view.rowCount; i++ ) {
+        let willOpen = true;
+        for ( let i = 0; i < this.TREE.view.rowCount; i++ ) {
             if ( !this.TREE.view.isContainer(i) ) continue;
             if ( this.TREE.view.isContainerOpen(i) ) { willOpen = false; break; }
         }
         if ( forceClose ) willOpen = false;
         if ( willOpen ) {
-            for ( var i = 0; i < this.TREE.view.rowCount; i++ ) {
+            for ( let i = 0; i < this.TREE.view.rowCount; i++ ) {
                 if ( this.TREE.view.isContainer(i) && !this.TREE.view.isContainerOpen(i) ) this.TREE.view.toggleOpenState(i);
             }
         } else {
-            for ( var i = this.TREE.view.rowCount - 1; i >= 0; i-- ) {
+            for ( let i = this.TREE.view.rowCount - 1; i >= 0; i-- ) {
                 if ( this.TREE.view.isContainer(i) && this.TREE.view.isContainerOpen(i) ) this.TREE.view.toggleOpenState(i);
             }
         }
     },
 
     collapseFoldersBut: function(curIdx) {
-        var ascIdxList = {};
+        let ascIdxList = {};
         ascIdxList[curIdx] = true;
         while ( curIdx >= 0 ) {
             curIdx = this.TREE.builderView.getParentIndex(curIdx);
             ascIdxList[curIdx] = true;
         }
-        for ( var i = this.TREE.view.rowCount - 1; i >= 0; i-- ) {
+        for ( let i = this.TREE.view.rowCount - 1; i >= 0; i-- ) {
             if ( !ascIdxList[i] && this.TREE.view.isContainer(i) && this.TREE.view.isContainerOpen(i) ) {
                 this.TREE.view.toggleOpenState(i);
             }
@@ -397,8 +397,8 @@ var sbTreeHandler = {
     // orient: -1 = drop before; 0 = drop on; 1 = drop after
     _moveInternal: function(row, orient, resValueList) {
         if (orient == 1) resValueList.reverse();
-        var tarRes = this.TREE.builderView.getResourceAtIndex(row);
-        var tarPar = (orient == 0) ? tarRes : this.getParentResource(row);
+        let tarRes = this.TREE.builderView.getResourceAtIndex(row);
+        let tarPar = (orient == 0) ? tarRes : this.getParentResource(row);
         if (orient == 1 &&
             this.TREE.view.isContainer(row) &&
             this.TREE.view.isContainerOpen(row) &&
@@ -406,13 +406,13 @@ var sbTreeHandler = {
             tarPar = tarRes;
         }
         resValueList.forEach(function(resValue){
-            var curRes = sbCommonUtils.RDF.GetResource(resValue);
-            var curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
+            let curRes = sbCommonUtils.RDF.GetResource(resValue);
+            let curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
             // if curRes is not visible (dropping to another window where a dragged item is not visible in)
             // use CPU consuming sbDataSource.findParentResource to get parent
-            var curPar = (curAbsIdx >= 0) ? this.getParentResource(curAbsIdx) : sbDataSource.findParentResource(curRes);
-            var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-            var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+            let curPar = (curAbsIdx >= 0) ? this.getParentResource(curAbsIdx) : sbDataSource.findParentResource(curRes);
+            let curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+            let tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
             // if moving to self, skip
             if (curRes.Value == tarRes.Value) return;
             // if tarRes = tarPar, insert to first
@@ -431,8 +431,8 @@ var sbTreeHandler = {
             // - if curRes is invisible, then its child must be invisible and is impossible to be the target
             // - if curRes is not a container then it must not have a child
             if (curAbsIdx != -1 && this.TREE.view.isContainer(curAbsIdx)) {
-                var tmpRes = tarRes;
-                var tmpIdx = this.TREE.builderView.getIndexOfResource(tmpRes);
+                let tmpRes = tarRes;
+                let tmpIdx = this.TREE.builderView.getIndexOfResource(tmpRes);
                 while (tmpRes.Value != this.TREE.ref && tmpIdx != -1) {
                     tmpRes = this.getParentResource(tmpIdx);
                     tmpIdx = this.TREE.builderView.getIndexOfResource(tmpRes);
@@ -447,12 +447,12 @@ var sbTreeHandler = {
     },
 
     _importDataInternal: function(row, orient, idxList) {
-        var win = window.top.document.getElementById("sbRightPaneBrowser").contentWindow;
+        let win = window.top.document.getElementById("sbRightPaneBrowser").contentWindow;
         win.sbImportService.importFromIndexList(row, orient, idxList);
     },
 
     _captureInternal: function(ip, showDetail, partial) {
-        var targetWindow = partial ? sbCommonUtils.getFocusedWindow() : window.top.content;
+        let targetWindow = partial ? sbCommonUtils.getFocusedWindow() : window.top.content;
         window.top.sbContentSaver.captureWindow(
             targetWindow, partial, showDetail, ip[0], ip[1], null, "capture", null
         );
@@ -465,8 +465,8 @@ var sbTreeHandler = {
     },
 
     _captureLinkInternal: function(ip, showDetail, url, title) {
-        var win = sbCommonUtils.getFocusedWindow();
-        var data = {
+        let win = sbCommonUtils.getFocusedWindow();
+        let data = {
             urls: [url],
             refUrl: win.location.href,
             showDetail: showDetail,
@@ -489,9 +489,9 @@ var sbTreeHandler = {
         if (aRow == -1 || aRow == -128) {
             return [this.TREE.ref, 0];
         }
-        var tarRes = this.TREE.builderView.getResourceAtIndex(aRow);
-        var tarPar = (aOrient == 0) ? tarRes : this.getParentResource(aRow);
-        var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+        let tarRes = this.TREE.builderView.getResourceAtIndex(aRow);
+        let tarPar = (aOrient == 0) ? tarRes : this.getParentResource(aRow);
+        let tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
         if (aOrient == 1)
             tarRelIdx++;
         if (aOrient == 1 &&
@@ -505,7 +505,7 @@ var sbTreeHandler = {
     },
 };
 
-var sbTreeDNDObserver = {
+let sbTreeDNDObserver = {
     canDrop: function(row, orient, dataTransfer) {
         return true;
     },
