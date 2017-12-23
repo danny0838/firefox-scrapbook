@@ -1,4 +1,4 @@
-var sbPrefWindow = {
+let sbPrefWindow = {
 
     changed: false,
 
@@ -11,7 +11,7 @@ var sbPrefWindow = {
 
         // init keys UI and event handlers
         Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
-            var shortcut = sbShortcut.fromString(elem.value);
+            let shortcut = sbShortcut.fromString(elem.value);
             if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
                 if (shortcut.isPrintable) {
                     elem.value = shortcut.keyName;
@@ -26,11 +26,11 @@ var sbPrefWindow = {
                 }
             }
             elem.defaultValue = elem.value;
-            var imgReset = document.createElement("image");
+            let imgReset = document.createElement("image");
             imgReset.className = "shortcut reset";
             imgReset.addEventListener("click", sbPrefWindow.resetShortcut, true);
             elem.appendChild(imgReset);
-            var imgDelete = document.createElement("image");
+            let imgDelete = document.createElement("image");
             imgDelete.addEventListener("click", sbPrefWindow.deleteShortcut, true);
             imgDelete.className = "shortcut delete";
             elem.appendChild(imgDelete);
@@ -45,8 +45,8 @@ var sbPrefWindow = {
     },
 
     updateGroupedUI: function(aPrefName, aGroupName) {
-        var enable = document.getElementById(aPrefName).value;
-        var elts = document.getElementsByAttribute("group", aGroupName);
+        let enable = document.getElementById(aPrefName).value;
+        let elts = document.getElementsByAttribute("group", aGroupName);
         Array.forEach(elts, function(elt) {
             elt.disabled = !enable;
         });
@@ -54,13 +54,13 @@ var sbPrefWindow = {
 
     hlUpdateUI: function() {
         for (var num = 8; num > 0; num--) {
-            var prefVal = sbCommonUtils.getPref("highlighter.style." + num, sbHighlighter.PRESET_STYLES[num]);
+            let prefVal = sbCommonUtils.getPref("highlighter.style." + num, sbHighlighter.PRESET_STYLES[num]);
             sbHighlighter.decorateElement(document.getElementById("hlPrefLabel" + num), prefVal);
         }
     },
 
     hlCustomize: function(aNumber) {
-        var ret = {index: aNumber};
+        let ret = {index: aNumber};
         document.documentElement.openSubDialog(
             "chrome://scrapbook/content/hlCustom.xul", "modal,centerscreen,chrome", ret
         );
@@ -72,10 +72,10 @@ var sbPrefWindow = {
     // we need to set the preference element's value to get it stored to preference
     // modifying the element's value only changes the display effect
     setShortcut: function(event) {
-        var elem = event.target;
-        var shortcut = sbShortcut.fromEvent(event);
-        var pref = elem.getAttribute("preference");
-        var prefElem = document.getElementById(pref);
+        let elem = event.target;
+        let shortcut = sbShortcut.fromEvent(event);
+        let pref = elem.getAttribute("preference");
+        let prefElem = document.getElementById(pref);
         if (pref === "extensions.scrapbook.key.menubar") {
             if (shortcut.isPrintable) {
                 prefElem.value = shortcut.keyName;
@@ -93,21 +93,21 @@ var sbPrefWindow = {
     },
 
     resetShortcut: function(event) {
-        var elem = event.target.parentNode;
-        var pref = elem.getAttribute("preference");
-        var prefElem = document.getElementById(pref);
+        let elem = event.target.parentNode;
+        let pref = elem.getAttribute("preference");
+        let prefElem = document.getElementById(pref);
         prefElem.value = elem.defaultValue;
     },
 
     deleteShortcut: function(event) {
-        var elem = event.target.parentNode;
-        var pref = elem.getAttribute("preference");
-        var prefElem = document.getElementById(pref);
+        let elem = event.target.parentNode;
+        let pref = elem.getAttribute("preference");
+        let prefElem = document.getElementById(pref);
         prefElem.value = "";
     },
 
     exportPrefs: function() {
-        var pickedFile = sbCommonUtils.showFilePicker({
+        let pickedFile = sbCommonUtils.showFilePicker({
             window: window,
             title: document.getElementById("sbPrefPopupExport").label,
             mode: 1, // modeSave
@@ -119,8 +119,8 @@ var sbPrefWindow = {
             ]
         });
         if (pickedFile) {
-            var list = sbCommonUtils.getPrefKeys();
-            var result = {};
+            let list = sbCommonUtils.getPrefKeys();
+            let result = {};
             for (var i=0, I=list.length; i<I; ++i) {
                 result[list[i]] = sbCommonUtils.getPref(list[i]);
             }
@@ -131,7 +131,7 @@ var sbPrefWindow = {
     },
     
     importPrefs: function() {
-        var pickedFile = sbCommonUtils.showFilePicker({
+        let pickedFile = sbCommonUtils.showFilePicker({
             window: window,
             title: document.getElementById("sbPrefPopupImport").label,
             mode: 0, // modeOpen
@@ -143,8 +143,8 @@ var sbPrefWindow = {
         });
         if (pickedFile) {
             try {
-                var data = sbCommonUtils.readFile(pickedFile, "UTF-8");
-                var prefs = JSON.parse(data);
+                let data = sbCommonUtils.readFile(pickedFile, "UTF-8");
+                let prefs = JSON.parse(data);
                 for (var i in prefs) {
                     sbCommonUtils.setPref(i, prefs[i]);
                 }

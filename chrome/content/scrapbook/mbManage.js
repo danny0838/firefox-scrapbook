@@ -2,9 +2,9 @@ const kNameCol = 0;
 const kPathCol = 1;
 const kActiveCol = 2;
 
-var gMultiBookTreeView;
+let gMultiBookTreeView;
 
-var gMultiBookManager = {
+let gMultiBookManager = {
 
     _changed: false,
     _activeItemChanged: false,
@@ -12,13 +12,13 @@ var gMultiBookManager = {
     init: function() {
         if (!window.opener)
             throw Components.results.NS_ERROR_UNEXPECTED;
-        var data = sbMultiBookService.initFile();
-        var currentPath = sbCommonUtils.getPref("data.path", "");
+        let data = sbMultiBookService.initFile();
+        let currentPath = sbCommonUtils.getPref("data.path", "");
         data.forEach(function(item) {
             item[kActiveCol] = (item[kPathCol] == currentPath);
         });
         gMultiBookTreeView = new MultiBookTreeView(data);
-        var tree = document.getElementById("mbManagerTree");
+        let tree = document.getElementById("mbManagerTree");
         tree.view = gMultiBookTreeView;
         this.updateButtonsUI();
     },
@@ -26,7 +26,7 @@ var gMultiBookManager = {
     done: function() {
         if (!this._changed)
             return;
-        var content = "";
+        let content = "";
         gMultiBookTreeView._data.forEach(function(item) {
             content += item[kNameCol] + "\t" + item[kPathCol] + "\n";
         });
@@ -43,28 +43,28 @@ var gMultiBookManager = {
     },
 
     updateButtonsUI: function() {
-        var row = gMultiBookTreeView.selection.currentIndex;
-        var item = gMultiBookTreeView.getItemAt(row);
-        var canEdit = gMultiBookTreeView.selection.count == 1;
-        var canRemove = item ? !item[kActiveCol] : false;
+        let row = gMultiBookTreeView.selection.currentIndex;
+        let item = gMultiBookTreeView.getItemAt(row);
+        let canEdit = gMultiBookTreeView.selection.count == 1;
+        let canRemove = item ? !item[kActiveCol] : false;
         document.getElementById("mbEditButton").disabled = !canEdit;
         document.getElementById("mbRemoveButton").disabled = !canRemove;
     },
 
     add: function() {
-        var newItem = ["", ""];
+        let newItem = ["", ""];
         gMultiBookTreeView.appendItem(newItem);
-        var canceled = this.edit();
+        let canceled = this.edit();
         if (canceled)
             gMultiBookTreeView.removeItemAt(gMultiBookTreeView.selection.currentIndex);
     },
 
     edit: function() {
-        var row = gMultiBookTreeView.selection.currentIndex;
+        let row = gMultiBookTreeView.selection.currentIndex;
         if (row < 0)
             return false;
-        var item = gMultiBookTreeView.getItemAt(row);
-        var ret = { value: item };
+        let item = gMultiBookTreeView.getItemAt(row);
+        let ret = { value: item };
         window.openDialog(
             "chrome://scrapbook/content/mbEdit.xul", "", "chrome,centerscreen,modal",
             ret
@@ -81,7 +81,7 @@ var gMultiBookManager = {
     },
 
     remove: function() {
-        var row = gMultiBookTreeView.selection.currentIndex;
+        let row = gMultiBookTreeView.selection.currentIndex;
         gMultiBookTreeView.removeItemAt(row);
         this._changed = true;
     },
@@ -89,7 +89,7 @@ var gMultiBookManager = {
     handleTreeDblClick: function(aEvent) {
         if (aEvent.button != 0)
             return;
-        var row = {}, obj = {};
+        let row = {}, obj = {};
         gMultiBookTreeView._treeBoxObject.getCellAt(aEvent.clientX, aEvent.clientY, row, {}, obj);
         if (row.value == -1 || obj.value == "twisty")
             return;
@@ -100,9 +100,9 @@ var gMultiBookManager = {
         if (gMultiBookTreeView.selection.count != 1) {
             return;
         }
-        var sourceIndex = gMultiBookTreeView.selection.currentIndex;
-        var name = gMultiBookTreeView._data[sourceIndex][kNameCol];
-        var path = gMultiBookTreeView._data[sourceIndex][kPathCol];
+        let sourceIndex = gMultiBookTreeView.selection.currentIndex;
+        let name = gMultiBookTreeView._data[sourceIndex][kNameCol];
+        let path = gMultiBookTreeView._data[sourceIndex][kPathCol];
         event.dataTransfer.setData("text/x-moz-tree-index", sourceIndex);
         event.dataTransfer.setData("text/plain", name + "\t" + path);
         event.dataTransfer.dropEffect = "move";
@@ -135,7 +135,7 @@ MultiBookTreeView.prototype = {
 
     appendItem: function(aItem) {
         this._data.push(aItem);
-        var newIdx = this.rowCount - 1;
+        let newIdx = this.rowCount - 1;
         this._treeBoxObject.rowCountChanged(newIdx, 1);
         this.selection.select(newIdx);
         this._treeBoxObject.ensureRowIsVisible(newIdx);
@@ -151,7 +151,7 @@ MultiBookTreeView.prototype = {
     moveItem: function(aSourceIndex, aTargetIndex) {
         if (aTargetIndex < 0 || aTargetIndex > this.rowCount - 1)
             return;
-        var removedItems = this._data.splice(aSourceIndex, 1);
+        let removedItems = this._data.splice(aSourceIndex, 1);
         this._data.splice(aTargetIndex, 0, removedItems[0]);
         this._treeBoxObject.invalidate();
         this.selection.clearSelection();
@@ -169,7 +169,7 @@ MultiBookTreeView.prototype = {
     getRowProperties: function(index, properties) {},
     getCellProperties: function(row, col, properties) {
         if (this._data[row][kActiveCol]) {
-            var val = "active";
+            let val = "active";
             // Gecko >= 22 (Firefox >= 22): do not take properties and requires a return value
             if (properties) {
                 properties.AppendElement(sbCommonUtils.ATOM.getAtom(val));
@@ -188,7 +188,7 @@ MultiBookTreeView.prototype = {
         if (!dataTransfer.types.contains("text/x-moz-tree-index")) {
             return false;
         }
-        var sourceIndex = parseInt(dataTransfer.getData("text/x-moz-tree-index"), 10);
+        let sourceIndex = parseInt(dataTransfer.getData("text/x-moz-tree-index"), 10);
         return (
             sourceIndex != -1 &&
             sourceIndex != targetIndex &&
@@ -196,7 +196,7 @@ MultiBookTreeView.prototype = {
         );
     },
     drop: function(targetIndex, orientation, dataTransfer) {
-        var sourceIndex = this.selection.currentIndex;
+        let sourceIndex = this.selection.currentIndex;
         if (sourceIndex < targetIndex) {
             if (orientation == Components.interfaces.nsITreeView.DROP_BEFORE)
                 targetIndex--;

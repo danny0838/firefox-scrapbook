@@ -1,4 +1,4 @@
-var mbEditDialog = {
+let mbEditDialog = {
 
     _nameTextbox: null,
     _pathField: null,
@@ -8,10 +8,10 @@ var mbEditDialog = {
             throw Components.results.NS_ERROR_UNDEXPECTED;
         this._nameTextbox = document.getElementById("mbName");
         this._pathField = document.getElementById("mbPath");
-        var ret = window.arguments[0];
+        let ret = window.arguments[0];
         this._nameTextbox.value = ret.value ? ret.value[0] : "";
         if (ret.value && ret.value[1]) {
-            var file = sbCommonUtils.convertPathToFile(ret.value[1]);
+            let file = sbCommonUtils.convertPathToFile(ret.value[1]);
             this._pathField.file = file;
             this._pathField.label = file.path;
         }
@@ -28,7 +28,7 @@ var mbEditDialog = {
     },
 
     selectFolder: function(aTitle) {
-        var pickedFile = sbCommonUtils.showFilePicker({
+        let pickedFile = sbCommonUtils.showFilePicker({
             window: window,
             title: aTitle,
             mode: 2, // modeGetFolder

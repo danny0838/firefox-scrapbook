@@ -1,4 +1,4 @@
-var sbHighlighter = {
+let sbHighlighter = {
 
     nodePositionInRange: {
         SINGLE: 0,
@@ -22,10 +22,10 @@ var sbHighlighter = {
     },
 
     updatePopup: function() {
-        var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
+        let idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
         document.getElementById("ScrapBookHighlighterM" + idx).setAttribute("checked", "true");
         for ( idx = 8; idx > 0; idx-- ) {
-            var cssText = sbCommonUtils.getPref("highlighter.style." + idx, "") || this.PRESET_STYLES[idx];
+            let cssText = sbCommonUtils.getPref("highlighter.style." + idx, "") || this.PRESET_STYLES[idx];
             this.decorateElement(document.getElementById("ScrapBookHighlighterM" + idx), cssText);
         }
     },
@@ -37,25 +37,25 @@ var sbHighlighter = {
     },
 
     set: function(aWindow, aSelection, aNodeName, aAttributes) {
-        for ( var r = 0; r < aSelection.rangeCount; ++r ) {
-            var range = aSelection.getRangeAt( r ); 
-            var doc = aWindow.document;
+        for ( let r = 0; r < aSelection.rangeCount; ++r ) {
+            let range = aSelection.getRangeAt( r ); 
+            let doc = aWindow.document;
 
-            var startC = range.startContainer;
-            var endC = range.endContainer;
-            var sOffset = range.startOffset;
-            var eOffset = range.endOffset;
-            var sameNode = ( startC == endC );
+            let startC = range.startContainer;
+            let endC = range.endContainer;
+            let sOffset = range.startOffset;
+            let eOffset = range.endOffset;
+            let sameNode = ( startC == endC );
 //sbCommonUtils.alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
             if ( aNodeName == "a" && !sameNode ) {
                 sbCommonUtils.alert(sbCommonUtils.lang("MSG_ATTACH_ACROSS_TAGS"));
                 return;
             }
             // Replace faulty original function
-            var nodeWalker = doc.createTreeWalker(range.commonAncestorContainer,NodeFilter.SHOW_TEXT,this._acceptNode,false);
+            let nodeWalker = doc.createTreeWalker(range.commonAncestorContainer,NodeFilter.SHOW_TEXT,this._acceptNode,false);
             nodeWalker.currentNode = startC;
-            var txtNode = startC;
-            var end = 1;
+            let txtNode = startC;
+            let end = 1;
             if ( txtNode.nodeType == 1 ) {
                 txtNode = nodeWalker.nextNode();
                 if ( txtNode ) {
@@ -116,8 +116,8 @@ var sbHighlighter = {
     },
 
     _createNode: function( aWindow, aNodeName, aAttributes, aNodePosInRange ) {
-        var newNode = aWindow.document.createElement( aNodeName );
-        for ( var attr in aAttributes ) {
+        let newNode = aWindow.document.createElement( aNodeName );
+        for ( let attr in aAttributes ) {
             newNode.setAttribute( attr, aAttributes[attr] );
         }
         return newNode;

@@ -71,13 +71,13 @@ const keyNameToUIStringMapMac = {
 const keyCodeToNameMap = {};
 const keyNameToCodeMap = {};
 (function () {
-    var keys = Components.interfaces.nsIDOMKeyEvent;
+    let keys = Components.interfaces.nsIDOMKeyEvent;
     for (var name in keys) {
         if (name.match(/^DOM_VK_/)) {
-            var keyName = RegExp.rightContext.toLowerCase().replace(/(^|_)([a-z])/g, function(){
+            let keyName = RegExp.rightContext.toLowerCase().replace(/(^|_)([a-z])/g, function(){
                 return arguments[2].toUpperCase();
             });
-            var keyCode = keys[name];
+            let keyCode = keys[name];
             keyCodeToNameMap[keyCode] = keyName;
             keyNameToCodeMap[keyName] = keyCode;
         }
@@ -147,11 +147,11 @@ sbShortcut.prototype = {
 
     // return an array containing the keys
     get getKeys() {
-        var mainKey = this.keyName || "";
+        let mainKey = this.keyName || "";
         if (["Win", "Control", "Alt", "Shift"].indexOf(mainKey) != -1) {
             mainKey = "";
         }
-        var parts = Array.prototype.slice.call(this.modifiers);
+        let parts = Array.prototype.slice.call(this.modifiers);
         parts.push(mainKey);
         delete this.getKeys;
         return this.getKeys = parts;
@@ -164,7 +164,7 @@ sbShortcut.prototype = {
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        var keys = this.getKeys.map(function(key) {
+        let keys = this.getKeys.map(function(key) {
             // replace Accel
             if (key == "Accel") {
                 if (accelKeyCode == 17) {
@@ -195,7 +195,7 @@ sbShortcut.prototype = {
 
         // Mac style modifier keys: reversed order and no "+" inbetween
         if (isMac) {
-            var macKeys = [keys.pop()];
+            let macKeys = [keys.pop()];
             while (keys.length) {
                 macKeys.unshift(keys.shift());
             }
@@ -213,7 +213,7 @@ sbShortcut.prototype = {
 
     // return the modifiers attribute for XUL <key> elements
     getModifiers: function () {
-        var modifiers = [];
+        let modifiers = [];
         if (this.accelKey) modifiers.push("accel");
         if (this.metaKey) modifiers.push("meta");
         if (this.ctrlKey) modifiers.push("control");
@@ -225,8 +225,8 @@ sbShortcut.prototype = {
 
 // returns new object from a normalized string
 sbShortcut.fromString = function (str) {
-    var data = {}
-    var parts = str.split("+");
+    let data = {}
+    let parts = str.split("+");
     data.keyCode = keyNameToCodeMap[parts.pop()];
     data.modifiers = [].concat(parts);
     return new sbShortcut(data);
@@ -236,11 +236,11 @@ sbShortcut.fromString = function (str) {
 // e.g. Space gets event.keyCode = 0
 // and is more likely to be overriden by other key events.
 sbShortcut.fromEvent = function (event) {
-    var data = {};
+    let data = {};
     data.keyCode = event.keyCode;
 
     // if accel key is pressed, record it as "Accel" rather than usual
-    var modifiers = [];
+    let modifiers = [];
     if ((event.ctrlKey && accelKeyCode == 17) ||
         (event.metaKey && accelKeyCode == 224) ||
         (event.altKey && accelKeyCode == 18) ||

@@ -1,5 +1,5 @@
 
-var sbNoteService = {
+let sbNoteService = {
 
     get TEXTBOX()   { return document.getElementById("sbNoteTextbox"); },
     get HTML_HEAD() { return '<html><head><meta http-equiv="Content-Type" content="text/html;Charset=UTF-8"></head><body><pre>\n'; },
@@ -17,7 +17,7 @@ var sbNoteService = {
         this.locked = true;
         setTimeout(function(){ sbNoteService.locked = false; }, 1000);
         this.save();
-        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        let newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         newItem.id = sbDataSource.identify(newItem.id);
         newItem.type = "note";
         newItem.chars = "UTF-8";
@@ -55,14 +55,14 @@ var sbNoteService = {
     save: function() {
         if ( !this.changed ) return;
         if ( !sbDataSource.exists(this.resource) ) return;
-        var data = this.HTML_HEAD + sbCommonUtils.escapeHTMLWithSpace(this.TEXTBOX.value, true) + this.HTML_FOOT;
+        let data = this.HTML_HEAD + sbCommonUtils.escapeHTMLWithSpace(this.TEXTBOX.value, true) + this.HTML_FOOT;
         sbCommonUtils.writeFile(this.notefile, data, "UTF-8");
         this.saveResource();
         this.change(false);
     },
 
     saveResource: function() {
-        var title = sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 150, 180);
+        let title = sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 150, 180);
         sbDataSource.setProperty(this.resource, "title", title);
     },
 
@@ -91,7 +91,7 @@ var sbNoteService = {
     },
 
     getContentFromFile: function(aFile) {
-        var content = sbCommonUtils.readFile(aFile, "UTF-8");
+        let content = sbCommonUtils.readFile(aFile, "UTF-8");
         content = content.replace(this.HTML_HEAD, "");
         content = content.replace(this.HTML_FOOT, "");
         content = sbCommonUtils.unescapeHTML(content);
@@ -109,22 +109,22 @@ var sbNoteService = {
     },
 
     insertString: function(aEvent) {
-        var shortcut = sbShortcut.fromEvent(aEvent);
+        let shortcut = sbShortcut.fromEvent(aEvent);
         if ( shortcut.keyName == "Escape" && this.sidebarContext ) { sbNoteService.exit(); return; }
         if ( shortcut.modifiers.length ) return;
-        var str = "";
+        let str = "";
         switch ( shortcut.keyName ) {
             case "Tab": str = "\t"; break;
             case "F5": str = (new Date()).toLocaleString(); break;
             default: return;
         }
         aEvent.preventDefault();
-        var command = "cmd_insertText";
+        let command = "cmd_insertText";
         try {
-            var controller = document.commandDispatcher.getControllerForCommand(command);
+            let controller = document.commandDispatcher.getControllerForCommand(command);
             if ( controller && controller.isCommandEnabled(command) ) {
                 controller = controller.QueryInterface(Components.interfaces.nsICommandController);
-                var params = Components.classes['@mozilla.org/embedcomp/command-params;1'].createInstance(Components.interfaces.nsICommandParams);
+                let params = Components.classes['@mozilla.org/embedcomp/command-params;1'].createInstance(Components.interfaces.nsICommandParams);
                 params.setStringValue("state_data", str);
                 controller.doCommandWithParams(command, params);
             }

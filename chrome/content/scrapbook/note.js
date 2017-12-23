@@ -1,5 +1,5 @@
 
-var sbNoteService2 = {
+let sbNoteService2 = {
 
     get BROWSER(){ return document.getElementById("sbNoteBrowser"); },
 
@@ -7,9 +7,9 @@ var sbNoteService2 = {
     enabledHTMLView: false,
 
     init: function() {
-        var id = sbCommonUtils.parseURLQuery(window.location.search.substring(1))['id'];
+        let id = sbCommonUtils.parseURLQuery(window.location.search.substring(1))['id'];
         sbNoteService.sidebarContext = false;
-        var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+        let res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
         if ( !sbDataSource.exists(res) ) return window.location.href = "about:blank";
         sbNoteService.edit(res);
         sbNoteTemplate.init();
@@ -21,9 +21,9 @@ var sbNoteService2 = {
     },
 
     refreshTab: function() {
-        var icon = sbCommonUtils.getDefaultIcon("note");
+        let icon = sbCommonUtils.getDefaultIcon("note");
         document.getElementById("sbNoteImage").setAttribute("src", icon);
-        var win = sbCommonUtils.getBrowserWindow();
+        let win = sbCommonUtils.getBrowserWindow();
         if ( win.content.location.href.indexOf(sbNoteService.resource.Value.substring(18)) > 0 ) {
             win.gBrowser.selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
             win.gBrowser.selectedTab.setAttribute("image", icon);
@@ -37,7 +37,7 @@ var sbNoteService2 = {
         sbCommonUtils.setPref("note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
         sbCommonUtils.setPref("note.fontSize",  this.fontSize);
         if ( exit ) {
-            var browser = sbCommonUtils.getBrowserWindow().getBrowser();
+            let browser = sbCommonUtils.getBrowserWindow().getBrowser();
             browser.mTabContainer.childNodes.length > 1 ? window.close() : browser.loadURI("about:blank");
         }
     },
@@ -45,13 +45,13 @@ var sbNoteService2 = {
     initFontSize: function() {
         this.fontSize = sbCommonUtils.getPref("note.fontSize", 12);
         this.changeFontSize(this.fontSize);
-        var fontSizeElem = document.getElementById("sbNoteToolbarF" + this.fontSize);
+        let fontSizeElem = document.getElementById("sbNoteToolbarF" + this.fontSize);
         if (fontSizeElem) fontSizeElem.setAttribute("checked", true);
     },
 
     changeFontSize: function(aSize) {
         this.fontSize = aSize;
-        var newStyle = "font-size: " + aSize + "pt; font-family: monospace;";
+        let newStyle = "font-size: " + aSize + "pt; font-family: monospace;";
         sbNoteService.TEXTBOX.setAttribute("style", newStyle);
         sbNoteTemplate.TEXTBOX.setAttribute("style", newStyle);
     },
@@ -60,15 +60,15 @@ var sbNoteService2 = {
     initHTMLView: function() {
         sbNoteService.save();
         sbNoteTemplate.save();
-        var source = sbNoteTemplate.getTemplate();
+        let source = sbNoteTemplate.getTemplate();
         /\n|$/.test(sbNoteService.TEXTBOX.value);
-        var [title, content] = [RegExp.leftContext, RegExp.rightContext];
+        let [title, content] = [RegExp.leftContext, RegExp.rightContext];
         title = sbCommonUtils.escapeHTMLWithSpace(title, false, true);
         content = sbCommonUtils.escapeHTMLWithSpace(content, false, true);
         if ( document.getElementById("sbNoteToolbarL").getAttribute("checked") ) content = content.replace(/$/mg, "<br>");
         source = source.replace(/<%NOTE_TITLE%>/g,   title);
         source = source.replace(/<%NOTE_CONTENT%>/g, content);
-        var htmlFile = sbCommonUtils.getScrapBookDir().clone();
+        let htmlFile = sbCommonUtils.getScrapBookDir().clone();
         htmlFile.append("note.html");
         sbCommonUtils.writeFile(htmlFile, source, "UTF-8");
         this.toggleHTMLView(true);
@@ -87,7 +87,7 @@ var sbNoteService2 = {
 };
 
 
-var sbNoteTemplate = {
+let sbNoteTemplate = {
 
     get TEXTBOX() { return document.getElementById("sbNoteTemplateTextbox"); },
 
@@ -108,7 +108,7 @@ var sbNoteTemplate = {
     },
 
     getTemplate: function() {
-        var template = sbCommonUtils.readFile(this.file, "UTF-8");
+        let template = sbCommonUtils.readFile(this.file, "UTF-8");
         return template;
     },
 
@@ -121,7 +121,7 @@ var sbNoteTemplate = {
 
     save: function() {
         if ( !this.shouldSave ) return;
-        var myCSS = sbCommonUtils.getScrapBookDir().clone();
+        let myCSS = sbCommonUtils.getScrapBookDir().clone();
         myCSS.append("note_template.html");
         sbCommonUtils.writeFile(myCSS, this.TEXTBOX.value, "UTF-8");
         this.change(false);

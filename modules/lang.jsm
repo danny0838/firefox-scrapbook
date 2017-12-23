@@ -28,7 +28,7 @@ const _bundle = stringBundle.createBundle("chrome://scrapbook/locale/message.pro
 function lang(key) {
     try {
         if (arguments.length > 1) {
-            var args = Array.prototype.slice.call(arguments, 1);
+            let args = Array.prototype.slice.call(arguments, 1);
             return _bundle.formatStringFromName(key, args, args.length);
         } else {
             return _bundle.GetStringFromName(key);

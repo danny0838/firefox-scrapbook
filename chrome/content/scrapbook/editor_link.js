@@ -1,4 +1,4 @@
-var gData;
+let gData;
 
 function init() {
     if ( !window.arguments) window.close();

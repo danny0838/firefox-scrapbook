@@ -1,13 +1,13 @@
-var gArg;
-var gPrefName;
-var gPreviewUI;
-var gColorIndex;
+let gArg;
+let gPrefName;
+let gPreviewUI;
+let gColorIndex;
 
 function getElement(aID) {
     return document.getElementById(aID);
 }
 
-var hlCustomizer = {
+let hlCustomizer = {
 
     init: function() {
         if (!window.arguments || !(gArg = window.arguments[0])) {
@@ -17,7 +17,7 @@ var hlCustomizer = {
         gColorIndex = gArg.index;
         gPreviewUI = getElement("hlCustomPreview");
         gPrefName = "highlighter.style." + gColorIndex;
-        var prefVal = sbCommonUtils.getPref(gPrefName, sbHighlighter.PRESET_STYLES[gColorIndex]);
+        let prefVal = sbCommonUtils.getPref(gPrefName, sbHighlighter.PRESET_STYLES[gColorIndex]);
         gPreviewUI.setAttribute("style", prefVal);
         this.syncFromPreview();
     },
@@ -44,7 +44,7 @@ var hlCustomizer = {
     },
 
     syncToPreview: function() {
-        var rules = [];
+        let rules = [];
         if (getElement("hlTextBold").checked)
             rules.push("font-weight: bold;");
         if (getElement("hlTextItalic").checked)
@@ -56,10 +56,10 @@ var hlCustomizer = {
         if (getElement("hlTextEnabled").checked)
             rules.push("color: " + getElement("hlTextColor").color + ";");
         if (getElement("hlBorderEnabled").checked) {
-            var borderType = getElement("hlBorderType").value;
-            var borderStyle = getElement("hlBorderStyle").value;
-            var borderWidth = getElement("hlBorderWidth").value;
-            var borderColor = getElement("hlBorderColor").color;
+            let borderType = getElement("hlBorderType").value;
+            let borderStyle = getElement("hlBorderStyle").value;
+            let borderWidth = getElement("hlBorderWidth").value;
+            let borderColor = getElement("hlBorderColor").color;
             rules.push(borderType + ": " + [borderWidth, borderStyle, borderColor].join(" ") + ";");
         }
         this._updateUIActiveState();
@@ -68,9 +68,9 @@ var hlCustomizer = {
     },
 
     _updateUIActiveState: function() {
-        var bgEnabled = getElement("hlBackgroundEnabled").checked;
-        var textEnabled = getElement("hlTextEnabled").checked;
-        var borderEnabled = getElement("hlBorderEnabled").checked;
+        let bgEnabled = getElement("hlBackgroundEnabled").checked;
+        let textEnabled = getElement("hlTextEnabled").checked;
+        let borderEnabled = getElement("hlBorderEnabled").checked;
         getElement("hlBackgroundColor").disabled = !bgEnabled;
         getElement("hlTextColor").disabled = !textEnabled;
         getElement("hlBorderColor").disabled = !borderEnabled;
@@ -90,7 +90,7 @@ var hlCustomizer = {
     rotatePreset: function() {
         if (++this._presetIndex > 8)
             this._presetIndex = 0;
-        var button = getElement("hlCustomizeDialog").getButton("extra2");
+        let button = getElement("hlCustomizeDialog").getButton("extra2");
         button.label.match(/\d(\/\d)$/);
         button.label = RegExp.leftContext + this._presetIndex.toString() + RegExp.$1;
         gPreviewUI.setAttribute("style", sbHighlighter.PRESET_STYLES[this._presetIndex]);

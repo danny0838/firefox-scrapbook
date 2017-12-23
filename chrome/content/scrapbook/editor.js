@@ -1,5 +1,5 @@
 
-var sbPageEditor = {
+let sbPageEditor = {
 
     get TOOLBAR() { return document.getElementById("ScrapBookEditor"); },
     get COMMENT() { return document.getElementById("ScrapBookEditComment"); },
@@ -25,8 +25,8 @@ var sbPageEditor = {
         }
 
         // Update highlighter previewers
-        var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
-        var cssText = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
+        let idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
+        let cssText = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
         sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
 
         // show and enable the edit toolbar, with several settings
@@ -41,13 +41,13 @@ var sbPageEditor = {
         this.isMainPage = false;
         if ( aID ) {
             try {
-                var mainFile = sbCommonUtils.getContentDir(aID); mainFile.append("index.html");
-                var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+                let mainFile = sbCommonUtils.getContentDir(aID); mainFile.append("index.html");
+                let curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
                 // if the current page is the index page of the id, use the item title and item icon
                 if (mainFile.equals(curFile)) {
                     this.isMainPage = true;
                     this.documentLoad(window.content.document, function(doc){
-                        var that = this;
+                        let that = this;
                         setTimeout(function(){
                             gBrowser.selectedTab.label = that.item.title;
                             gBrowser.selectedTab.setAttribute("image", that.item.icon || sbCommonUtils.getDefaultIcon(that.item.type));
@@ -63,7 +63,7 @@ var sbPageEditor = {
                     this.item.modify = this.item.create;
                     sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", this.item.modify);
                 }
-                var curFileTime = sbCommonUtils.getTimeStamp(new Date(curFile.lastModifiedTime));
+                let curFileTime = sbCommonUtils.getTimeStamp(new Date(curFile.lastModifiedTime));
                 if (curFileTime > this.item.modify) {
                     this.item.modify = curFileTime;
                     sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", curFileTime);
@@ -73,12 +73,12 @@ var sbPageEditor = {
             }
         }
         // -- icon --> link to parent folder
-        var icon = document.getElementById("ScrapBookEditIcon");
+        let icon = document.getElementById("ScrapBookEditIcon");
         if (aID) {
             icon.src = this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type);
             try {
-                var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-                var url = sbCommonUtils.convertFileToURL(curFile.parent);
+                let curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+                let url = sbCommonUtils.convertFileToURL(curFile.parent);
                 icon.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
             } catch(ex) {
                 sbCommonUtils.error(ex);
@@ -91,7 +91,7 @@ var sbPageEditor = {
         try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
         // -- comment
         this.COMMENT.value = aID ? this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t") : "";
-        var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
+        let restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
         if (restoredComment) this.COMMENT.value = restoredComment;
         try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
         // -- inner link and attach file button
@@ -126,7 +126,7 @@ var sbPageEditor = {
                     // check document type and make sure it's a file
                     if (doc.contentType != "text/html") return;
                     // turn on HTMLEditor, without marking as changed
-                    var _changed = sbCommonUtils.documentData(doc, "changed");
+                    let _changed = sbCommonUtils.documentData(doc, "changed");
                     sbHtmlEditor.init(window.content.document, 1);
                     if (!_changed) sbCommonUtils.documentData(doc, "changed", false);
                 }, this);
@@ -145,7 +145,7 @@ var sbPageEditor = {
             return;
         }
         aDoc.defaultView.addEventListener("load", function(aEvent){
-            var doc = aEvent.originalTarget;
+            let doc = aEvent.originalTarget;
             aCallback.call(aThisArg, doc);
         }, true);
     },
@@ -163,7 +163,7 @@ var sbPageEditor = {
             arguments.callee.domEraserToggle = sbCommonUtils.getPref("key.domEraser.quit2", "");
             arguments.callee.htmlEditorToggle = sbCommonUtils.getPref("key.htmlEditor.quit", "");
         }
-        var shortcut = sbShortcut.fromEvent(aEvent);
+        let shortcut = sbShortcut.fromEvent(aEvent);
         // F9
         if (arguments.callee.domEraserToggle && shortcut.toString() == arguments.callee.domEraserToggle) {
             sbDOMEraser.init(1);
@@ -190,7 +190,7 @@ var sbPageEditor = {
         }
         // 1-8 or Alt + 1-8
         if (/^(?:Alt\+)?([1-8])$/.test(shortcut.toString())) {
-            var idx = parseInt(RegExp.$1, 10);
+            let idx = parseInt(RegExp.$1, 10);
             sbPageEditor.highlight(idx);
             return;
         }
@@ -206,7 +206,7 @@ var sbPageEditor = {
 
     toggleComment: function() {
         this.multiline = !this.multiline;
-        var val = this.COMMENT.value;
+        let val = this.COMMENT.value;
         this.COMMENT.setAttribute("multiline", this.multiline);
         this.COMMENT.setAttribute("style", this.multiline ? "height:100px;" : "padding:2px;");
         if ( this.multiline ) {
@@ -229,21 +229,21 @@ var sbPageEditor = {
     },
 
     getSelection: function(aWindow) {
-        var sel = aWindow.getSelection();
+        let sel = aWindow.getSelection();
         return !sel.isCollapsed ? sel : false;
     },
 
     getSelectionHTML: function(aSelection) {
-        var range = aSelection.getRangeAt(0);
-        var content = range.cloneContents();
-        var elem = aSelection.anchorNode.ownerDocument.createElement("div");
+        let range = aSelection.getRangeAt(0);
+        let content = range.cloneContents();
+        let elem = aSelection.anchorNode.ownerDocument.createElement("div");
         elem.appendChild(content);
         return elem.innerHTML;
     },
 
     cutter: function() {
-        var win = sbCommonUtils.getFocusedWindow();
-        var sel = this.getSelection(win);
+        let win = sbCommonUtils.getFocusedWindow();
+        let sel = this.getSelection(win);
         if ( !sel ) return;
         this.allowUndo(win.document);
         sel.deleteFromDocument();
@@ -253,15 +253,15 @@ var sbPageEditor = {
         // update the dropdown list
         if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
         document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
-        var style = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
+        let style = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
         sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), style);
         // check and get selection
-        var win = sbCommonUtils.getFocusedWindow();
-        var sel = this.getSelection(win);
+        let win = sbCommonUtils.getFocusedWindow();
+        let sel = this.getSelection(win);
         if ( !sel ) return;
         // apply
         this.allowUndo(win.document);
-        var attr = {
+        let attr = {
             "data-sb-id": (new Date()).valueOf(),
             "data-sb-obj": "linemarker",
             "class": "linemarker-marked-line", // for downward compatibility with ScrapBook / ScrapBook Plus
@@ -271,15 +271,15 @@ var sbPageEditor = {
     },
 
     removeSbObjectsSelected: function() {
-        var win = sbCommonUtils.getFocusedWindow();
-        var sel = this.getSelection(win);
+        let win = sbCommonUtils.getFocusedWindow();
+        let sel = this.getSelection(win);
         if ( !sel ) return;
         this.allowUndo(win.document);
-        var selRange = sel.getRangeAt(0);
-        var node = selRange.startContainer;
+        let selRange = sel.getRangeAt(0);
+        let node = selRange.startContainer;
         if ( node.nodeName == "#text" ) node = node.parentNode;
-        var nodeRange = win.document.createRange();
-        var nodeToDel = [];
+        let nodeRange = win.document.createRange();
+        let nodeToDel = [];
         traceTree: while ( true ) {
             nodeRange.selectNode(node);
             if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 ) {
@@ -296,26 +296,26 @@ var sbPageEditor = {
                 node = node.nextSibling;
             }
         }
-        for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
+        for ( let i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
     },
 
     removeSbObjects: function() {
-        var nodeToDel = [];
+        let nodeToDel = [];
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-            var doc = win.document;
+            let doc = win.document;
             this.allowUndo(doc);
-            var elems = doc.getElementsByTagName("*");
-            for ( var i = 0; i < elems.length; i++ ) nodeToDel.push(elems[i]);
+            let elems = doc.getElementsByTagName("*");
+            for ( let i = 0; i < elems.length; i++ ) nodeToDel.push(elems[i]);
         }, this);
-        for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
+        for ( let i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
     },
 
     removeElementsByTagName: function(aTagName) {
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-            var doc = win.document;
+            let doc = win.document;
             this.allowUndo(doc);
-            var elems = doc.getElementsByTagName(aTagName), toRemove = [];
-            for ( var i = 0; i < elems.length; i++ ) {
+            let elems = doc.getElementsByTagName(aTagName), toRemove = [];
+            for ( let i = 0; i < elems.length; i++ ) {
                 toRemove.push(elems[i]);
             }
             toRemove.forEach(function(elem){
@@ -332,16 +332,16 @@ var sbPageEditor = {
             // not an element or a dead object, skip
             return -1;
         }
-        var type = sbCommonUtils.getSbObjectRemoveType(aNode);
+        let type = sbCommonUtils.getSbObjectRemoveType(aNode);
         switch (type) {
             case 1:
-                var els = sbCommonUtils.getSbObjectsById(aNode);
+                let els = sbCommonUtils.getSbObjectsById(aNode);
                 for (var i=0, len=els.length; i<len; ++i) {
                     els[i].parentNode.removeChild(els[i]);
                 }
                 break;
             case 2:
-                var els = sbCommonUtils.getSbObjectsById(aNode);
+                let els = sbCommonUtils.getSbObjectsById(aNode);
                 for (var i=0, len=els.length; i<len; ++i) {
                     this.unwrapNode(els[i]);
                 }
@@ -351,16 +351,16 @@ var sbPageEditor = {
     },
 
     unwrapNode: function(aNode) {
-        var childs = aNode.childNodes;
-        var parent = aNode.parentNode;
+        let childs = aNode.childNodes;
+        let parent = aNode.parentNode;
         while ( childs.length ) parent.insertBefore(childs[0], aNode);
         parent.removeChild(aNode);
         parent.normalize();
     },
 
     selection2Title: function(aElement) {
-        var win = sbCommonUtils.getFocusedWindow();
-        var sel = this.getSelection(win);
+        let win = sbCommonUtils.getFocusedWindow();
+        let sel = this.getSelection(win);
         if ( !sel ) return;
         aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 150, 180);
         sel.removeAllRanges();
@@ -381,7 +381,7 @@ var sbPageEditor = {
 
     allowUndo: function(aDoc) {
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
-        var histories = sbCommonUtils.documentData(aDoc, "histories");
+        let histories = sbCommonUtils.documentData(aDoc, "histories");
         if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
         if (aDoc.body) {
             histories.push(aDoc.body.cloneNode(true));
@@ -391,10 +391,10 @@ var sbPageEditor = {
 
     undo: function(aDoc) {
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
-        var histories = sbCommonUtils.documentData(aDoc, "histories");
+        let histories = sbCommonUtils.documentData(aDoc, "histories");
         if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
         while ( histories.length ) {
-            var prevBody = histories.pop();
+            let prevBody = histories.pop();
             if (!sbCommonUtils.isDeadObject(prevBody)) {
                 sbCommonUtils.documentData(aDoc, "changed", true);
                 aDoc.body.parentNode.replaceChild(prevBody, aDoc.body);
@@ -407,7 +407,7 @@ var sbPageEditor = {
 
     checkModify: function() {
         if ( sbCommonUtils.documentData(window.content.document, "propertyChanged") ) this.saveResource();
-        var changed = false;
+        let changed = false;
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
             if (sbCommonUtils.documentData(win.document, "changed")) changed = true;
         }, this);
@@ -423,7 +423,7 @@ var sbPageEditor = {
             sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
                 this.documentBeforeSave(win.document);
             }, this);
-            var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
+            let ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
             if ( ret ) {
                 this.exit();
                 return;
@@ -438,7 +438,7 @@ var sbPageEditor = {
         // if for some reason the item no longer exists, abort
         if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
         // acquires the id from current uri and check again for safe
-        var curURL = window.content.location.href;
+        let curURL = window.content.location.href;
         if (sbBrowserOverlay.getID(curURL) != this.item.id) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_SAVE_FILE", curURL));
             return;
@@ -452,19 +452,19 @@ var sbPageEditor = {
         // check pass, exec the saving
         this.disable(true, true);
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-            var doc = win.document;
+            let doc = win.document;
             if ( ["text/html", "application/xhtml+xml"].indexOf(doc.contentType) < 0 ) {
                 sbCommonUtils.alert(sbCommonUtils.lang("MSG_CANT_MODIFY", doc.contentType));
                 return;
             }
-            var charset = doc.characterSet;
+            let charset = doc.characterSet;
             if (charset != "UTF-8") {
                 sbCommonUtils.alert(sbCommonUtils.lang("MSG_NOT_UTF8", doc.location.href));
             }
             this.documentBeforeSave(doc);
-            var rootNode = doc.getElementsByTagName("html")[0];
-            var src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
-            var file = sbCommonUtils.convertURLToFile(doc.location.href);
+            let rootNode = doc.getElementsByTagName("html")[0];
+            let src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
+            let file = sbCommonUtils.convertURLToFile(doc.location.href);
             sbCommonUtils.writeFile(file, src, charset);
             this.documentAfterSave(doc);
             sbCommonUtils.documentData(doc, "changed", false);
@@ -475,9 +475,9 @@ var sbPageEditor = {
     saveResource: function() {
         if ( !this.item ) return;
         if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
-        var newTitle = document.getElementById("ScrapBookEditTitle").value;
-        var newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
-        var newModify = sbCommonUtils.getTimeStamp();
+        let newTitle = document.getElementById("ScrapBookEditTitle").value;
+        let newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
+        let newModify = sbCommonUtils.getTimeStamp();
         sbDataSource.setProperty(sbBrowserOverlay.resource, "title",   newTitle);
         sbDataSource.setProperty(sbBrowserOverlay.resource, "comment", newComment);
         sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", newModify);
@@ -503,13 +503,13 @@ var sbPageEditor = {
         this.enabled = !isDisable;
         sbDOMEraser.init(0);
         if (isDisable && !isTemp) sbHtmlEditor.init(null, 0);
-        var elems = this.TOOLBAR.childNodes;
-        for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = isDisable;
+        let elems = this.TOOLBAR.childNodes;
+        for ( let i = 0; i < elems.length; i++ ) elems[i].disabled = isDisable;
         if (!isDisable) sbHtmlEditor.init(null, 2);
     },
 
     toggle: function() {
-        var id = sbBrowserOverlay.getID();
+        let id = sbBrowserOverlay.getID();
         if ( !id ) return;
         this.TOOLBAR.setAttribute("autoshow", this.TOOLBAR.hidden);
         sbBrowserOverlay.editMode = this.TOOLBAR.hidden;
@@ -528,13 +528,13 @@ var sbPageEditor = {
         if ( aWindow.document.getElementById(aID) ) {
             return;
         }
-        var newNode = aWindow.document.createElement("style");
+        let newNode = aWindow.document.createElement("style");
         newNode.setAttribute("data-sb-obj", "stylesheet-temp");
         newNode.setAttribute("media", "screen");
         newNode.setAttribute("type", "text/css");
         newNode.setAttribute("id", aID);
         newNode.appendChild(aWindow.document.createTextNode(aString));
-        var headNode = aWindow.document.getElementsByTagName("head")[0];
+        let headNode = aWindow.document.getElementsByTagName("head")[0];
         if ( headNode ) headNode.appendChild(newNode);
     },
 
@@ -544,7 +544,7 @@ var sbPageEditor = {
 
     documentBeforeEdit: function(aDoc) {
         if (this.item && this.item.type != "notex") {
-            var indicate = document.getElementById("ScrapBookStatusPopupD");
+            let indicate = document.getElementById("ScrapBookStatusPopupD");
             indicate = indicate ? indicate.getAttribute("checked") : false;
             if (indicate) sbInfoViewer.toggleIndicator(true);
         }
@@ -552,25 +552,25 @@ var sbPageEditor = {
 
     documentBeforeSave: function(aDoc) {
         // save all freenotes
-        var nodes = aDoc.getElementsByTagName("div");
-        for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
-            var node = nodes[i];
+        let nodes = aDoc.getElementsByTagName("div");
+        for ( let i = nodes.length - 1; i >= 0 ; i-- ) {
+            let node = nodes[i];
             if ( sbCommonUtils.getSbObjectType(node) == "freenote" && node.getAttribute("data-sb-active")) {
                 sbAnnotationService.saveFreenote(node);
             }
         }
         // remove temp styles
-        var nodes = aDoc.getElementsByTagName("style");
-        for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
-            var node = nodes[i];
+        let nodes = aDoc.getElementsByTagName("style");
+        for ( let i = nodes.length - 1; i >= 0 ; i-- ) {
+            let node = nodes[i];
             if ( sbCommonUtils.getSbObjectType(node) == "stylesheet-temp") {
                 sbCommonUtils.removeNode(node);
             }
         }
         // record the status of todo form elements
-        var nodes = aDoc.getElementsByTagName("input");
-        for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
-            var node = nodes[i];
+        let nodes = aDoc.getElementsByTagName("input");
+        for ( let i = nodes.length - 1; i >= 0 ; i-- ) {
+            let node = nodes[i];
             if ( sbCommonUtils.getSbObjectType(node) == "todo") {
                 switch (node.type.toLowerCase()) {
                     case "checkbox":
@@ -587,21 +587,21 @@ var sbPageEditor = {
                 }
             }
         }
-        var nodes = aDoc.getElementsByTagName("textarea");
-        for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
-            var node = nodes[i];
+        let nodes = aDoc.getElementsByTagName("textarea");
+        for ( let i = nodes.length - 1; i >= 0 ; i-- ) {
+            let node = nodes[i];
             if ( sbCommonUtils.getSbObjectType(node) == "todo") {
                 node.textContent = node.value;
             }
         }
         // flush title for the main page if it's notex
         if (this.item && this.item.type == "notex") {
-            var title = this.isMainPage ? this.item.title : gBrowser.selectedTab.label;
-            var titleNodes = [];
-            var titleSrcNodes = [];
-            var nodes = aDoc.getElementsByTagName("*");
-            for ( var i = 0; i < nodes.length; i++ ) {
-                var node = nodes[i];
+            let title = this.isMainPage ? this.item.title : gBrowser.selectedTab.label;
+            let titleNodes = [];
+            let titleSrcNodes = [];
+            let nodes = aDoc.getElementsByTagName("*");
+            for ( let i = 0; i < nodes.length; i++ ) {
+                let node = nodes[i];
                 switch (sbCommonUtils.getSbObjectType(node)) {
                     case "title": titleNodes.push(node); break;
                     case "title-src": titleSrcNodes.push(node); break;
@@ -609,7 +609,7 @@ var sbPageEditor = {
             }
             if (titleSrcNodes.length) {
                 titleSrcNodes.forEach(function(node){
-                    var text = node.textContent;
+                    let text = node.textContent;
                     if (text) title = text;
                 });
             }
@@ -633,10 +633,10 @@ var sbPageEditor = {
 
 
 
-var sbHtmlEditor = {
+let sbHtmlEditor = {
 
     get strftime() {
-        var { strftime } = Components.utils.import("resource://scrapbook-modules/lib/strftime.jsm", {});
+        let { strftime } = Components.utils.import("resource://scrapbook-modules/lib/strftime.jsm", {});
         delete this.strftime;
         return this.strftime = strftime;
     },
@@ -648,7 +648,7 @@ var sbHtmlEditor = {
         if (arguments.callee.done) return;
         arguments.callee.done = true;
 
-        var that = this;
+        let that = this;
 
         // init shortkey table
         [
@@ -701,7 +701,7 @@ var sbHtmlEditor = {
             "wrapHTML9",
             "wrapHTML0",
         ].forEach(function(cmd){
-            var key = sbCommonUtils.getPref("key.htmlEditor." + cmd, "");
+            let key = sbCommonUtils.getPref("key.htmlEditor." + cmd, "");
             if (key) {
                 that._shortcutMap[key] = cmd;
             }
@@ -711,7 +711,7 @@ var sbHtmlEditor = {
         Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
             for (var i in that._shortcutMap) {
                 if (elem.value == that._shortcutMap[i]) {
-                    var shortcut = sbShortcut.fromString(i);
+                    let shortcut = sbShortcut.fromString(i);
                     elem.setAttribute("acceltext", shortcut.getUIString());
                     return;
                 }
@@ -731,9 +731,9 @@ var sbHtmlEditor = {
     init: function(aDoc, aStateFlag) {
         this._firstInit();
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
-        var wasEnabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
+        let wasEnabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
         if ( aStateFlag === undefined ) aStateFlag = wasEnabled ? 0 : 1;
-        var toEnable = this.enabled = (aStateFlag === 2) ? wasEnabled : (aStateFlag == 1);
+        let toEnable = this.enabled = (aStateFlag === 2) ? wasEnabled : (aStateFlag == 1);
         document.getElementById("ScrapBookEditHTML").checked = toEnable;
         document.getElementById("ScrapBookHighlighter").disabled = toEnable;
         document.getElementById("ScrapBookEditAnnotation").disabled = toEnable;
@@ -753,9 +753,9 @@ var sbHtmlEditor = {
                 this.initEvent(win, 1);
             }, this);
             if ( aDoc.designMode != "on" ) {
-                var sel = aDoc.defaultView.getSelection();
+                let sel = aDoc.defaultView.getSelection();
                 // backup original selection ranges
-                var ranges = [];
+                let ranges = [];
                 for (var i=0, len=sel.rangeCount; i<len; i++) {
                     ranges.push(sel.getRangeAt(i))
                 }
@@ -767,7 +767,7 @@ var sbHtmlEditor = {
                     aDoc.designMode = "on";
                 } catch (ex) {}    
                 // restore the selection
-                var sel = aDoc.defaultView.getSelection();
+                let sel = aDoc.defaultView.getSelection();
                 sel.removeAllRanges();
                 for (var i=0, len=ranges.length; i<len; i++) {
                     sel.addRange(ranges[i]);
@@ -800,19 +800,19 @@ var sbHtmlEditor = {
     },
 
     handleInputEvent: function(aEvent) {
-        var doc = aEvent.originalTarget.ownerDocument;
+        let doc = aEvent.originalTarget.ownerDocument;
         sbCommonUtils.documentData(doc, "changed", true);
     },
 
     handleKeyEvent: function(aEvent) {
         // set variables and check whether it's a defined hotkey combination
-        var shortcut = sbShortcut.fromEvent(aEvent);
-        var key = shortcut.toString();
-        var callback_name = sbHtmlEditor._shortcutMap[key];
+        let shortcut = sbShortcut.fromEvent(aEvent);
+        let key = shortcut.toString();
+        let callback_name = sbHtmlEditor._shortcutMap[key];
         if (!callback_name) return;
 
         // now we are sure we have the hotkey
-        var callback = sbHtmlEditor["cmd_" + callback_name];
+        let callback = sbHtmlEditor["cmd_" + callback_name];
         aEvent.preventDefault();
         try {
             // event.stopImmediatePropagation is supported since Firefox 10
@@ -822,7 +822,7 @@ var sbHtmlEditor = {
         }
 
         // check the document is editable and set
-        var doc = sbHtmlEditor.currentDocument();
+        let doc = sbHtmlEditor.currentDocument();
         if (!doc.body || doc.designMode != "on") return;
 
         // The original key effect could not be blocked completely
@@ -834,10 +834,10 @@ var sbHtmlEditor = {
     },
 
     handlePopupCommand: function(aCallback) {
-        var callback = sbHtmlEditor["cmd_" + aCallback];
+        let callback = sbHtmlEditor["cmd_" + aCallback];
 
         // check the document is editable and set
-        var doc = sbHtmlEditor.currentDocument();
+        let doc = sbHtmlEditor.currentDocument();
         if (!doc.body || doc.designMode != "on") return;
 
         callback.call(sbHtmlEditor, doc);
@@ -886,9 +886,9 @@ var sbHtmlEditor = {
     },
 
     cmd_setColor: function (aDoc) {
-        var data = {};
+        let data = {};
         // prompt the dialog for user input
-        var accepted = window.top.openDialog("chrome://scrapbook/content/editor_color.xul", "ScrapBook:PickColor", "chrome,modal,centerscreen", data);
+        let accepted = window.top.openDialog("chrome://scrapbook/content/editor_color.xul", "ScrapBook:PickColor", "chrome,modal,centerscreen", data);
         if (data.result != 1) return;
         aDoc.execCommand("styleWithCSS", false, true);
         if (data.textColor) {
@@ -989,39 +989,39 @@ var sbHtmlEditor = {
     },
 
     cmd_attachLink: function (aDoc) {
-        var sel = aDoc.defaultView.getSelection();
+        let sel = aDoc.defaultView.getSelection();
         // fill the selection it looks like an URL
         // use a very wide standard, which allows as many cases as may be used
-        var selText = sel.toString();
+        let selText = sel.toString();
         if (selText && selText.match(/^(\w+:[^\t\n\r\v\f]*)/i)) {
-            var url = RegExp.$1;
+            let url = RegExp.$1;
         }
         // retrieve selected id from sidebar
         // -- if the sidebar is closed, we may get an error
         try {
-            var sidebarId = sbCommonUtils.getSidebarId("sidebar");
-            var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
+            let sidebarId = sbCommonUtils.getSidebarId("sidebar");
+            let res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
         } catch(ex) {}
         // -- check the selected resource
         if (res && res.length) {
             res = res[0];
-            var type = sbDataSource.getProperty(res, "type");
+            let type = sbDataSource.getProperty(res, "type");
             if ( ["folder", "separator"].indexOf(type) === -1 ) {
-                var id = sbDataSource.getProperty(res, "id");
+                let id = sbDataSource.getProperty(res, "id");
             }
         }
         // prompt the dialog for user input
-        var data = {
+        let data = {
             id: id,
             url: url,
             item: sbPageEditor.item,
         };
-        var accepted = window.top.openDialog("chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", data);
+        let accepted = window.top.openDialog("chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", data);
         if (data.result != 1) return;
         if (data.url_use) {  // insert link?
             // attach the link
             if (data.format) {
-                var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+                let html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
                     URL: sbCommonUtils.escapeHTML(data.url, false, true),
                     TITLE: "",
                     THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(data.url, false, true) : sbPageEditor.getSelectionHTML(sel),
@@ -1031,11 +1031,11 @@ var sbHtmlEditor = {
         } else if (data.id_use) {  // insert inner link?
             // we can construct inner link only for those with valid id
             if (!sbPageEditor.item) return;
-            var id = data.id;
+            let id = data.id;
             // check the specified id
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+            let res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
             if ( sbDataSource.exists(res) ) {
-                var type = sbDataSource.getProperty(res, "type");
+                let type = sbDataSource.getProperty(res, "type");
                 if ( ["folder", "separator"].indexOf(type) !== -1 ) {
                     res = null;
                 }
@@ -1047,7 +1047,7 @@ var sbHtmlEditor = {
             }
             // attach the link
             if (data.format) {
-                var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+                let html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
                     URL: (type == "bookmark") ? sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "source"), false, true) : sbCommonUtils.escapeHTML(makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id), false, true),
                     TITLE: sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "title"), false, true),
                     THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(sbDataSource.getProperty(res, "title"), false, true) : sbPageEditor.getSelectionHTML(sel),
@@ -1057,9 +1057,9 @@ var sbHtmlEditor = {
         }
         
         function makeRelativeLink(aBaseURL, aBaseId, aTargetId) {
-            var result = "";
-            var contDir = sbCommonUtils.getContentDir(aBaseId);
-            var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+            let result = "";
+            let contDir = sbCommonUtils.getContentDir(aBaseId);
+            let checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
             while (!checkFile.equals(contDir)){
                 result += "../";
                 checkFile = checkFile.parent;
@@ -1072,24 +1072,24 @@ var sbHtmlEditor = {
         // we can upload file only for those with valid id
         if (!sbPageEditor.item) return;
         // check if the current page is local and get its path
-        var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
+        let htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
         if (!htmlFile) return;
         // init
-        var sel = aDoc.defaultView.getSelection();
-        var selText = sel.toString();
+        let sel = aDoc.defaultView.getSelection();
+        let selText = sel.toString();
         if (selText && selText.match(/^([^\t\n\r\v\f]*)/i)) {
-            var url = RegExp.$1;
+            let url = RegExp.$1;
         }
         // prompt the dialog for user input
-        var data = { url: url, filename: htmlFile.leafName };
-        var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", data);
+        let data = { url: url, filename: htmlFile.leafName };
+        let accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", data);
         if (data.result != 1) return;
         if (data.file_use) {  // insert file ?
-            var filename = data.file.leafName;
-            var filename2 = sbCommonUtils.validateFileName(filename);
+            let filename = data.file.leafName;
+            let filename2 = sbCommonUtils.validateFileName(filename);
             try {
                 // copy the selected file
-                var destFile = htmlFile.parent.clone();
+                let destFile = htmlFile.parent.clone();
                 destFile.append(filename2);
                 if ( destFile.exists() && destFile.isFile() ) {
                     if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
@@ -1102,7 +1102,7 @@ var sbHtmlEditor = {
             }
             // insert to the document
             if (data.format) {
-                var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+                let html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
                     FILE: sbCommonUtils.escapeHTML(filename, false, true),
                     FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
                     THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename, false, true) : sbPageEditor.getSelectionHTML(sel),
@@ -1110,27 +1110,27 @@ var sbHtmlEditor = {
                 aDoc.execCommand("insertHTML", false, html);
             }
         } else if (data.html_use) {  // insert html ?
-            var title = data.html;
-            var filename = title + ".html";
-            var filename2 = sbCommonUtils.validateFileName(filename);
+            let title = data.html;
+            let filename = title + ".html";
+            let filename2 = sbCommonUtils.validateFileName(filename);
             try {
                 if (filename2 == "index.html") throw "";  // do not allow to overwrite index page
-                var destFile = htmlFile.parent.clone();
+                let destFile = htmlFile.parent.clone();
                 destFile.append(filename2);
                 if ( destFile.exists() && destFile.isFile() ) {
                     if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                 }
                 // check the template file, create one if not exist
-                var template = sbCommonUtils.getScrapBookDir().clone();
+                let template = sbCommonUtils.getScrapBookDir().clone();
                 template.append("notex_template.html");
                 if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/notex_template.html", template);
                 // create content
-                var content = sbCommonUtils.readFile(template, "UTF-8");
+                let content = sbCommonUtils.readFile(template, "UTF-8");
                 content = sbCommonUtils.stringTemplate(content, /<%([\w_]+)%>/g, {
                     NOTE_TITLE: title,
                     SCRAPBOOK_DIR: (function(aFile){
-                        var result = "", checkFile = aFile.parent;
-                        var sbDir = sbCommonUtils.getScrapBookDir();
+                        let result = "", checkFile = aFile.parent;
+                        let sbDir = sbCommonUtils.getScrapBookDir();
                         while (!checkFile.equals(sbDir)){
                             result += "../";
                             checkFile = checkFile.parent;
@@ -1139,8 +1139,8 @@ var sbHtmlEditor = {
                         return result.substring(0, result.length -1);
                     })(destFile),
                     DATA_DIR: (function(aFile, aID){
-                        var result = "", checkFile = aFile.parent;
-                        var dataDir = sbCommonUtils.getContentDir(aID);
+                        let result = "", checkFile = aFile.parent;
+                        let dataDir = sbCommonUtils.getContentDir(aID);
                         while (!checkFile.equals(dataDir)){
                             result += "../";
                             checkFile = checkFile.parent;
@@ -1160,7 +1160,7 @@ var sbHtmlEditor = {
             }
             // insert to the document
             if (data.insert && data.format) {
-                var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+                let html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
                     FILE: sbCommonUtils.escapeHTML(filename, false, true),
                     FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
                     THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename, false, true) : sbPageEditor.getSelectionHTML(sel),
@@ -1174,20 +1174,20 @@ var sbHtmlEditor = {
         // we can save history only for those with valid id
         if (!sbPageEditor.item) return;
         // check if the current page is local and get its path
-        var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
+        let htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
         if (!htmlFile) return;
         // check if it's an HTML file
         if (sbCommonUtils.splitFileName(htmlFile.leafName)[1] != "html") return;
         // prompt the dialog for user input
-        var data = {};
-        var accepted = window.top.openDialog("chrome://scrapbook/content/editor_backup.xul", "ScrapBook:backupFile", "chrome,modal,centerscreen,resizable", data);
+        let data = {};
+        let accepted = window.top.openDialog("chrome://scrapbook/content/editor_backup.xul", "ScrapBook:backupFile", "chrome,modal,centerscreen,resizable", data);
         if (data.result != 1) return;
         // insert hist html
-        var title = data.hist_html;
-        var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
-        var filename2 = sbCommonUtils.validateFileName(filename);
+        let title = data.hist_html;
+        let filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
+        let filename2 = sbCommonUtils.validateFileName(filename);
         try {
-            var destFile = htmlFile.parent.clone();
+            let destFile = htmlFile.parent.clone();
             destFile.append(filename2);
             if ( destFile.exists() && destFile.isFile() ) {
                 if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
@@ -1202,24 +1202,24 @@ var sbHtmlEditor = {
     },
 
     cmd_horizontalLine: function (aDoc) {
-        var html = '<hr/>';
+        let html = '<hr/>';
         aDoc.execCommand("insertHTML", false, html);
     },
 
     cmd_insertDate: function (aDoc) {
-        var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
-        var time = "&lt;time&gt;";
+        let fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
+        let time = "&lt;time&gt;";
         try { time = this.strftime(fmt); } catch (ex) {}
         aDoc.execCommand("insertHTML", false, time);
     },
 
     cmd_insertTodoBox: function (aDoc) {
-        var html = '<input type="checkbox" data-sb-obj="todo" />';
+        let html = '<input type="checkbox" data-sb-obj="todo" />';
         aDoc.execCommand("insertHTML", false, html);
     },
 
     cmd_insertTodoBoxDone: function (aDoc) {
-        var html = '<input type="checkbox" data-sb-obj="todo" checked="checked" />';
+        let html = '<input type="checkbox" data-sb-obj="todo" checked="checked" />';
         aDoc.execCommand("insertHTML", false, html);
     },
 
@@ -1264,17 +1264,17 @@ var sbHtmlEditor = {
     },
 
     _wrapHTML: function (aDoc, aIdx) {
-        var sel = aDoc.defaultView.getSelection();
-        var html = sel.isCollapsed ? "{THIS}" : sbPageEditor.getSelectionHTML(sel);
-        var wrapper = sbCommonUtils.getPref("edit.wrapperFormat." + aIdx, "") || "<code>{THIS}</code>";
+        let sel = aDoc.defaultView.getSelection();
+        let html = sel.isCollapsed ? "{THIS}" : sbPageEditor.getSelectionHTML(sel);
+        let wrapper = sbCommonUtils.getPref("edit.wrapperFormat." + aIdx, "") || "<code>{THIS}</code>";
         html = wrapper.replace(/{THIS}/g, html);
         aDoc.execCommand("insertHTML", false, html);
     },
     
     cmd_insertSource: function (aDoc) {
-        var sel = aDoc.defaultView.getSelection();
-        var collapsed = sel.isCollapsed;
-        var data = {
+        let sel = aDoc.defaultView.getSelection();
+        let collapsed = sel.isCollapsed;
+        let data = {
             preTag: "",
             preContext: "",
             value: "",
@@ -1283,14 +1283,14 @@ var sbHtmlEditor = {
         };
         if (!collapsed) {
             // get selection area to edit
-            var range = sel.getRangeAt(0);
-            var ac = getReplaceableNode(range.commonAncestorContainer);
-            var source = sbCommonUtils.getOuterHTML(ac);
-            var source_inner = ac.innerHTML;
-            var istart = source.lastIndexOf(source_inner);
-            var start = getOffsetInSource(ac, range.startContainer, range.startOffset);
-            var end = getOffsetInSource(ac, range.endContainer, range.endOffset);
-            var iend = istart + source_inner.length;
+            let range = sel.getRangeAt(0);
+            let ac = getReplaceableNode(range.commonAncestorContainer);
+            let source = sbCommonUtils.getOuterHTML(ac);
+            let source_inner = ac.innerHTML;
+            let istart = source.lastIndexOf(source_inner);
+            let start = getOffsetInSource(ac, range.startContainer, range.startOffset);
+            let end = getOffsetInSource(ac, range.endContainer, range.endOffset);
+            let iend = istart + source_inner.length;
             data.preTag = source.substring(0, istart);
             data.preContext = source.substring(istart, start);
             data.value = source.substring(start, end);
@@ -1303,28 +1303,28 @@ var sbHtmlEditor = {
         if (data.result) {
             if (!collapsed) {
                 // reset selection to the common ancestor container of the first range
-                var range = aDoc.createRange();
+                let range = aDoc.createRange();
                 if (ac.nodeName != "BODY") {
                     // replace outer tag
-                    var html = data.preTag + data.preContext + data.value + data.postContext + data.postTag;
+                    let html = data.preTag + data.preContext + data.value + data.postContext + data.postTag;
                     range.setStartBefore(ac);
                     range.setEndAfter(ac);
                 } else {
                     // replace inner tag
-                    var html = data.preContext + data.value + data.postContext;
+                    let html = data.preContext + data.value + data.postContext;
                     range.selectNodeContents(ac);
                 }
                 sel.removeAllRanges();
                 sel.addRange(range);
             } else {
-                var html = data.value;
+                let html = data.value;
             }
             aDoc.execCommand("insertHTML", false, html);
         }
 
         function getReplaceableNode(aNode) {
             // replacing these nodes could get a bad and not-undoable result
-            var forbiddenList = ["#text", "THEAD", "TBODY", "TFOOT", "TR"];
+            let forbiddenList = ["#text", "THEAD", "TBODY", "TFOOT", "TR"];
             while (forbiddenList.indexOf(aNode.nodeName) >= 0) {
                 aNode = aNode.parentNode;
             }
@@ -1332,7 +1332,7 @@ var sbHtmlEditor = {
         }
 
         function getOffsetInSource(aNode, aDescNode, aDescOffset) {
-            var pos = 0;
+            let pos = 0;
             switch (aDescNode.nodeName) {
                 case "#text":
                     pos += textToHtmlOffset(aDescNode, aDescOffset);
@@ -1345,18 +1345,18 @@ var sbHtmlEditor = {
                     break;
                 default:
                     // in this case aDescOffset means the real desc node is the nth child of aDescNode
-                    var aDescNodeParent = aDescNode;
+                    let aDescNodeParent = aDescNode;
                     aDescNode = aDescNode.childNodes[aDescOffset];
                     break;
             }
             if (aDescNode) {
-                var tmpParent = aDescNode;
-                var tmpSibling = aDescNode.previousSibling;
+                let tmpParent = aDescNode;
+                let tmpSibling = aDescNode.previousSibling;
             } else {
                 // no end element means that the selection ends after the last child of aDescNodeParent
                 // so we walk for all elements
-                var tmpSibling = aDescNodeParent.lastChild;
-                var tmpParent = tmpSibling;
+                let tmpSibling = aDescNodeParent.lastChild;
+                let tmpParent = tmpSibling;
             }
             do {
                 while (tmpSibling) {
@@ -1389,8 +1389,8 @@ var sbHtmlEditor = {
 
         function textToHtmlOffset(aNode, aOffset) {
             // if (aNode.nodeName !== "#text") return aOffset;
-            var content = (typeof aOffset == "undefined") ? aNode.textContent : aNode.textContent.substring(0, aOffset);
-            var span = aNode.ownerDocument.createElement("span");
+            let content = (typeof aOffset == "undefined") ? aNode.textContent : aNode.textContent.substring(0, aOffset);
+            let span = aNode.ownerDocument.createElement("span");
             span.appendChild(aNode.ownerDocument.createTextNode(content));
             return span.innerHTML.length;
         }
@@ -1400,7 +1400,7 @@ var sbHtmlEditor = {
 
 
 
-var sbDOMEraser = {
+let sbDOMEraser = {
 
     _shortcutMap: {},
 
@@ -1417,7 +1417,7 @@ var sbDOMEraser = {
         if (arguments.callee.done) return;
         arguments.callee.done = true;
 
-        var that = this;
+        let that = this;
 
         // init shortkey table
         [
@@ -1442,10 +1442,10 @@ var sbDOMEraser = {
            "wider3",
            "narrower3",
         ].forEach(function(cmd){
-            var key = sbCommonUtils.getPref("key.domEraser." + cmd, "");
+            let key = sbCommonUtils.getPref("key.domEraser." + cmd, "");
             if (key) {
                 // commands with a number suffix are alternatives
-                var mainCmd = cmd.replace(/\d+$/, "");
+                let mainCmd = cmd.replace(/\d+$/, "");
                 that._shortcutMap[key] = mainCmd;
             }
         });
@@ -1456,7 +1456,7 @@ var sbDOMEraser = {
     //   1: enable
     init: function(aStateFlag) {
         this._firstInit();
-        var wasEnabled = this.enabled;
+        let wasEnabled = this.enabled;
         this.enabled = (aStateFlag == 1);
         if (this.enabled == wasEnabled) return;
         document.getElementById("ScrapBookEditEraser").checked = this.enabled;
@@ -1500,7 +1500,7 @@ var sbDOMEraser = {
     initStyle: function(aWindow, aStateFlag) {
         sbCommonUtils.flattenFrames(aWindow).forEach(function(win) {
             if ( aStateFlag == 1 ) {
-                var estyle = "* { cursor: crosshair !important; }";
+                let estyle = "* { cursor: crosshair !important; }";
                 sbPageEditor.applyStyle(win, "scrapbook-eraser-style", estyle);
             } else {
                 sbPageEditor.removeStyle(win, "scrapbook-eraser-style");
@@ -1510,9 +1510,9 @@ var sbDOMEraser = {
 
     handleKeyEvent: function(aEvent) {
         // set variables and check whether it's a defined hotkey combination
-        var shortcut = sbShortcut.fromEvent(aEvent);
-        var key = shortcut.toString();
-        var command = sbDOMEraser._shortcutMap[key];
+        let shortcut = sbShortcut.fromEvent(aEvent);
+        let key = shortcut.toString();
+        let command = sbDOMEraser._shortcutMap[key];
         if (!command) return;
 
         // now we are sure we have the hotkey, skip the default key action
@@ -1540,7 +1540,7 @@ var sbDOMEraser = {
         } catch (ex) {
             aEvent.stopPropagation();
         }
-        var elem = aEvent.target;
+        let elem = aEvent.target;
         if ( aEvent.type == "mouseover" ) {
             if (sbDOMEraser._isNormalNode(elem)) {
                 elem = sbDOMEraser._findValidElement(elem, true);
@@ -1560,9 +1560,9 @@ var sbDOMEraser = {
             sbDOMEraser.lastMouseWindow = aEvent.target.ownerDocument.defaultView;
             sbDOMEraser._clearHelp();
         } else if ( aEvent.type == "click" ) {
-            var elem = sbDOMEraser.lastTarget;
+            let elem = sbDOMEraser.lastTarget;
             if (elem) {
-                var command = ( aEvent.shiftKey || aEvent.button == 2 ) ? "isolate" : "remove";
+                let command = ( aEvent.shiftKey || aEvent.button == 2 ) ? "isolate" : "remove";
                 sbDOMEraser._execCommand(sbDOMEraser.lastWindow, command, "");
             }
         }
@@ -1575,7 +1575,7 @@ var sbDOMEraser = {
 
     cmd_wider: function (aNode) {
         if (aNode && aNode.parentNode) {
-            var newNode = this._findValidElement(aNode.parentNode, true);
+            let newNode = this._findValidElement(aNode.parentNode, true);
             if (!newNode) return false;
             if (!this.widerStack) this.widerStack = [];
             this.widerStack.push(aNode);
@@ -1588,7 +1588,7 @@ var sbDOMEraser = {
     cmd_narrower: function (aNode) {
         if (!aNode) return false;
         if (!this.widerStack || !this.widerStack.length) return false;
-        var child = this.widerStack.pop();
+        let child = this.widerStack.pop();
         this._selectNode(child);
         return true;
     },
@@ -1607,13 +1607,13 @@ var sbDOMEraser = {
         if ( !aNode || !aNode.ownerDocument.body ) return false;
         this._clear();
         sbPageEditor.allowUndo(aNode.ownerDocument);
-        var i = 0;
+        let i = 0;
         while ( aNode != aNode.ownerDocument.body && ++i < 64 ) {
-            var parent = aNode.parentNode;
-            var child = parent.lastChild;
-            var j = 0;
+            let parent = aNode.parentNode;
+            let child = parent.lastChild;
+            let j = 0;
             while ( child && ++j < 1024 ) {
-                var prevChild = child.previousSibling;
+                let prevChild = child.previousSibling;
                 if ( child != aNode ) parent.removeChild(child);
                 child = prevChild;
             }
@@ -1635,7 +1635,7 @@ var sbDOMEraser = {
             aNode.style.color = "#000";
             aNode.style.backgroundColor = "#FFF";
             aNode.style.backgroundImage = "";
-            var childs = aNode.childNodes;
+            let childs = aNode.childNodes;
             for (var i=0; i<childs.length; i++) {
                 blackOnWhite(childs[i]);
             }
@@ -1655,10 +1655,10 @@ var sbDOMEraser = {
     cmd_deWrapping: function (aNode) {
         if (!aNode) return false;
         this.cmd_isolate(aNode);
-        var next = this._findValidElement(aNode);
+        let next = this._findValidElement(aNode);
         while (next) {
-            var cur = next;
-            var next = this._findValidElement(cur.parentNode);
+            let cur = next;
+            let next = this._findValidElement(cur.parentNode);
             sbPageEditor.unwrapNode(cur);
         }
         return true;
@@ -1675,15 +1675,15 @@ var sbDOMEraser = {
 
     _execCommand: function (win, command, key) {
         if (command != "help") this._clearHelp();
-        var callback = sbDOMEraser["cmd_" + command];
+        let callback = sbDOMEraser["cmd_" + command];
         if (callback.call(sbDOMEraser, sbDOMEraser.lastTarget)) {
             sbDOMEraser._showKeybox(win, command, key);
         }
     },
 
     _showHelp: function (win) {
-        var doc = win.document;
-        var id = "scrapbook-domeraser-" + (new Date()).valueOf();  // a unique id for styling
+        let doc = win.document;
+        let id = "scrapbook-domeraser-" + (new Date()).valueOf();  // a unique id for styling
 
         // clear the help if existed
         if (this.helpElem) {
@@ -1692,11 +1692,11 @@ var sbDOMEraser = {
         }
 
         // create new help
-        var helpElem = doc.createElement("div");
+        let helpElem = doc.createElement("div");
         helpElem.id = id;
         helpElem.isDOMEraser = true; // mark as ours
 
-        var content = ''
+        let content = ''
             + '<style>'
             + '#__id__, #__id__ * {'
                 + 'visibility: visible;'
@@ -1879,9 +1879,9 @@ var sbDOMEraser = {
         doc.body.appendChild(helpElem);
 
         // fix position
-        var dims = this._getWindowDimensions(win);
-        var x = dims.scrollX + (dims.width - helpElem.offsetWidth) / 2;  if (x < 0) x = 0;
-        var y = dims.scrollY + (dims.height - helpElem.offsetHeight) / 2; if (y < 0) y = 0;
+        let dims = this._getWindowDimensions(win);
+        let x = dims.scrollX + (dims.width - helpElem.offsetWidth) / 2;  if (x < 0) x = 0;
+        let y = dims.scrollY + (dims.height - helpElem.offsetHeight) / 2; if (y < 0) y = 0;
         helpElem.style.left = x + "px";
         helpElem.style.top = y + "px";
 
@@ -1895,34 +1895,34 @@ var sbDOMEraser = {
     },
 
     _showKeybox: function (win, command, key) {
-        var doc = win.document;
+        let doc = win.document;
 
         // clear previous keybox
         this._clearKeybox();
 
         // set content
-        var content = sbCommonUtils.escapeHTML(command);
+        let content = sbCommonUtils.escapeHTML(command);
         if (key) {
-            var index = command.toLowerCase().indexOf(key.toLowerCase());
+            let index = command.toLowerCase().indexOf(key.toLowerCase());
             if (index >= 0) {
-                var s1 = command.substring(0, index);
-                var s2 = command.charAt(index);
-                var s3 = command.substring(index + 1);
+                let s1 = command.substring(0, index);
+                let s2 = command.charAt(index);
+                let s3 = command.substring(index + 1);
                 content = sbCommonUtils.escapeHTML(s1) + "<b style='font-size:2em;'>" + sbCommonUtils.escapeHTML(s2) + "</b>" + sbCommonUtils.escapeHTML(s3);
             }
         }
 
         // create a keybox
-        var dims = this._getWindowDimensions(win);
-        var x = this.lastX + 10; if (x < 0) x = 0;
-        var y = dims.scrollY + this.lastY + 10; if (y < 0) y = 0;
+        let dims = this._getWindowDimensions(win);
+        let x = this.lastX + 10; if (x < 0) x = 0;
+        let y = dims.scrollY + this.lastY + 10; if (y < 0) y = 0;
 
         // if in frame, add parent window offset
-        var pos = sbDOMEraser._getFrameOffset(sbDOMEraser.lastMouseWindow);
+        let pos = sbDOMEraser._getFrameOffset(sbDOMEraser.lastMouseWindow);
         x += pos.x;
         y += pos.y;
 
-        var keyboxElem = doc.createElement("div");
+        let keyboxElem = doc.createElement("div");
         keyboxElem.isDOMEraser = true; // mark as ours
         keyboxElem.style.backgroundColor = "#dfd";
         keyboxElem.style.border = "2px solid black";
@@ -1963,7 +1963,7 @@ var sbDOMEraser = {
     // verify it's not in an element specially used by DOMEraser
     _isNormalNode: function(elem) {
         // check whether it's in our special element
-        var test = elem;
+        let test = elem;
         while (test) {
             if (test.isDOMEraser) return false;
             test = test.parentNode;
@@ -1977,8 +1977,8 @@ var sbDOMEraser = {
         while (elem) {
             if (["#document","scrollbar","html","body","frame","frameset"].indexOf(elem.nodeName.toLowerCase()) == -1) return elem;
             if (traceFrame && !elem.parentNode) {  // now elem is #document
-                var win = elem.defaultView;
-                var parent = win.parent;
+                let win = elem.defaultView;
+                let parent = win.parent;
                 // if the elem is in a frame, go out to the frame element and then go up
                 if (win != parent) {
                     elem = this._findFrameElement(win, parent);
@@ -1992,16 +1992,16 @@ var sbDOMEraser = {
 
     // find which element in parentWin owns the given frame
     _findFrameElement: function (frame, parentWin) {
-        var elems = parentWin.document.getElementsByTagName("iframe");
+        let elems = parentWin.document.getElementsByTagName("iframe");
         for (var i=0, I=elems.length; i<I; ++i) {
-            var elem = elems[i];
+            let elem = elems[i];
             if (elem.contentDocument.defaultView === frame) {
                 return elem;
             }
         }
-        var elems = parentWin.document.getElementsByTagName("frame");
+        let elems = parentWin.document.getElementsByTagName("frame");
         for (var i=0, I=elems.length; i<I; ++i) {
-            var elem = elems[i];
+            let elem = elems[i];
             if (elem.contentDocument.defaultView === frame) {
                 return elem;
             }
@@ -2010,8 +2010,8 @@ var sbDOMEraser = {
     },
 
     _getPos: function (elem) {
-        var pos = sbDOMEraser._getPosInWindow(elem);
-        var pos2 = sbDOMEraser._getFrameOffset(elem.ownerDocument.defaultView);
+        let pos = sbDOMEraser._getPosInWindow(elem);
+        let pos2 = sbDOMEraser._getFrameOffset(elem.ownerDocument.defaultView);
         pos.x += pos2.x;
         pos.y += pos2.y;
         return pos;
@@ -2019,11 +2019,11 @@ var sbDOMEraser = {
 
     // if win is a frame, get its offset relative to all parent windows
     _getFrameOffset: function(win) {
-        var pos = {x: 0, y: 0};
-        var parent = win.parent;
+        let pos = {x: 0, y: 0};
+        let parent = win.parent;
         while (win != parent) {
-            var frameElem = sbDOMEraser._findFrameElement(win, parent);
-            var framePos = sbDOMEraser._getPosInWindow(frameElem);
+            let frameElem = sbDOMEraser._findFrameElement(win, parent);
+            let framePos = sbDOMEraser._getPosInWindow(frameElem);
             pos.x += framePos.x;
             pos.y += framePos.y;
             win = parent;
@@ -2033,7 +2033,7 @@ var sbDOMEraser = {
     },
 
     _getPosInWindow: function (elem) {
-        var pos = {x: 0, y: 0};
+        let pos = {x: 0, y: 0};
         if (elem.offsetParent) {
             while (elem.offsetParent) {
                 pos.x += elem.offsetLeft;
@@ -2060,11 +2060,11 @@ var sbDOMEraser = {
 
     _addTooltip: function(aNode) {
         if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
-            var outlineStyle = "2px dashed #0000FF";
-            var labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("EDIT_REMOVE_HIGHLIGHT"));
+            let outlineStyle = "2px dashed #0000FF";
+            let labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("EDIT_REMOVE_HIGHLIGHT"));
         } else {
-            var outlineStyle = "2px solid #FF0000";
-            var labelText = "<b style='color:#000'>" + sbCommonUtils.escapeHTMLWithSpace(aNode.tagName.toLowerCase()) + "</b>" +
+            let outlineStyle = "2px solid #FF0000";
+            let labelText = "<b style='color:#000'>" + sbCommonUtils.escapeHTMLWithSpace(aNode.tagName.toLowerCase()) + "</b>" +
             (aNode.id ? ", id: " + sbCommonUtils.escapeHTMLWithSpace(aNode.id) : "") +
             (aNode.className ? ", class: " + sbCommonUtils.escapeHTMLWithSpace(aNode.className) : "");
         }
@@ -2072,12 +2072,12 @@ var sbDOMEraser = {
         setOutline(aNode, outlineStyle);
 
         function createLabel(win, elem, text) {
-            var doc = win.document;
-            var dims = sbDOMEraser._getWindowDimensions(win);
-            var pos = sbDOMEraser._getPos(elem), x = pos.x, y = pos.y;
+            let doc = win.document;
+            let dims = sbDOMEraser._getWindowDimensions(win);
+            let pos = sbDOMEraser._getPos(elem), x = pos.x, y = pos.y;
             y += elem.offsetHeight;
 
-            var labelElem = doc.createElement("div");
+            let labelElem = doc.createElement("div");
             labelElem.isDOMEraser = true; // mark as ours
             labelElem.style.backgroundColor = "#fff0cc";
             labelElem.style.border = "2px solid black";
@@ -2128,8 +2128,8 @@ var sbDOMEraser = {
     },
 
     _getWindowDimensions: function (win) {
-        var out = {};
-        var doc = win.document;
+        let out = {};
+        let doc = win.document;
 
         if (win.pageXOffset) {
             out.scrollX = win.pageXOffset;
@@ -2162,7 +2162,7 @@ var sbDOMEraser = {
 
 
 
-var sbAnnotationService = {
+let sbAnnotationService = {
 
     FREENOTE_DEFAULT_WIDTH: 250,
     FREENOTE_DEFAULT_HEIGHT: 100,
@@ -2187,7 +2187,7 @@ var sbAnnotationService = {
         if ( aEvent.type == "mousedown" ) {
             switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) ) {
                 case "freenote":
-                    var freenote = aEvent.originalTarget;
+                    let freenote = aEvent.originalTarget;
                     if (!freenote.hasAttribute("data-sb-active")) {
                         sbAnnotationService.editFreenote(freenote);
                     }
@@ -2210,14 +2210,14 @@ var sbAnnotationService = {
                 case "sticky-delete":
                     // for downward compatibility with ScrapBook X <= 1.12.0a34
                     // sticky annotation is created in old versions, replace it with a freenote
-                    var sticky = aEvent.originalTarget;
+                    let sticky = aEvent.originalTarget;
                     while (sbCommonUtils.getSbObjectType(sticky)!="sticky") sticky = sticky.parentNode;
                     if (sticky.lastChild.nodeName == "#text") {
                         // general cases
-                        var text = sticky.lastChild.data;
+                        let text = sticky.lastChild.data;
                     } else {
                         // SB/SBP unsaved sticky
-                        var text = sticky.childNodes[1].value;
+                        let text = sticky.childNodes[1].value;
                     }
                     sbAnnotationService.createFreenote({
                         element: sticky,
@@ -2228,13 +2228,13 @@ var sbAnnotationService = {
                 case "block-comment":
                     // for downward compatibility with SB <= 0.17.0
                     // block-comment is created in old versions, replace it with a freenote
-                    var bcomment = aEvent.originalTarget;
+                    let bcomment = aEvent.originalTarget;
                     if (bcomment.firstChild.nodeName == "#text") {
                         // general cases
-                        var text = bcomment.firstChild.data;
+                        let text = bcomment.firstChild.data;
                     } else {
                         // unsaved block comment
-                        var text = bcomment.firstChild.firstChild.value;
+                        let text = bcomment.firstChild.firstChild.value;
                     }
                     sbAnnotationService.createFreenote({
                         element: bcomment,
@@ -2263,28 +2263,28 @@ var sbAnnotationService = {
      * @param preset { element: <object>, content: <string>, isRelative: <bool> }
      */
     createFreenote: function(preset) {
-        var win = sbCommonUtils.getFocusedWindow();
+        let win = sbCommonUtils.getFocusedWindow();
         if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
         sbPageEditor.allowUndo(win.document);
 
         // place at the target
         if (preset) {
-            var isRelative = preset.isRelative;
-            var targetNode = preset.element;
+            let isRelative = preset.isRelative;
+            let targetNode = preset.element;
         } else {
-            var sel = sbPageEditor.getSelection(win);
+            let sel = sbPageEditor.getSelection(win);
             if (sel) {
                 // relative to the target element
-                var isRelative = true;
-                var targetNode = findTargetNode(sel.anchorNode);
+                let isRelative = true;
+                let targetNode = findTargetNode(sel.anchorNode);
             } else {
                 // absolute (in the body element)
-                var isRelative = false;
+                let isRelative = false;
             }
         }
 
         // create a new freenote
-        var mainDiv = win.content.document.createElement("div");
+        let mainDiv = win.content.document.createElement("div");
         mainDiv.setAttribute("data-sb-obj", "freenote");
         mainDiv.style.cursor = "help";
         mainDiv.style.overflow = "visible";
@@ -2299,8 +2299,8 @@ var sbAnnotationService = {
         mainDiv.style.fontSize = "small";
         mainDiv.style.lineHeight = "1.2em";
         mainDiv.style.wordWrap = "break-word";
-        var width = this.FREENOTE_DEFAULT_WIDTH;
-        var height = this.FREENOTE_DEFAULT_HEIGHT;
+        let width = this.FREENOTE_DEFAULT_WIDTH;
+        let height = this.FREENOTE_DEFAULT_HEIGHT;
         mainDiv.style.width = width + "px";
         mainDiv.style.height = height + "px";
         if ( isRelative ) {
@@ -2312,8 +2312,8 @@ var sbAnnotationService = {
                 mainDiv.style.left = targetNode.style.left;
                 mainDiv.style.top = targetNode.style.top;
             } else {
-                var left = win.scrollX + Math.round((win.innerWidth - width) / 2);
-                var top = win.scrollY + Math.round((win.innerHeight - height) / 2);
+                let left = win.scrollX + Math.round((win.innerWidth - width) / 2);
+                let top = win.scrollY + Math.round((win.innerHeight - height) / 2);
                 mainDiv.style.left = left + "px";
                 mainDiv.style.top = top  + "px";
             }
@@ -2342,7 +2342,7 @@ var sbAnnotationService = {
         this._editFreenote(mainDiv);
 
         function findTargetNode(refNode) {
-            var targetNode = refNode;
+            let targetNode = refNode;
             // must be one of these block elements
             while (["body", "div", "blockquote", "pre", "p", "td", "li", "dt", "dd"].indexOf(targetNode.nodeName.toLowerCase()) == -1 || sbCommonUtils.getSbObjectType(targetNode)) {
                 targetNode = targetNode.parentNode;
@@ -2361,11 +2361,11 @@ var sbAnnotationService = {
     },
 
     _editFreenote: function(mainDiv) {
-        var doc = mainDiv.ownerDocument, child;
-        var isRelative = mainDiv.style.position != "absolute";
+        let doc = mainDiv.ownerDocument, child;
+        let isRelative = mainDiv.style.position != "absolute";
         mainDiv.setAttribute("data-sb-active", "1");
 
-        var headDiv = doc.createElement("div");
+        let headDiv = doc.createElement("div");
         headDiv.setAttribute("data-sb-obj", "freenote-header");
         headDiv.style.cursor = isRelative ? "auto" : "move";
         headDiv.style.position = "absolute";
@@ -2377,7 +2377,7 @@ var sbAnnotationService = {
         headDiv.style.width = "inherit";
         headDiv.style.height = this.FREENOTE_HEADER_HEIGHT + "px";
 
-        var bodyDiv = doc.createElement("div");
+        let bodyDiv = doc.createElement("div");
         bodyDiv.setAttribute("data-sb-obj", "freenote-body");
         bodyDiv.setAttribute("contentEditable", true);
         bodyDiv.style.cursor = "auto";
@@ -2391,7 +2391,7 @@ var sbAnnotationService = {
         bodyDiv.style.textAlign = "inherit";
         while ((child = mainDiv.firstChild)) bodyDiv.appendChild(child);
 
-        var footDiv = doc.createElement("div");
+        let footDiv = doc.createElement("div");
         footDiv.setAttribute("data-sb-obj", "freenote-footer");
         footDiv.style.cursor = "se-resize";
         footDiv.style.margin = "0px";
@@ -2401,7 +2401,7 @@ var sbAnnotationService = {
         footDiv.style.textAlign = "inherit";
         footDiv.style.height = this.FREENOTE_FOOTER_HEIGHT + "px";
 
-        var button1 = doc.createElement("input");
+        let button1 = doc.createElement("input");
         button1.setAttribute("data-sb-obj", "freenote-save");
         button1.setAttribute("type", "image");
         button1.setAttribute("src", "chrome://scrapbook/skin/freenote_save.gif");
@@ -2411,7 +2411,7 @@ var sbAnnotationService = {
         button1.style.width = "16px";
         button1.style.height = "16px";
         button1.style.verticalAlign = "baseline";
-        var button2 = doc.createElement("input");
+        let button2 = doc.createElement("input");
         button2.setAttribute("data-sb-obj", "freenote-delete");
         button2.setAttribute("type", "image");
         button2.setAttribute("src", "chrome://scrapbook/skin/freenote_delete.gif");
@@ -2434,7 +2434,7 @@ var sbAnnotationService = {
 
     saveFreenote: function(mainDiv) {
         mainDiv.removeAttribute("data-sb-active");
-        var bodyDiv = mainDiv.childNodes[1], child;
+        let bodyDiv = mainDiv.childNodes[1], child;
         while ((child = mainDiv.firstChild)) mainDiv.removeChild(child);
         if (bodyDiv && sbCommonUtils.getSbObjectType(bodyDiv) == "freenote-body") {
             while ((child = bodyDiv.firstChild)) mainDiv.appendChild(child);
@@ -2446,7 +2446,7 @@ var sbAnnotationService = {
     },
 
     _adjustEditArea: function(mainDiv) {
-        var h = Math.max(parseInt(mainDiv.style.height, 10) - this.FREENOTE_FOOTER_HEIGHT, 0);
+        let h = Math.max(parseInt(mainDiv.style.height, 10) - this.FREENOTE_FOOTER_HEIGHT, 0);
         mainDiv.childNodes[1].style.height = h + "px";
     },
 
@@ -2463,13 +2463,13 @@ var sbAnnotationService = {
     onDrag: function(aEvent) {
         aEvent.preventDefault();
         if (this.isMove) {
-            var x = aEvent.clientX - this.offsetX;
-            var y = aEvent.clientY - this.offsetY;
+            let x = aEvent.clientX - this.offsetX;
+            let y = aEvent.clientY - this.offsetY;
             this.target.style.left = x + "px";
             this.target.style.top = y + "px";
         } else {
-            var x = Math.max(aEvent.clientX - this.offsetX, this.FREENOTE_MIN_WIDTH);
-            var y = Math.max(aEvent.clientY - this.offsetY, this.FREENOTE_MIN_HEIGHT);
+            let x = Math.max(aEvent.clientX - this.offsetX, this.FREENOTE_MIN_WIDTH);
+            let y = Math.max(aEvent.clientY - this.offsetY, this.FREENOTE_MIN_HEIGHT);
             this.target.style.width = x + "px";
             this.target.style.height = y + "px";
             this._adjustEditArea(this.target);
@@ -2484,16 +2484,16 @@ var sbAnnotationService = {
 
     addInline: function() {
         // check and get selection
-        var win = sbCommonUtils.getFocusedWindow();
-        var sel = sbPageEditor.getSelection(win);
+        let win = sbCommonUtils.getFocusedWindow();
+        let sel = sbPageEditor.getSelection(win);
         if ( !sel ) return;
         // check and get the annotation
-        var ret = {};
+        let ret = {};
         if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(sel.toString(), null, 80)), ret, null, {}) ) return;
         if ( !ret.value ) return;
         // apply
         sbPageEditor.allowUndo(win.document);
-        var attr = {
+        let attr = {
             "data-sb-id": (new Date()).valueOf(),
             "data-sb-obj": "inline",
             "class": "scrapbook-inline", // for downward compatibility with ScrapBook / ScrapBook Plus
@@ -2504,13 +2504,13 @@ var sbAnnotationService = {
     },
 
     editInline: function(aElement) {
-        var doc = aElement.ownerDocument;
+        let doc = aElement.ownerDocument;
         // check and get the annotation
-        var ret = { value: aElement.getAttribute("title") };
+        let ret = { value: aElement.getAttribute("title") };
         if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(aElement.textContent, null, 80)), ret, null, {}) ) return;
         // apply
         sbPageEditor.allowUndo(doc);
-        var els = sbCommonUtils.getSbObjectsById(aElement);
+        let els = sbCommonUtils.getSbObjectsById(aElement);
         if ( ret.value ) {
             for (var i=0, I=els.length; i<I; ++i) {
                 els[i].setAttribute("title", ret.value);
@@ -2524,20 +2524,20 @@ var sbAnnotationService = {
 
 
     attach: function(aFlag) {
-        var win = sbCommonUtils.getFocusedWindow();
-        var sel = sbPageEditor.getSelection(win);
+        let win = sbCommonUtils.getFocusedWindow();
+        let sel = sbPageEditor.getSelection(win);
         if ( !sel ) return;
         if ( aFlag == "L" ) {
             // fill the selection it looks like an URL
             // use a very wide standard, which allows as many cases as may be used
-            var selText = sel.toString();
+            let selText = sel.toString();
             if (selText && selText.match(/^(\w+:[^\t\n\r\v\f]*)/i)) {
-                var url = RegExp.$1;
+                let url = RegExp.$1;
             }
-            var ret = { value: url || "" };
+            let ret = { value: url || "" };
             if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("ADDRESS"), ret, null, {}) ) return;
             if ( !ret.value ) return;
-            var attr = {
+            let attr = {
                 "data-sb-obj": "link-url",
                 "href": ret.value
             };
@@ -2546,24 +2546,24 @@ var sbAnnotationService = {
             if (!sbPageEditor.item) return;
             // if the sidebar is closed, we may get an error
             try {
-                var sidebarId = sbCommonUtils.getSidebarId("sidebar");
-                var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
+                let sidebarId = sbCommonUtils.getSidebarId("sidebar");
+                let res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
             } catch(ex) {}
             // check the selected resource
             if (res && res.length) {
                 res = res[0];
-                var type = sbDataSource.getProperty(res, "type");
+                let type = sbDataSource.getProperty(res, "type");
                 if ( ["folder", "separator"].indexOf(type) === -1 ) {
-                    var id = sbDataSource.getProperty(res, "id");
+                    let id = sbDataSource.getProperty(res, "id");
                 }
             }
             // if unavailable, let the user input an id
-            var ret = {value: id || ""};
+            let ret = {value: id || ""};
             if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
-            var id = ret.value;
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+            let id = ret.value;
+            let res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
             if ( sbDataSource.exists(res) ) {
-                var type = sbDataSource.getProperty(res, "type");
+                let type = sbDataSource.getProperty(res, "type");
                 if ( ["folder", "separator"].indexOf(type) !== -1 ) {
                     res = null;
                 }
@@ -2574,8 +2574,8 @@ var sbAnnotationService = {
                 return;
             }
             // attach the link
-            var title = sbDataSource.getProperty(res, "title");
-            var attr = {
+            let title = sbDataSource.getProperty(res, "title");
+            let attr = {
                 "data-sb-obj": "link-inner",
                 "href": (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id),
                 "title": title
@@ -2584,20 +2584,20 @@ var sbAnnotationService = {
             // we can upload file only for those with valid id
             if (!sbPageEditor.item) return;
             // check if the page is local and get its path
-            var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
+            let htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
             if (!htmlFile) return;
             // prompt a window to select file
-            var pickedFile = sbCommonUtils.showFilePicker({
+            let pickedFile = sbCommonUtils.showFilePicker({
                 window: window,
                 title: sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"),
                 mode: 0, // modeOpen
             });
             if ( !pickedFile ) return;
             // upload the file
-            var filename = pickedFile.leafName;
-            var filename2 = sbCommonUtils.validateFileName(filename);
+            let filename = pickedFile.leafName;
+            let filename2 = sbCommonUtils.validateFileName(filename);
             try {
-                var destFile = htmlFile.parent.clone();
+                let destFile = htmlFile.parent.clone();
                 destFile.append(filename2);
                 if ( destFile.exists() && destFile.isFile() ) {
                     if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
@@ -2609,7 +2609,7 @@ var sbAnnotationService = {
                 return;
             }
             // attach the link
-            var attr = {
+            let attr = {
                 "data-sb-obj": "link-file",
                 "href": sbCommonUtils.escapeFileName(filename2),
                 "title": filename
@@ -2619,9 +2619,9 @@ var sbAnnotationService = {
         sbHighlighter.set(win, sel, "a", attr);
         
         function makeRelativeLink(aBaseURL, aBaseId, aTargetId) {
-            var result = "";
-            var contDir = sbCommonUtils.getContentDir(aBaseId);
-            var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+            let result = "";
+            let contDir = sbCommonUtils.getContentDir(aBaseId);
+            let checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
             while (!checkFile.equals(contDir)){
                 result += "../";
                 checkFile = checkFile.parent;
@@ -2635,12 +2635,12 @@ var sbAnnotationService = {
 
 
 
-var sbInfoViewer = {
+let sbInfoViewer = {
 
     get TOOLBAR() { return document.getElementById("ScrapBookInfobar"); },
 
     onPopupShowing: function(aEvent) {
-        var id = sbBrowserOverlay.getID();
+        let id = sbBrowserOverlay.getID();
         document.getElementById("ScrapBookStatusPopupE").setAttribute("checked", sbBrowserOverlay.editMode);
         document.getElementById("ScrapBookStatusPopupI").setAttribute("checked", sbBrowserOverlay.infoMode);
         if ( id && sbDataSource.exists(sbBrowserOverlay.resource) ) {
@@ -2675,26 +2675,26 @@ var sbInfoViewer = {
             return;
         }
         this.TOOLBAR.hidden = false;
-        var isTypeSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
+        let isTypeSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
         document.getElementById("ScrapBookInfoHome").disabled = !isTypeSite;
         document.getElementById("ScrapBookInfoSite").disabled = !isTypeSite;
         // source image --> link to parent directory
         try {
-            var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-            var url = sbCommonUtils.convertFileToURL(curFile.parent);
-            var srcImage = document.getElementById("ScrapBookInfobar").firstChild;
+            let curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+            let url = sbCommonUtils.convertFileToURL(curFile.parent);
+            let srcImage = document.getElementById("ScrapBookInfobar").firstChild;
             srcImage.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
         } catch(ex) {
             sbCommonUtils.error(ex);
         }
         // source label --> link to source
-        var srcLabel = document.getElementById("ScrapBookInfoSource");
+        let srcLabel = document.getElementById("ScrapBookInfoSource");
         srcLabel.value = sbDataSource.getProperty(sbBrowserOverlay.resource, "source");
         srcLabel.onclick = function(aEvent){ sbCommonUtils.loadURL(srcLabel.value, aEvent.button == 1); };
     },
 
     toggle: function() {
-        var id = sbBrowserOverlay.getID();
+        let id = sbBrowserOverlay.getID();
         if ( !id ) return;
         this.TOOLBAR.setAttribute("autoshow", this.TOOLBAR.hidden);
         sbBrowserOverlay.infoMode = this.TOOLBAR.hidden;
@@ -2717,11 +2717,11 @@ var sbInfoViewer = {
     },
 
     renew: function(showDetail) {
-        var id = sbBrowserOverlay.getID();
+        let id = sbBrowserOverlay.getID();
         if ( !id ) return;
-        var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
-        var source = fileName == "index" ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
-        var data = {
+        let fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
+        let source = fileName == "index" ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
+        let data = {
             urls: [source],
             showDetail: showDetail,
             preset: [id, fileName, null, null, 0],
@@ -2731,27 +2731,27 @@ var sbInfoViewer = {
     },
 
     internalize: function() {
-        var id = sbBrowserOverlay.getID();
+        let id = sbBrowserOverlay.getID();
         if ( !id ) return;
         if (window.content.document.contentType != "text/html") {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_NOT_INTERNALIZE_TYPE"));
             return;
         }
-        var refFile = sbCommonUtils.convertURLToFile(window.content.location.href);
-        var refDir = refFile.parent;
+        let refFile = sbCommonUtils.convertURLToFile(window.content.location.href);
+        let refDir = refFile.parent;
 
         // pre-fill files in the same folder to prevent overwrite
-        var file2Url = {};
+        let file2Url = {};
         sbCommonUtils.forEachFile(refDir, function(file){
             if (file.isDirectory() && file.equals(refDir)) return;
             file2Url[file.leafName] = true;
             return 0;
         }, this);
 
-        var options = {
+        let options = {
             "internalize": refFile,
         };
-        var preset = [
+        let preset = [
             id,
             refFile.leafName,
             options,
@@ -2759,7 +2759,7 @@ var sbInfoViewer = {
             0,
             false
         ];
-        var data = {
+        let data = {
             urls: [window.content.location.href],
             showDetail: false,
             option: options,
@@ -2771,7 +2771,7 @@ var sbInfoViewer = {
     },
 
     openSourceURL: function(tabbed) {
-        var self = arguments.callee;
+        let self = arguments.callee;
         if (!self.getSourceURL) {
             self.getSourceURL = function(id, res, subPath){
                 if (subPath == "index.html") {
@@ -2781,11 +2781,11 @@ var sbInfoViewer = {
             };
             self.getSourceURLFromFile2Url = function(id, subPath){
                 // seek sb-file2url.txt for source URL of the current file
-                var listfile = sbCommonUtils.getContentDir(id).clone(); listfile.append("sb-file2url.txt");
+                let listfile = sbCommonUtils.getContentDir(id).clone(); listfile.append("sb-file2url.txt");
                 if (listfile.exists() && listfile.isFile()) {
-                    var lines = sbCommonUtils.readFile(listfile, "UTF-8").split("\n");
+                    let lines = sbCommonUtils.readFile(listfile, "UTF-8").split("\n");
                     for (var i = 0, I = lines.length; i < I; i++) {
-                        var [file, url] = lines[i].split("\t", 2);
+                        let [file, url] = lines[i].split("\t", 2);
                         if (file == subPath && url.indexOf(":") != -1) return url;
                     }
                 }
@@ -2793,12 +2793,12 @@ var sbInfoViewer = {
             };
             self.getSourceURLFromUrl2Name = function(id, subPath){
                 // seek sb-url2name.txt for source URL of the current doc
-                var [subPathBase] = sbCommonUtils.splitFileName(subPath);
-                var listfile = sbCommonUtils.getContentDir(id).clone(); listfile.append("sb-url2name.txt");
+                let [subPathBase] = sbCommonUtils.splitFileName(subPath);
+                let listfile = sbCommonUtils.getContentDir(id).clone(); listfile.append("sb-url2name.txt");
                 if (listfile.exists() && listfile.isFile()) {
-                    var lines = sbCommonUtils.readFile(listfile, "UTF-8").split("\n");
+                    let lines = sbCommonUtils.readFile(listfile, "UTF-8").split("\n");
                     for (var i = 0, I = lines.length; i < I; i++) {
-                        var [url, name] = lines[i].split("\t", 2);
+                        let [url, name] = lines[i].split("\t", 2);
                         if (name == subPathBase) return url;
                     }
                 }
@@ -2806,35 +2806,35 @@ var sbInfoViewer = {
             };
         }
       
-        var id = sbBrowserOverlay.getID();
+        let id = sbBrowserOverlay.getID();
         if ( !id ) return;
-        var basePathCut = sbCommonUtils.getContentDir(id, true).path.length + 1;
-        var subPath = sbCommonUtils.convertURLToFile(window.content.location.href).path.substring(basePathCut).replace(/\\/g, "/");
-        var source = self.getSourceURL(id, sbBrowserOverlay.resource, subPath);
+        let basePathCut = sbCommonUtils.getContentDir(id, true).path.length + 1;
+        let subPath = sbCommonUtils.convertURLToFile(window.content.location.href).path.substring(basePathCut).replace(/\\/g, "/");
+        let source = self.getSourceURL(id, sbBrowserOverlay.resource, subPath);
         if (!source) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", subPath));
             return;
         }
-        var [, hash] = sbCommonUtils.splitURLByAnchor(window.content.location.href);
+        let [, hash] = sbCommonUtils.splitURLByAnchor(window.content.location.href);
         sbCommonUtils.loadURL(source + hash, tabbed);
     },
 
     loadFile: function(aFileName) {
-        var file = sbCommonUtils.getContentDir(sbBrowserOverlay.getID()); file.append(aFileName);
-        var url = sbCommonUtils.convertFileToURL(file);
-        var dataXml = sbCommonUtils.convertURLToFile(url);
+        let file = sbCommonUtils.getContentDir(sbBrowserOverlay.getID()); file.append(aFileName);
+        let url = sbCommonUtils.convertFileToURL(file);
+        let dataXml = sbCommonUtils.convertURLToFile(url);
         // later Firefox version doesn't allow loading .xsl in the upper directory
         // if it's requested, patch it
         if (dataXml.leafName == "sitemap.xml" && dataXml.exists()) {
-            var dataDir = dataXml.parent;
-            var dataXsl = dataDir.clone(); dataXsl.append("sitemap.xsl");
-            var dataU2N = dataDir.clone(); dataU2N.append("sb-url2name.txt");
-            var bookXsl = dataDir.parent.parent; bookXsl.append("sitemap.xsl");
+            let dataDir = dataXml.parent;
+            let dataXsl = dataDir.clone(); dataXsl.append("sitemap.xsl");
+            let dataU2N = dataDir.clone(); dataU2N.append("sb-url2name.txt");
+            let bookXsl = dataDir.parent.parent; bookXsl.append("sitemap.xsl");
 
             // dataXml is flushed earlier than dataU2N in a new capture
             // if it has newer lastModifiedTime, treat as already patched
             if ( !dataU2N.exists() || dataXml.lastModifiedTime <= dataU2N.lastModifiedTime ) {
-                var lfData = sbCommonUtils.readFile(dataXml, "UTF-8");
+                let lfData = sbCommonUtils.readFile(dataXml, "UTF-8");
                 lfData = lfData.replace('<?xml-stylesheet href="../../sitemap.xsl"', '<?xml-stylesheet href="sitemap.xsl"');
                 dataXml.remove(false);
                 sbCommonUtils.writeFile(dataXml, lfData, "UTF-8");

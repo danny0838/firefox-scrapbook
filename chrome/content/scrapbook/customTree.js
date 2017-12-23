@@ -48,12 +48,12 @@ sbCustomTreeView.prototype = {
 };
 
 
-var sbCustomTreeUtil = {
+let sbCustomTreeUtil = {
 
     sortItems: function(aService, aColElem) {
-        var asc = aColElem.getAttribute("sortDirection") != "ascending";
-        var elems = aService.TREE.firstChild.childNodes;
-        for ( var i = 0; i < elems.length; i++ ) {
+        let asc = aColElem.getAttribute("sortDirection") != "ascending";
+        let elems = aService.TREE.firstChild.childNodes;
+        for ( let i = 0; i < elems.length; i++ ) {
             elems[i].removeAttribute("sortDirection");
         }
         if ( !asc ) {
@@ -74,11 +74,11 @@ var sbCustomTreeUtil = {
     },
 
     getSelection: function(aTree) {
-        var retArray = [];
-        for ( var rc = 0; rc < aTree.view.selection.getRangeCount(); rc++ ) {
-            var start = {}, end = {};
+        let retArray = [];
+        for ( let rc = 0; rc < aTree.view.selection.getRangeCount(); rc++ ) {
+            let start = {}, end = {};
             aTree.view.selection.getRangeAt(rc, start, end);
-            for ( var i = start.value; i <= end.value; i++ ) {
+            for ( let i = start.value; i <= end.value; i++ ) {
                 retArray.push(i);
             }
         }

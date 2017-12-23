@@ -1,5 +1,5 @@
 
-var sbCaptureOptions = {
+let sbCaptureOptions = {
 
     param: null,
 
@@ -95,10 +95,10 @@ var sbCaptureOptions = {
         }
 
         // check for regex error
-        var errors = [];
+        let errors = [];
         this.param.option["downLinkFilter"].split(/[\r\n]/).forEach(function (srcLine, index) {
             if (srcLine.charAt(0) === "#") return;
-            var line = srcLine.trim();
+            let line = srcLine.trim();
             if (line === "") return;
             try {
                 new RegExp("^(?:" + line + ")$", "i");
@@ -108,8 +108,8 @@ var sbCaptureOptions = {
             }
         });
         if (errors.length) {
-            var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS;
-            var text = sbCommonUtils.lang("ERR_SAVE_DOWNLINKFILTER", errors.join("\n\n"));
+            let button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS;
+            let text = sbCommonUtils.lang("ERR_SAVE_DOWNLINKFILTER", errors.join("\n\n"));
             // yes => 0, no => 1, close => 1
             return sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
         }
@@ -122,13 +122,13 @@ var sbCaptureOptions = {
     },
 
     fillTitleList: function() {
-        var isPartial = this.param.titles.length > 1;
-        var list = document.getElementById("sbDetailTitle");
+        let isPartial = this.param.titles.length > 1;
+        let list = document.getElementById("sbDetailTitle");
         if ( this.param.context == "capture-again" ) {
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
+            let res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
             list.appendItem(sbDataSource.getProperty(res, "title"));
         }
-        for ( var i = 0; i < this.param.titles.length; i++ ) {
+        for ( let i = 0; i < this.param.titles.length; i++ ) {
             list.appendItem(this.param.titles[i]);
             if ( i == 0 && this.param.titles.length > 1 ) list.firstChild.appendChild(document.createElement("menuseparator"));
         }
@@ -140,7 +140,7 @@ var sbCaptureOptions = {
     },
 
     resetDownLinkFilters: function() {
-        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
+        let _filter = document.getElementById("sbDetailDownLinkFilter").value;
         sbCommonUtils.resetPref("save.default.downLinkFilter");
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("save.default.downLinkFilter", "");
         sbCommonUtils.setPref("save.default.downLinkFilter", _filter);
@@ -151,7 +151,7 @@ var sbCaptureOptions = {
 
 
 
-var sbFolderSelector = {
+let sbFolderSelector = {
 
     get MENU_LIST()  { return document.getElementById("sbFolderList"); },
     get MENU_POPUP() { return document.getElementById("sbFolderPopup"); },
@@ -176,14 +176,14 @@ var sbFolderSelector = {
     },
 
     clear: function() {
-        var oldItems = this.MENU_POPUP.childNodes;
-        for ( var i = oldItems.length - 1; i >= 0; i-- ) {
+        let oldItems = this.MENU_POPUP.childNodes;
+        for ( let i = oldItems.length - 1; i >= 0; i-- ) {
             this.MENU_POPUP.removeChild(oldItems[i]);
         }
     },
 
     fill: function(aID, aTitle) {
-        var item = document.createElement("menuitem");
+        let item = document.createElement("menuitem");
         item.setAttribute("id",    aID);
         item.setAttribute("label", aTitle);
         item.setAttribute("nest", this.nest);
@@ -198,13 +198,13 @@ var sbFolderSelector = {
     },
 
     processRecent: function() {
-        var ids = sbCommonUtils.getPref("ui.folderList", "");
+        let ids = sbCommonUtils.getPref("ui.folderList", "");
         ids = ids ? ids.split("|") : [];
-        var shownItems = 0;
-        var maxEntries = sbCommonUtils.getPref("ui.folderList.maxEntries", 5);
+        let shownItems = 0;
+        let maxEntries = sbCommonUtils.getPref("ui.folderList.maxEntries", 5);
         for (var i = 0; i < ids.length && shownItems < maxEntries; i++) {
             if (!sbCommonUtils.validateID(ids[i])) continue;
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
+            let res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
             if (!sbDataSource.exists(res)) continue;
             this.fill(res.Value, sbDataSource.getProperty(res, "title"));
             shownItems++;
@@ -215,10 +215,10 @@ var sbFolderSelector = {
 
     processRecursive: function(aContRes) {
         this.nest++;
-        var resList = sbDataSource.flattenResources(aContRes, 1, false);
+        let resList = sbDataSource.flattenResources(aContRes, 1, false);
         resList.shift();
-        for ( var i = 0; i < resList.length; i++ ) {
-            var res = resList[i];
+        for ( let i = 0; i < resList.length; i++ ) {
+            let res = resList[i];
             this.fill(res.Value, sbDataSource.getProperty(res, "title"));
             this.processRecursive(res);
         }
@@ -236,7 +236,7 @@ var sbFolderSelector = {
     },
 
     pick: function() {
-        var ret = {};
+        let ret = {};
         window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes', ret, sbCaptureOptions.param.resURI);
         if ( ret.resource ) {
             this.refresh(ret.resource.Value);

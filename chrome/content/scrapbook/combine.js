@@ -1,5 +1,5 @@
 
-var sbCombineService = {
+let sbCombineService = {
 
 
     get WIZARD()  { return document.getElementById("sbCombineWizard"); },
@@ -37,11 +37,11 @@ var sbCombineService = {
 
     add: function(aRes, aParRes) {
         if ( this.resList.indexOf(aRes) != -1 ) return;
-        var type = sbDataSource.getProperty(aRes, "type");
+        let type = sbDataSource.getProperty(aRes, "type");
         if (type == "folder" || type == "separator") return;
-        var icon = sbDataSource.getProperty(aRes, "icon");
+        let icon = sbDataSource.getProperty(aRes, "icon");
         if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
-        var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
+        let listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
         listItem.setAttribute("class", "listitem-iconic");
         listItem.setAttribute("image", icon);
         this.idList.push(sbDataSource.getProperty(aRes, "id"));
@@ -59,15 +59,15 @@ var sbCombineService = {
     initPreview: function() {
         // generate default tree icons
         // borrow the tree folder
-        var dir = sbCommonUtils.getScrapBookDir().clone(); dir.append("tree");
+        let dir = sbCommonUtils.getScrapBookDir().clone(); dir.append("tree");
         if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
-        var urlHash = {
+        let urlHash = {
             "chrome://scrapbook/skin/treeitem.png": "treeitem.png",
             "chrome://scrapbook/skin/treenote.png": "treenote.png",
             "chrome://scrapbook/skin/treenotex.png": "treenotex.png",
         };
-        for ( var url in urlHash ) {
-            var destFile = dir.clone(); destFile.append(urlHash[url]);
+        for ( let url in urlHash ) {
+            let destFile = dir.clone(); destFile.append(urlHash[url]);
             sbCommonUtils.saveTemplateFile(url, destFile);
         }
 
@@ -98,7 +98,7 @@ var sbCombineService = {
         if ( this.index < this.idList.length ) {
             this.prefix = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
             this.postfix = sbDataSource.getProperty(this.resList[this.index], "title");
-            var type = sbDataSource.getProperty(this.resList[this.index], "type");
+            let type = sbDataSource.getProperty(this.resList[this.index], "type");
             if  ( type == "file" || type == "bookmark" ) {
                 sbPageCombiner.exec(type);
             } else {
@@ -113,10 +113,10 @@ var sbCombineService = {
     },
 
     donePreview: function() {
-        var htmlFile = sbCommonUtils.getScrapBookDir();
+        let htmlFile = sbCommonUtils.getScrapBookDir();
         htmlFile.append("combine.html");
         sbCommonUtils.writeFile(htmlFile, sbPageCombiner.htmlSrc, "UTF-8");
-        var cssFile = sbCommonUtils.getScrapBookDir();
+        let cssFile = sbCommonUtils.getScrapBookDir();
         cssFile.append("combine.css");
         sbCommonUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
         sbInvisibleBrowser.onLoadFinish = function() {
@@ -158,15 +158,15 @@ var sbCombineService = {
     },
 
     onCombineComplete: function(aItem) {
-        var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
+        let newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
         sbDataSource.setProperty(newRes, "type", "combine");
         sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
-        var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
+        let newIcon = sbDataSource.getProperty(this.resList[0], "icon");
         if ( newIcon.startsWith("resource://scrapbook/data/") ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
         sbDataSource.setProperty(newRes, "icon", newIcon);
-        var newComment = "";
-        for ( var i = 0; i < this.resList.length; i++ ) {
-            var comment = sbDataSource.getProperty(this.resList[i], "comment");
+        let newComment = "";
+        for ( let i = 0; i < this.resList.length; i++ ) {
+            let comment = sbDataSource.getProperty(this.resList[i], "comment");
             if ( comment ) newComment += comment + " __BR__ ";
         }
         if ( newComment ) sbDataSource.setProperty(newRes, "comment", newComment);
@@ -174,7 +174,7 @@ var sbCombineService = {
     },
 
     onKeyPress: function(aEvent) {
-        var shortcut = sbShortcut.fromEvent(aEvent);
+        let shortcut = sbShortcut.fromEvent(aEvent);
         if ( shortcut.toString() == "Delete") {
             this.deleteItem();
         } else if (shortcut.toString() == "Alt+Up") {
@@ -192,28 +192,28 @@ var sbCombineService = {
 
     onDrop: function(event) {
         event.preventDefault();
-        var th = window.top.sbTreeHandler;
+        let th = window.top.sbTreeHandler;
         th.getComplexSelection(
             event.dataTransfer.getData("moz/rdfitem").split("\n").map(function(resValue){
                 return sbCommonUtils.RDF.GetResource(resValue);
             }),
             0
         ).forEach(function(res) {
-            var resIdx = th.TREE.builderView.getIndexOfResource(res);
-            var parRes = (resIdx >= 0) ? th.getParentResource(resIdx) : sbDataSource.findParentResource(res);
+            let resIdx = th.TREE.builderView.getIndexOfResource(res);
+            let parRes = (resIdx >= 0) ? th.getParentResource(resIdx) : sbDataSource.findParentResource(res);
             sbCombineService.add(res, parRes);
         });
     },
 
     deleteItem: function() {
-        var diIndex = this.LISTBOX.selectedIndex;
+        let diIndex = this.LISTBOX.selectedIndex;
         if (diIndex < 0) return; // no select
         this.LISTBOX.removeItemAt(diIndex);
         this.idList.splice(diIndex, 1);
         this.resList.splice(diIndex, 1);
         this.parList.splice(diIndex, 1);
         if (this.LISTBOX.getRowCount() > 0) {
-            var diNewItem = this.LISTBOX.getItemAtIndex(diIndex) || this.LISTBOX.getItemAtIndex(--diIndex);
+            let diNewItem = this.LISTBOX.getItemAtIndex(diIndex) || this.LISTBOX.getItemAtIndex(--diIndex);
             this.LISTBOX.ensureElementIsVisible(diNewItem);
             this.LISTBOX.selectItem(diNewItem);
             this.LISTBOX.focus();
@@ -223,13 +223,13 @@ var sbCombineService = {
     },
 
     moveDown: function() {
-        var mdIndex = this.LISTBOX.selectedIndex;
+        let mdIndex = this.LISTBOX.selectedIndex;
         if (mdIndex < 0 || mdIndex == this.LISTBOX.getRowCount() - 1) return; // no select, or at bottom
         [this.idList[mdIndex], this.idList[mdIndex+1]] = [this.idList[mdIndex+1], this.idList[mdIndex]];
         [this.resList[mdIndex], this.resList[mdIndex+1]] = [this.resList[mdIndex+1], this.resList[mdIndex]];
         [this.parList[mdIndex], this.parList[mdIndex+1]] = [this.parList[mdIndex+1], this.parList[mdIndex]];
-        var mdItem = this.LISTBOX.removeItemAt(mdIndex);
-        var mdNewItem = this.LISTBOX.insertItemAt( mdIndex+1, mdItem.getAttribute("label") );
+        let mdItem = this.LISTBOX.removeItemAt(mdIndex);
+        let mdNewItem = this.LISTBOX.insertItemAt( mdIndex+1, mdItem.getAttribute("label") );
         mdNewItem.setAttribute("class", "listitem-iconic");
         mdNewItem.setAttribute("image", mdItem.getAttribute("image"));
         this.LISTBOX.ensureElementIsVisible(mdNewItem);
@@ -239,13 +239,13 @@ var sbCombineService = {
     },
 
     moveUp: function() {
-        var muIndex = this.LISTBOX.selectedIndex;
+        let muIndex = this.LISTBOX.selectedIndex;
         if (muIndex <= 0) return; // no select, or at top
         [this.idList[muIndex], this.idList[muIndex-1]] = [this.idList[muIndex-1], this.idList[muIndex]];
         [this.resList[muIndex], this.resList[muIndex-1]] = [this.resList[muIndex-1], this.resList[muIndex]];
         [this.parList[muIndex], this.parList[muIndex-1]] = [this.parList[muIndex-1], this.parList[muIndex]];
-        var muItem = this.LISTBOX.removeItemAt(muIndex);
-        var muNewItem = this.LISTBOX.insertItemAt( muIndex-1, muItem.getAttribute("label") );
+        let muItem = this.LISTBOX.removeItemAt(muIndex);
+        let muNewItem = this.LISTBOX.insertItemAt( muIndex-1, muItem.getAttribute("label") );
         muNewItem.setAttribute("class", "listitem-iconic");
         muNewItem.setAttribute("image", muItem.getAttribute("image"));
         this.LISTBOX.ensureElementIsVisible(muNewItem);
@@ -255,8 +255,8 @@ var sbCombineService = {
     },
 
     toggleButtons: function() {
-        var index = this.LISTBOX.selectedIndex;
-        var entry = this.LISTBOX.getRowCount();
+        let index = this.LISTBOX.selectedIndex;
+        let entry = this.LISTBOX.getRowCount();
         if ( entry > 1 ) {
             switch ( index ) {
                 case -1:
@@ -295,7 +295,7 @@ var sbCombineService = {
 
 
 
-var sbPageCombiner = {
+let sbPageCombiner = {
 
     get BROWSER(){ return document.getElementById("sbCaptureBrowser"); },
     get BODY()   { return this.BROWSER.contentDocument.body; },
@@ -311,13 +311,13 @@ var sbPageCombiner = {
 
     exec: function(aType) {
         // check for meta refresh
-        var metaElems = this.BROWSER.contentDocument.getElementsByTagName("meta");
-        for ( var i = 0; i < metaElems.length; i++ ) {
+        let metaElems = this.BROWSER.contentDocument.getElementsByTagName("meta");
+        for ( let i = 0; i < metaElems.length; i++ ) {
             if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
                  metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
                  metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) ) {
-                var curURL = this.BROWSER.currentURI.spec;
-                var newURL = sbCommonUtils.resolveURL(curURL, RegExp.$1);
+                let curURL = this.BROWSER.currentURI.spec;
+                let newURL = sbCommonUtils.resolveURL(curURL, RegExp.$1);
                 if ( newURL != curURL && !this.refreshHash[newURL] ) {
                     this.refreshHash[curURL] = true;
                     sbInvisibleBrowser.load(newURL);
@@ -327,7 +327,7 @@ var sbPageCombiner = {
         }
 
         this.isTargetCombined = false;
-        var anchor = this.BROWSER.contentDocument.createElement("a");
+        let anchor = this.BROWSER.contentDocument.createElement("a");
         anchor.href = "";
         this.baseURI = anchor.href;
         if ( sbCombineService.index == 0 ) {
@@ -377,13 +377,13 @@ var sbPageCombiner = {
     },
 
     getCiteHTML: function(aType) {
-        var src = '\n<!--' + sbCommonUtils.escapeHTMLComment(sbCombineService.postfix) + '-->\n';
-        var title = sbDataSource.getProperty(sbCombineService.curRes, "title");
-        var linkURL = "";
+        let src = '\n<!--' + sbCommonUtils.escapeHTMLComment(sbCombineService.postfix) + '-->\n';
+        let title = sbDataSource.getProperty(sbCombineService.curRes, "title");
+        let linkURL = "";
         switch ( aType ) {
             case "file":
-                var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID); htmlFile.append("index.html");
-                var targetFile = sbCommonUtils.readMetaRefresh(htmlFile);
+                let htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID); htmlFile.append("index.html");
+                let targetFile = sbCommonUtils.readMetaRefresh(htmlFile);
                 if (targetFile) {
                     linkURL = sbCommonUtils.convertFileToURL(targetFile);
                 }
@@ -393,7 +393,7 @@ var sbPageCombiner = {
             default:
                 linkURL = sbDataSource.getProperty(sbCombineService.curRes, "source"); break;
         }
-        var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
+        let icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
         if (icon) {
             icon = sbCommonUtils.convertResURLToURL(icon, true);
         } else {
@@ -413,30 +413,30 @@ var sbPageCombiner = {
             window.location.reload();
         }
 
-        var divBody = this.BROWSER.contentDocument.createElement("div");
-        var attrs = this.BODY.attributes;
+        let divBody = this.BROWSER.contentDocument.createElement("div");
+        let attrs = this.BODY.attributes;
         for (var i = 0; i < attrs.length; i++) {
             divBody.setAttribute(attrs[i].name, attrs[i].value);
         }
         divBody.id = "item" + sbCombineService.curID + "body";
         divBody = sbCommonUtils.surroundByTags(divBody, this.BODY.innerHTML);
 
-        var divHTML = this.BROWSER.contentDocument.createElement("div");
-        var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
+        let divHTML = this.BROWSER.contentDocument.createElement("div");
+        let attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
         for (var i = 0; i < attrs.length; i++) {
             divHTML.setAttribute(attrs[i].name, attrs[i].value);
         }
         divHTML.id = "item" + sbCombineService.curID + "html";
         divHTML = sbCommonUtils.surroundByTags(divHTML, divBody);
 
-        var divWrap = this.BROWSER.contentDocument.createElement("div");
+        let divWrap = this.BROWSER.contentDocument.createElement("div");
         divWrap.id = "item" + sbCombineService.curID;
         divWrap.style.position = "relative";
         return sbCommonUtils.surroundByTags(divWrap, divHTML);
     },
 
     surroundDOMCombined: function() {
-        var divWrap = this.BROWSER.contentDocument.createElement("div");
+        let divWrap = this.BROWSER.contentDocument.createElement("div");
         divWrap.id = "item" + sbCombineService.curID;
         return sbCommonUtils.surroundByTags(divWrap, this.BODY.innerHTML);
     },
@@ -444,8 +444,8 @@ var sbPageCombiner = {
     surroundCSS: function() {
         this.htmlId = this.BROWSER.contentDocument.getElementsByTagName("html")[0].id;
         this.bodyId = this.BODY.id;
-        var ret = "";
-        for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ ) {
+        let ret = "";
+        for ( let i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ ) {
             ret += this.processCSSRecursively(this.BROWSER.contentDocument.styleSheets[i]);
         }
         return ret + "\n\n";
@@ -456,8 +456,8 @@ var sbPageCombiner = {
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
         if (aCSS.href && aCSS.href.startsWith("chrome:")) return "";
-        var content = this.processCSSRules(aCSS, this.baseURI, "");
-        var media = aCSS.media.mediaText;
+        let content = this.processCSSRules(aCSS, this.baseURI, "");
+        let media = aCSS.media.mediaText;
         if (media) {
             // omit "all" since it's defined in the link tag
             if (media !== "all") {
@@ -468,11 +468,11 @@ var sbPageCombiner = {
     },
 
     processCSSRules: function(aCSS, aRefURL) {
-        var content = "";
+        let content = "";
         // if aCSS is a rule set of an external CSS file, use its URL as reference
-        var refURL = aCSS.href || aRefURL;
+        let refURL = aCSS.href || aRefURL;
         Array.forEach(aCSS.cssRules, function(cssRule) {
-            var cssText = "";
+            let cssText = "";
             if (this.isTargetCombined) {
                 cssText = cssRule.cssText;
             } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.IMPORT_RULE) {
@@ -491,15 +491,15 @@ var sbPageCombiner = {
     },
 
     remapCSSSelector: function(selectorText) {
-        var htmlId = this.htmlId;
-        var bodyId = this.bodyId;
-        var id = "item" + sbCombineService.curID;
-        var canBeElement = true;
-        var canBeId = false;
-        var ret = "#" + id + " " + selectorText.replace(
+        let htmlId = this.htmlId;
+        let bodyId = this.bodyId;
+        let id = "item" + sbCombineService.curID;
+        let canBeElement = true;
+        let canBeId = false;
+        let ret = "#" + id + " " + selectorText.replace(
             /(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
             function(){
-                var ret = "";
+                let ret = "";
                 if (arguments[1]) {
                     // a new selector, add prefix
                     ret = arguments[1] + "#" + id + " ";
@@ -551,9 +551,9 @@ var sbPageCombiner = {
 
     inspectCSSText: function(aCSSText, aRefURL) {
         // CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
-        var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
+        let regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = sbCommonUtils.unescapeCss(arguments[1]);
+            let dataURL = sbCommonUtils.unescapeCss(arguments[1]);
             if (dataURL.startsWith("data:")) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
@@ -605,8 +605,8 @@ var sbPageCombiner = {
                 break;
             case "img": case "source": 
                 if ( aNode.hasAttribute("srcset") ) {
-                    var that = this;
-                    var newSrcset = gContentSaver.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                    let that = this;
+                    let newSrcset = gContentSaver.parseSrcset(aNode.getAttribute("srcset"), function(url){
                         return sbCommonUtils.resolveURL(that.baseURI, url);
                     });
                     aNode.setAttribute("srcset", newSrcset);
@@ -621,13 +621,13 @@ var sbPageCombiner = {
                 break;
             case "applet": 
                 if ( aNode.hasAttribute("archive") ) {
-                    var url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("archive"));
+                    let url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("archive"));
                     aNode.setAttribute("archive", url);
                 }
                 break;
             case "table":  case "tr":  case "th": case "td": 
                 if ( aNode.hasAttribute("background") ) {
-                    var url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("background"));
+                    let url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("background"));
                     aNode.setAttribute("background", url);
                 }
                 break;
@@ -639,7 +639,7 @@ var sbPageCombiner = {
                 break;
         }
         if ( aNode.style && aNode.style.cssText ) {
-            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.baseURI);
+            let newCSStext = this.inspectCSSText(aNode.style.cssText, this.baseURI);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
     },
@@ -650,10 +650,10 @@ var sbPageCombiner = {
 
 
 gContentSaver.onCaptureComplete = function(aItem) {
-    var newRes = sbCombineService.onCombineComplete(aItem);
+    let newRes = sbCombineService.onCombineComplete(aItem);
     if ( sbCombineService.option["R"] ) {
         if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
-        var rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
+        let rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
         if ( rmIDs ) SB_trace(sbCommonUtils.lang("ITEMS_REMOVED", rmIDs.length));
     }
     SB_fireNotification(aItem);

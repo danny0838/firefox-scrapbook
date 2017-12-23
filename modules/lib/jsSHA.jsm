@@ -26,4 +26,4 @@ p})(this);
 
 
 
-var EXPORTED_SYMBOLS = ["jsSHA"];
+let EXPORTED_SYMBOLS = ["jsSHA"];

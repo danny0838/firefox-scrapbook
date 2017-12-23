@@ -1,5 +1,5 @@
 
-var sbRepair = {
+let sbRepair = {
 
     get WIZARD() { return document.getElementById("sbRepairWizard"); },
     get TREE()   { return document.getElementById("sbRepairTree"); },
@@ -7,7 +7,7 @@ var sbRepair = {
     treeItems: [],
 
     initStartPage: function() {
-        var nextPage;
+        let nextPage;
         switch ( document.getElementById("sbRepairRadioGroup").selectedIndex ) {
             case 0: nextPage = "sbRepairRDF1"; break;
             case 1: nextPage = "sbRepairFavicons"; break;
@@ -18,20 +18,20 @@ var sbRepair = {
 
     initRestoreRDF: function() {
         this.treeItems = [];
-        var backupDir = sbCommonUtils.getScrapBookDir();
+        let backupDir = sbCommonUtils.getScrapBookDir();
         backupDir.append("backup");
         if ( !backupDir.exists() ) {
             sbCommonUtils.alert(sbCommonUtils.lang("MSG_NO_BACKUP_FILES"));
             return;
         }
-        var fileEnum = backupDir.directoryEntries;
+        let fileEnum = backupDir.directoryEntries;
         while ( fileEnum.hasMoreElements() ) {
-            var fileObj = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-            var fileName = fileObj.leafName;
-            var isMatch = fileName.match(/^scrapbook_\d{8}\.rdf$/);
+            let fileObj = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+            let fileName = fileObj.leafName;
+            let isMatch = fileName.match(/^scrapbook_\d{8}\.rdf$/);
             if ( isMatch ) this.treeItems.push([fileName, (new Date(fileObj.lastModifiedTime)).toLocaleString(), fileObj.fileSize]);
         }
-        var colIDs = [
+        let colIDs = [
             "sbRepairTreecolFile",
             "sbRepairTreecolTime",
             "sbRepairTreecolSize",
@@ -41,24 +41,24 @@ var sbRepair = {
 
     execRestoreRDF: function() {
         if ( this.TREE.currentIndex < 0 ) { this.WIZARD.rewind(); return; }
-        var fileName = this.treeItems[this.TREE.currentIndex][0];
+        let fileName = this.treeItems[this.TREE.currentIndex][0];
         if ( !fileName ) { this.WIZARD.rewind(); return; }
-        var bFile = sbCommonUtils.getScrapBookDir();
+        let bFile = sbCommonUtils.getScrapBookDir();
         bFile.append("backup");
         bFile.append(fileName);
         if ( !bFile.exists() || !bFile.isFile() ) { this.WIZARD.rewind(); return; }
         this.WIZARD.canRewind = false;
-        var aFile = sbCommonUtils.getScrapBookDir();
+        let aFile = sbCommonUtils.getScrapBookDir();
         aFile.append("scrapbook.rdf");
         try {
-            var bDir = sbCommonUtils.getScrapBookDir();
+            let bDir = sbCommonUtils.getScrapBookDir();
             bDir.append("backup");
             aFile.copyTo(bDir, "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf");
         } catch(ex) {
         }
         try {
             aFile.remove(false);
-            var aDir = sbCommonUtils.getScrapBookDir();
+            let aDir = sbCommonUtils.getScrapBookDir();
             bFile.copyTo(aDir, "scrapbook.rdf");
         } catch(ex) {
             document.getElementById("sbRepairRDF2Label").value = "ERROR: " + ex;
@@ -69,17 +69,17 @@ var sbRepair = {
 
     restoreFavicons: function() {
         this.WIZARD.canRewind = false;
-        var shouldFlush = false;
-        var i = 0;
-        var resEnum = sbDataSource.data.GetAllResources();
+        let shouldFlush = false;
+        let i = 0;
+        let resEnum = sbDataSource.data.GetAllResources();
         while ( resEnum.hasMoreElements() ) {
-            var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-            var id = sbDataSource.getProperty(res, "id");
-            var icon = sbDataSource.getProperty(res, "icon");
+            let res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+            let id = sbDataSource.getProperty(res, "id");
+            let icon = sbDataSource.getProperty(res, "icon");
             if ( res.Value == "urn:scrapbook:root" || res.Value == "urn:scrapbook:search" ) continue;
             if ( ++i % 10 == 0 ) document.getElementById("sbRepairFaviconsTextbox").value = res.Value;
             if ( icon.match(/(\d{14}\/.*$)/) ) {
-                var newIcon = "resource://scrapbook/data/" + RegExp.$1;
+                let newIcon = "resource://scrapbook/data/" + RegExp.$1;
                 if ( icon != newIcon ) {
                     sbDataSource.setProperty(res, "icon", newIcon);
                 }

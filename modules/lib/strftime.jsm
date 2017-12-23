@@ -11,7 +11,7 @@
 
 ;(function() {
 
-    var DefaultLocale = {
+    let DefaultLocale = {
             days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -49,8 +49,8 @@
     }
 
     // Deprecated API, to be removed in v1.0
-    var _require = isCommonJS ? "require('strftime')" : "strftime";
-    var _deprecationWarnings = {};
+    let _require = isCommonJS ? "require('strftime')" : "strftime";
+    let _deprecationWarnings = {};
     function deprecationWarning(name, instead) {
         if (!_deprecationWarnings[name]) {
             if (typeof console !== 'undefined' && typeof console.warn == 'function') {
@@ -81,7 +81,7 @@
         if (locale) {
             deprecationWarning("`" + _require + "(format, [date], [locale])`", "var s = " + _require + ".localize(locale); s(format, [date])");
         }
-        var strftime = locale ? defaultStrftime.localize(locale) : defaultStrftime;
+        let strftime = locale ? defaultStrftime.localize(locale) : defaultStrftime;
         return strftime(fmt, d);
     }
 
@@ -93,7 +93,7 @@
         else {
             deprecationWarning("`" + _require + ".strftime(format, [date])`", _require + "(format, [date])");
         }
-        var strftime = locale ? defaultStrftime.localize(locale) : defaultStrftime;
+        let strftime = locale ? defaultStrftime.localize(locale) : defaultStrftime;
         return strftime(fmt, d);
     }
 
@@ -111,11 +111,11 @@
             deprecationWarning("`" + _require + ".strftimeTZ(format, date, tz)`", "var s = " + _require + ".timezone(tz); s(format, [date])` or `" + _require + ".timezone(tz)(format, [date])");
         }
 
-        var strftime = (locale ? defaultStrftime.localize(locale) : defaultStrftime).timezone(timezone);
+        let strftime = (locale ? defaultStrftime.localize(locale) : defaultStrftime).timezone(timezone);
         return strftime(fmt, d);
     }
 
-    var utcStrftime = defaultStrftime.utc();
+    let utcStrftime = defaultStrftime.utc();
     function deprecatedStrftimeUTC(fmt, d, locale) {
         if (locale) {
             deprecationWarning("`" + _require + ".strftimeUTC(format, date, locale)`", "var s = " + _require + ".localize(locale).utc(); s(format, [date])");
@@ -123,7 +123,7 @@
         else {
             deprecationWarning("`" + _require + ".strftimeUTC(format, [date])`", "var s = " + _require + ".utc(); s(format, [date])");
         }
-        var strftime = locale ? utcStrftime.localize(locale) : utcStrftime;
+        let strftime = locale ? utcStrftime.localize(locale) : utcStrftime;
         return strftime(fmt, d);
     }
 
@@ -141,7 +141,7 @@
     }
 
     function Strftime(locale, customTimezoneOffset, useUtcTimezone) {
-        var _locale = locale || DefaultLocale,
+        let _locale = locale || DefaultLocale,
             _customTimezoneOffset = customTimezoneOffset || 0,
             _useUtcBasedDate = useUtcTimezone || false,
 
@@ -153,10 +153,10 @@
             _cachedDate;
 
         function _strftime(format, date) {
-            var timestamp;
+            let timestamp;
 
             if (!date) {
-                var currentTimestamp = Date.now();
+                let currentTimestamp = Date.now();
                 if (currentTimestamp > _cachedDateTimestamp) {
                     _cachedDateTimestamp = currentTimestamp;
                     _cachedDate = new Date(_cachedDateTimestamp);
@@ -186,7 +186,7 @@
         }
 
         function _processFormat(format, date, locale, timestamp) {
-            var resultString = '',
+            let resultString = '',
                 padding = null,
                 isInScope = false,
                 length = format.length,
@@ -194,7 +194,7 @@
 
             for (var i = 0; i < length; i++) {
 
-                var currentCharCode = format.charCodeAt(i);
+                let currentCharCode = format.charCodeAt(i);
 
                 if (isInScope === true) {
                     // '-'
@@ -337,7 +337,7 @@
                             }
                             else {
                                 // fixme optimize
-                                var tzString = date.toString().match(/\(([\w\s]+)\)/);
+                                let tzString = date.toString().match(/\(([\w\s]+)\)/);
                                 resultString += tzString && tzString[1] || '';
                             }
                             break;
@@ -381,8 +381,8 @@
                         // '000'
                         // case 'j':
                         case 106:
-                            var y = new Date(date.getFullYear(), 0, 1);
-                            var day = Math.ceil((date.getTime() - y.getTime()) / (1000 * 60 * 60 * 24));
+                            let y = new Date(date.getFullYear(), 0, 1);
+                            let day = Math.ceil((date.getTime() - y.getTime()) / (1000 * 60 * 60 * 24));
                             resultString += padTill3(day);
                             break;
 
@@ -443,7 +443,7 @@
                         // '4'
                         // case 'u':
                         case 117:
-                            var day = date.getDay();
+                            let day = date.getDay();
                             resultString += day === 0 ? 7 : day;
                             break; // 1 - 7, Monday is first day of the week
 
@@ -478,17 +478,17 @@
                                 resultString += extendedTZ ? "+00:00" : "+0000";
                             }
                             else {
-                                var off;
+                                let off;
                                 if (_customTimezoneOffset !== 0) {
                                     off = _customTimezoneOffset / (60 * 1000);
                                 }
                                 else {
                                     off = -date.getTimezoneOffset();
                                 }
-                                var sign = off < 0 ? '-' : '+';
-                                var sep = extendedTZ ? ':' : '';
-                                var hours = Math.floor(Math.abs(off / 60));
-                                var mins = Math.abs(off % 60);
+                                let sign = off < 0 ? '-' : '+';
+                                let sep = extendedTZ ? ':' : '';
+                                let hours = Math.floor(Math.abs(off / 60));
+                                let mins = Math.abs(off % 60);
                                 resultString += sign + padTill2(hours) + sep + padTill2(mins);
                             }
                             break;
@@ -515,23 +515,23 @@
             return resultString;
         }
 
-        var strftime = _strftime;
+        let strftime = _strftime;
 
         strftime.localize = function(locale) {
             return new Strftime(locale || _locale, _customTimezoneOffset, _useUtcBasedDate);
         };
 
         strftime.timezone = function(timezone) {
-            var customTimezoneOffset = _customTimezoneOffset;
-            var useUtcBasedDate = _useUtcBasedDate;
+            let customTimezoneOffset = _customTimezoneOffset;
+            let useUtcBasedDate = _useUtcBasedDate;
 
-            var timezoneType = typeof timezone;
+            let timezoneType = typeof timezone;
             if (timezoneType === 'number' || timezoneType === 'string') {
                 useUtcBasedDate = true;
 
                 // ISO 8601 format timezone string, [-+]HHMM
                 if (timezoneType === 'string') {
-                    var sign = timezone[0] === '-' ? -1 : 1,
+                    let sign = timezone[0] === '-' ? -1 : 1,
                         hours = parseInt(timezone.slice(1, 3), 10),
                         minutes = parseInt(timezone.slice(3, 5), 10);
 
@@ -591,7 +591,7 @@
 
         // This works by shifting the weekday back by one day if we
         // are treating Monday as the first day of the week.
-        var weekday = date.getDay();
+        let weekday = date.getDay();
         if (firstWeekday === 'monday') {
             if (weekday === 0) // Sunday
                 weekday = 6;
@@ -599,7 +599,7 @@
                 weekday--;
         }
 
-        var firstDayOfYearUtc = Date.UTC(date.getFullYear(), 0, 1),
+        let firstDayOfYearUtc = Date.UTC(date.getFullYear(), 0, 1),
             dateUtc = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
             yday = Math.floor((dateUtc - firstDayOfYearUtc) / 86400000),
             weekNum = (yday + 7 - weekday) / 7;
@@ -609,8 +609,8 @@
 
     // Get the ordinal suffix for a number: st, nd, rd, or th
     function ordinal(number) {
-        var i = number % 10;
-        var ii = number % 100;
+        let i = number % 10;
+        let ii = number % 100;
 
         if ((ii >= 11 && ii <= 13) || i === 0 || i >= 4) {
             return 'th';
@@ -628,4 +628,4 @@
 
 }());
 
-var EXPORTED_SYMBOLS = ["strftime"];
+let EXPORTED_SYMBOLS = ["strftime"];

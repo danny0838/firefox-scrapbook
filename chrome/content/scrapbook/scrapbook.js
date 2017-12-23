@@ -1,5 +1,5 @@
 
-var sbMainService = {
+let sbMainService = {
 
     baseURL: "",
     prefs: {},
@@ -42,8 +42,8 @@ var sbMainService = {
     },
 
     trace: function(aText, aMillisec) {
-        var win = top.window;
-        var status = win.document.getElementById("statusbar-display");
+        let win = top.window;
+        let status = win.document.getElementById("statusbar-display");
         if ( !status ) return;
         status.label = aText;
         if (status.timeout) win.clearTimeout(status.timeout);  // clear previous timeout
@@ -67,19 +67,19 @@ var sbMainService = {
     createFolder: function(aAsChild) {
         sbSearchService.exit();
         // create item
-        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        let newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         newItem.id = sbDataSource.identify(newItem.id);
         newItem.title = sbCommonUtils.lang("DEFAULT_FOLDER");
         newItem.type = "folder";
         // add resource
-        var newRes = this.addNewResource(newItem, null, aAsChild);
+        let newRes = this.addNewResource(newItem, null, aAsChild);
         // edit the new folder
-        var result = {};
+        let result = {};
         window.openDialog(
             "chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome",
             newItem.id, result
         );
-        var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
+        let idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
         if (!result.accept) {
             sbDataSource.deleteItemDescending(newRes, sbTreeHandler.getParentResource(idx));
             return false;
@@ -91,68 +91,68 @@ var sbMainService = {
     createSeparator: function(aAsChild) {
         sbSearchService.exit();
         // create item
-        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        let newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         newItem.id = sbDataSource.identify(newItem.id);
         newItem.type = "separator";
         // add resource
-        var newRes = this.addNewResource(newItem, null, aAsChild);
+        let newRes = this.addNewResource(newItem, null, aAsChild);
     },
 
     createNote: function(aAsChild, aInTab) {
         sbSearchService.exit();
         // add resource
-        var newRes = this.addNewResource(null, {"type": "note", "inTab": aInTab}, aAsChild);
+        let newRes = this.addNewResource(null, {"type": "note", "inTab": aInTab}, aAsChild);
     },
 
     createNoteX: function(aAsChild) {
         sbSearchService.exit();
         // create item
-        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        let newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         newItem.id = sbDataSource.identify(newItem.id);
         newItem.title = sbCommonUtils.lang("DEFAULT_NOTEX");
         newItem.type = "notex";
         newItem.chars = "UTF-8";
         // check the template file, create one if not exist
-        var template = sbCommonUtils.getScrapBookDir().clone();
+        let template = sbCommonUtils.getScrapBookDir().clone();
         template.append("notex_template.html");
         if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/notex_template.html", template);
         // create content
-        var dir = sbCommonUtils.getContentDir(newItem.id);
-        var html = dir.clone();
+        let dir = sbCommonUtils.getContentDir(newItem.id);
+        let html = dir.clone();
         html.append("index.html");
-        var tpl = {
+        let tpl = {
             NOTE_TITLE: newItem.title,
             SCRAPBOOK_DIR: "../..",
             DATA_DIR: ".",
         };
-        var content = sbCommonUtils.readFile(template, "UTF-8");
+        let content = sbCommonUtils.readFile(template, "UTF-8");
         content = content.replace(/<%([\w_]+)%>/g, function(){
-            var label = arguments[1];
+            let label = arguments[1];
             if (tpl[label]) return tpl[label];
             return "";
         });
         sbCommonUtils.writeFile(html, content, newItem.chars);
         sbCommonUtils.writeIndexDat(newItem);
         // add resource
-        var newRes = this.addNewResource(newItem, null, aAsChild);
+        let newRes = this.addNewResource(newItem, null, aAsChild);
         // open and edit the new notex
         sbController.open(newRes, false);
     },
 
     addNewResource: function(aItem, aData, aAsChild) {
         // calculate the position to insert
-        var tarResName, tarRelIdx, isRootPos;
+        let tarResName, tarRelIdx, isRootPos;
         try {
-            var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
-            var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+            let curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
+            let curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
             if (aAsChild && sbDataSource.isContainer(curRes)) {
                 tarResName = curRes.Value;
                 tarRelIdx = 0;
                 isRootPos = false;
                 if (!sbTreeHandler.TREE.view.isContainerOpen(curIdx) ) sbTreeHandler.TREE.view.toggleOpenState(curIdx);
             } else {
-                var curPar = sbTreeHandler.getParentResource(curIdx);
-                var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+                let curPar = sbTreeHandler.getParentResource(curIdx);
+                let curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
                 tarResName = curPar.Value;
                 tarRelIdx = curRelIdx + (sbCommonUtils.getPref("tree.unshift", false) ? 0 : 1);
                 isRootPos = false;
@@ -164,18 +164,18 @@ var sbMainService = {
         }
         // add the new resource
         if (aItem) {
-            var newRes = sbDataSource.addItem(aItem, tarResName, tarRelIdx);
+            let newRes = sbDataSource.addItem(aItem, tarResName, tarRelIdx);
             if (aItem.type == "folder") sbDataSource.createEmptySeq(newRes.Value);
         } else {
             if (!aData) return;
             if (aData.type == "note") {
                 sbNoteService.create(tarResName, tarRelIdx, aData.inTab);
-                var newRes = sbNoteService.resource;
+                let newRes = sbNoteService.resource;
             }
         }
         sbCommonUtils.rebuildGlobal();
         // select and scroll to the new resource
-        var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
+        let idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
         sbTreeHandler.TREE.view.selection.select(idx);
         sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
         return newRes;
@@ -183,8 +183,8 @@ var sbMainService = {
 
     makeContainer: function() {
         try {
-            var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
-            var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+            let curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
+            let curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
             if (!sbDataSource.isContainer(curRes)) {
                 sbDataSource.createEmptySeq(curRes.Value);
             }
@@ -195,13 +195,13 @@ var sbMainService = {
 
     unmakeContainer: function() {
         try {
-            var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
-            var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+            let curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
+            let curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
             if (sbDataSource.isContainer(curRes)) {
                 if (sbDataSource.flattenResources(curRes, 0, false).length <= 1) {
-                    var curPar = sbTreeHandler.getParentResource(curIdx);
-                    var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-                    var item = sbDataSource.getItem(curRes);
+                    let curPar = sbTreeHandler.getParentResource(curIdx);
+                    let curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+                    let item = sbDataSource.getItem(curRes);
                     sbDataSource.deleteItemDescending(curRes, curPar);
                     sbDataSource.addItem(item, curPar.Value, curRelIdx);
                     sbCommonUtils.rebuildGlobal();
@@ -215,7 +215,7 @@ var sbMainService = {
     },
 
     openPrefWindow: function() {
-        var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
+        let instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
         window.top.openDialog(
             "chrome://scrapbook/content/prefs.xul", "ScrapBook:Options",
             "chrome,titlebar,toolbar,centerscreen,resizable," + (instantApply ? "dialog=no" : "modal")
@@ -227,7 +227,7 @@ var sbMainService = {
 
 
 
-var sbController = {
+let sbController = {
 
     // left for addon compatibility
     isTreeContext: function(itcEvent) {
@@ -236,20 +236,20 @@ var sbController = {
 
     onPopupShowing: function(aEvent) {
         if (aEvent.originalTarget.localName != "menupopup") return;
-        var res = sbTreeHandler.resource;
+        let res = sbTreeHandler.resource;
         if (!res) {
             aEvent.preventDefault();
             return;
         }
-        var isContainer = false;
-        var isFile = false;
-        var isNote = false;
-        var isNotex = false;
-        var isFolder = false;
-        var isBookmark = false;
-        var isSeparator = false;
-        var hasSource = false;
-        var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
+        let isContainer = false;
+        let isFile = false;
+        let isNote = false;
+        let isNotex = false;
+        let isFolder = false;
+        let isBookmark = false;
+        let isSeparator = false;
+        let hasSource = false;
+        let isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
             isContainer = sbDataSource.isContainer(res);
             switch (sbDataSource.getProperty(res, "type")) {
@@ -262,7 +262,7 @@ var sbController = {
             }
             hasSource = !!sbDataSource.getProperty(res, "source");
         }
-        var getElement = function(aID) {
+        let getElement = function(aID) {
             return document.getElementById(aID);
         };
         getElement("sbPopupOpenNative").hidden = isMultiple || !isFile;
@@ -298,7 +298,7 @@ var sbController = {
             aRes = sbTreeHandler.resource;
         if (!aRes)
             return;
-        var id = sbDataSource.getProperty(aRes, "id");
+        let id = sbDataSource.getProperty(aRes, "id");
         if (!id)
             return;
         switch (sbDataSource.getProperty(aRes, "type")) {
@@ -348,7 +348,7 @@ var sbController = {
             aRes = sbTreeHandler.resource;
         if (!aRes)
             return;
-        var preset = [
+        let preset = [
             sbDataSource.getProperty(aRes, "id"),
             "index",
             null,
@@ -356,7 +356,7 @@ var sbController = {
             0,
             sbDataSource.getProperty(aRes, "type") == "bookmark"
         ];
-        var data = {
+        let data = {
             urls: [sbDataSource.getProperty(aRes, "source")],
             showDetail: aShowDetail,
             preset: preset,
@@ -370,19 +370,19 @@ var sbController = {
             aRes = sbTreeHandler.resource;
         if (!aRes)
             return;
-        var id = sbDataSource.getProperty(aRes, "id");
-        var refFile = sbCommonUtils.getContentDir(id); refFile.append("index.html");
-        var refDir = refFile.parent;
+        let id = sbDataSource.getProperty(aRes, "id");
+        let refFile = sbCommonUtils.getContentDir(id); refFile.append("index.html");
+        let refDir = refFile.parent;
 
         // pre-fill files in the same folder to prevent overwrite
-        var file2Url = {};
+        let file2Url = {};
         sbCommonUtils.forEachFile(refDir, function(file){
             if (file.isDirectory() && file.equals(refDir)) return;
             file2Url[file.leafName] = true;
             return 0;
         }, this);
 
-        var options = {
+        let options = {
             "isPartial": false,
             "images": true,
             "media": true,
@@ -393,7 +393,7 @@ var sbController = {
             "tidyCss": false,
             "internalize": refFile,
         };
-        var preset = [
+        let preset = [
             id,
             "index",
             options,
@@ -401,7 +401,7 @@ var sbController = {
             0,
             false
         ];
-        var data = {
+        let data = {
             urls: [sbMainService.baseURL + "data/" + id + "/index.html"],
             showDetail: false,
             option: options,
@@ -418,7 +418,7 @@ var sbController = {
             aRes = sbTreeHandler.resource;
         if (!aRes)
             return;
-        var id = sbDataSource.getProperty(aRes, "id");
+        let id = sbDataSource.getProperty(aRes, "id");
         if (!id)
             return;
         switch (aCommand) {
@@ -444,8 +444,8 @@ var sbController = {
                 );
                 break;
             case "N": 
-                var index = sbCommonUtils.getContentDir(id); index.append("index.html");
-                var redirectFile = sbCommonUtils.readMetaRefresh(index);
+                let index = sbCommonUtils.getContentDir(id); index.append("index.html");
+                let redirectFile = sbCommonUtils.readMetaRefresh(index);
                 if (redirectFile) {
                     this.launch(redirectFile);
                 }
@@ -473,15 +473,15 @@ var sbController = {
     },
 
     sendInternal: function(aResList, aParResList) {
-        var result = {};
-        var preset = aParResList[0];
+        let result = {};
+        let preset = aParResList[0];
         window.openDialog(
             "chrome://scrapbook/content/folderPicker.xul", "",
             "modal,chrome,centerscreen,resizable=yes", result, preset
         );
         if (!result.resource)
             return;
-        var tarRes = result.resource;
+        let tarRes = result.resource;
         for (var i = 0; i < aResList.length; i++)  {
             sbDataSource.moveItem(aResList[i], aParResList[i], tarRes, -1);
         }
@@ -489,15 +489,15 @@ var sbController = {
     },
 
     copyInternal: function(aResList, aParResList) {
-        var result = {};
-        var preset = aParResList[0];
+        let result = {};
+        let preset = aParResList[0];
         window.openDialog(
             "chrome://scrapbook/content/folderPicker.xul", "",
             "modal,chrome,centerscreen,resizable=yes", result, preset
         );
         if (!result.resource)
             return;
-        var tarRes = result.resource;
+        let tarRes = result.resource;
         for (var i = 0; i < aResList.length; i++)  {
             sbDataSource.copyItem(aResList[i], tarRes, -1);
         }
@@ -505,7 +505,7 @@ var sbController = {
     },
 
     removeInternal: function(aResList, aParResList, aBypassConfirm) {
-        var rmIDs = [];
+        let rmIDs = [];
         for (var i = 0, I = aResList.length; i < I; i++) {
             if (aParResList[i].Value == "urn:scrapbook:search") {
                 aParResList[i] = sbDataSource.findParentResource(aResList[i]);
@@ -522,7 +522,7 @@ var sbController = {
             sbDataSource.deleteItemDescending(aResList[i], aParResList[i], rmIDs);
         }
         for (var i = 0; i < rmIDs.length; i++) {
-            var myDir = sbCommonUtils.getContentDir(rmIDs[i], true);
+            let myDir = sbCommonUtils.getContentDir(rmIDs[i], true);
             if (myDir) sbCommonUtils.removeDirSafety(myDir, false);
         }
         return rmIDs;
@@ -532,7 +532,7 @@ var sbController = {
         if (sbCommonUtils.getPref("confirmDelete", false)) {
             return this.confirmRemovingPrompt();
         }
-        for ( var i = 0; i < aResList.length; i++ ) {
+        for ( let i = 0; i < aResList.length; i++ ) {
             if ( sbDataSource.isContainer(aResList[i]) ) {
                 return this.confirmRemovingPrompt();
             }
@@ -541,8 +541,8 @@ var sbController = {
     },
 
     confirmRemovingPrompt: function() {
-        var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
-        var text = sbCommonUtils.lang("CONFIRM_DELETE");
+        let button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
+        let text = sbCommonUtils.lang("CONFIRM_DELETE");
         // pressing default button or closing the prompt returns 1
         // reverse it to mean "no" by default
         return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
@@ -552,17 +552,17 @@ var sbController = {
 
 
 
-var sbSearchService = {
+let sbSearchService = {
 
     get ELEMENT() { return document.getElementById("sbSearchImage"); },
     get FORM_HISTORY() {
         try {
             // Firefox >= ?
             Components.utils.import("resource://gre/modules/FormHistory.jsm");
-            var result = FormHistory;
+            let result = FormHistory;
         } catch (ex) {
             // not available in Firefox >= 54
-            var result = Components.classes["@mozilla.org/satchel/form-history;1"]
+            let result = Components.classes["@mozilla.org/satchel/form-history;1"]
                     .getService(Components.interfaces.nsIFormHistory2 || Components.interfaces.nsIFormHistory);
         }
         return this.FORM_HISTORY = result;
@@ -586,7 +586,7 @@ var sbSearchService = {
     },
 
     populatePopup: function() {
-        var c = this.type.charAt(0).toUpperCase();
+        let c = this.type.charAt(0).toUpperCase();
         ["F", "T", "C", "S", "I", "A"].forEach(function(elt) {
             document.getElementById("sbSearchPopup" + elt).setAttribute("checked", elt == c);
         });
@@ -594,7 +594,7 @@ var sbSearchService = {
 
     enter: function(aInput) {
         if (aInput.match(/^[a-z]$/i) || !aInput) {
-            var table = {
+            let table = {
                 "F": "fulltext",
                 "T": "title",
                 "C": "comment",
@@ -609,47 +609,47 @@ var sbSearchService = {
             }
             document.getElementById("sbSearchTextbox").value = "";
         } else {
-            var query = aInput;
-            var re = document.getElementById("sbSearchPopupOptionRE").getAttribute("checked");
-            var mc = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
+            let query = aInput;
+            let re = document.getElementById("sbSearchPopupOptionRE").getAttribute("checked");
+            let mc = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
             this.addFormHistory(query);
             if (this.type == "fulltext") {
                 this.doFullTextSearch(query, re, mc);
             } else {
-                var key = sbSearchQueryHandler.parse(query, {'re': re, 'mc': mc, 'default': this.type});
+                let key = sbSearchQueryHandler.parse(query, {'re': re, 'mc': mc, 'default': this.type});
                 this.doFilteringSearch(key);
             }
         }
     },
 
     doFullTextSearch: function(query, re, mc) {
-        var cache = sbCommonUtils.getScrapBookDir().clone();
+        let cache = sbCommonUtils.getScrapBookDir().clone();
         cache.append("cache.rdf");
-        var shouldBuild = false;
-        var sizeThresholdBytes = sbCommonUtils.getPref("fulltext.updateSizeThreshold", 0);
-        var sizeThreshold = sizeThresholdBytes >= 0 ? 1024 * sizeThresholdBytes : Infinity;
+        let shouldBuild = false;
+        let sizeThresholdBytes = sbCommonUtils.getPref("fulltext.updateSizeThreshold", 0);
+        let sizeThreshold = sizeThresholdBytes >= 0 ? 1024 * sizeThresholdBytes : Infinity;
         if (!cache.exists() || cache.fileSize < sizeThreshold) {
             shouldBuild = true;
         } else {
-            var data = sbCommonUtils.getScrapBookDir().clone();
+            let data = sbCommonUtils.getScrapBookDir().clone();
             data.append("scrapbook.rdf");
-            var dataModTime = data.lastModifiedTime;
-            var cacheModTime = cache.lastModifiedTime;
-            var timeThresholdMinutes = sbCommonUtils.getPref("fulltext.updateTimeThreshold", 0);
-            var timeThreshold = timeThresholdMinutes >= 0 ? 1000 * 60 * timeThresholdMinutes : Infinity;
+            let dataModTime = data.lastModifiedTime;
+            let cacheModTime = cache.lastModifiedTime;
+            let timeThresholdMinutes = sbCommonUtils.getPref("fulltext.updateTimeThreshold", 0);
+            let timeThreshold = timeThresholdMinutes >= 0 ? 1000 * 60 * timeThresholdMinutes : Infinity;
             if (dataModTime > cacheModTime && (Date.now() - cacheModTime) >= timeThreshold)
                 shouldBuild = true;
         }
-        var uri = "chrome://scrapbook/content/result.xul";
-        var query = "?q=" + encodeURIComponent(query) 
+        let uri = "chrome://scrapbook/content/result.xul";
+        let query = "?q=" + encodeURIComponent(query)
             + (re ? "&re=1" : "")
             + (mc ? "&cs=1" : "")
             + (this.treeRef != "urn:scrapbook:root" ? "&ref=" + this.treeRef : "");
         if (shouldBuild) {
             this.updateCache(uri + query);
         } else {
-            var win = sbCommonUtils.getBrowserWindow();
-            var inTab = (win.content.location.href.startsWith(uri)) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
+            let win = sbCommonUtils.getBrowserWindow();
+            let inTab = (win.content.location.href.startsWith(uri)) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
             sbCommonUtils.loadURL(uri + query, inTab);
             win.focus();
         }
@@ -666,9 +666,9 @@ var sbSearchService = {
         }
         sbDataSource.clearContainer("urn:scrapbook:search");
         this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
-        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
+        let resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
         resList.shift(); // remove root
-        var result = [];
+        let result = [];
         resList.forEach(function(res) {
             if (sbDataSource.getProperty(res, "type") !== "folder") {
                 if (sbSearchQueryHandler.match(aKey, res, false)) result.push(res);
@@ -709,7 +709,7 @@ var sbSearchService = {
         }
         sbDataSource.clearContainer("urn:scrapbook:search");
         this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
-        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
+        let resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
         resList.shift(); // remove root
         resList.forEach(function(res) {
             if (sbDataSource.getProperty(res, "type") !== "folder") {
@@ -769,15 +769,15 @@ var sbSearchService = {
 
 
 
-var sbSearchQueryHandler = {
+let sbSearchQueryHandler = {
 
     hits: null,
 
     // parses a given search query string
     parse: function(aString, aPreset) {
-        var that = this;
+        let that = this;
         aPreset = aPreset || [];
-        var key = {
+        let key = {
             'rule': [],
             'error': [],
             'sort': [],
@@ -787,9 +787,9 @@ var sbSearchQueryHandler = {
         };
         aString.replace(/(-?[A-Za-z]+:|-)(?:"((?:""|[^"])*)"|([^"\s]*))|(?:"((?:""|[^"])*)"|([^"\s]+))/g, function(match, cmd, qterm, term, qterm2, term2){
             if (cmd) {
-                var term = (qterm !== undefined) ? qterm.replace(/""/g, '"') : term;
+                let term = (qterm !== undefined) ? qterm.replace(/""/g, '"') : term;
             } else {
-                var term = (qterm2 !== undefined) ? qterm2.replace(/""/g, '"') : term2;
+                let term = (qterm2 !== undefined) ? qterm2.replace(/""/g, '"') : term2;
             }
             switch (cmd) {
                 case "mc:":
@@ -893,30 +893,30 @@ var sbSearchQueryHandler = {
             }
 
             function parseStr(term, exactMatch) {
-                var options = key.mc ? 'gm' : 'igm';
+                let options = key.mc ? 'gm' : 'igm';
                 if (key.re) {
                     try {
-                        var regex = new RegExp(term, options);
+                        let regex = new RegExp(term, options);
                     } catch(ex) {
                         addError(sbCommonUtils.lang("ERR_SEARCH_REGEXP_INAVLID", term));
                         return null;
                     }
                 } else {
-                    var q = sbCommonUtils.escapeRegExp(term);
+                    let q = sbCommonUtils.escapeRegExp(term);
                     if (exactMatch) q = "^" + q + "$";
-                    var regex = new RegExp(q, options);
+                    let regex = new RegExp(q, options);
                 }
                 return regex;
             }
 
             function parseDate(term) {
-                var match = term.match(/^(\d{0,14})-?(\d{0,14})$/);
+                let match = term.match(/^(\d{0,14})-?(\d{0,14})$/);
                 if (!match) {
                     addError(sbCommonUtils.lang("ERR_SEARCH_DATE_INAVLID", term));
                     return null;
                 }
-                var since = match[1] ? fill(match[1], 14) : fill(match[1], 14);
-                var until = match[2] ? fill(match[2], 14) : fill(match[2], 14, "9");
+                let since = match[1] ? fill(match[1], 14) : fill(match[1], 14);
+                let until = match[2] ? fill(match[2], 14) : fill(match[2], 14, "9");
                 return [parseInt(since, 10), parseInt(until, 10)];
             }
 
@@ -942,10 +942,10 @@ var sbSearchQueryHandler = {
     },
 
     _match_tcc: function(aKeyItem, aRes, aText, aFile) {
-        var title = sbDataSource.getProperty(aRes, "title");
-        var comment = sbDataSource.getProperty(aRes, "comment");
-        var content = aText || "";
-        var regex;
+        let title = sbDataSource.getProperty(aRes, "title");
+        let comment = sbDataSource.getProperty(aRes, "comment");
+        let content = aText || "";
+        let regex;
         for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
             regex = aKeyItem.exclude[i];
             regex.lastIndex = 0;
@@ -963,7 +963,7 @@ var sbSearchQueryHandler = {
         }
         for (var i=0, len=aKeyItem.include.length; i<len; i++) {
             regex = aKeyItem.include[i];
-            var result = false;
+            let result = false;
             regex.lastIndex = 0;
             if (regex.test(title)) {
                 result = true;
@@ -989,10 +989,10 @@ var sbSearchQueryHandler = {
     },
 
     _match_all: function(aKeyItem, aRes, aText, aFile) {
-        var title = sbDataSource.getProperty(aRes, "title");
-        var comment = sbDataSource.getProperty(aRes, "comment");
-        var id = sbDataSource.getProperty(aRes, "id");
-        var source = sbDataSource.getProperty(aRes, "source");
+        let title = sbDataSource.getProperty(aRes, "title");
+        let comment = sbDataSource.getProperty(aRes, "comment");
+        let id = sbDataSource.getProperty(aRes, "id");
+        let source = sbDataSource.getProperty(aRes, "source");
         return this.matchText(aKeyItem, "all", [title, comment, source, id].join("\n"));
     },
 
@@ -1017,7 +1017,7 @@ var sbSearchQueryHandler = {
     },
 
     _match_type: function(aKeyItem, aRes, aText, aFile) {
-        var text = sbDataSource.getProperty(aRes, "type");
+        let text = sbDataSource.getProperty(aRes, "type");
         for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
             if (aKeyItem.exclude[i].test(text)) {
                 return false;
@@ -1042,7 +1042,7 @@ var sbSearchQueryHandler = {
     },
 
     matchText: function(aKeyItem, aKeyName, aText) {
-        var regex;
+        let regex;
         for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
             regex = aKeyItem.exclude[i];
             regex.lastIndex = 0;
@@ -1064,7 +1064,7 @@ var sbSearchQueryHandler = {
 
     matchDate: function(aKeyItem, aDate) {
         if (!aDate) return false;
-        var aDate = parseInt(aDate, 10);
+        let aDate = parseInt(aDate, 10);
         for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
             if (aKeyItem.exclude[i][0] <= aDate && aDate <= aKeyItem.exclude[i][1]) {
                 return false;

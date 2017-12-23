@@ -6,13 +6,13 @@
  *
  *******************************************************************/
 
-var EXPORTED_SYMBOLS = ["sbCommonUtils"];
+let EXPORTED_SYMBOLS = ["sbCommonUtils"];
 
 const { lang } = Components.utils.import("resource://scrapbook-modules/lang.jsm", {});
 const { console } = Components.utils.import("resource://scrapbook-modules/console.jsm", {});
 const { jsSHA } = Components.utils.import("resource://scrapbook-modules/lib/jsSHA.jsm", {});
 
-var sbCommonUtils = {
+let sbCommonUtils = {
 
     _documentArray: [],
     _documentDataArray: [],
@@ -82,7 +82,7 @@ var sbCommonUtils = {
      * return (1, 0, -1) if ver1 (>, =, <) ver2
      */
     checkVersion: function(ver1, ver2) {
-        var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+        let iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
         return iVerComparator.compare(ver1, ver2);
     },
 
@@ -116,7 +116,7 @@ var sbCommonUtils = {
     },
     
     getPrefType: function (aName, aDefaultValue, isGlobal) {
-        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        let branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
         try {
             switch (typeof aDefaultValue) {
                 case "boolean":
@@ -141,7 +141,7 @@ var sbCommonUtils = {
     },
 
     getPref: function (aName, aDefaultValue, isGlobal) {
-        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        let branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
         try {
             switch (this.getPrefType(aName, aDefaultValue, isGlobal)) {
                 case "boolean": 
@@ -160,7 +160,7 @@ var sbCommonUtils = {
     },
 
     setPref: function (aName, aValue, isGlobal) {
-        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        let branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
         try {
             switch (this.getPrefType(aName, aValue, isGlobal)) {
                 case "boolean": 
@@ -171,7 +171,7 @@ var sbCommonUtils = {
                     break;
                 case "string":
                     // using getCharPref may meet encoding problems
-                    var str = Components.classes["@mozilla.org/supports-string;1"].
+                    let str = Components.classes["@mozilla.org/supports-string;1"].
                               createInstance(Components.interfaces.nsISupportsString);
                     str.data = aValue;
                     branch.setComplexValue(aName, Components.interfaces.nsISupportsString, str);
@@ -185,7 +185,7 @@ var sbCommonUtils = {
     },
 
     resetPref: function (aName, isGlobal) {
-        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        let branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
         branch.clearUserPref(aName);
     },
 
@@ -194,7 +194,7 @@ var sbCommonUtils = {
     },
 
     resetPrefs: function () {
-        var list = this.getPrefKeys();
+        let list = this.getPrefKeys();
         for (var i=0, I=list.length; i<I; ++i) {
             this.prefBranch.clearUserPref(list[i]);
         }
@@ -232,9 +232,9 @@ var sbCommonUtils = {
 
     getScrapBookDir: function(aRenew) {
         if (!arguments.callee.newScrapBookDir) {
-            var that = this;
+            let that = this;
             arguments.callee.newScrapBookDir = function() {
-                var dataPath = that.getPref("data.path", ""), dir;
+                let dataPath = that.getPref("data.path", ""), dir;
                 if (dataPath) {
                     try {
                         // if dataPath is absolute
@@ -242,8 +242,8 @@ var sbCommonUtils = {
                     } catch(ex) {
                         try {
                             // if data.path is relative (to Firefox profile directory)
-                            var profileDir = that.DIR.get("ProfD", Components.interfaces.nsIFile);
-                            var path = that.convertFileToURL(profileDir) + dataPath.split(/[\/\\]/).map(function(part){return encodeURIComponent(part);}).join("/");
+                            let profileDir = that.DIR.get("ProfD", Components.interfaces.nsIFile);
+                            let path = that.convertFileToURL(profileDir) + dataPath.split(/[\/\\]/).map(function(part){return encodeURIComponent(part);}).join("/");
                             dir = that.convertURLToFile(path);
                         } catch(ex) {}
                     }
@@ -258,7 +258,7 @@ var sbCommonUtils = {
         if (!arguments.callee.currentDir || aRenew) {
             arguments.callee.currentDir = arguments.callee.newScrapBookDir();
         }
-        var dir = arguments.callee.currentDir.clone();
+        let dir = arguments.callee.currentDir.clone();
         if ( !dir.exists() ) {
             try {
                 dir.create(dir.DIRECTORY_TYPE, 0700);
@@ -280,7 +280,7 @@ var sbCommonUtils = {
             this.alert(lang("ERR_FAIL_GET_DIR", aID));
             return null;
         }
-        var dir = this.getScrapBookDir().clone();
+        let dir = this.getScrapBookDir().clone();
         dir.append("data");
         if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
         dir.append(aID);
@@ -298,21 +298,21 @@ var sbCommonUtils = {
             aFile = this.getContentDir(aItem.id).clone();
             aFile.append("index.dat");
         }
-        var content = "";
-        for ( var prop in aItem ) {
+        let content = "";
+        for ( let prop in aItem ) {
             content += prop + "\t" + aItem[prop] + "\n";
         }
         this.writeFile(aFile, content, "UTF-8");
     },
 
     getTimeStamp: function(aDate) {
-        var dd = aDate || new Date();
-        var y = dd.getFullYear();
-        var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
-        var d = dd.getDate();      if ( d < 10 ) d = "0" + d;
-        var h = dd.getHours();     if ( h < 10 ) h = "0" + h;
-        var i = dd.getMinutes();   if ( i < 10 ) i = "0" + i;
-        var s = dd.getSeconds();   if ( s < 10 ) s = "0" + s;
+        let dd = aDate || new Date();
+        let y = dd.getFullYear();
+        let m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
+        let d = dd.getDate();      if ( d < 10 ) d = "0" + d;
+        let h = dd.getHours();     if ( h < 10 ) h = "0" + h;
+        let i = dd.getMinutes();   if ( i < 10 ) i = "0" + i;
+        let s = dd.getSeconds();   if ( s < 10 ) s = "0" + s;
         return y.toString() + m.toString() + d.toString() + h.toString() + i.toString() + s.toString();
     },
 
@@ -327,7 +327,7 @@ var sbCommonUtils = {
     
     getSidebarId: function(id) {
         // Need this or MultiSidebar can cause errors
-        var rgPosition = this.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
+        let rgPosition = this.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
         if ( rgPosition > 1) {
             switch (id) {
                 case "sidebar":
@@ -352,25 +352,25 @@ var sbCommonUtils = {
     },
 
     _refresh: function(aDSChanged) {
-        var cur = this.WINDOW.getMostRecentWindow(null);
-        var curDone = false;
-        var sidebarId = this.getSidebarId("sidebar");
+        let cur = this.WINDOW.getMostRecentWindow(null);
+        let curDone = false;
+        let sidebarId = this.getSidebarId("sidebar");
         // refresh/rebuild main browser windows and their sidebars
-        var winEnum = this.WINDOW.getEnumerator("navigator:browser");
+        let winEnum = this.WINDOW.getEnumerator("navigator:browser");
         while (winEnum.hasMoreElements()) {
-            var win = winEnum.getNext();
+            let win = winEnum.getNext();
             if (cur === win) curDone = true;
             aDSChanged ? win.sbBrowserOverlay.refresh() : win.sbBrowserOverlay.rebuild();
-            var win = win.document.getElementById(sidebarId).contentWindow;
+            let win = win.document.getElementById(sidebarId).contentWindow;
             if (cur === win) curDone = true;
             if (win.sbMainService) {
                 aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
             }
         }
         // refresh/rebuild other scrapbook windows
-        var winEnum = this.WINDOW.getEnumerator("scrapbook");
+        let winEnum = this.WINDOW.getEnumerator("scrapbook");
         while (winEnum.hasMoreElements()) {
-            var win = winEnum.getNext();
+            let win = winEnum.getNext();
             if (cur === win) curDone = true;
             if (win.sbMainService && win.sbTreeHandler) {
                 aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
@@ -386,11 +386,11 @@ var sbCommonUtils = {
     },
 
     convertURLToId: function(aURL) {
-        var file = this.convertURLToFile(aURL);
+        let file = this.convertURLToFile(aURL);
         if (!file || !file.exists() || !file.isFile()) return null;
-        var aURL = this.convertFileToURL(file);
-        var sbDir = this.convertFileToURL(this.getScrapBookDir());
-        var sbPath = new RegExp("^" + this.escapeRegExp(sbDir) + "data/(\\d{14})/");
+        let aURL = this.convertFileToURL(file);
+        let sbDir = this.convertFileToURL(this.getScrapBookDir());
+        let sbPath = new RegExp("^" + this.escapeRegExp(sbDir) + "data/(\\d{14})/");
         return aURL.match(sbPath) ? RegExp.$1 : null;
     },
 
@@ -406,9 +406,9 @@ var sbCommonUtils = {
     // get the datasource from an .rdf file
     // if the .rdf file does not exist, create one using the default root name
     getRDFDataSource: function(aDataFile, aDefaultRootName) {
-        var fileURL = this.convertFileToURL(aDataFile);
+        let fileURL = this.convertFileToURL(aDataFile);
         if (!aDataFile.exists()) {
-            var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
+            let iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
             this.RDFCU.MakeSeq(iDS, this.RDF.GetResource(aDefaultRootName));
             iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(fileURL);
         }
@@ -431,13 +431,13 @@ var sbCommonUtils = {
      *   2: skip look all files
      */
     forEachFile: function(aFolder, aCallback, aThisArg, aArgs) {
-        var dirs = [aFolder], ret;
+        let dirs = [aFolder], ret;
         all:
         for (var i=0; i<dirs.length; i++) {
             if (aCallback.call(aThisArg, dirs[i], aArgs) === 0) continue;
-            var files = dirs[i].directoryEntries;
+            let files = dirs[i].directoryEntries;
             while (files.hasMoreElements()) {
-                var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
+                let file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
                 if (file.isDirectory()) {
                     dirs.push(file);
                 } else {
@@ -453,13 +453,13 @@ var sbCommonUtils = {
     },
 
     readFile: function(aFile, aCharset) {
-        var file = (typeof aFile === "string") ? this.convertPathToFile(aFile) : aFile;
+        let file = (typeof aFile === "string") ? this.convertPathToFile(aFile) : aFile;
         try {
-            var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
+            let istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
             istream.init(file, 1, 0, false);
-            var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
+            let bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
             bistream.setInputStream(istream);
-            var data = bistream.readBytes(bistream.available());
+            let data = bistream.readBytes(bistream.available());
             bistream.close();
             istream.close();
             if (aCharset) {
@@ -473,25 +473,25 @@ var sbCommonUtils = {
 
     writeFile: function(aFile, aContent, aChars, aNoCatch) {
         try {
-            var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+            let ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
             ostream.init(aFile, -1, 0666, 0);
             if (aChars == "UTF-8" || !aChars) {
                 // quick way to process UTF-8 conversion
                 // UTF-16 => UTF-8 should be no unsupported chars
-                var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].createInstance(Components.interfaces.nsIConverterOutputStream);
+                let converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].createInstance(Components.interfaces.nsIConverterOutputStream);
                 converter.init(ostream, "UTF-8", 4096, 0x0000);
                 converter.writeString(aContent);
                 converter.close();
             } else {
                 // loop over all chars and encode the unsupported ones
                 this.UNICODE.charset = aChars;
-                var output = [];
+                let output = [];
                 for (var i=0, I=aContent.length; i<I; i++) {
-                    var code = aContent.charCodeAt(i);
-                    var oldchar = aContent[i];
+                    let code = aContent.charCodeAt(i);
+                    let oldchar = aContent[i];
                     // special process for a UTF-16 surrogate pair
                     if (0xD800 <= code && code <= 0xDBFF) {
-                        var high = code, low = aContent.charCodeAt(i+1);
+                        let high = code, low = aContent.charCodeAt(i+1);
                         code = ((high - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
                         oldchar += aContent[i+1];
                         i++;
@@ -501,7 +501,7 @@ var sbCommonUtils = {
                     // 2. results ""
                     // 3. results "?" (or "??" for a surrogate pair)
                     try {
-                        var newchar = this.UNICODE.ConvertFromUnicode(oldchar);
+                        let newchar = this.UNICODE.ConvertFromUnicode(oldchar);
                         if (!newchar || (newchar[0] == "?" && oldchar != "?")) throw "unsupported char";
                         output.push(newchar);
                     } catch(ex) {
@@ -522,7 +522,7 @@ var sbCommonUtils = {
     },
 
     writeFileBytes: function (aFile, aBytes) {
-        var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+        let ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
         ostream.init(aFile, -1, 0666, 0);
         ostream.write(aBytes, aBytes.length);
         ostream.close();
@@ -539,10 +539,10 @@ var sbCommonUtils = {
 
     // reads an url synchronously, should only be used for local data
     readTemplateURL: function(aURISpec) {
-        var istream = this.newChannel(aURISpec).open();
-        var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
+        let istream = this.newChannel(aURISpec).open();
+        let bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
         bistream.setInputStream(istream);
-        var data = bistream.readBytes(bistream.available());
+        let data = bistream.readBytes(bistream.available());
         bistream.close();
         istream.close();
         return data;
@@ -550,14 +550,14 @@ var sbCommonUtils = {
 
     saveTemplateFile: function(aURISpec, aFile, aOverwrite) {
         if ( aFile.exists() && !aOverwrite ) return;
-        var istream = this.newChannel(aURISpec).open();
-        var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
+        let istream = this.newChannel(aURISpec).open();
+        let bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
         bistream.setInputStream(istream);
-        var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+        let ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
         ostream.init(aFile, -1, 0666, 0);
-        var bostream = Components.classes["@mozilla.org/binaryoutputstream;1"].createInstance(Components.interfaces.nsIBinaryOutputStream);
+        let bostream = Components.classes["@mozilla.org/binaryoutputstream;1"].createInstance(Components.interfaces.nsIBinaryOutputStream);
         bostream.setOutputStream(ostream);
-        var size = 0;
+        let size = 0;
         while (size = bistream.available()) {
             bostream.writeBytes(bistream.readBytes(size), size);
         }
@@ -565,7 +565,7 @@ var sbCommonUtils = {
     },
 
     removeDirSafety: function(aDir, check) {
-        var curFile;
+        let curFile;
         try {
             if ( check && !this.validateID(aDir.leafName) ) return;
             this.forEachFile(aDir, function(file) {
@@ -583,12 +583,12 @@ var sbCommonUtils = {
 
     execProgram: function(aExecFilePath, args) {
         try {
-            var execFile = this.convertPathToFile(aExecFilePath);
+            let execFile = this.convertPathToFile(aExecFilePath);
             if ( !execFile.exists() ) {
                 this.alert(lang("ERR_FILE_NOT_EXIST", [aExecFilePath]));
                 return;
             }
-            var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
+            let process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
             process.init(execFile);
             process.run(false, args, args.length);
         } catch (ex) {
@@ -610,10 +610,10 @@ var sbCommonUtils = {
     // It may not work for more general cases.
     readMetaRefresh: function(aDocFile) {
         if (this.readFile(aDocFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
-            var relURL = this.convertToUnicode(RegExp.$1, "UTF-8");
-            var URI1 = this.convertFileToURL(aDocFile);
-            var URI2 = this.resolveURL(URI1, relURL);
-            var file2 = this.convertURLToFile(URI2);
+            let relURL = this.convertToUnicode(RegExp.$1, "UTF-8");
+            let URI1 = this.convertFileToURL(aDocFile);
+            let URI2 = this.resolveURL(URI1, relURL);
+            let file2 = this.convertURLToFile(URI2);
             return file2;
         }
         return false;
@@ -644,12 +644,12 @@ var sbCommonUtils = {
      ***************************************************************/
 
     getRootHref: function(aURLSpec) {
-        var url = this.convertURLToObject(aURLSpec);
+        let url = this.convertURLToObject(aURLSpec);
         return url.scheme + "://" + url.host + "/";
     },
 
     getBaseHref: function(sURI) {
-        var base = sURI, pos;
+        let base = sURI, pos;
         if ((pos = base.indexOf("?")) != -1) { base = base.substring(0, pos); }
         if ((pos = base.indexOf("#")) != -1) { base = base.substring(0, pos); }
         if ((pos = base.lastIndexOf("/")) != -1) { base = base.substring(0, pos + 1); }
@@ -657,7 +657,7 @@ var sbCommonUtils = {
     },
 
     getFileName: function(aURI) {
-        var name = aURI, pos;
+        let name = aURI, pos;
         if ((pos = name.indexOf("?")) !== -1) { name = name.substring(0, pos); }
         if ((pos = name.indexOf("#")) !== -1) { name = name.substring(0, pos); }
         if ((pos = name.lastIndexOf("/")) !== -1) { name = name.substring(pos + 1); }
@@ -671,10 +671,10 @@ var sbCommonUtils = {
         }
     },
 
-    // This ensures normalizeURI("http://abc/?¤¤¤å!def%#1234") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87%21def%")
+    // This ensures normalizeURI("http://abc/?ï¿½ï¿½ï¿½ï¿½!def%#1234") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87%21def%")
     // Mainly to recover an overencode issue that !'()~ be saved encoded for xhtml files.
     normalizeURI: function(aURI) {
-        var [URI] = this.splitURLByAnchor(aURI);
+        let [URI] = this.splitURLByAnchor(aURI);
         try {
             return URI.replace(/((?!%[0-9A-F]{2}).)+|(%[0-9A-F]{2})+/gi, function (m, u, e) {
                 // unencoded part => encode as it's safe
@@ -689,27 +689,27 @@ var sbCommonUtils = {
     },
 
     splitFileName: function(aFileName) {
-        var pos = aFileName.lastIndexOf(".");
+        let pos = aFileName.lastIndexOf(".");
         return (pos != -1) ? [aFileName.substring(0, pos), aFileName.substring(pos + 1)] : [aFileName, ""];
     },
 
     splitURLByAnchor: function(aURL) {
-        var pos = aURL.indexOf("#");
+        let pos = aURL.indexOf("#");
         return (pos == -1) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos)];
     },
 
     resolveURL: function(aBaseURL, aRelURL) {
         try {
             // URLObj.spec is encoded and usable URI
-            var baseURLObj = this.convertURLToObject(aBaseURL);
-            var resolved = baseURLObj.resolve(aRelURL);
+            let baseURLObj = this.convertURLToObject(aBaseURL);
+            let resolved = baseURLObj.resolve(aRelURL);
             return this.convertURLToObject(resolved).spec;
         } catch(ex) {}
         return aRelURL;
     },
 
     convertPathToFile: function(aPath) {
-        var aFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
+        let aFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
         aFile.initWithPath(aPath);
         return aFile;
     },
@@ -723,32 +723,32 @@ var sbCommonUtils = {
     },
 
     convertFileToResURL: function(aFile) {
-        var pathFull = this.convertFileToURL(aFile);
-        var pathBase = this.convertFileToURL(this.getScrapBookDir());
+        let pathFull = this.convertFileToURL(aFile);
+        let pathBase = this.convertFileToURL(this.getScrapBookDir());
         return "resource://scrapbook/" + pathFull.substring(pathBase.length);
     },
 
     convertResURLToURL: function(aResURL, aRelative) {
         if (aResURL.indexOf("resource://scrapbook/") != 0) return aResURL;
-        var subPath = aResURL.substring("resource://scrapbook/".length);
+        let subPath = aResURL.substring("resource://scrapbook/".length);
         // if relative, return the subpath under the ScrapBook directory
         if ( aRelative ) return subPath;
         // else return the full path
-        var pathBase = this.convertFileToURL(this.getScrapBookDir());
+        let pathBase = this.convertFileToURL(this.getScrapBookDir());
         return pathBase + subPath;
     },
 
     convertURLToObject: function(aURLString) {
-        var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
+        let aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
         aURL.spec = aURLString;
         return aURL;
     },
 
     convertURLToFile: function(aURLString) {
-        var aURL = this.convertURLToObject(aURLString);
+        let aURL = this.convertURLToObject(aURLString);
         if ( !aURL.schemeIs("file") ) return;
         try {
-            var fileHandler = this.IO.getProtocolHandler("file").QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+            let fileHandler = this.IO.getProtocolHandler("file").QueryInterface(Components.interfaces.nsIFileProtocolHandler);
             return fileHandler.getFileFromURLSpec(aURLString);
         } catch(ex) {
         }
@@ -782,17 +782,17 @@ var sbCommonUtils = {
     },
 
     parseURLQuery: function(aStr) {
-        var query = {};
-        var a = aStr.split('&');
+        let query = {};
+        let a = aStr.split('&');
         for (var i in a) {
-            var b = a[i].split('=');
+            let b = a[i].split('=');
             query[decodeURIComponent(b[0])] = decodeURIComponent(b[1]);
         }
         return query;
     },
 
     parseDataURI: function (aDataURI) {
-        var match = aDataURI.match(/^data:(?:\/\/)?([^;]*)(?:;charset=([^;,]*))?(?:;(base64))?,([\s\S]*)$/i);
+        let match = aDataURI.match(/^data:(?:\/\/)?([^;]*)(?:;charset=([^;,]*))?(?:;(base64))?,([\s\S]*)$/i);
         if (match) {
             return {
                 mime: match[1],
@@ -831,7 +831,7 @@ var sbCommonUtils = {
 
     // supported data types: "B64", "BYTES", "TEXT", "ARRAYBUFFER"
     sha1: function (data, type) {
-        var shaObj = new jsSHA("SHA-1", type);
+        let shaObj = new jsSHA("SHA-1", type);
         shaObj.update(data);
         return shaObj.getHash("HEX");
     },
@@ -846,17 +846,17 @@ var sbCommonUtils = {
     },
 
     escapeHTML: function(aStr, aNoDoubleQuotes, aSingleQuotes) {
-        var list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
+        let list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
         return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
     },
 
     escapeHTMLWithSpace: function(aStr, aNoDoubleQuotes, aSingleQuotes) {
-        var list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
+        let list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
         return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
     },
 
     unescapeHTML: function(aStr) {
-        var list = {
+        let list = {
             "&amp;": "&",
             "&lt;": "<",
             "&gt;" : ">",
@@ -882,7 +882,7 @@ var sbCommonUtils = {
     },
 
     unescapeCss: function(aStr) {
-        var that = arguments.callee;
+        let that = arguments.callee;
         if (!that.replaceRegex) {
             that.replaceRegex = /\\([0-9A-Fa-f]{1,6}) ?|\\(.)/g;
             that.getCodes = function (n) {
@@ -924,10 +924,10 @@ var sbCommonUtils = {
     },
 
     convertHTMLtoText: function(aStr) {
-        var converter = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
-        var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
+        let converter = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
+        let fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
         fromStr.data = aStr;
-        var toStr = { value: null };
+        let toStr = { value: null };
         try {
             converter.convert("text/html", fromStr, aStr.length, "text/unicode", toStr, {});
             toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
@@ -948,15 +948,15 @@ var sbCommonUtils = {
     // aByteLimit: UTF-8 bytes limit, beyond which will be cropped. 0 means no crop.
     // aEllipsis: text for ellipsis
     crop: function(aString, aCharLimit, aByteLimit, aEllipsis) {
-        var str = aString;
-        var ellipsis = (typeof aEllipsis != "undefined") ? aEllipsis : "...";
+        let str = aString;
+        let ellipsis = (typeof aEllipsis != "undefined") ? aEllipsis : "...";
         if (aCharLimit) {
             if (str.length > aCharLimit) {
                 str = str.substring(0, aCharLimit - ellipsis.length) + ellipsis;
             }
         }
         if (aByteLimit) {
-            var bytes = this.unicodeToUtf8(str);
+            let bytes = this.unicodeToUtf8(str);
             if (bytes.length > aByteLimit) {
                 bytes = bytes.substring(0, aByteLimit - this.unicodeToUtf8(ellipsis).length);
                 while (true) {
@@ -978,18 +978,18 @@ var sbCommonUtils = {
 
     getUUID: function () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            let r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
             return v.toString(16);
         });
     },
     
     formatFileSize: function (bytes, si) {
-        var thresh = si ? 1000 : 1024;
-        var units = si
+        let thresh = si ? 1000 : 1024;
+        let units = si
             ? ['B', 'kB','MB','GB','TB','PB','EB','ZB','YB']
             : ['B', 'KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
-        var e = Math.log(bytes) / Math.log(thresh) | 0;
-        var n = bytes / Math.pow(thresh, e);
+        let e = Math.log(bytes) / Math.log(thresh) | 0;
+        let n = bytes / Math.pow(thresh, e);
         return n.toFixed((e >= 1 && n < 10) ? 1 : 0) + ' ' + units[e];
     },
 
@@ -1014,21 +1014,21 @@ var sbCommonUtils = {
     },
  
     getFocusedWindow: function() {
-        var window = this.getBrowserWindow();
-        var win = window.document.commandDispatcher.focusedWindow;
+        let window = this.getBrowserWindow();
+        let win = window.document.commandDispatcher.focusedWindow;
         if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
         return win;
     },
 
     openManageWindow: function(aRes, aModEltID) {
-        var window = this.getBrowserWindow();
+        let window = this.getBrowserWindow();
         window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
     },
 
     loadURL: function(aURL, tabbed) {
-        var win = this.getBrowserWindow();
+        let win = this.getBrowserWindow();
         if ( !win ) return;
-        var browser = win.gBrowser;
+        let browser = win.gBrowser;
         if ( tabbed ) {
             browser.selectedTab = browser.addTab(aURL);
         } else {
@@ -1043,7 +1043,7 @@ var sbCommonUtils = {
     //   modeOpenMultiple 3  Load multiple files.
     showFilePicker: function(aOptions) {
         aOptions = aOptions || {};
-        var FP = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+        let FP = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
         FP.init(aOptions.window, aOptions.title || "", aOptions.mode || 0);
         if (aOptions.dir) FP.displayDirectory = aOptions.dir;
         if (aOptions.filename) FP.defaultString = aOptions.filename;
@@ -1053,7 +1053,7 @@ var sbCommonUtils = {
                 if (typeof filter == "number") {
                     FP.appendFilters(filter);
                 } else {
-                    var [title, filter] = filter;
+                    let [title, filter] = filter;
                     FP.appendFilter(title, filter);
                 }
             });
@@ -1070,25 +1070,25 @@ var sbCommonUtils = {
      ***************************************************************/
 
     flattenFrames: function(aWindow) {
-        var ret = [aWindow];
-        for ( var i = 0; i < aWindow.frames.length; i++ ) {
+        let ret = [aWindow];
+        for ( let i = 0; i < aWindow.frames.length; i++ ) {
             ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
         }
         return ret;
     },
 
     getOuterHTML: function(aNode) {
-        var outer = aNode.outerHTML;
+        let outer = aNode.outerHTML;
         if (typeof(outer) != "undefined") return outer;
         // older versions without native outerHTML
-        var wrapper = aNode.ownerDocument.createElement("div");
+        let wrapper = aNode.ownerDocument.createElement("div");
         wrapper.appendChild(aNode.cloneNode(true));
         return wrapper.innerHTML;
     },
 
     surroundByTags: function(aNode, aContent) {
-        var tag = "<" + aNode.nodeName.toLowerCase();
-        for ( var i=0; i<aNode.attributes.length; i++ ) {
+        let tag = "<" + aNode.nodeName.toLowerCase();
+        for ( let i=0; i<aNode.attributes.length; i++ ) {
             tag += ' ' + aNode.attributes[i].name + '="' + this.escapeHTML(aNode.attributes[i].value) + '"';
         }
         tag += ">\n";
@@ -1102,7 +1102,7 @@ var sbCommonUtils = {
 
     doctypeToString: function(aDoctype) {
         if ( !aDoctype ) return "";
-        var ret = "<!DOCTYPE " + aDoctype.name;
+        let ret = "<!DOCTYPE " + aDoctype.name;
         if ( aDoctype.publicId ) ret += ' PUBLIC "' + aDoctype.publicId + '"';
         if ( aDoctype.systemId ) ret += ' "'        + aDoctype.systemId + '"';
         ret += ">\n";
@@ -1143,7 +1143,7 @@ var sbCommonUtils = {
      */
     getSbObjectType: function(aNode) {
         if (aNode.nodeType != 1) return false;
-        var type = aNode.getAttribute("data-sb-obj");
+        let type = aNode.getAttribute("data-sb-obj");
         if (type) return type;
         // below is for downward compatibility
         switch (aNode.className) {
@@ -1175,7 +1175,7 @@ var sbCommonUtils = {
      *   2: should unwrap
      */
     getSbObjectRemoveType: function(aNode) {
-        var type = this.getSbObjectType(aNode);
+        let type = this.getSbObjectType(aNode);
         if (!type) return -1;
         if (["title", "title-src", "stylesheet", "stylesheet-temp", "todo"].indexOf(type) != -1) return 0;
         if (["linemarker", "inline", "link-url", "link-inner", "link-file", "custom-wrapper"].indexOf(type) != -1) return 2;
@@ -1187,15 +1187,15 @@ var sbCommonUtils = {
      * else return [aRefNode]
      */
     getSbObjectsById: function(aRefNode) {
-        var id = aRefNode.getAttribute("data-sb-id");
+        let id = aRefNode.getAttribute("data-sb-id");
         if (!id) return [aRefNode];
-        var doc = aRefNode.ownerDocument;
+        let doc = aRefNode.ownerDocument;
         if (doc.querySelectorAll) {
             return doc.querySelectorAll('[data-sb-id="' + id.replace(/"/g, '\\"') + '"]');
         } else {
             // workaround for older Firefox versions that don't support
-            var ret = [];
-            var els = doc.getElementsByTagName("*");
+            let ret = [];
+            let els = doc.getElementsByTagName("*");
             for (var i=0, I=els.length; i<I; ++i) {
                 if (els[i].getAttribute("data-sb-id") == id) ret.push(els[i]);
             }
@@ -1208,8 +1208,8 @@ var sbCommonUtils = {
      */
     _getDocumentIndex: function(aDocument) {
         // try to lookup the index of the specific document
-        var idx = false;
-        var firstEmptyIdx = false;
+        let idx = false;
+        let firstEmptyIdx = false;
         for (var i=0, len=this._documentArray.length; i<len ; i++) {
             if (this.isDeadObject(this._documentArray[i])) {
                 if (firstEmptyIdx === false) firstEmptyIdx = i;
@@ -1231,7 +1231,7 @@ var sbCommonUtils = {
     },
 
     documentData: function(aDocument, aKey, aValue) {
-        var idx = this._getDocumentIndex(aDocument);
+        let idx = this._getDocumentIndex(aDocument);
         // if given a new value, set it
         if (aValue !== undefined) {
             this._documentDataArray[idx][aKey] = aValue;
@@ -1244,7 +1244,7 @@ var sbCommonUtils = {
     // check if an object is dead (eg. window/document closed)
     isDeadObject: function(aObject) {
         try {
-            var x = aObject.body;
+            let x = aObject.body;
         } catch(ex) {
             return true;
         }

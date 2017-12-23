@@ -1,18 +1,18 @@
 
-var gContentSaver = new sbContentSaverClass();
-var gURLs = [];
-var gTitles = [];
-var gDepths = [];
-var gRefURL = "";
-var gShowDetail = false;
-var gResName = "";
-var gResIdx = 0;
-var gReferItem = null;
-var gOption = gContentSaver.option;
-var gFile2URL = {};
-var gURL2Name = {};
-var gPreset = null;
-var gContext = "";
+let gContentSaver = new sbContentSaverClass();
+let gURLs = [];
+let gTitles = [];
+let gDepths = [];
+let gRefURL = "";
+let gShowDetail = false;
+let gResName = "";
+let gResIdx = 0;
+let gReferItem = null;
+let gOption = gContentSaver.option;
+let gFile2URL = {};
+let gURL2Name = {};
+let gPreset = null;
+let gContext = "";
 
 
 
@@ -60,11 +60,11 @@ function SB_trace(aMessage) {
  *                                                 do not allow deep capture
  */
 function SB_initCapture() {
-    var data = window.arguments[0];
+    let data = window.arguments[0];
 
     // deprecated, left for downward compatibility with old style call by addons
     if (window.arguments.length > 1) {
-        var data = {
+        let data = {
             urls: window.arguments[0],
             refUrl: window.arguments[1],
             showDetail: window.arguments[2],
@@ -89,7 +89,7 @@ function SB_initCapture() {
         })();
     }
 
-    var myURLs = data.urls;
+    let myURLs = data.urls;
     gTitles = data.titles || gTitles;
     gRefURL = data.refUrl || gRefURL;
     gShowDetail = !!data.showDetail;
@@ -106,28 +106,28 @@ function SB_initCapture() {
         gURL2Name[sbCommonUtils.normalizeURI(gReferItem.source)] = "index";
     } else if ( gContext == "capture-again-deep" ) {
         myURLs = null;
-        var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+        let contDir = sbCommonUtils.getContentDir(gPreset[0]);
         // read sb-file2url.txt => gFile2URL for later usage
-        var file = contDir.clone(); file.append("sb-file2url.txt");
+        let file = contDir.clone(); file.append("sb-file2url.txt");
         if ( !(file.exists() && file.isFile()) ) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL"));
             window.close();
         }
         sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
-            var [file, url] = line.split("\t", 2);
+            let [file, url] = line.split("\t", 2);
             if (url) {
                 gFile2URL[file] = url;
             }
         });
         gPreset[3] = gFile2URL;
         // read sb-url2name.txt => gURL2Name and search for source URL of the current page
-        var file = contDir.clone(); file.append("sb-url2name.txt");
+        let file = contDir.clone(); file.append("sb-url2name.txt");
         if ( !(file.exists() && file.isFile()) ) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME"));
             window.close();
         }
         sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
-            var [url, docName] = line.split("\t", 2);
+            let [url, docName] = line.split("\t", 2);
             if (docName) {
                 gURL2Name[sbCommonUtils.normalizeURI(url)] = docName;
                 if ( docName == gPreset[1] ) myURLs = [url];
@@ -164,23 +164,23 @@ function SB_initCapture() {
 
 
 function SB_suggestName(aURL) {
-    var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0];
+    let tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0];
     if ( !tmpName || tmpName == "index" ) tmpName = "default";
-    var name = tmpName, seq = 0;
+    let name = tmpName, seq = 0;
     while ( gFile2URL[(name+".html").toLowerCase()] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);
     return name;
 }
 
 
 function SB_fireNotification(aItem) {
-    var win = sbCommonUtils.getBrowserWindow();
+    let win = sbCommonUtils.getBrowserWindow();
     win.sbContentSaver.notifyCaptureComplete(aItem);
 }
 
 
 
 
-var sbCaptureTask = {
+let sbCaptureTask = {
 
     get INTERVAL() { return parseInt(document.getElementById("sbCaptureTimeout").value, 10); },
     get CHARSET()  { return document.getElementById("sbCaptureCharset").value; },
@@ -197,8 +197,8 @@ var sbCaptureTask = {
     lastItem: null,
 
     init: function(myURLs) {
-        var depth = (gContext == "indepth" ? 1 : 0);
-        for ( var i = 0, I = myURLs.length; i < I; i++ ) {
+        let depth = (gContext == "indepth" ? 1 : 0);
+        for ( let i = 0, I = myURLs.length; i < I; i++ ) {
             this.add(myURLs[i], depth, gTitles[i]);
         }
     },
@@ -215,21 +215,21 @@ var sbCaptureTask = {
         }
         gURLs.push(aURL);
         gDepths.push(aDepth);
-        var wrapper = this.TREE.childNodes[1];
-        var item = document.createElement("treeitem");
+        let wrapper = this.TREE.childNodes[1];
+        let item = document.createElement("treeitem");
         wrapper.appendChild(item);
-        var row = document.createElement("treerow");
+        let row = document.createElement("treerow");
         item.appendChild(row);
-        var cell0 = document.createElement("treecell");
+        let cell0 = document.createElement("treecell");
         cell0.setAttribute("value", sbCaptureFilter.filter(aURL));
         row.appendChild(cell0);
-        var cell1 = document.createElement("treecell");
+        let cell1 = document.createElement("treecell");
         cell1.setAttribute("label", aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
         row.appendChild(cell1);
-        var cell2 = document.createElement("treecell");
+        let cell2 = document.createElement("treecell");
         cell2.setAttribute("label", aTitle || "");
         row.appendChild(cell2);
-        var cell3 = document.createElement("treecell");
+        let cell3 = document.createElement("treecell");
         row.appendChild(cell3);
     },
 
@@ -240,7 +240,7 @@ var sbCaptureTask = {
         // mark the item we are currently on
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "working");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
-        var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
+        let checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
         if ( checkstate.match("false") ) {
             document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
             this.skip();
@@ -249,7 +249,7 @@ var sbCaptureTask = {
 
         // manage redirect and fail out on circular redirect
         if (!aRedirectURL) {
-            var url = gURLs[this.index];
+            let url = gURLs[this.index];
             this.redirectHash = {};
         } else {
             if (gURL2Name[sbCommonUtils.normalizeURI(aRedirectURL)]) {
@@ -260,9 +260,9 @@ var sbCaptureTask = {
                 return;
             }
             if (!this.redirectHash[sbCommonUtils.normalizeURI(aRedirectURL)]) {
-                var url = aRedirectURL;
+                let url = aRedirectURL;
             } else {
-                var errMsg = "circular redirect";
+                let errMsg = "circular redirect";
                 this.updateStatus(errMsg);
                 this.fail(errMsg);
                 return;
@@ -357,7 +357,7 @@ var sbCaptureTask = {
             } else if (this.lastItem) {
                 if ( gContext == "capture-again" || gContext == "capture-again-deep" ) {
                     if ( gContext == "capture-again" ) {
-                        var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
+                        let res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
                         sbDataSource.setProperty(res, "title", this.lastItem.title);
                         if ( gPreset[5] ) {
                             // converts bookmark to normal
@@ -412,7 +412,7 @@ var sbCaptureTask = {
         if ( ++this.forceExit >= 2 ) window.close();
 
         // remember the current active state because it would be interfered by UI changing
-        var wasActive = this.isActive();
+        let wasActive = this.isActive();
 
         // set UI, generally same as finalize
         document.getElementById("sbCaptureTextbox").disabled = false;
@@ -437,7 +437,7 @@ var sbCaptureTask = {
     toggleFilterBox: function(tfbEvent) {
         //Blendet die Filterdetails an/aus
 
-        var tfbChecked = true;
+        let tfbChecked = true;
         tfbChecked = document.getElementById("sbCaptureFilterToggle").checked;
         if ( tfbEvent ) {
             if ( tfbEvent.button == 0 ) {
@@ -468,11 +468,11 @@ var sbCaptureTask = {
     },
 
     getSelection: function() {
-        var ret = [];
-        for ( var rc = 0; rc < this.TREE.view.selection.getRangeCount(); rc++ ) {
-            var start = {}, end = {};
+        let ret = [];
+        for ( let rc = 0; rc < this.TREE.view.selection.getRangeCount(); rc++ ) {
+            let start = {}, end = {};
             this.TREE.view.selection.getRangeAt(rc, start, end);
-            for ( var i = start.value; i <= end.value; i++ ) {
+            for ( let i = start.value; i <= end.value; i++ ) {
                 ret.push(i);
             }
         }
@@ -489,29 +489,29 @@ var sbCaptureTask = {
 
         // start capture
         if (gPreset) {
-            var preset = gPreset;
+            let preset = gPreset;
         } else if (gReferItem) {
-            var preset = [gReferItem.id, SB_suggestName(aWindow.location.href), gOption, gFile2URL, gDepths[this.index]];
+            let preset = [gReferItem.id, SB_suggestName(aWindow.location.href), gOption, gFile2URL, gDepths[this.index]];
         } else {
-            var preset = [];
+            let preset = [];
         }
         // pass current timeout and charset to saver so that a potential indepth capture can use them
         preset[2] = preset[2] || {};
         preset[2]["batchTimeout"] = sbCaptureTask.INTERVAL;
         preset[2]["batchCharset"] = sbCaptureTask.CHARSET;
 
-        var ret = gContentSaver.captureWindow(aWindow, aAllowPartial, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[this.index]);
+        let ret = gContentSaver.captureWindow(aWindow, aAllowPartial, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[this.index]);
         if ( ret ) {
             if ( gContext == "indepth" ) {
                 gURL2Name[sbCommonUtils.normalizeURI(this.URL)] = ret[0];
                 gFile2URL = ret[1];
             } else if ( gContext == "capture-again-deep" ) {
                 gFile2URL = ret[1];
-                var contDir = sbCommonUtils.getContentDir(gPreset[0]);
-                var txtFile = contDir.clone();
+                let contDir = sbCommonUtils.getContentDir(gPreset[0]);
+                let txtFile = contDir.clone();
                 txtFile.append("sb-file2url.txt");
-                var txt = "";
-                for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
+                let txt = "";
+                for ( let f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
                 sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
             }
             gTitles[this.index] = ret[2];
@@ -523,16 +523,16 @@ var sbCaptureTask = {
     },
 };
 
-var sbCaptureFilter = {
+let sbCaptureFilter = {
     filterList: [],
     ruleList: [],
     filterEdited: -1,  // index of the audited filter
 
     // Add a new filter or modify an existing one
     add: function() {
-        var filterDuplIdx = -1;
-        var filterNew = document.getElementById("sbCaptureFilterInput").value;
-        var ruleNew = document.getElementById("sbCaptureFilterRule").label;
+        let filterDuplIdx = -1;
+        let filterNew = document.getElementById("sbCaptureFilterInput").value;
+        let ruleNew = document.getElementById("sbCaptureFilterRule").label;
         // 1. Confirm the filter is valid
         try {
             new RegExp(filterNew);
@@ -546,17 +546,17 @@ var sbCaptureFilter = {
         }
         // 3. Update filter list
         if ( filterDuplIdx == -1 ) {
-            var wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
+            let wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
             if ( this.filterEdited == -1 ) {
                 // add a new filter
-                var item = document.createElement("treeitem");
+                let item = document.createElement("treeitem");
                 wrapper.appendChild(item);
-                var row = document.createElement("treerow");
+                let row = document.createElement("treerow");
                 item.appendChild(row);
-                var cell0 = document.createElement("treecell");
+                let cell0 = document.createElement("treecell");
                 cell0.setAttribute("label", ruleNew);
                 row.appendChild(cell0);
-                var cell1 = document.createElement("treecell");
+                let cell1 = document.createElement("treecell");
                 cell1.setAttribute("label", filterNew);
                 row.appendChild(cell1);
                 this.ruleList.push(ruleNew);
@@ -594,7 +594,7 @@ var sbCaptureFilter = {
         this.ruleList.splice(this.filterEdited, 1);
         this.filterList.splice(this.filterEdited, 1);
         // 2. Remove entry from file
-        var wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
+        let wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
         sbCommonUtils.removeNode(wrapper.childNodes[this.filterEdited]);
         // 3. Update selection
         this.updateSelection();
@@ -627,7 +627,7 @@ var sbCaptureFilter = {
     // Apply filters to the URL
     // the URL must pass all filters
     filter: function(url) {
-        for ( var i=0, I=this.filterList.length; i<I; i++ ) {
+        for ( let i=0, I=this.filterList.length; i<I; i++ ) {
             if ( this.ruleList[i] == "Include" ) {
                 if ( !url.match(sbCaptureFilter.filterList[i]) ) return false;
             } else {
@@ -639,7 +639,7 @@ var sbCaptureFilter = {
 
     // If text is available, enabled the OK button; otherwise disabled it
     input: function() {
-        var iText = document.getElementById("sbCaptureFilterInput").value;
+        let iText = document.getElementById("sbCaptureFilterInput").value;
         if ( iText.length > 0 ) {
             document.getElementById("sbCaptureFilterAccept").disabled=false;
         } else {
@@ -649,16 +649,16 @@ var sbCaptureFilter = {
 
     // Update the content of the current selection
     updateSelection: function() {
-        var wrapper = document.getElementById("sbCaptureUrlList").childNodes[1];
-        for ( var i=sbCaptureTask.index, I=gURLs.length; i<I; i++ ) {
-            var checked = this.filter(gURLs[i]);
+        let wrapper = document.getElementById("sbCaptureUrlList").childNodes[1];
+        for ( let i=sbCaptureTask.index, I=gURLs.length; i<I; i++ ) {
+            let checked = this.filter(gURLs[i]);
             wrapper.childNodes[i].childNodes[0].childNodes[0].setAttribute("value", checked);
         }
     },
 
 };
 
-var sbInvisibleBrowser = {
+let sbInvisibleBrowser = {
 
     get ELEMENT() {
         delete this.ELEMENT;
@@ -774,13 +774,13 @@ var sbInvisibleBrowser = {
     onLoadFinish: function() {
         // check for a potential meta refresh redirect
         if ( this.ELEMENT.contentDocument.body ) {
-            var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
-            for ( var i = 0; i < metaElems.length; i++ ) {
+            let metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
+            for ( let i = 0; i < metaElems.length; i++ ) {
                 if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
                      metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
                      metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) ) {
-                    var curURL = this.ELEMENT.currentURI.spec;
-                    var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1);
+                    let curURL = this.ELEMENT.currentURI.spec;
+                    let newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1);
                     sbCaptureTask.start(newURL);
                     return;
                 }
@@ -795,7 +795,7 @@ var sbInvisibleBrowser = {
 
 
 
-var sbCrossLinker = {
+let sbCrossLinker = {
 
     get ELEMENT(){ return document.getElementById("sbCaptureBrowser"); },
 
@@ -816,7 +816,7 @@ var sbCrossLinker = {
             sbCrossLinker.exec();
         };
         this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
-        for ( var url in gURL2Name ) {
+        for ( let url in gURL2Name ) {
             this.nameList.push(gURL2Name[url]);
         }
         // For a partial capture containing a link to self, the index may be overwritten and not exist
@@ -829,7 +829,7 @@ var sbCrossLinker = {
 
     start: function() {
         if ( ++this.index < this.nameList.length ) {
-            var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
+            let url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
             sbInvisibleBrowser.load(url);
         } else {
             SB_trace(sbCommonUtils.lang("REBUILD_LINKS_COMPLETE"));
@@ -853,13 +853,13 @@ var sbCrossLinker = {
         }
         // follow the meta refresh (mainly for ###.html --> ###.xhtml)
         if ( this.ELEMENT.contentDocument.body ) {
-            var curURL = this.ELEMENT.currentURI.spec;
-            var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
-            for ( var i = 0; i < metaElems.length; i++ ) {
+            let curURL = this.ELEMENT.currentURI.spec;
+            let metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
+            for ( let i = 0; i < metaElems.length; i++ ) {
                 if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
                      metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
                      metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) ) {
-                    var newURL = sbCommonUtils.splitURLByAnchor(sbCommonUtils.resolveURL(curURL, RegExp.$1))[0];
+                    let newURL = sbCommonUtils.splitURLByAnchor(sbCommonUtils.resolveURL(curURL, RegExp.$1))[0];
                     if ( newURL != curURL ) {
                         sbInvisibleBrowser.load(newURL);
                         return;
@@ -874,18 +874,18 @@ var sbCrossLinker = {
         }
         this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle) || sbCommonUtils.getFileName(this.ELEMENT.currentURI.spec));
         sbCommonUtils.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
-            var doc = win.document;
-            var shouldSave = false;
+            let doc = win.document;
+            let shouldSave = false;
             Array.prototype.forEach.call(doc.links, function(link) {
-                var [url, hash] = sbCommonUtils.splitURLByAnchor(link.href);
-                var name = gURL2Name[sbCommonUtils.normalizeURI(url)];
+                let [url, hash] = sbCommonUtils.splitURLByAnchor(link.href);
+                let name = gURL2Name[sbCommonUtils.normalizeURI(url)];
                 if ( name ) {
                     link.href = sbCommonUtils.escapeFileName(name) + ".html" + hash;
                     if (gOption["recordInDepthLink"]) {
                         link.setAttribute("data-sb-indepth", "true");
                     }
                     if ( !this.nodeHash[name] ) {
-                        var text = link.textContent;
+                        let text = link.textContent;
                         text = (!/^\s*$/.test(text)) ? text.replace(/[\t\r\n\v\f]/g, " ") : "";
                         this.nodeHash[name] = this.createNode(name, text);
                         this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
@@ -894,9 +894,9 @@ var sbCrossLinker = {
                 }
             }, this);
             if ( shouldSave ) {
-                var rootNode = doc.getElementsByTagName("html")[0];
-                var src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
-                var file = sbCommonUtils.getContentDir(gReferItem.id);
+                let rootNode = doc.getElementsByTagName("html")[0];
+                let src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
+                let file = sbCommonUtils.getContentDir(gReferItem.id);
                 file.append(sbCommonUtils.getFileName(doc.location.href));
                 sbCommonUtils.writeFile(file, src, doc.characterSet);
             }
@@ -909,7 +909,7 @@ var sbCrossLinker = {
         aText = sbCommonUtils.crop(aText, 150, 180);
         //Fehlermeldung könnte über Abfrage abgefangen werden.
         //Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
-        var node = this.XML.createElement("page");
+        let node = this.XML.createElement("page");
         node.setAttribute("file", sbCommonUtils.escapeFileName(aName) + ".html");
         node.setAttribute("text", sbDataSource.sanitize(aText));
         return node;
@@ -918,43 +918,43 @@ var sbCrossLinker = {
     flushXML: function() {
         this.rootNode.appendChild(this.nodeHash["index"]);
         this.XML.appendChild(this.rootNode);
-        var src = "";
+        let src = "";
         src += '<?xml version="1.0" encoding="UTF-8"?>\n';
         src += '<?xml-stylesheet href="../../sitemap.xsl" type="text/xsl" media="all"?>\n';
         src += (new XMLSerializer()).serializeToString(this.XML).replace(/></g, ">\n<");
         src += '\n';
-        var xslFile = sbCommonUtils.getScrapBookDir().clone();
+        let xslFile = sbCommonUtils.getScrapBookDir().clone();
         xslFile.append("sitemap.xsl");
         if ( !xslFile.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/sitemap.xsl", xslFile);
-        var contDir = sbCommonUtils.getContentDir(gReferItem.id);
-        var xmlFile = contDir.clone();
+        let contDir = sbCommonUtils.getContentDir(gReferItem.id);
+        let xmlFile = contDir.clone();
         xmlFile.append("sitemap.xml");
         sbCommonUtils.writeFile(xmlFile, src, "UTF-8");
-        var txt = "";
-        var txtFile1 = contDir.clone();
+        let txt = "";
+        let txtFile1 = contDir.clone();
         txtFile1.append("sb-file2url.txt");
-        for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
+        for ( let f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
         sbCommonUtils.writeFile(txtFile1, txt, "UTF-8");
         txt = "";
-        var txtFile2 = contDir.clone();
+        let txtFile2 = contDir.clone();
         txtFile2.append("sb-url2name.txt");
-        for ( var u in gURL2Name ) txt += u + "\t" + gURL2Name[u] + "\n";
+        for ( let u in gURL2Name ) txt += u + "\t" + gURL2Name[u] + "\n";
         sbCommonUtils.writeFile(txtFile2, txt, "UTF-8");
     },
 
     forceReloading: function(aID, aName) {
-        var file = sbCommonUtils.getContentDir(aID);
+        let file = sbCommonUtils.getContentDir(aID);
         file.append(aName + ".html");
-        var url = sbCommonUtils.convertFileToURL(file);
+        let url = sbCommonUtils.convertFileToURL(file);
         this.forceReloadingURL(url);
     },
 
     forceReloadingURL: function(aURL) {
         try {
-            var win = sbCommonUtils.getBrowserWindow();
-            var nodes = win.gBrowser.mTabContainer.childNodes;
-            for ( var i = 0; i < nodes.length; i++ ) {
-                var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
+            let win = sbCommonUtils.getBrowserWindow();
+            let nodes = win.gBrowser.mTabContainer.childNodes;
+            for ( let i = 0; i < nodes.length; i++ ) {
+                let uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
                 uri = sbCommonUtils.splitURLByAnchor(uri)[0];
                 if ( uri == aURL ) {
                     win.gBrowser.getBrowserForTab(nodes[i]).reload();
@@ -985,14 +985,14 @@ sbHeaderSniffer.prototype = {
         onDataAvailable: function(aRequest, aContext, aInputStream, aOffset, aCount) {},
         onStartRequest: function(aRequest, aContext) {},
         onStopRequest: function(aRequest, aContext, aStatus) {
-            var that = this._sniffer;
+            let that = this._sniffer;
 
             // show connect success
-            var contentType = that.getContentType() || "";
+            let contentType = that.getContentType() || "";
             SB_trace(sbCommonUtils.lang("CONNECT_SUCCESS", contentType));
 
             // get and show http status
-            var [statusCode, statusText] = that.getStatus();
+            let [statusCode, statusText] = that.getStatus();
             if ( statusCode !== false) {
                 sbCaptureTask.updateStatus(statusCode + " " + statusText);
                 if ( statusCode >= 400 && statusCode < 600 || statusCode == 305 ) {
@@ -1005,7 +1005,7 @@ sbHeaderSniffer.prototype = {
             }
 
             // manage redirect if defined
-            var redirectURL = that.getHeader("Location");
+            let redirectURL = that.getHeader("Location");
             if ( redirectURL ) {
                 redirectURL = sbCommonUtils.resolveURL(that.URLSpec, redirectURL);
                 sbCaptureTask.start(redirectURL);
@@ -1013,7 +1013,7 @@ sbHeaderSniffer.prototype = {
             }
 
             // attempt to load the content
-            var isAttachment = that.getContentDisposition();
+            let isAttachment = that.getContentDisposition();
             that.load(that.URLSpec, contentType, isAttachment);
         },
     },
@@ -1027,12 +1027,12 @@ sbHeaderSniffer.prototype = {
     },
 
     checkLocalFile: function(URL) {
-        var file = sbCommonUtils.convertURLToFile(URL);
+        let file = sbCommonUtils.convertURLToFile(URL);
         if (!(file.exists() && file.isFile() && file.isReadable())) {
             this.reportConnectError("Can't access");
             return;
         }
-        var mime = sbCommonUtils.getFileMime(file);
+        let mime = sbCommonUtils.getFileMime(file);
         this.load(URL, mime);
     },
 
@@ -1089,7 +1089,7 @@ sbHeaderSniffer.prototype = {
             sbInvisibleBrowser.load(URL, sbCaptureTask.CHARSET);
         } else if (gContext == "link") {
             // capture as file for link capture
-            var refURL = this.refURLSpec || sbCaptureTask.URL;
+            let refURL = this.refURLSpec || sbCaptureTask.URL;
             gContentSaver.captureFile(URL, refURL, "file", gShowDetail, gResName, gResIdx, null, gContext);
         } else if (gContext == "indepth") {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list

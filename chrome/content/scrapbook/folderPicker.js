@@ -1,5 +1,5 @@
 
-var sbFolderPicker = {
+let sbFolderPicker = {
 
     init: function() {
         sbTreeHandler.init(true);
@@ -36,7 +36,7 @@ var sbFolderPicker = {
 
 
 
-var sbFolderSelector2 = {
+let sbFolderSelector2 = {
 
     get TEXTBOX(){ return document.getElementById("sbFolderTextbox"); },
     get resURI() { return this.TEXTBOX.getAttribute("resuri"); },
@@ -47,7 +47,7 @@ var sbFolderSelector2 = {
     },
 
     pick: function() {
-        var ret = {};
+        let ret = {};
         //this.RES_URI durch this.resURI ersetzt
         window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes', ret, this.resURI);
         if ( ret.resource ) {
