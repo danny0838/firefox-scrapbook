@@ -6,13 +6,14 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>scrapbookx@addons.mozilla.org</em:id>
         <em:type>2</em:type>
-        <em:version>1.14.5</em:version>
+        <em:version>1.14.6</em:version>
         <em:unpack>false</em:unpack>
         <em:bootstrap>false</em:bootstrap>
         <em:multiprocessCompatible>false</em:multiprocessCompatible>
         <em:iconURL>chrome://scrapbook/skin/main_32.png</em:iconURL>
         <em:optionsURL>chrome://scrapbook/content/prefs.xul</em:optionsURL>
-        <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+        <em:updateURL>https://danny0838.github.io/firefox-scrapbook/files/updates.rdf</em:updateURL>
+        <em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 
         <!-- Firefox -->
         <em:targetApplication>

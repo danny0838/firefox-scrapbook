@@ -1,0 +1,7 @@
+Scrapbook X 1.14.6
+==================
+
+Changes since v1.14.5
+---------------------
+
+ * Revise homepage and update URL.
