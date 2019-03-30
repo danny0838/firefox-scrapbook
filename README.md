@@ -1,4 +1,4 @@
-**ScrapBook X** is a legacy Firefox add-on based on **ScrapBook** (by Gomita) and **ScrapBook Plus** (by haselnuss).
+*ScrapBook X* is a legacy Firefox add-on based on *ScrapBook* (by Gomita) and *ScrapBook Plus* (by haselnuss).
 
 ## Features
 
@@ -14,11 +14,11 @@
 
 ## Installation
 
-Download the **.xpi** file of a desired version in the [releases list](https://github.com/danny0838/firefox-scrapbook/releases) with a Firefox-like browser and you are done.
+Download the *.xpi* file of a desired version in the [releases list](https://github.com/danny0838/firefox-scrapbook/releases) with a Firefox-like browser and you are done.
 
 * Be sure to **disable or remove ScrapBook or ScrapBook Plus** to prevent a potential conflict.
 
-* ScrapBook X is a legacy Firefox addon and is **neither supported by Firefox Quantum (>= 57) nor compatible with Electrolysis (e10s)**. You can install and use the successor browser extension [WebScrapBook](https://github.com/danny0838/webscrapbook) in modern browsers, or install ScrapBook X in older Firefox or a Firefox (Gecko) fork which supports XUL/XPCOM, such as [WaterFox](https://www.waterfoxproject.org/), [Basilisk](https://basilisk-browser.org/), or [Pale Moon](https://www.palemoon.org/).
+* ScrapBook X, as a legacy Firefox addon, is **neither supported by Firefox Quantum (>= 57) nor compatible with Electrolysis (e10s)**. You can install and use the successor browser extension [WebScrapBook](https://github.com/danny0838/webscrapbook) in a modern browser, or install ScrapBook X in older Firefox or a Firefox (Gecko) fork which supports XUL/XPCOM, such as [WaterFox](https://www.waterfoxproject.org/), [Basilisk](https://basilisk-browser.org/), or [Pale Moon](https://www.palemoon.org/).
 
 ## See Also
 * [Documentation Wiki of ScrapBook X](https://github.com/danny0838/firefox-scrapbook/wiki)
