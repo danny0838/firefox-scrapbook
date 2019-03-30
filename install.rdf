@@ -12,6 +12,7 @@
         <em:multiprocessCompatible>false</em:multiprocessCompatible>
         <em:iconURL>chrome://scrapbook/skin/main_32.png</em:iconURL>
         <em:optionsURL>chrome://scrapbook/content/prefs.xul</em:optionsURL>
+        <em:updateURL>https://danny0838.github.io/firefox-scrapbook/files/updates.rdf</em:updateURL>
         <em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 
         <!-- Firefox -->
