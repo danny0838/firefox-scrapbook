@@ -1,0 +1,11 @@
+Scrapbook X 1.14.7
+==================
+
+Changes since v1.14.6
+---------------------
+
+ * <track> elements in a <audio> or <video> element are now downloaded.
+
+ * Fixed bad homepage URL in add-on information.
+
+Also includes some localization improvements.
