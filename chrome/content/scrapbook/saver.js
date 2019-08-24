@@ -714,8 +714,14 @@ sbContentSaverClass.prototype = {
                 break;
             case "track":  // in <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
-                    if ( this.option["internalize"] ) break;
-                    aNode.setAttribute("src", aNode.src);
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
+                    var url = aNode.src;
+                    if ( this.option["media"] ) {
+                        var fileName = this.download(url);
+                        if (fileName) aNode.setAttribute("src", fileName);
+                    } else {
+                        aNode.setAttribute("src", this.getSkippedURL(url));
+                    }
                 }
                 break;
             case "body": 
