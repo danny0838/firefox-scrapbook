@@ -16,11 +16,13 @@
 
 Download the *.xpi* file of a desired version in the [releases list](https://github.com/danny0838/firefox-scrapbook/releases) with a Firefox-like browser and you are done.
 
-* Be sure to **disable or remove ScrapBook or ScrapBook Plus** to prevent a potential conflict.
+* Be sure to **disable or remove ScrapBook, ScrapBook Plus, or other similar add-ons** to prevent a potential conflict.
 
-* ScrapBook X, as a legacy Firefox add-on, is **neither supported by Firefox Quantum (>= 57) nor compatible with Electrolysis (e10s)**. You can install and use the successor browser extension [WebScrapBook](https://github.com/danny0838/webscrapbook) in a modern browser, or install ScrapBook X in older Firefox or a Firefox (Gecko) fork which supports XUL/XPCOM, such as [WaterFox](https://www.waterfoxproject.org/), [Basilisk](https://basilisk-browser.org/), or [Pale Moon](https://www.palemoon.org/).
+* ScrapBook X, as a legacy Firefox add-on, is **not supported by Firefox Quantum (>= 57)**. You can install and use the successor browser extension [WebScrapBook](https://github.com/danny0838/webscrapbook) in a modern browser, or install ScrapBook X in older Firefox or a Firefox (Gecko) fork which supports XUL/XPCOM, such as [WaterFox](https://www.waterfoxproject.org/), [Basilisk](https://basilisk-browser.org/), or [Pale Moon](https://www.palemoon.org/).
 
-* Since Firefox 43, add-ons are required to be signed by Mozilla to be usable, while ScrapBook X > 1.14.5 are no more signed as Mozilla has stopped support of signing for legacy add-ons. To get the latest ScrapBook X work, you'd have to [use Developer Edition, Nightly, or ESR versions of Firefox (with `xpinstall.signatures.required` preference in `about:config` toggled false)](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox#w_what-are-my-options-if-i-want-to-use-an-unsigned-add-on-advanced-users), or use an older Firefox version or a Firefox fork, like the previous point.
+* Since Firefox 43, add-ons are required to be signed by Mozilla to be usable, while ScrapBook X > 1.14.5 are no more signed as Mozilla has stopped support of signing for legacy add-ons. To get the latest ScrapBook X work, [use Developer Edition, Nightly, or ESR versions of Firefox (with `xpinstall.signatures.required` preference in `about:config` toggled false)](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox#w_what-are-my-options-if-i-want-to-use-an-unsigned-add-on-advanced-users), or use an older Firefox version or a Firefox fork described in the previous point.
+
+* ScrapBook X is **not compatible with Electrolysis (e10s)**. Be sure to disable e10s (check the `Multiprocess`-related fields in `about:support`) when using ScrapBook X or it may not function as expected.
 
 ## See Also
 * [Documentation Wiki of ScrapBook X](https://github.com/danny0838/firefox-scrapbook/wiki)
